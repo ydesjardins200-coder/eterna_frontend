@@ -113,33 +113,35 @@
   .hero {
     position: relative;
     padding-top: 64px;
-    background:
-      radial-gradient(120% 80% at 50% 0%, #fff 0%, #f0f0ee 38%, #d7d8dc 72%, #c9cace 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #c3ced0 url("hero-bg.jpg") center 44% / cover no-repeat;
     overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 0; height: 26%;
+    background: linear-gradient(180deg, rgba(222,228,227,0) 0%, rgba(222,228,227,0.55) 60%, var(--mist) 100%);
+    pointer-events: none;
   }
   .hero-word {
     text-align: center;
     font-family: var(--display);
     font-weight: 300;
     color: #fff;
-    font-size: clamp(72px, 18vw, 260px);
+    font-size: clamp(72px, 18vw, 250px);
     letter-spacing: 0.04em;
     line-height: 0.9;
-    padding-top: 40px;
-    text-shadow: 0 2px 40px rgba(120,124,135,0.25);
+    padding-top: 26px;
+    text-shadow: 0 2px 50px rgba(90,100,115,0.35);
     position: relative;
-    z-index: 1;
-  }
-  .hero-capsule {
-    position: relative;
-    margin: -6vw auto 0;
-    max-width: 1000px;
     z-index: 2;
-    filter: drop-shadow(0 40px 55px rgba(60,64,80,0.30));
+    mix-blend-mode: soft-light;
+    opacity: 0.96;
   }
-  .hero-capsule img { width: 100%; height: auto; }
-
-  .hero-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; padding: 80px 0 70px; }
+  .hero-inner { position: relative; z-index: 2; margin-top: auto; }
+  .hero-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; padding: 80px 0 64px; }
   .hero-copy h1 { font-size: clamp(34px, 4.4vw, 56px); color: var(--ink); }
   .hero-lead { max-width: 420px; }
   .hero-lead p { color: var(--ink-soft); font-size: 15px; margin-bottom: 24px; }
@@ -171,35 +173,23 @@
     position: relative;
     border-radius: 18px;
     overflow: hidden;
-    background: linear-gradient(115deg, #f4f3f6 0%, #e9e7f1 45%, #ded9ef 100%);
-    min-height: 460px;
-    display: grid;
-    grid-template-columns: 1fr 1.15fr;
+    background: #eef0f3;
+    min-height: 560px;
   }
-  .how-stage-visual {
-    position: relative;
-    margin: auto;
-    width: 78%;
-    aspect-ratio: 5/3;
-    border-radius: 16px / 50px;
-    background:
-      radial-gradient(80% 120% at 50% 120%, var(--iris) 0%, #4d3aa6 40%, #1c1530 100%);
-    box-shadow: inset 0 0 60px rgba(160,140,255,0.55), 0 30px 60px rgba(60,40,120,0.3);
+  .how-figure { position: absolute; inset: 0; background: url("how-bg.jpg") center / cover no-repeat; }
+  .how-figure::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(100deg, rgba(244,243,248,0.92) 0%, rgba(244,243,248,0.35) 30%, rgba(244,243,248,0) 52%);
   }
-  .how-stage-visual .lid {
-    position: absolute; left: -6%; top: -10%; width: 60%; height: 56%;
-    border-radius: 50% / 40%;
-    background: linear-gradient(180deg, #fbfbfc, #c7c9d2);
-    transform: rotate(-18deg);
-    box-shadow: 0 14px 30px rgba(40,44,60,0.3);
-  }
-  .how-annot { padding: 50px 44px; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
-  .how-point h4 { font-family: var(--sans); font-size: 14px; font-weight: 600; margin-bottom: 6px; }
-  .how-point p { font-size: 12.5px; color: var(--ink-soft); max-width: 320px; }
-  .how-point.placement { align-self: flex-end; text-align: right; }
-  .how-point.placement p { margin-left: auto; }
-  .how-thumbs { display: flex; gap: 10px; margin-top: 26px; }
-  .how-thumb { width: 84px; height: 56px; border-radius: 8px; background: linear-gradient(135deg,#2a2433,#0e0b16); border: 1px solid rgba(255,255,255,0.1); }
+  .how-point { position: absolute; max-width: 244px; z-index: 2; }
+  .how-point h4 { font-family: var(--sans); font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+  .how-point p { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+  .how-point.sealing { top: 56px; left: 44px; }
+  .how-point.gas { top: 268px; left: 44px; }
+  .how-point.placement { bottom: 120px; right: 44px; text-align: right; max-width: 230px; }
+  .how-thumbs { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 2; }
+  .how-thumb { width: 84px; height: 56px; border-radius: 8px; background: rgba(22,18,32,0.42); border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
 
   /* ---------- WHY (DARK) ---------- */
   .why { background: var(--night); color: #fff; padding: 100px 0; }
@@ -311,11 +301,10 @@
     .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
     .hero-copy { grid-template-columns: 1fr; gap: 22px; }
     .values-grid { grid-template-columns: 1fr 1fr; }
-    .how-stage { grid-template-columns: 1fr; }
-    .how-stage-visual { width: 86%; margin: 36px auto 0; }
-    .how-annot { padding: 30px; }
-    .how-point.placement { text-align: left; align-self: flex-start; }
-    .how-point.placement p { margin-left: 0; }
+    .how-stage { min-height: 0; }
+    .how-figure { position: relative; inset: auto; height: 240px; }
+    .how-point { position: static; max-width: none; padding: 0 22px; margin-top: 22px; text-align: left !important; }
+    .how-thumbs { position: static; transform: none; justify-content: flex-start; padding: 16px 22px 26px; }
     .why-grid, .faq-grid, .voices-grid, .foot-top { grid-template-columns: 1fr; gap: 34px; }
     .why .top { justify-content: flex-start; }
   }
@@ -359,8 +348,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-word">ETERNA</div>
-    <div class="wrap">
-      <div class="hero-capsule"><img src="capsule-hero.png" alt="The Capsule Pyrale — a hermetic aluminium capsule with a dark glass viewing dome" /></div>
+    <div class="wrap hero-inner">
       <div class="hero-copy">
         <h1>A New Way<br />to Say Goodbye</h1>
         <div class="hero-lead">
@@ -408,22 +396,20 @@
       <span class="eyebrow reveal">The Capsule Pyrale</span>
       <h2 class="reveal">How it works</h2>
       <div class="how-stage reveal">
-        <div class="how-stage-visual"><span class="lid"></span></div>
-        <div class="how-annot">
-          <div class="how-point">
-            <h4>Hermetic Sealing</h4>
-            <p>The cover is lowered and locked with a special key, creating a completely airtight barrier — no leaks, no odors, no infiltration possible.</p>
-          </div>
-          <div class="how-point">
-            <h4>Inert Gas Preservation</h4>
-            <p>The capsule is filled with nitrogen gas, naturally drying the body without chemicals or toxic release. Preservation lasts up to 100 years.</p>
-          </div>
-          <div class="how-point placement">
-            <h4>Gentle Placement</h4>
-            <p>The body is placed by qualified professionals. Every gesture is slow, deliberate, and respectful — no rushed movements, no preparation or drying.</p>
-            <div class="how-thumbs"><span class="how-thumb"></span><span class="how-thumb"></span><span class="how-thumb"></span></div>
-          </div>
+        <div class="how-figure"></div>
+        <div class="how-point sealing">
+          <h4>Hermetic Sealing</h4>
+          <p>The cover is lowered and locked with a special key, creating a completely airtight barrier — no leaks, no odors, no infiltration possible.</p>
         </div>
+        <div class="how-point gas">
+          <h4>Inert Gas Preservation</h4>
+          <p>The capsule is filled with nitrogen gas, naturally drying the body without chemicals or toxic release. Preservation lasts up to 100 years.</p>
+        </div>
+        <div class="how-point placement">
+          <h4>Gentle Placement</h4>
+          <p>The body is placed by qualified professionals. Every gesture is slow, deliberate, and respectful — no rushed movements, no preparation or drying.</p>
+        </div>
+        <div class="how-thumbs"><span class="how-thumb"></span><span class="how-thumb"></span><span class="how-thumb"></span></div>
       </div>
     </div>
   </section>
