@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Eterna — A New Way to Say Goodbye</title>
+<meta name="description" content="The Capsule Pyrale is a hermetic aluminium capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without compromise. Designed and manufactured in Québec." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #16181c;
+    --ink-soft: #4a4e57;
+    --muted: #8a8f98;
+    --line: #e4e3df;
+    --paper: #ffffff;
+    --mist: #f3f2ef;
+    --silver-1: #d9dade;
+    --silver-2: #c4c6cc;
+    --night: #0c0d10;
+    --night-soft: #16181d;
+    --night-line: #2a2c33;
+    --night-text: #b9bcc4;
+    --iris: #6f5ad8;
+    --iris-soft: #b9aef0;
+    --display: "Cormorant Garamond", Georgia, serif;
+    --sans: "Inter", system-ui, -apple-system, sans-serif;
+    --maxw: 1200px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 6px; height: 6px;
+    background: var(--ink);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .dark .eyebrow { color: var(--night-text); }
+  .dark .eyebrow::before { background: var(--iris-soft); }
+
+  h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.05; letter-spacing: -0.01em; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--sans);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 13px 26px;
+    border-radius: 100px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.4s var(--ease);
+    white-space: nowrap;
+  }
+  .btn--dark { background: var(--ink); color: #fff; }
+  .btn--dark:hover { background: #000; transform: translateY(-1px); }
+  .btn--ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn--ghost:hover { border-color: var(--ink); }
+  .btn--light { background: #fff; color: var(--ink); }
+  .btn--light:hover { background: #f0f0ee; }
+
+  /* ---------- NAV ---------- */
+  header.nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+  header.nav.scrolled {
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { font-family: var(--display); font-size: 22px; letter-spacing: 0.18em; font-weight: 500; }
+  .nav-links { display: flex; gap: 30px; list-style: none; }
+  .nav-links a { font-size: 13px; color: var(--ink-soft); transition: color 0.3s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { display: flex; align-items: center; gap: 16px; }
+  .menu-toggle { display: none; background: none; border: 0; cursor: pointer; flex-direction: column; gap: 4px; }
+  .menu-toggle span { width: 22px; height: 1.5px; background: var(--ink); display: block; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding-top: 64px;
+    background:
+      radial-gradient(120% 80% at 50% 0%, #fff 0%, #f0f0ee 38%, #d7d8dc 72%, #c9cace 100%);
+    overflow: hidden;
+  }
+  .hero-word {
+    text-align: center;
+    font-family: var(--display);
+    font-weight: 300;
+    color: #fff;
+    font-size: clamp(72px, 18vw, 260px);
+    letter-spacing: 0.04em;
+    line-height: 0.9;
+    padding-top: 40px;
+    text-shadow: 0 2px 40px rgba(120,124,135,0.25);
+    position: relative;
+    z-index: 1;
+  }
+  .hero-capsule {
+    position: relative;
+    margin: -7vw auto 0;
+    max-width: 920px;
+    z-index: 2;
+    filter: drop-shadow(0 50px 60px rgba(60,64,80,0.32));
+  }
+  .hero-capsule-shape {
+    width: 100%;
+    aspect-ratio: 920 / 300;
+    border-radius: 50% / 38%;
+    background:
+      linear-gradient(180deg, #fdfdfd 0%, #e9eaee 30%, #b9bcc6 62%, #9a9da9 100%);
+    box-shadow:
+      inset 0 6px 14px rgba(255,255,255,0.9),
+      inset 0 -22px 40px rgba(90,94,108,0.45);
+    position: relative;
+  }
+  .hero-capsule-shape::before {
+    content: "";
+    position: absolute; inset: 7% 5% auto 5%; height: 46%;
+    border-radius: 50% / 60%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0));
+  }
+  .hero-capsule-shape::after {
+    content: "";
+    position: absolute; left: 12%; right: 12%; bottom: -34px; height: 40px;
+    background: radial-gradient(60% 100% at 50% 0%, rgba(70,74,88,0.28), transparent 70%);
+    filter: blur(8px);
+  }
+
+  .hero-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; padding: 80px 0 70px; }
+  .hero-copy h1 { font-size: clamp(34px, 4.4vw, 56px); color: var(--ink); }
+  .hero-lead { max-width: 420px; }
+  .hero-lead p { color: var(--ink-soft); font-size: 15px; margin-bottom: 24px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ---------- VALUE STRIP ---------- */
+  .values { background: var(--mist); padding: 0 0 70px; }
+  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: -50px; position: relative; z-index: 3; }
+  .value-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 24px;
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+  .value-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(40,44,60,0.08); }
+  .value-ic {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--ink); color: #fff;
+    display: grid; place-items: center; margin-bottom: 18px;
+  }
+  .value-card h3 { font-size: 21px; margin-bottom: 8px; }
+  .value-card p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how { padding: 100px 0 90px; }
+  .how h2 { font-size: clamp(32px, 4vw, 50px); margin: 16px 0 50px; }
+  .how-stage {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: linear-gradient(115deg, #f4f3f6 0%, #e9e7f1 45%, #ded9ef 100%);
+    min-height: 460px;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+  }
+  .how-stage-visual {
+    position: relative;
+    margin: auto;
+    width: 78%;
+    aspect-ratio: 5/3;
+    border-radius: 16px / 50px;
+    background:
+      radial-gradient(80% 120% at 50% 120%, var(--iris) 0%, #4d3aa6 40%, #1c1530 100%);
+    box-shadow: inset 0 0 60px rgba(160,140,255,0.55), 0 30px 60px rgba(60,40,120,0.3);
+  }
+  .how-stage-visual .lid {
+    position: absolute; left: -6%; top: -10%; width: 60%; height: 56%;
+    border-radius: 50% / 40%;
+    background: linear-gradient(180deg, #fbfbfc, #c7c9d2);
+    transform: rotate(-18deg);
+    box-shadow: 0 14px 30px rgba(40,44,60,0.3);
+  }
+  .how-annot { padding: 50px 44px; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
+  .how-point h4 { font-family: var(--sans); font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .how-point p { font-size: 12.5px; color: var(--ink-soft); max-width: 320px; }
+  .how-point.placement { align-self: flex-end; text-align: right; }
+  .how-point.placement p { margin-left: auto; }
+  .how-thumbs { display: flex; gap: 10px; margin-top: 26px; }
+  .how-thumb { width: 84px; height: 56px; border-radius: 8px; background: linear-gradient(135deg,#2a2433,#0e0b16); border: 1px solid rgba(255,255,255,0.1); }
+
+  /* ---------- WHY (DARK) ---------- */
+  .why { background: var(--night); color: #fff; padding: 100px 0; }
+  .why .top { display: flex; justify-content: flex-end; margin-bottom: 40px; }
+  .why .top span { font-family: var(--display); font-size: clamp(20px,2.4vw,30px); color: #fff; opacity: 0.9; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .why-grid h2 { font-size: clamp(32px, 4vw, 50px); color: #fff; margin-bottom: 22px; }
+  .why-grid > div > p { color: var(--night-text); font-size: 14.5px; max-width: 400px; }
+  .why-visual {
+    margin: 30px 0;
+    aspect-ratio: 16/7;
+    border-radius: 14px;
+    background: radial-gradient(70% 130% at 50% 100%, #2a3f8f 0%, #141a3a 45%, #07080f 100%);
+    box-shadow: inset 0 0 50px rgba(70,90,200,0.4);
+  }
+  .why-list { display: flex; flex-direction: column; gap: 14px; }
+  .why-item {
+    background: var(--night-soft);
+    border: 1px solid var(--night-line);
+    border-radius: 13px;
+    padding: 22px 24px;
+    display: flex; gap: 16px;
+    transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+  .why-item:hover { border-color: var(--iris); transform: translateX(4px); }
+  .why-item .ic { flex: 0 0 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; }
+  .why-item h4 { font-family: var(--sans); font-size: 14.5px; font-weight: 600; margin-bottom: 6px; }
+  .why-item p { font-size: 12.5px; color: var(--night-text); line-height: 1.55; }
+
+  /* ---------- CERTIFICATION ---------- */
+  .cert { padding: 100px 0; text-align: center; }
+  .cert h2 { font-size: clamp(32px, 4vw, 50px); margin: 16px 0 0; }
+  .cert-track { display: flex; gap: 22px; margin: 50px 0 34px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scrollbar-width: none; }
+  .cert-track::-webkit-scrollbar { display: none; }
+  .cert-card { flex: 0 0 290px; scroll-snap-align: start; text-align: left; }
+  .cert-img { height: 170px; border-radius: 12px; margin-bottom: 18px; }
+  .cert-card:nth-child(1) .cert-img { background: linear-gradient(135deg,#e8e9ed,#bcbfc8); }
+  .cert-card:nth-child(2) .cert-img { background: linear-gradient(135deg,#cdd6f0,#8f7fd6); }
+  .cert-card:nth-child(3) .cert-img { background: linear-gradient(160deg,#1f3aa0,#dfe4f4); position: relative; }
+  .cert-card:nth-child(4) .cert-img { background: linear-gradient(135deg,#d8dae0,#a9adb8); }
+  .cert-card h3 { font-size: 22px; margin-bottom: 4px; }
+  .cert-card .lbl { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .cert-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+  .cert-nav { display: flex; gap: 12px; justify-content: center; }
+  .cert-nav button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 16px; transition: all 0.3s; }
+  .cert-nav button:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* ---------- FAQ ---------- */
+  .faq { padding: 90px 0; }
+  .faq-grid { display: grid; grid-template-columns: 0.6fr 1.4fr; gap: 50px; }
+  .faq-grid h2 { font-size: clamp(28px, 3.4vw, 42px); }
+  .faq-item { border-top: 1px solid var(--line); }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-q { width: 100%; background: none; border: 0; cursor: pointer; text-align: left; padding: 24px 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-family: var(--sans); font-size: 15px; color: var(--ink); }
+  .faq-q .sign { font-size: 20px; color: var(--muted); transition: transform 0.3s; flex: 0 0 auto; }
+  .faq-item.open .faq-q .sign { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); }
+  .faq-a p { padding: 0 40px 24px 0; font-size: 13.5px; color: var(--ink-soft); }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .voices { padding: 90px 0; background: var(--mist); text-align: center; }
+  .voices h2 { font-size: clamp(30px, 3.6vw, 46px); margin: 16px 0 50px; }
+  .voices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; }
+  .voice { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 30px 28px; }
+  .voice p { font-family: var(--display); font-size: 18px; line-height: 1.45; color: var(--ink); margin-bottom: 24px; }
+  .voice .who { display: flex; align-items: center; gap: 12px; }
+  .voice .av { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg,#cfd1d8,#a7aab3); }
+  .voice .who b { font-size: 13px; font-weight: 600; display: block; }
+  .voice .who span { font-size: 12px; color: var(--muted); }
+
+  /* ---------- CONTACT ---------- */
+  .contact { background: var(--night); color: #fff; padding: 100px 0; text-align: center; }
+  .contact h2 { font-size: clamp(32px, 4.2vw, 54px); color: #fff; margin: 16px 0 14px; }
+  .contact > .wrap > p { color: var(--night-text); font-size: 14px; max-width: 540px; margin: 0 auto 44px; }
+  form.consult { max-width: 540px; margin: 0 auto; background: var(--night-soft); border: 1px solid var(--night-line); border-radius: 16px; padding: 34px; text-align: left; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 12px; color: var(--night-text); margin-bottom: 7px; letter-spacing: 0.02em; }
+  .field input, .field select, .field textarea {
+    width: 100%; background: #0a0b0e; border: 1px solid var(--night-line); border-radius: 9px;
+    padding: 12px 14px; color: #fff; font-family: var(--sans); font-size: 13.5px; transition: border-color 0.3s;
+  }
+  .field input::placeholder, .field textarea::placeholder { color: #565a63; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--iris); }
+  .field textarea { resize: vertical; min-height: 92px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  form.consult .btn { width: 100%; justify-content: center; margin-top: 6px; }
+  .form-note { text-align: center; font-size: 12px; color: var(--muted); margin-top: 26px; }
+  .form-note a { color: var(--night-text); text-decoration: underline; }
+
+  /* ---------- FOOTER ---------- */
+  footer { background: var(--night); color: #fff; padding: 70px 0 0; }
+  .foot-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 60px; border-top: 1px solid var(--night-line); }
+  .foot-brand .brand { font-size: 26px; margin-bottom: 18px; display: inline-block; }
+  .foot-brand address { font-style: normal; font-size: 12.5px; color: var(--night-text); line-height: 1.8; }
+  .foot-col h5 { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; font-weight: 600; }
+  .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .foot-col a { font-size: 13px; color: var(--night-text); transition: color 0.3s; }
+  .foot-col a:hover { color: #fff; }
+  .foot-word { font-family: var(--display); font-weight: 300; text-align: center; font-size: clamp(80px, 20vw, 300px); letter-spacing: 0.05em; line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--night-line); padding: 10px 0; user-select: none; }
+
+  /* ---------- REVEAL ---------- */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta .btn { display: none; }
+    .menu-toggle { display: flex; }
+    .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+    .hero-copy { grid-template-columns: 1fr; gap: 22px; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .how-stage { grid-template-columns: 1fr; }
+    .how-stage-visual { width: 86%; margin: 36px auto 0; }
+    .how-annot { padding: 30px; }
+    .how-point.placement { text-align: left; align-self: flex-start; }
+    .how-point.placement p { margin-left: 0; }
+    .why-grid, .faq-grid, .voices-grid, .foot-top { grid-template-columns: 1fr; gap: 34px; }
+    .why .top { justify-content: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 18px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+    form.consult { padding: 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+    .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">ETERNA</a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#capsule">The Capsule Pyrale</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#planning">Pre-Planning</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#partner">Find a Partner</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn--dark">Book a Consultation</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-word">ETERNA</div>
+    <div class="wrap">
+      <div class="hero-capsule"><div class="hero-capsule-shape"></div></div>
+      <div class="hero-copy">
+        <h1>A New Way<br />to Say Goodbye</h1>
+        <div class="hero-lead">
+          <p>The Capsule Pyrale is a hermetic aluminium capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without compromise.</p>
+          <div class="hero-actions">
+            <a href="#capsule" class="btn btn--dark">Discover the Pyrale</a>
+            <a href="#partner" class="btn btn--ghost">Find a Partner</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE STRIP -->
+  <section class="values" id="capsule">
+    <div class="wrap">
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <div class="value-ic">&#9670;</div>
+          <h3>100% Québec</h3>
+          <p>Designed, engineered, and manufactured entirely in Québec, Canada.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-ic">&#10003;</div>
+          <h3>No Chemicals</h3>
+          <p>No embalming fluids, no toxic treatments. Preservation through inert nitrogen gas only.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-ic">&#9711;</div>
+          <h3>60–100 Year Preservation</h3>
+          <p>The body is naturally preserved for up to a century inside the hermetically sealed capsule.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-ic">&#9733;</div>
+          <h3>Patented Technology</h3>
+          <p>A unique, certified innovation — 10+ years of research, certified in Canada and the USA.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="wrap">
+      <span class="eyebrow reveal">The Capsule Pyrale</span>
+      <h2 class="reveal">How it works</h2>
+      <div class="how-stage reveal">
+        <div class="how-stage-visual"><span class="lid"></span></div>
+        <div class="how-annot">
+          <div class="how-point">
+            <h4>Hermetic Sealing</h4>
+            <p>The cover is lowered and locked with a special key, creating a completely airtight barrier — no leaks, no odors, no infiltration possible.</p>
+          </div>
+          <div class="how-point">
+            <h4>Inert Gas Preservation</h4>
+            <p>The capsule is filled with nitrogen gas, naturally drying the body without chemicals or toxic release. Preservation lasts up to 100 years.</p>
+          </div>
+          <div class="how-point placement">
+            <h4>Gentle Placement</h4>
+            <p>The body is placed by qualified professionals. Every gesture is slow, deliberate, and respectful — no rushed movements, no preparation or drying.</p>
+            <div class="how-thumbs"><span class="how-thumb"></span><span class="how-thumb"></span><span class="how-thumb"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY (DARK) -->
+  <section class="why" id="about">
+    <div class="wrap">
+      <div class="top"><span>No decomposition, no chemicals</span></div>
+      <div class="why-grid">
+        <div class="reveal">
+          <h2>Why Families<br />Choose the Capsule Pyrale</h2>
+          <p>For families who want more than a traditional farewell — a gentler, more meaningful, and more responsible way to honor the departed.</p>
+          <div class="why-visual"></div>
+        </div>
+        <div class="why-list">
+          <div class="why-item reveal">
+            <span class="ic">&#9670;</span>
+            <div>
+              <h4>Extended viewing and prolonged farewell</h4>
+              <p>No color, no degradation. Families are not forced to rush their goodbyes — there is time to gather, to grieve, and to be present with their loved one.</p>
+            </div>
+          </div>
+          <div class="why-item reveal">
+            <span class="ic">&#10003;</span>
+            <div>
+              <h4>Environmentally responsible</h4>
+              <p>100% recyclable aluminium. No soil contamination, no groundwater impact, no toxic release. Compatible with crypts, mausoleums, and above-ground interment.</p>
+            </div>
+          </div>
+          <div class="why-item reveal">
+            <span class="ic">&#9678;</span>
+            <div>
+              <h4>International transport compliant</h4>
+              <p>Hermetically sealed with no fluid or odor — fully compatible with international air-cargo regulations. Certified in Canada and the USA.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATION -->
+  <section class="cert" id="research">
+    <div class="wrap">
+      <span class="eyebrow reveal" style="margin:0 auto; display:flex; justify-content:center;">Research</span>
+      <h2 class="reveal">Innovation &amp; Certification</h2>
+      <div class="cert-track" id="certTrack">
+        <article class="cert-card reveal">
+          <div class="cert-img"></div>
+          <h3>Patented Technology</h3>
+          <p class="lbl">Certified · Canada &amp; USA</p>
+          <p>The Capsule Pyrale uses a proprietary hermetic sealing system and inert gas preservation process — patented and certified in Canada and the United States, with additional certifications in progress.</p>
+        </article>
+        <article class="cert-card reveal">
+          <div class="cert-img"></div>
+          <h3>10+ Years of Research</h3>
+          <p class="lbl">First Test 2011 · Results 2014</p>
+          <p>More than a decade of rigorous development, testing, and refinement went into the Capsule Pyrale. The first prototype was tested in 2011. Conclusive preservation results were confirmed in 2014.</p>
+        </article>
+        <article class="cert-card reveal">
+          <div class="cert-img"></div>
+          <h3>100% Québec Manufacturing</h3>
+          <p class="lbl">Lifetime Warranty</p>
+          <p>Every Capsule Pyrale is designed, engineered, and assembled in Granby, Québec. Built from recyclable aluminium and aviation-grade polycarbonate — and backed by a lifetime structural warranty.</p>
+        </article>
+        <article class="cert-card reveal">
+          <div class="cert-img"></div>
+          <h3>Independently Validated</h3>
+          <p class="lbl">Third-Party Review</p>
+          <p>Preservation performance has been reviewed by independent specialists, confirming the integrity of the seal and the stability of the inert-gas environment over time.</p>
+        </article>
+      </div>
+      <div class="cert-nav">
+        <button id="certPrev" aria-label="Previous">&larr;</button>
+        <button id="certNext" aria-label="Next">&rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="faq-grid">
+        <div>
+          <span class="eyebrow reveal">About Eterna</span>
+          <h2 class="reveal" style="margin-top:14px;">Frequently asked questions</h2>
+        </div>
+        <div>
+          <div class="faq-item open">
+            <button class="faq-q">How does nitrogen gas preserve the body? <span class="sign">+</span></button>
+            <div class="faq-a"><p>Once the Capsule Pyrale is hermetically sealed, it is filled with inert nitrogen gas. Nitrogen displaces the oxygen inside the capsule, eliminating the conditions that allow decomposition to occur. The gas naturally dries the body over time — a process that is entirely physical, with no chemical agents involved. The result is preservation of up to 60 to 100 years.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Is the Capsule Pyrale environmentally safe? <span class="sign">+</span></button>
+            <div class="faq-a"><p>Yes. The capsule is built from 100% recyclable aluminium and releases no toxins into the soil or groundwater. There are no embalming chemicals, making it one of the most responsible interment options available.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Can the Capsule Pyrale be transported internationally? <span class="sign">+</span></button>
+            <div class="faq-a"><p>Because the capsule is hermetically sealed with no fluid or odor, it is fully compliant with international air-cargo regulations and certified for transport in Canada and the USA.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Is the Capsule Pyrale compatible with religious traditions? <span class="sign">+</span></button>
+            <div class="faq-a"><p>The Capsule Pyrale allows for extended viewing and unhurried farewells, which makes it compatible with a wide range of cultural and religious practices. Speak with an Eterna advisor about your family's specific needs.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How do I purchase the Capsule Pyrale? <span class="sign">+</span></button>
+            <div class="faq-a"><p>The Capsule Pyrale is available through our network of partner funeral homes. Use "Find a Partner" to locate one near you, or book a free consultation and we'll guide you through every step.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="voices" id="voices">
+    <div class="wrap">
+      <span class="eyebrow reveal" style="margin:0 auto; display:flex; justify-content:center;">Families</span>
+      <h2 class="reveal">What families say</h2>
+      <div class="voices-grid">
+        <article class="voice reveal">
+          <p>"Seeing my mother in the Capsule Pyrale was unlike anything I expected. She looked peaceful, truly at rest. We were able to take the time we needed to say goodbye, without any of the distress we feared. It changed how we experienced grief."</p>
+          <div class="who"><span class="av"></span><div><b>Marie-Hélène D.</b><span>Montréal, QC</span></div></div>
+        </article>
+        <article class="voice reveal">
+          <p>"We had to repatriate my father from abroad. The Capsule Pyrale made that possible without the complications we had been warned about. The team at Eterna guided us every step of the way. I am deeply grateful."</p>
+          <div class="who"><span class="av"></span><div><b>Robert C.</b><span>Ottawa, ON</span></div></div>
+        </article>
+        <article class="voice reveal">
+          <p>"We chose the Capsule Pyrale because we did not want chemicals anywhere near our father's body. The nitrogen process felt natural, respectful, and right. We are proud of the choice we made for him. He deserved nothing less."</p>
+          <div class="who"><span class="av"></span><div><b>Sandra &amp; Tom P.</b><span>Granby, QC</span></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact dark" id="contact">
+    <div class="wrap">
+      <span class="eyebrow reveal" style="margin:0 auto; display:flex; justify-content:center;">Contact</span>
+      <h2 class="reveal">Book a Free Consultation</h2>
+      <p class="reveal">Speak with an Eterna advisor — no sales pressure, no obligation. We are here to answer your questions and help your family find the right path forward.</p>
+      <form class="consult reveal" id="consultForm" novalidate>
+        <div class="field">
+          <label for="fullname">Full name</label>
+          <input id="fullname" name="fullname" type="text" placeholder="Your name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" placeholder="Your email address" required />
+        </div>
+        <div class="field">
+          <label for="phone">Phone number</label>
+          <input id="phone" name="phone" type="tel" placeholder="Your phone number" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="province">Province</label>
+            <select id="province" name="province">
+              <option value="">Select your province…</option>
+              <option>Québec</option><option>Ontario</option><option>British Columbia</option>
+              <option>Alberta</option><option>Manitoba</option><option>Saskatchewan</option>
+              <option>Nova Scotia</option><option>New Brunswick</option>
+              <option>Newfoundland and Labrador</option><option>Prince Edward Island</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="time">Preferred contact time</label>
+            <select id="time" name="time">
+              <option value="">Select a time…</option>
+              <option>Morning</option><option>Afternoon</option><option>Evening</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="message">Message (optional)</label>
+          <textarea id="message" name="message" placeholder="Tell us a bit about your situation or any questions you have…"></textarea>
+        </div>
+        <button type="submit" class="btn btn--light">Request Consultation</button>
+        <p class="form-note" id="formNote">We respond within one business day. For urgent matters, call <a href="tel:18446955613">1 844 695-5613</a>.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#top" class="brand">ETERNA</a>
+        <address>
+          411 Saint-Vallier<br />
+          Granby, Québec J2G 7Y2, Canada<br />
+          <a href="tel:18446955613">1 844 695-5613</a><br />
+          <a href="mailto:info@pyramidedetail.com">info@pyramidedetail.com</a>
+        </address>
+      </div>
+      <div class="foot-col">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="#capsule">The Capsule Pyrale</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#contact">Buy Now</a></li>
+          <li><a href="#partner">Find a Partner Funeral Home</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#planning">Pre-Planning</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact &amp; Support</h5>
+        <ul>
+          <li><a href="tel:18446955613">1 844 695-5613</a></li>
+          <li><a href="mailto:info@pyramidedetail.com">info@pyramidedetail.com</a></li>
+          <li><span style="color:var(--night-text)">Mon–Fri · 9am–5pm ET</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot-word">ETERNA</div>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.addEventListener('click', e => { if (e.target.tagName === 'A') navLinks.classList.remove('open'); });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    const sync = () => { a.style.maxHeight = item.classList.contains('open') ? a.scrollHeight + 'px' : 0; };
+    if (item.classList.contains('open')) sync();
+    q.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight = 0; });
+      if (!wasOpen) { item.classList.add('open'); sync(); }
+    });
+  });
+
+  // Certification carousel
+  const track = document.getElementById('certTrack');
+  const step = () => Math.min(track.clientWidth * 0.85, 320);
+  document.getElementById('certNext').addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  document.getElementById('certPrev').addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+    reveals.forEach(el => io.observe(el));
+    // Fallback: anything still hidden after 2.5s gets shown (covers edge cases)
+    setTimeout(() => reveals.forEach(el => el.classList.add('in')), 2500);
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
+
+  // Form (front-end only — no backend wired yet)
+  const form = document.getElementById('consultForm');
+  const note = document.getElementById('formNote');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = form.fullname.value.trim();
+    const email = form.email.value.trim();
+    if (!name || !email) { note.textContent = 'Please add your name and email so we can reach you.'; note.style.color = '#e2b4b4'; return; }
+    note.textContent = 'Thank you, ' + name.split(' ')[0] + '. An Eterna advisor will be in touch within one business day.';
+    note.style.color = '#9fb39f';
+    form.reset();
+  });
+</script>
+</body>
+</html>
