@@ -116,7 +116,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: #c3ced0 url("hero-bg.jpg") center 44% / cover no-repeat;
+    background: #d2dadb url("hero-bg.jpg") center 40% / cover no-repeat;
     overflow: hidden;
   }
   .hero::after {
@@ -173,7 +173,7 @@
     border-radius: 18px;
     overflow: hidden;
     background: #eef0f3;
-    min-height: 660px;
+    aspect-ratio: 1600 / 893;
   }
   .how-figure { position: absolute; inset: 0; background: url("how-bg.jpg") center / cover no-repeat; }
   .how-figure::after {
@@ -181,28 +181,25 @@
     position: absolute; inset: 0;
     background: linear-gradient(100deg, rgba(244,243,248,0.92) 0%, rgba(244,243,248,0.4) 26%, rgba(244,243,248,0) 48%);
   }
-  .how-head { position: absolute; top: 44px; left: 48px; z-index: 3; }
-  .how-head h2 { font-size: clamp(32px, 4vw, 52px); margin-top: 14px; }
-  .how-point { position: absolute; max-width: 248px; z-index: 3; }
-  .how-point h4 { font-family: var(--sans); font-size: 16px; font-weight: 600; margin-bottom: 7px; color: var(--ink); }
-  .how-point p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
-  .how-point.sealing { top: 250px; left: 150px; }
-  .how-point.gas { top: 470px; left: 120px; }
-  .how-point.placement { bottom: 96px; right: 56px; text-align: right; max-width: 232px; }
+  .how-lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+  .how-lines path { fill: none; stroke: rgba(34,38,52,0.55); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+  .how-lines circle { fill: #23262f; }
+  .how-head { position: absolute; top: 5%; left: 4%; z-index: 3; }
+  .how-head h2 { font-size: clamp(30px, 3.6vw, 50px); margin-top: 14px; }
+  .how-point { position: absolute; max-width: 224px; z-index: 3; }
+  .how-point h4 { font-family: var(--sans); font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+  .how-point p { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+  .how-point.sealing { top: 25%; left: 4%; }
+  .how-point.gas { top: 50%; left: 4%; }
+  .how-point.placement { bottom: 11%; right: 4%; text-align: right; max-width: 210px; }
   .how-point.placement h4, .how-point.placement p { text-shadow: 0 0 10px rgba(246,245,249,0.92), 0 0 4px rgba(246,245,249,0.95); }
-  .leader { position: absolute; overflow: visible; pointer-events: none; }
-  .leader path { fill: none; stroke: rgba(34,38,52,0.5); stroke-width: 1; vector-effect: non-scaling-stroke; }
-  .leader circle { fill: #23262f; }
-  .sealing .leader { width: 240px; height: 170px; top: 70px; left: 18px; }
-  .gas .leader { width: 260px; height: 70px; top: 4px; left: 178px; }
-  .placement .leader { width: 240px; height: 170px; top: 70px; right: 18px; }
   .how-thumbs {
-    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    position: absolute; bottom: 4%; left: 50%; transform: translateX(-50%);
     display: flex; gap: 10px; z-index: 3;
     padding: 12px; background: rgba(255,255,255,0.92); border-radius: 18px;
     box-shadow: 0 16px 36px rgba(40,44,60,0.14); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   }
-  .how-thumb { width: 104px; height: 72px; border-radius: 10px; object-fit: cover; display: block; }
+  .how-thumb { width: 100px; height: 68px; border-radius: 10px; object-fit: cover; display: block; }
 
   /* ---------- WHY (DARK) ---------- */
   .why { background: var(--night); color: #fff; padding: 100px 0; }
@@ -235,11 +232,7 @@
   .cert-track { display: flex; gap: 22px; margin: 50px 0 34px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scrollbar-width: none; }
   .cert-track::-webkit-scrollbar { display: none; }
   .cert-card { flex: 0 0 290px; scroll-snap-align: start; text-align: left; }
-  .cert-img { height: 170px; border-radius: 12px; margin-bottom: 18px; }
-  .cert-card:nth-child(1) .cert-img { background: linear-gradient(135deg,#e8e9ed,#bcbfc8); }
-  .cert-card:nth-child(2) .cert-img { background: linear-gradient(135deg,#cdd6f0,#8f7fd6); }
-  .cert-card:nth-child(3) .cert-img { background: linear-gradient(160deg,#1f3aa0,#dfe4f4); position: relative; }
-  .cert-card:nth-child(4) .cert-img { background: linear-gradient(135deg,#d8dae0,#a9adb8); }
+  .cert-img { width: 100%; height: 170px; object-fit: cover; border-radius: 12px; margin-bottom: 18px; display: block; }
   .cert-card h3 { font-size: 22px; margin-bottom: 4px; }
   .cert-card .lbl { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
   .cert-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
@@ -311,13 +304,13 @@
     .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
     .hero-copy { grid-template-columns: 1fr; gap: 22px; }
     .values-grid { grid-template-columns: 1fr 1fr; }
-    .how-stage { min-height: 0; display: flex; flex-direction: column; }
+    .how-stage { min-height: 0; aspect-ratio: auto; display: flex; flex-direction: column; }
     .how-head { order: 1; position: static; padding: 26px 22px 4px; }
     .how-figure { order: 2; position: relative; inset: auto; height: 230px; }
     .how-point { order: 3; position: static; max-width: none; padding: 0 22px; margin-top: 22px; text-align: left !important; }
     .how-thumbs { order: 4; position: static; transform: none; flex-wrap: wrap; justify-content: center; margin: 22px auto 26px; box-shadow: none; background: transparent; backdrop-filter: none; padding: 0 18px; }
     .how-thumb { width: calc(50% - 6px); height: 90px; }
-    .leader { display: none; }
+    .how-lines { display: none; }
     .why-grid, .faq-grid, .voices-grid, .foot-top { grid-template-columns: 1fr; gap: 34px; }
     .why .top { justify-content: flex-start; }
   }
@@ -408,6 +401,14 @@
     <div class="wrap">
       <div class="how-stage reveal">
         <div class="how-figure"></div>
+        <svg class="how-lines" viewBox="0 0 1600 893" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M455,300 L575,300 L690,188" />
+          <circle cx="455" cy="300" r="5.5" />
+          <path d="M430,535 L600,535 L700,455" />
+          <circle cx="430" cy="535" r="5.5" />
+          <path d="M1230,700 L1230,565 L1108,480" />
+          <circle cx="1230" cy="700" r="5.5" />
+        </svg>
         <div class="how-head">
           <span class="eyebrow">The Capsule Pyrale</span>
           <h2>How it works</h2>
@@ -415,17 +416,14 @@
         <div class="how-point sealing">
           <h4>Hermetic Sealing</h4>
           <p>The cover is lowered and locked with a special key, creating a completely airtight barrier — no leaks, no odors, no infiltration possible.</p>
-          <svg class="leader" viewBox="0 0 240 170" preserveAspectRatio="none" aria-hidden="true"><circle cx="4" cy="4" r="4"/><path d="M4,4 L4,90 L238,166"/></svg>
         </div>
         <div class="how-point gas">
           <h4>Inert Gas Preservation</h4>
           <p>The capsule is filled with nitrogen gas, naturally drying the body without chemicals or toxic release. Preservation lasts up to 100 years.</p>
-          <svg class="leader" viewBox="0 0 260 70" preserveAspectRatio="none" aria-hidden="true"><circle cx="4" cy="8" r="4"/><path d="M4,8 L150,8 L256,64"/></svg>
         </div>
         <div class="how-point placement">
           <h4>Gentle Placement</h4>
           <p>The body is placed inside by qualified professionals. Every gesture is slow, deliberate, and respectful — no rushed movements, no compromise on dignity.</p>
-          <svg class="leader leader-left" viewBox="0 0 240 170" preserveAspectRatio="none" aria-hidden="true"><circle cx="236" cy="4" r="4"/><path d="M236,4 L236,90 L2,166"/></svg>
         </div>
         <div class="how-thumbs">
           <img class="how-thumb" src="thumb1.jpg" alt="Capsule interior detail" loading="lazy" />
@@ -481,25 +479,25 @@
       <h2 class="reveal">Innovation &amp; Certification</h2>
       <div class="cert-track" id="certTrack">
         <article class="cert-card reveal">
-          <div class="cert-img"></div>
+          <img class="cert-img" src="cert-patented.jpg" alt="The Capsule Pyrale product render" loading="lazy" />
           <h3>Patented Technology</h3>
           <p class="lbl">Certified · Canada &amp; USA</p>
           <p>The Capsule Pyrale uses a proprietary hermetic sealing system and inert gas preservation process — patented and certified in Canada and the United States, with additional certifications in progress.</p>
         </article>
         <article class="cert-card reveal">
-          <div class="cert-img"></div>
+          <img class="cert-img" src="cert-research.jpg" alt="Semiconductor wafer under laboratory inspection" loading="lazy" />
           <h3>10+ Years of Research</h3>
           <p class="lbl">First Test 2011 · Results 2014</p>
           <p>More than a decade of rigorous development, testing, and refinement went into the Capsule Pyrale. The first prototype was tested in 2011. Conclusive preservation results were confirmed in 2014.</p>
         </article>
         <article class="cert-card reveal">
-          <div class="cert-img"></div>
+          <img class="cert-img" src="cert-quebec.jpg" alt="Eterna manufacturing facility in Québec" loading="lazy" />
           <h3>100% Québec Manufacturing</h3>
           <p class="lbl">Lifetime Warranty</p>
           <p>Every Capsule Pyrale is designed, engineered, and assembled in Granby, Québec. Built from recyclable aluminium and aviation-grade polycarbonate — and backed by a lifetime structural warranty.</p>
         </article>
         <article class="cert-card reveal">
-          <div class="cert-img"></div>
+          <img class="cert-img" src="cert-validated.jpg" alt="Independent validation facility" loading="lazy" />
           <h3>Independently Validated</h3>
           <p class="lbl">Third-Party Review</p>
           <p>Preservation performance has been reviewed by independent specialists, confirming the integrity of the seal and the stability of the inert-gas environment over time.</p>
