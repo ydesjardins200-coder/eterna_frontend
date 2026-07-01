@@ -118,14 +118,14 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: linear-gradient(176deg, #cad1d3 0%, #d7dcdd 26%, #ccd1d2 56%, #b9c0c2 86%, #b1b8ba 100%);
+    background:
+      linear-gradient(180deg, rgba(48,32,58,0.28) 0%, rgba(48,32,58,0.06) 20%, rgba(48,32,58,0) 44%, rgba(44,28,52,0.10) 72%, rgba(40,24,48,0.30) 100%),
+      url("hero-clouds.jpg") center / cover no-repeat;
   }
   .hero::before {
     content: "";
     position: absolute; inset: 0; pointer-events: none;
-    background:
-      radial-gradient(72% 46% at 50% 16%, rgba(255,255,255,0.55), transparent 72%),
-      linear-gradient(90deg, transparent 37%, rgba(255,255,255,0.16) 41%, transparent 45%);
+    background: radial-gradient(78% 44% at 50% 30%, rgba(60,40,70,0.16), transparent 72%);
   }
   .hero-stage {
     position: relative; z-index: 1; flex: 1;
@@ -143,24 +143,35 @@
     width: 100%;
     position: relative;
     z-index: 1;
+    text-shadow: 0 4px 40px rgba(70,45,60,0.35);
   }
   .hero-capsule {
-    width: min(82%, 1080px);
-    height: auto;
-    margin-top: -1.5%;
     position: relative;
+    width: min(66%, 880px);
+    margin: -1% auto 0;
     z-index: 2;
-    filter: drop-shadow(0 26px 40px rgba(70,76,92,0.26));
-    -webkit-box-reflect: below -2px linear-gradient(to bottom, transparent 56%, rgba(0,0,0,0.16) 100%);
+  }
+  .hero-capsule img {
+    width: 100%; height: auto; display: block;
+    position: relative; z-index: 2;
+    filter: drop-shadow(0 26px 22px rgba(45,28,50,0.38));
+  }
+  .hero-capsule::after {
+    content: "";
+    position: absolute; z-index: 1;
+    left: 10%; right: 10%; bottom: -3%;
+    height: 52px;
+    background: radial-gradient(50% 100% at 50% 50%, rgba(38,22,46,0.55) 0%, rgba(38,22,46,0.3) 42%, transparent 74%);
+    filter: blur(18px);
   }
   .hero-copy {
     position: relative; z-index: 3;
     display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end;
     padding: 0 0 52px;
   }
-  .hero-title { font-weight: 500; font-size: clamp(40px, 5.6vw, 70px); color: #fff; letter-spacing: -0.025em; line-height: 1.0; }
+  .hero-title { font-weight: 500; font-size: clamp(40px, 5.6vw, 70px); color: #fff; letter-spacing: -0.025em; line-height: 1.0; text-shadow: 0 2px 22px rgba(60,38,52,0.4); }
   .hero-lead { max-width: 430px; justify-self: end; }
-  .hero-lead p { color: var(--ink-soft); font-size: 15px; margin-bottom: 26px; line-height: 1.6; }
+  .hero-lead p { color: #33272e; font-size: 15px; margin-bottom: 26px; line-height: 1.6; }
   .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
   .btn--partner { background: #fff; color: var(--ink); padding: 7px 7px 7px 24px; }
   .btn--partner:hover { background: #f0f0ee; }
@@ -377,7 +388,9 @@
   <section class="hero">
     <div class="hero-stage">
       <div class="hero-word">ETERNA</div>
-      <img class="hero-capsule" src="capsule-hero.png" alt="The Capsule Pyrale — a hermetic aluminium capsule with a dark glass viewing dome" />
+      <div class="hero-capsule">
+        <img src="capsule-hero.png" alt="The Capsule Pyrale — a hermetic aluminium capsule with a dark glass viewing dome" />
+      </div>
     </div>
     <div class="wrap hero-copy">
       <h1 class="hero-title">A New Way<br />to Say Goodbye</h1>
