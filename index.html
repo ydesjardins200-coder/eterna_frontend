@@ -118,7 +118,11 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: url("hero-clouds.jpg") center / cover no-repeat;
+  }
+  .hero-bg {
+    position: absolute; top: -14%; left: 0; right: 0; height: 128%;
+    background: #e6cfd0 url("hero-clouds.jpg") center / cover no-repeat;
+    z-index: 0; will-change: transform;
   }
   .hero::before {
     content: "";
@@ -150,11 +154,21 @@
   }
   @supports ((-webkit-background-clip: text) or (background-clip: text)) {
     .hero-word {
-      background: linear-gradient(176deg, #ffffff 0%, #f7f0e7 46%, #ecdcc8 100%);
+      background:
+        linear-gradient(105deg, transparent 42%, rgba(255,255,255,0.85) 50%, transparent 58%),
+        linear-gradient(176deg, #ffffff 0%, #f7f0e7 46%, #ecdcc8 100%);
+      background-size: 260% 100%, 100% 100%;
+      background-position: 135% 0, 0 0;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: heroSlideLeft 1.2s cubic-bezier(.22,1,.36,1) both, heroShine 8s ease-in-out 1.6s infinite;
     }
+  }
+  @keyframes heroShine {
+    0%   { background-position: 135% 0, 0 0; }
+    26%  { background-position: -35% 0, 0 0; }
+    100% { background-position: -35% 0, 0 0; }
   }
   .hero-capsule {
     position: relative;
@@ -482,6 +496,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-bg" id="heroBg"></div>
     <div class="hero-stage">
       <div class="hero-word">ETERNA</div>
       <div class="hero-capsule">
@@ -800,6 +815,22 @@
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Hero cloud parallax
+  const heroBg = document.getElementById('heroBg');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (heroBg && !reduceMotion) {
+    let ticking = false;
+    const applyParallax = () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight * 1.25) heroBg.style.transform = 'translate3d(0,' + (y * 0.34) + 'px,0)';
+      ticking = false;
+    };
+    applyParallax();
+    window.addEventListener('scroll', () => {
+      if (!ticking) { window.requestAnimationFrame(applyParallax); ticking = true; }
+    }, { passive: true });
+  }
 
   // Mobile menu
   const toggle = document.getElementById('menuToggle');
