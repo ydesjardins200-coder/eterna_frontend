@@ -296,11 +296,41 @@
   /* ---------- CERTIFICATION ---------- */
   .cert { padding: 100px 0; text-align: center; }
   .cert h2 { font-size: clamp(32px, 4vw, 50px); margin: 16px 0 0; }
-  .cert-track { display: flex; gap: 22px; margin: 50px 0 34px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scrollbar-width: none; }
+  .cert-track { display: flex; gap: 22px; margin: 44px 0 30px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding: 14px 4px 28px; scrollbar-width: none; }
   .cert-track::-webkit-scrollbar { display: none; }
-  .cert-card { flex: 0 0 290px; scroll-snap-align: start; text-align: left; }
-  .cert-img { width: 100%; height: 170px; object-fit: cover; border-radius: 12px; margin-bottom: 18px; display: block; }
-  .cert-card h3 { font-size: 22px; margin-bottom: 4px; }
+  .cert-card {
+    flex: 0 0 300px; scroll-snap-align: start; text-align: left;
+    background: #fff;
+    border: 1px solid rgba(228,227,223,0.9);
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 0 22px 26px;
+    position: relative;
+    box-shadow:
+      0 1px 2px rgba(40,44,60,0.05),
+      0 8px 18px rgba(40,44,60,0.06),
+      0 24px 44px rgba(40,44,60,0.05);
+    transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
+  }
+  .cert-card::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 3px; z-index: 2;
+    background: linear-gradient(90deg, var(--iris), var(--iris-soft));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.5s var(--ease);
+  }
+  .cert-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(111,90,216,0.28);
+    box-shadow:
+      0 2px 4px rgba(40,44,60,0.05),
+      0 18px 34px rgba(70,56,140,0.12),
+      0 40px 70px rgba(70,56,140,0.12);
+  }
+  .cert-card:hover::before { transform: scaleX(1); }
+  .cert-img { width: calc(100% + 44px); margin: 0 -22px 20px; height: 184px; object-fit: cover; display: block; transition: transform 0.6s var(--ease); }
+  .cert-card:hover .cert-img { transform: scale(1.04); }
+  .cert-card h3 { font-size: 21px; margin-bottom: 4px; }
   .cert-card .lbl { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
   .cert-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
   .cert-nav { display: flex; gap: 12px; justify-content: center; }
