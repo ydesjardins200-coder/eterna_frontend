@@ -137,29 +137,23 @@
   .hero-word {
     font-family: var(--display);
     font-weight: 400;
-    color: rgba(255,255,255,0.9);
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px rgba(255,255,255,0.92);
     font-size: clamp(78px, 19.5vw, 310px);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
     line-height: 0.9;
     text-align: center;
     width: 100%;
     position: relative;
     z-index: 1;
-    filter: drop-shadow(0 3px 24px rgba(55,34,48,0.55)) drop-shadow(0 1px 2px rgba(40,24,40,0.32));
+    filter: drop-shadow(0 3px 18px rgba(48,28,42,0.5));
     animation: heroSlideLeft 1.2s cubic-bezier(.22,1,.36,1) both;
-  }
-  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
-    .hero-word {
-      background: linear-gradient(176deg, #ffffff 0%, #f7f0e7 46%, #ecdcc8 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
   }
   .hero-capsule {
     position: relative;
     width: min(78%, 1080px);
-    margin: -7% auto 0;
+    margin: -2.5% auto 0;
     z-index: 2;
     animation: heroFadeUp 1.2s cubic-bezier(.22,1,.36,1) 0.15s both;
   }
