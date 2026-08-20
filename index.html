@@ -410,10 +410,17 @@
   .voice .who span { font-size: 12px; color: var(--muted); }
 
   /* ---------- CONTACT ---------- */
-  .contact { background: var(--night); color: #fff; padding: 100px 0; text-align: center; }
-  .contact h2 { font-size: clamp(32px, 4.2vw, 54px); color: #fff; margin: 16px 0 14px; }
-  .contact > .wrap > p { color: var(--night-text); font-size: 14px; max-width: 540px; margin: 0 auto 44px; }
-  form.consult { max-width: 540px; margin: 0 auto; background: var(--night-soft); border: 1px solid var(--night-line); border-radius: 16px; padding: 34px; text-align: left; }
+  .contact { background: var(--night); color: #fff; padding: 90px 0; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 46px; align-items: stretch; }
+  .contact-visual { position: relative; border-radius: 18px; overflow: hidden; min-height: 540px; background: linear-gradient(180deg, rgba(12,13,17,0.10) 0%, rgba(12,13,17,0.30) 50%, rgba(9,10,13,0.9) 100%), #14161c url("director.jpg") center 24% / cover no-repeat; box-shadow: 0 30px 64px rgba(0,0,0,0.4); }
+  .contact-visual-inner { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 36px; }
+  .cv-quote { font-family: var(--display); font-weight: 500; font-size: clamp(18px, 1.9vw, 24px); line-height: 1.42; letter-spacing: -0.01em; color: #fff; margin-bottom: 14px; }
+  .cv-by { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--night-text); }
+  .contact-form-side { display: flex; flex-direction: column; justify-content: center; }
+  .contact-form-side .eyebrow { margin-bottom: 14px; }
+  .contact-form-side h2 { font-size: clamp(30px, 3.4vw, 46px); color: #fff; margin: 0 0 14px; line-height: 1.06; }
+  .contact-form-side > p { color: var(--night-text); font-size: 14px; line-height: 1.7; margin: 0 0 30px; max-width: 480px; }
+  form.consult { max-width: none; margin: 0; background: transparent; border: 0; border-radius: 0; padding: 0; text-align: left; }
   .field { margin-bottom: 18px; }
   .field label { display: block; font-size: 12px; color: var(--night-text); margin-bottom: 7px; letter-spacing: 0.02em; }
   .field input, .field select, .field textarea {
@@ -487,7 +494,9 @@
     .wrap { padding: 0 18px; }
     .values-grid { grid-template-columns: 1fr; }
     .field-row { grid-template-columns: 1fr; }
-    form.consult { padding: 24px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 26px; }
+    .contact-visual { min-height: 300px; }
+    .cv-quote { font-size: 18px; }
   }
   @media (prefers-reduced-motion: reduce) {
     * { scroll-behavior: auto !important; }
@@ -745,50 +754,58 @@
 
   <!-- CONTACT -->
   <section class="contact dark" id="contact">
-    <div class="wrap">
-      <span class="eyebrow reveal" style="margin:0 auto; display:flex; justify-content:center;">Contact</span>
-      <h2 class="reveal">Book a Free Consultation</h2>
-      <p class="reveal">Speak with an Eterna advisor — no sales pressure, no obligation. We are here to answer your questions and help your family find the right path forward.</p>
-      <form class="consult reveal" id="consultForm" novalidate>
-        <div class="field">
-          <label for="fullname">Full name</label>
-          <input id="fullname" name="fullname" type="text" placeholder="Your name" required />
+    <div class="wrap contact-grid">
+      <div class="contact-visual reveal">
+        <div class="contact-visual-inner">
+          <p class="cv-quote">"To carry a family through their hardest days — with patience, dignity, and quiet respect for the one they have lost."</p>
+          <span class="cv-by">The Eterna promise</span>
         </div>
-        <div class="field">
-          <label for="email">Email address</label>
-          <input id="email" name="email" type="email" placeholder="Your email address" required />
-        </div>
-        <div class="field">
-          <label for="phone">Phone number</label>
-          <input id="phone" name="phone" type="tel" placeholder="Your phone number" />
-        </div>
-        <div class="field-row">
+      </div>
+      <div class="contact-form-side">
+        <span class="eyebrow reveal">Contact</span>
+        <h2 class="reveal">Book a Free Consultation</h2>
+        <p class="reveal">Speak with an Eterna advisor — no sales pressure, no obligation. We are here to answer your questions and help your family find the right path forward.</p>
+        <form class="consult reveal" id="consultForm" novalidate>
           <div class="field">
-            <label for="province">Province</label>
-            <select id="province" name="province">
-              <option value="">Select your province…</option>
-              <option>Québec</option><option>Ontario</option><option>British Columbia</option>
-              <option>Alberta</option><option>Manitoba</option><option>Saskatchewan</option>
-              <option>Nova Scotia</option><option>New Brunswick</option>
-              <option>Newfoundland and Labrador</option><option>Prince Edward Island</option>
-              <option>Other</option>
-            </select>
+            <label for="fullname">Full name</label>
+            <input id="fullname" name="fullname" type="text" placeholder="Your name" required />
           </div>
           <div class="field">
-            <label for="time">Preferred contact time</label>
-            <select id="time" name="time">
-              <option value="">Select a time…</option>
-              <option>Morning</option><option>Afternoon</option><option>Evening</option>
-            </select>
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" placeholder="Your email address" required />
           </div>
-        </div>
-        <div class="field">
-          <label for="message">Message (optional)</label>
-          <textarea id="message" name="message" placeholder="Tell us a bit about your situation or any questions you have…"></textarea>
-        </div>
-        <button type="submit" class="btn btn--light">Request Consultation</button>
-        <p class="form-note" id="formNote">We respond within one business day. For urgent matters, call <a href="tel:18446955613">1 844 695-5613</a>.</p>
-      </form>
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" placeholder="Your phone number" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="province">Province</label>
+              <select id="province" name="province">
+                <option value="">Select your province…</option>
+                <option>Québec</option><option>Ontario</option><option>British Columbia</option>
+                <option>Alberta</option><option>Manitoba</option><option>Saskatchewan</option>
+                <option>Nova Scotia</option><option>New Brunswick</option>
+                <option>Newfoundland and Labrador</option><option>Prince Edward Island</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="time">Preferred contact time</label>
+              <select id="time" name="time">
+                <option value="">Select a time…</option>
+                <option>Morning</option><option>Afternoon</option><option>Evening</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="message">Message (optional)</label>
+            <textarea id="message" name="message" placeholder="Tell us a bit about your situation or any questions you have…"></textarea>
+          </div>
+          <button type="submit" class="btn btn--light">Request Consultation</button>
+          <p class="form-note" id="formNote">We respond within one business day. For urgent matters, call <a href="tel:18446955613">1 844 695-5613</a>.</p>
+        </form>
+      </div>
     </div>
   </section>
 </main>
