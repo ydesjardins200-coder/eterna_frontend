@@ -370,7 +370,9 @@
   .cert-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
 
   /* ---------- FAQ ---------- */
-  .faq { padding: 90px 0; }
+  .faq { position: relative; overflow: hidden; padding: 104px 0; background: linear-gradient(180deg, rgba(248,247,244,0.80) 0%, rgba(250,249,246,0.86) 50%, rgba(246,245,242,0.9) 100%), radial-gradient(46% 68% at 15% 24%, rgba(111,90,216,0.20), transparent 66%), #eef0f2 url("footer-mist.jpg") center 24% / cover no-repeat; }
+  .faq::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(111,90,216,0.28), transparent); }
+  .faq .wrap { position: relative; z-index: 1; }
   .faq-grid { display: grid; grid-template-columns: 0.6fr 1.4fr; gap: 50px; }
   .faq-grid h2 { font-size: clamp(28px, 3.4vw, 42px); }
   .faq-aside p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; margin: 18px 0 22px; max-width: 300px; }
