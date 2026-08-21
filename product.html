@@ -258,12 +258,8 @@
 
   .phero { padding: 130px 0 70px; }
   .phero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 54px; align-items: start; }
-  .pstage { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 360 / 282; cursor: grab; user-select: none; -webkit-user-select: none; touch-action: pan-y; background: radial-gradient(70% 62% at 50% 42%, #ffffff 0%, #eef0f3 62%, #e5e7ea 100%); display: grid; place-items: center; }
-  .pstage.grabbing { cursor: grabbing; }
-  .pspin { position: absolute; inset: 0; background-repeat: no-repeat; background-size: 600% 400%; background-position: 0% 0%; }
-  .pstage-hint { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 7px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); background: rgba(255,255,255,0.78); border: 1px solid var(--line); border-radius: 100px; padding: 7px 14px; pointer-events: none; transition: opacity 0.4s var(--ease); }
-  .pstage-hint .ic-svg { width: 14px; height: 14px; color: var(--iris); }
-  .pstage.touched .pstage-hint { opacity: 0; }
+  .pstage { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 4 / 3; background: radial-gradient(70% 62% at 50% 42%, #ffffff 0%, #eef0f3 62%, #e5e7ea 100%); display: grid; place-items: center; }
+  .pstage::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: 12%; height: 26px; background: radial-gradient(50% 100% at 50% 0%, rgba(30,30,40,0.16), transparent 70%); filter: blur(3px); }
   .pstage img { width: 84%; height: auto; position: relative; z-index: 1; transition: opacity 0.35s var(--ease); filter: drop-shadow(0 24px 30px rgba(30,25,45,0.22)); }
   .ptrust-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
   .ptrust-row span { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--ink-soft); background: var(--mist); border: 1px solid var(--line); border-radius: 100px; padding: 8px 14px; }
@@ -393,10 +389,7 @@
   <section class="phero" id="overview">
     <div class="wrap phero-grid">
       <div class="pgallery">
-        <div class="pstage" id="pStage">
-          <div class="pspin" id="pSpin" style="background-image:url('pyrale-spin-silver.jpg')" role="img" aria-label="The Capsule Pyrale — drag to rotate"></div>
-          <div class="pstage-hint" id="pHint"><svg class="ic-svg"><use href="#ic-rotate"/></svg> Drag to rotate</div>
-        </div>
+        <div class="pstage"><img src="pyrale-silver.png" alt="The Capsule Pyrale in Brushed Aluminium" id="pMain" /></div>
         <div class="ptrust-row">
           <span><svg class="ic-svg"><use href="#ic-shield"/></svg> Lifetime warranty</span>
           <span><svg class="ic-svg"><use href="#ic-factory"/></svg> Made in Québec</span>
@@ -641,45 +634,24 @@
     setTimeout(() => reveals.forEach(el => el.classList.add('in')), 2500);
   } else { reveals.forEach(el => el.classList.add('in')); }
 
-  // ---- Product 360 spinner + finish configurator ----
-  var COLS = 6, ROWS = 4, FRAMES = COLS * ROWS;
-  var stage = document.getElementById('pStage');
-  var spin = document.getElementById('pSpin');
+  // ---- Product configurator ----
+  var pMain = document.getElementById('pMain');
   var swatches = document.getElementById('pSwatches');
   var finishName = document.getElementById('finishName');
   var pbarImg = document.getElementById('pbarImg');
   var pbarFinish = document.getElementById('pbarFinish');
-  var frame = 0, auto = null;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function showFrame(f) {
-    frame = ((Math.round(f) % FRAMES) + FRAMES) % FRAMES;
-    var col = frame % COLS, row = Math.floor(frame / COLS);
-    spin.style.backgroundPosition = (col / (COLS - 1) * 100) + '% ' + (row / (ROWS - 1) * 100) + '%';
-  }
-  if (spin && stage) {
-    showFrame(0);
-    // gentle auto-rotate until first interaction
-    function startAuto() { if (reduce || auto) return; auto = setInterval(function () { showFrame(frame + 1); }, 130); }
-    function stopAuto() { if (auto) { clearInterval(auto); auto = null; } }
-    var idle = setTimeout(startAuto, 1200);
-    var dragging = false, startX = 0, startFrame = 0;
-    function cx(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
-    function down(e) { dragging = true; startX = cx(e); startFrame = frame; stage.classList.add('grabbing', 'touched'); clearTimeout(idle); stopAuto(); }
-    function move(e) { if (!dragging) return; var dx = cx(e) - startX; showFrame(startFrame - dx / stage.clientWidth * FRAMES); if (e.cancelable && e.touches) e.preventDefault(); }
-    function up() { dragging = false; stage.classList.remove('grabbing'); }
-    stage.addEventListener('mousedown', down); window.addEventListener('mousemove', move); window.addEventListener('mouseup', up);
-    stage.addEventListener('touchstart', down, { passive: true }); stage.addEventListener('touchmove', move, { passive: false }); window.addEventListener('touchend', up);
-  }
   if (swatches) {
     swatches.querySelectorAll('.pswatch').forEach(function (b) {
       b.addEventListener('click', function () {
         if (b.classList.contains('active')) return;
         swatches.querySelectorAll('.pswatch').forEach(function (s) { s.classList.remove('active'); });
         b.classList.add('active');
-        var name = b.dataset.name;
+        var src = b.dataset.src, name = b.dataset.name;
         finishName.textContent = name; if (pbarFinish) pbarFinish.textContent = name;
-        if (spin && b.dataset.sheet) spin.style.backgroundImage = "url('" + b.dataset.sheet + "')";
-        if (pbarImg && b.dataset.src) pbarImg.src = b.dataset.src;
+        pMain.style.opacity = '0';
+        var img = new Image();
+        img.onload = function () { pMain.src = src; pMain.style.opacity = '1'; if (pbarImg) pbarImg.src = src; };
+        img.src = src;
       });
     });
   }
