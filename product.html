@@ -343,6 +343,29 @@
     .pbuy { flex-direction: column; }
     .pbar-price { display: none; }
   }
+
+  /* CHECKOUT MODAL */
+  .cko-veil { position: fixed; inset: 0; z-index: 200; background: rgba(12,13,16,0.55); backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease); }
+  .cko-veil.show { opacity: 1; pointer-events: auto; }
+  .cko { position: fixed; z-index: 201; left: 50%; top: 50%; transform: translate(-50%, -46%); width: min(94vw, 468px); max-height: 90vh; overflow-y: auto; background: var(--paper); border-radius: 18px; padding: 34px; box-shadow: 0 30px 80px rgba(0,0,0,0.32); opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease), transform 0.3s var(--ease); }
+  .cko.show { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%); }
+  .cko h3 { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .cko-sub { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 24px; }
+  .cko-close { position: absolute; top: 18px; right: 18px; width: 30px; height: 30px; border: none; background: transparent; color: var(--muted); font-size: 21px; line-height: 1; cursor: pointer; border-radius: 50%; }
+  .cko-close:hover { background: var(--mist); color: var(--ink); }
+  .cko-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .cko-f { margin-bottom: 14px; }
+  .cko-f label { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .cko-f input { width: 100%; padding: 12px 14px; font-family: var(--sans); font-size: 14.5px; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 9px; transition: border-color 0.25s var(--ease); }
+  .cko-f input:focus { outline: none; border-color: var(--iris); }
+  .cko-consent { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0 20px; font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
+  .cko-consent input { margin-top: 2px; accent-color: var(--iris); flex-shrink: 0; }
+  .cko-total { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); padding-top: 16px; margin-bottom: 18px; font-size: 13.5px; color: var(--ink-soft); }
+  .cko-total b { font-size: 19px; font-weight: 500; color: var(--ink); }
+  .cko-go { width: 100%; justify-content: center; }
+  .cko-err { background: #fbf0ef; border-left: 2px solid #8c2f2a; color: #8c2f2a; font-size: 13px; padding: 11px 13px; margin-bottom: 16px; line-height: 1.5; }
+  .cko-note { font-size: 11.5px; color: var(--muted); text-align: center; margin-top: 14px; line-height: 1.55; }
+  @media (max-width: 480px) { .cko { padding: 26px 22px; } .cko-row { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -599,6 +622,31 @@
   </div>
 </footer>
 
+
+<!-- Checkout -->
+<div class="cko-veil" id="ckoVeil"></div>
+<div class="cko" id="cko" role="dialog" aria-modal="true" aria-labelledby="ckoTitle">
+  <button class="cko-close" id="ckoClose" aria-label="Close">&times;</button>
+  <h3 id="ckoTitle">Reserve your Capsule Pyrale</h3>
+  <p class="cko-sub">Finish &mdash; <span id="ckoFinish">Brushed Aluminium</span>. We'll confirm every detail with you personally before anything is made.</p>
+  <div class="cko-err" id="ckoErr" style="display:none"></div>
+  <form id="ckoForm" novalidate>
+    <div class="cko-row">
+      <div class="cko-f"><label for="ckoFirst">First name</label><input id="ckoFirst" name="firstName" autocomplete="given-name" required></div>
+      <div class="cko-f"><label for="ckoLast">Last name</label><input id="ckoLast" name="lastName" autocomplete="family-name" required></div>
+    </div>
+    <div class="cko-f"><label for="ckoEmail">Email</label><input id="ckoEmail" name="email" type="email" autocomplete="email" required></div>
+    <div class="cko-f"><label for="ckoPhone">Phone <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="ckoPhone" name="phone" type="tel" autocomplete="tel"></div>
+    <label class="cko-consent">
+      <input type="checkbox" id="ckoConsent">
+      <span id="ckoConsentText">I agree to receive occasional emails from Eterna about pre-planning and the Capsule Pyrale. You can withdraw consent at any time.</span>
+    </label>
+    <div class="cko-total"><span>Total, taxes included</span><b id="ckoTotal">$17,073.79 CAD</b></div>
+    <button type="submit" class="btn btn--dark cko-go" id="ckoGo">Continue to secure payment</button>
+    <p class="cko-note">Payment is processed by Stripe. A 30-day cancellation period applies &mdash; nothing is made until it closes.</p>
+  </form>
+</div>
+
 <div class="ptoast" id="ptoast" role="status"></div>
 
 <script>
@@ -665,14 +713,98 @@
   }
   // ---- Fake Buy Now -> toast (Stripe later) ----
   var toast = document.getElementById('ptoast'); var toastT;
-  document.querySelectorAll('.js-buy').forEach(function (b) {
-    b.addEventListener('click', function () {
-      if (!toast) return;
-      toast.textContent = "Secure checkout is coming soon — reserve yours or book a consultation and we'll guide you.";
-      toast.classList.add('show');
-      clearTimeout(toastT); toastT = setTimeout(function () { toast.classList.remove('show'); }, 4200);
-    });
+
+  /* ---- Checkout ---- */
+  var ETERNA_API = window.ETERNA_API || 'https://eternaadmin-production.up.railway.app';
+  var SKU = 'PYR-STD-GRAPHITE';
+
+  /* Capture a partner referral code and keep it for the attribution window.
+     A funeral director's referral often converts months later, so this must
+     outlive the session. */
+  (function () {
+    try {
+      var ref = new URLSearchParams(location.search).get('ref');
+      if (ref) localStorage.setItem('eterna_ref', ref);
+    } catch (e) {}
+  })();
+
+  var cko = document.getElementById('cko'),
+      ckoVeil = document.getElementById('ckoVeil'),
+      ckoErr = document.getElementById('ckoErr'),
+      ckoGo = document.getElementById('ckoGo'),
+      ckoForm = document.getElementById('ckoForm'),
+      ckoFinishEl = document.getElementById('ckoFinish'),
+      lastFocus = null;
+
+  function ckoOpen() {
+    lastFocus = document.activeElement;
+    var active = document.querySelector('.pswatch.active');
+    if (active && ckoFinishEl) ckoFinishEl.textContent = active.dataset.name;
+    ckoErr.style.display = 'none';
+    cko.classList.add('show'); ckoVeil.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { document.getElementById('ckoFirst').focus(); }, 60);
+  }
+  function ckoClose() {
+    cko.classList.remove('show'); ckoVeil.classList.remove('show');
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+  document.getElementById('ckoClose').addEventListener('click', ckoClose);
+  ckoVeil.addEventListener('click', ckoClose);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && cko.classList.contains('show')) ckoClose();
   });
+
+  document.querySelectorAll('.js-buy').forEach(function (b) {
+    b.addEventListener('click', ckoOpen);
+  });
+
+  ckoForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    ckoErr.style.display = 'none';
+
+    var first = document.getElementById('ckoFirst').value.trim(),
+        last = document.getElementById('ckoLast').value.trim(),
+        email = document.getElementById('ckoEmail').value.trim(),
+        phone = document.getElementById('ckoPhone').value.trim(),
+        consent = document.getElementById('ckoConsent').checked,
+        active = document.querySelector('.pswatch.active');
+
+    if (!first || !last || !email) {
+      ckoErr.textContent = 'Please enter your name and email so we can reach you.';
+      ckoErr.style.display = 'block'; return;
+    }
+
+    ckoGo.disabled = true; ckoGo.textContent = 'One moment\u2026';
+    var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e2) {}
+
+    try {
+      var r = await fetch(ETERNA_API + '/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sku: SKU, email: email, firstName: first, lastName: last,
+          phone: phone || undefined,
+          locale: 'en-CA',
+          finish: active ? active.dataset.name : undefined,
+          referralCode: ref || undefined,
+          marketingConsent: consent,
+          /* CASL requires proof of the exact wording shown at opt-in. */
+          consentPromptText: consent ? document.getElementById('ckoConsentText').textContent.trim() : undefined
+        })
+      });
+      var d = await r.json().catch(function () { return null; });
+      if (r.ok && d && d.checkoutUrl) { window.location.href = d.checkoutUrl; return; }
+      ckoErr.textContent = (d && d.error && d.error.message) || 'We could not start checkout. Please try again or call us.';
+      ckoErr.style.display = 'block';
+    } catch (err) {
+      ckoErr.textContent = 'We could not reach our server. Please check your connection and try again.';
+      ckoErr.style.display = 'block';
+    }
+    ckoGo.disabled = false; ckoGo.textContent = 'Continue to secure payment';
+  });
+
 </script>
 </body>
 </html>
