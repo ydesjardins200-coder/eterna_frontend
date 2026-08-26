@@ -366,6 +366,29 @@
   .cko-err { background: #fbf0ef; border-left: 2px solid #8c2f2a; color: #8c2f2a; font-size: 13px; padding: 11px 13px; margin-bottom: 16px; line-height: 1.5; }
   .cko-note { font-size: 11.5px; color: var(--muted); text-align: center; margin-top: 14px; line-height: 1.55; }
   @media (max-width: 480px) { .cko { padding: 26px 22px; } .cko-row { grid-template-columns: 1fr; } }
+
+  .ppre-note { font-size: 12.5px; color: var(--muted); line-height: 1.6; margin-top: 12px; max-width: 46ch; }
+  .pbar-pre { margin-right: 8px; }
+  @media (max-width: 640px) { .pbar-pre { display: none; } }
+
+  /* PRE-PLAN */
+  .pp-terms { display: grid; gap: 9px; margin-bottom: 18px; }
+  .pp-term { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%;
+    padding: 13px 15px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper);
+    cursor: pointer; font: inherit; text-align: left; transition: border-color 0.2s var(--ease), background 0.2s var(--ease); }
+  .pp-term:hover { border-color: var(--ink-soft); }
+  .pp-term[aria-pressed="true"] { border-color: var(--iris); background: #fbfaff; }
+  .pp-term b { font-size: 15px; font-weight: 500; display: block; }
+  .pp-term span { font-size: 12px; color: var(--muted); }
+  .pp-term .pp-amt { font-size: 17px; font-weight: 500; white-space: nowrap; }
+  .pp-term .pp-amt em { font-style: normal; font-size: 11.5px; color: var(--muted); }
+  .pp-total { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line);
+    padding-top: 15px; margin-bottom: 16px; font-size: 13.5px; color: var(--ink-soft); }
+  .pp-total b { font-size: 18px; font-weight: 500; color: var(--ink); }
+  .pp-facts { list-style: none; margin: 0 0 20px; padding: 0; font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; }
+  .pp-facts li { padding-left: 20px; position: relative; }
+  .pp-facts li::before { content: ""; position: absolute; left: 4px; top: 9px; width: 5px; height: 5px;
+    border-radius: 50%; background: var(--iris); }
 </style>
 </head>
 <body>
@@ -403,6 +426,7 @@
       </div>
       <div class="pbar-right">
         <span class="pbar-price">$14,500 <em>CAD</em></span>
+        <button class="btn btn--ghost js-preplan pbar-pre">Pre-plan</button>
         <button class="btn btn--dark js-buy">Buy Now</button>
       </div>
     </div>
@@ -448,8 +472,9 @@
 
         <div class="pbuy">
           <button class="btn btn--dark js-buy">Buy Now</button>
-          <a href="contact.html" class="btn btn--ghost">Book a consultation</a>
+          <button class="btn btn--ghost js-preplan">Pre-plan &mdash; from $284/mo</button>
         </div>
+        <p class="ppre-note">Pre-planning holds today&rsquo;s price and spreads it over up to 60 months. Nothing is built until it is paid in full &mdash; you can settle the balance early at any time.</p>
         <p class="pship"><svg class="ic-svg"><use href="#ic-truck"/></svg> White-glove delivery &amp; placement by trained professionals, anywhere in Canada.</p>
       </div>
     </div>
@@ -647,6 +672,44 @@
   </form>
 </div>
 
+
+<!-- Pre-plan -->
+<div class="cko-veil" id="ppVeil"></div>
+<div class="cko" id="ppModal" role="dialog" aria-modal="true" aria-labelledby="ppTitle">
+  <button class="cko-close" id="ppClose" aria-label="Close">&times;</button>
+  <h3 id="ppTitle">Pre-plan your Capsule Pyrale</h3>
+  <p class="cko-sub">Today&rsquo;s price, held. Choose how you&rsquo;d like to spread it &mdash; the total is the same either way.</p>
+  <div class="cko-err" id="ppErr" style="display:none"></div>
+
+  <div class="pp-terms" id="ppTerms"></div>
+
+  <div class="pp-total">
+    <span>Total, taxes included</span>
+    <b id="ppTotal">&mdash;</b>
+  </div>
+
+  <ul class="pp-facts">
+    <li>Nothing is manufactured until the balance reaches zero.</li>
+    <li>You can pay off the balance early at any time to start production sooner.</li>
+    <li>No financing charge &mdash; the instalments add up to exactly the price above.</li>
+  </ul>
+
+  <form id="ppForm" novalidate>
+    <div class="cko-row">
+      <div class="cko-f"><label for="ppFirst">First name</label><input id="ppFirst" autocomplete="given-name" required></div>
+      <div class="cko-f"><label for="ppLast">Last name</label><input id="ppLast" autocomplete="family-name" required></div>
+    </div>
+    <div class="cko-f"><label for="ppEmail">Email</label><input id="ppEmail" type="email" autocomplete="email" required></div>
+    <div class="cko-f"><label for="ppPhone">Phone <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="ppPhone" type="tel" autocomplete="tel"></div>
+    <label class="cko-consent">
+      <input type="checkbox" id="ppConsent">
+      <span id="ppConsentText">I&rsquo;d also like to receive occasional emails from Eterna about pre-planning. Optional &mdash; you can pre-plan without this, and withdraw at any time.</span>
+    </label>
+    <button type="submit" class="btn btn--dark cko-go" id="ppGo">Continue to secure payment</button>
+    <p class="cko-note">Payment is processed by Stripe. Billing details are confirmed on the next step, and an account is created for you so you can follow your plan.</p>
+  </form>
+</div>
+
 <div class="ptoast" id="ptoast" role="status"></div>
 
 <script>
@@ -803,6 +866,119 @@
       ckoErr.style.display = 'block';
     }
     ckoGo.disabled = false; ckoGo.textContent = 'Continue to secure payment';
+  });
+
+
+  /* ---- Pre-plan ---- */
+  var ppModal = document.getElementById('ppModal'),
+      ppVeil = document.getElementById('ppVeil'),
+      ppErr = document.getElementById('ppErr'),
+      ppGo = document.getElementById('ppGo'),
+      ppTermsEl = document.getElementById('ppTerms'),
+      ppPlans = null, ppChosen = null, ppLastFocus = null;
+
+  function ppMoney(c) {
+    return '$' + (c / 100).toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  /* Terms and prices come from the server. The page never computes money:
+     a browser that could name its own instalment could name its own price. */
+  async function ppLoad() {
+    if (ppPlans) return true;
+    try {
+      var r = await fetch(ETERNA_API + '/api/preplan/plans?sku=' + encodeURIComponent(SKU));
+      var d = await r.json();
+      if (!r.ok || !d.plans) throw new Error('plans');
+      ppPlans = d;
+      document.getElementById('ppTotal').textContent = ppMoney(d.totalCents) + ' CAD';
+      ppTermsEl.innerHTML = d.plans.map(function (p, i) {
+        return '<button type="button" class="pp-term" role="button" aria-pressed="' + (i === 0 ? 'true' : 'false') +
+          '" data-months="' + p.months + '">' +
+          '<span><b>' + p.months + ' monthly payments</b>' +
+          '<span>First payment ' + ppMoney(p.firstCents) + ', then ' + ppMoney(p.monthlyCents) + '</span></span>' +
+          '<span class="pp-amt">' + ppMoney(p.monthlyCents) + '<em>/mo</em></span>' +
+          '</button>';
+      }).join('');
+      ppChosen = d.plans[0].months;
+      ppTermsEl.querySelectorAll('.pp-term').forEach(function (b) {
+        b.addEventListener('click', function () {
+          ppChosen = Number(b.dataset.months);
+          ppTermsEl.querySelectorAll('.pp-term').forEach(function (x) {
+            x.setAttribute('aria-pressed', String(x === b));
+          });
+        });
+      });
+      return true;
+    } catch (e) {
+      ppErr.textContent = 'We could not load the payment options. Please try again or call us.';
+      ppErr.style.display = 'block';
+      return false;
+    }
+  }
+
+  async function ppOpen() {
+    ppLastFocus = document.activeElement;
+    ppErr.style.display = 'none';
+    ppModal.classList.add('show'); ppVeil.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    await ppLoad();
+    setTimeout(function () { document.getElementById('ppFirst').focus(); }, 60);
+  }
+  function ppCloseFn() {
+    ppModal.classList.remove('show'); ppVeil.classList.remove('show');
+    document.body.style.overflow = '';
+    if (ppLastFocus) ppLastFocus.focus();
+  }
+  document.getElementById('ppClose').addEventListener('click', ppCloseFn);
+  ppVeil.addEventListener('click', ppCloseFn);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && ppModal.classList.contains('show')) ppCloseFn();
+  });
+  document.querySelectorAll('.js-preplan').forEach(function (b) {
+    b.addEventListener('click', ppOpen);
+  });
+
+  document.getElementById('ppForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    ppErr.style.display = 'none';
+    var first = document.getElementById('ppFirst').value.trim(),
+        last = document.getElementById('ppLast').value.trim(),
+        email = document.getElementById('ppEmail').value.trim(),
+        phone = document.getElementById('ppPhone').value.trim(),
+        consent = document.getElementById('ppConsent').checked,
+        active = document.querySelector('.pswatch.active');
+
+    if (!first || !last || !email) {
+      ppErr.textContent = 'Please enter your name and email so we can reach you.';
+      ppErr.style.display = 'block'; return;
+    }
+    if (!ppChosen) { ppErr.textContent = 'Please choose a payment term.'; ppErr.style.display = 'block'; return; }
+
+    ppGo.disabled = true; ppGo.textContent = 'One moment\u2026';
+    var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e2) {}
+
+    try {
+      var r = await fetch(ETERNA_API + '/api/preplan/checkout', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sku: SKU, email: email, firstName: first, lastName: last,
+          phone: phone || undefined, locale: 'en-CA',
+          finish: active ? active.dataset.name : undefined,
+          months: ppChosen,
+          referralCode: ref || undefined,
+          marketingConsent: consent,
+          consentPromptText: consent ? document.getElementById('ppConsentText').textContent.trim() : undefined
+        })
+      });
+      var d = await r.json().catch(function () { return null; });
+      if (r.ok && d && d.checkoutUrl) { window.location.href = d.checkoutUrl; return; }
+      ppErr.textContent = (d && d.error && d.error.message) || 'We could not start your pre-plan. Please try again or call us.';
+      ppErr.style.display = 'block';
+    } catch (err) {
+      ppErr.textContent = 'We could not reach our server. Please check your connection and try again.';
+      ppErr.style.display = 'block';
+    }
+    ppGo.disabled = false; ppGo.textContent = 'Continue to secure payment';
   });
 
 </script>
