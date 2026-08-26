@@ -834,8 +834,18 @@
     if (e.key === 'Escape' && cko.classList.contains('show')) ckoClose();
   });
 
+  /* Full page rather than a modal, for the same reasons as pre-planning:
+     an address, a review and a payment do not belong in an overlay. */
   document.querySelectorAll('.js-buy').forEach(function (b) {
-    b.addEventListener('click', ckoOpen);
+    b.addEventListener('click', function (e) {
+      e.preventDefault();
+      var active = document.querySelector('.pswatch.active');
+      var q = ['sku=' + encodeURIComponent(SKU)];
+      if (active && active.dataset.name) q.push('finish=' + encodeURIComponent(active.dataset.name));
+      var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e2) {}
+      if (ref) q.push('ref=' + encodeURIComponent(ref));
+      window.location.href = '/achat?' + q.join('&');
+    });
   });
 
   ckoForm.addEventListener('submit', async function (e) {
