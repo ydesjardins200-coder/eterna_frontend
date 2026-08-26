@@ -366,6 +366,24 @@
   .cko-err { background: #fbf0ef; border-left: 2px solid #8c2f2a; color: #8c2f2a; font-size: 13px; padding: 11px 13px; margin-bottom: 16px; line-height: 1.5; }
   .cko-note { font-size: 11.5px; color: var(--muted); text-align: center; margin-top: 14px; line-height: 1.55; }
   @media (max-width: 480px) { .cko { padding: 26px 22px; } .cko-row { grid-template-columns: 1fr; } }
+
+  .ty-fig { margin: 26px 0 0; }
+  .ty-fig img { width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;
+    animation: tyRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  @keyframes tyRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .ty-fig figcaption { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted, #6A7370); margin-top: 12px; }
+  .ty-plan { margin-top: 22px; padding: 14px 18px; background: #F7FAF9; border-radius: 10px;
+    font-size: 13.5px; color: var(--ink-soft, #3A4245); line-height: 1.6; }
+  .ty-plan b { font-weight: 500; }
+  .ty-next { list-style: none; margin: 26px 0 0; padding: 0; text-align: left; display: grid; gap: 13px; }
+  .ty-next li { font-size: 13.5px; line-height: 1.65; color: var(--muted, #6A7370);
+    padding-left: 22px; position: relative; }
+  .ty-next li::before { content: ""; position: absolute; left: 5px; top: 9px; width: 5px; height: 5px;
+    border-radius: 50%; background: var(--iris, #6C63C7); }
+  .ty-next b { color: var(--ink, #14181A); font-weight: 500; }
+  .ty-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  [hidden] { display: none !important; }
 </style>
 <style>
   .ty { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 28px; background: var(--mist); }
@@ -385,16 +403,87 @@
     <div class="ty-seal">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
     </div>
-    <h1>Thank you, we have your reservation.</h1>
-    <p>A member of our team will call you within one business day to confirm every detail &mdash; finish, engraving, and timing &mdash; before anything is made.</p>
-    <p>You have 30 days to change your mind. Nothing enters our workshop until that period closes.</p>
+    <h1 id="tyTitle">It's yours.</h1>
+    <p id="tyLede">Your Capsule Pyrale is reserved, and today's price is held for you &mdash; whatever happens to the cost of aluminium between now and the day it matters.</p>
+
+    <figure class="ty-fig" id="tyFig" hidden>
+      <img id="tyImg" src="" alt="">
+      <figcaption id="tyCap"></figcaption>
+    </figure>
+
+    <div class="ty-plan" id="tyPlan" hidden></div>
+
+    <ul class="ty-next">
+      <li><b>We call you within one business day.</b> One of our advisors will confirm the finish and the details with you &mdash; unhurried, and with no obligation.</li>
+      <li><b>Your file is open now.</b> Follow your plan, your payments and your balance whenever you like.</li>
+      <li><b>Made only for you.</b> Each capsule is built to order, serial-numbered, and its record follows it for the century it is designed to last.</li>
+    </ul>
+
     <div class="ty-ref">Reference &mdash; <b id="ref">&mdash;</b></div>
-    <div class="ty-actions"><a class="btn btn--ghost" href="index.html">Return to Eterna</a></div>
+    <div class="ty-actions">
+      <a class="btn btn--dark" id="tyAcct" href="#" hidden>My account</a>
+      <a class="btn btn--ghost" href="index.html">Return to Eterna</a>
+    </div>
   </div>
 </main>
 <script>
-  var o = new URLSearchParams(location.search).get('order');
+  var ETERNA_API = 'https://eternaadmin-production.up.railway.app';
+  var params = new URLSearchParams(location.search);
+  var o = params.get('order'), sid = params.get('session_id');
   if (o) document.getElementById('ref').textContent = o;
+
+  var FINISH_IMG = {
+    'brushed aluminium': 'pyrale-silver.png', 'silver': 'pyrale-silver.png',
+    'champagne': 'pyrale-champagne.png', 'graphite': 'pyrale-graphite.png',
+    'bronze': 'pyrale-bronze.png', 'onyx': 'pyrale-onyx.png'
+  };
+
+  function money(c) {
+    return '$' + (c / 100).toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  /* The page is complete without this: the reference and the message are
+     already on screen. Everything below only enriches it, so a failed call
+     leaves a page that still reads properly rather than a broken one. */
+  (async function () {
+    if (!sid) return;
+    try {
+      var r = await fetch(ETERNA_API + '/api/checkout/summary', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId: sid })
+      });
+      if (!r.ok) return;
+      var d = await r.json();
+
+      if (d.firstName) {
+        document.getElementById('tyTitle').textContent = 'It\u2019s yours, ' + d.firstName + '.';
+      }
+
+      var img = d.finish ? FINISH_IMG[String(d.finish).toLowerCase()] : null;
+      if (img) {
+        var fig = document.getElementById('tyFig');
+        document.getElementById('tyImg').src = img;
+        document.getElementById('tyImg').alt = (d.productName || 'Capsule Pyrale') + ' \u2014 ' + d.finish;
+        document.getElementById('tyCap').textContent = (d.productName || 'Capsule Pyrale') + ' \u2014 ' + d.finish;
+        fig.hidden = false;
+      }
+
+      if (d.instalmentCount && d.instalmentAmountCents) {
+        var plan = document.getElementById('tyPlan');
+        plan.innerHTML = 'Your plan: <b>' + d.instalmentCount + ' monthly payments of ' +
+          money(d.instalmentAmountCents) + '</b>, totalling ' + money(d.totalCents) +
+          '. No financing charge \u2014 the instalments add up to exactly the price you saw. ' +
+          'You can settle the balance early at any time to bring your capsule forward.';
+        plan.hidden = false;
+      }
+
+      if (d.portalUrl) {
+        var a = document.getElementById('tyAcct');
+        a.href = d.portalUrl;
+        a.hidden = false;
+      }
+    } catch (e) { /* leave the page as it stands */ }
+  })();
 </script>
 </body>
 </html>
