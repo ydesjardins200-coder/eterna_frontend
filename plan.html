@@ -210,14 +210,30 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
 
   var API = 'https://eternaadmin-production.up.railway.app';
   var BASE = '/preplan';
+  var KIND = location.pathname.indexOf('/achat') === 0 ? 'buy_now' : 'preplan';
 
-  var STEPS = [
-    { key: 'beneficiaire', label: 'Pour qui' },
-    { key: 'capsule',      label: 'Capsule' },
-    { key: 'modalites',    label: 'Modalités' },
-    { key: 'coordonnees',  label: 'Coordonnées' },
-    { key: 'revision',     label: 'Révision' }
-  ];
+  var FLOWS = {
+    preplan: {
+      base: '/preplan',
+      steps: [
+        { key: 'beneficiaire', label: 'Pour qui' },
+        { key: 'capsule',      label: 'Capsule' },
+        { key: 'modalites',    label: 'Modalités' },
+        { key: 'coordonnees',  label: 'Coordonnées' },
+        { key: 'revision',     label: 'Révision' }
+      ]
+    },
+    buy_now: {
+      base: '/achat',
+      steps: [
+        { key: 'capsule',     label: 'Capsule' },
+        { key: 'coordonnees', label: 'Coordonnées' },
+        { key: 'livraison',   label: 'Livraison' },
+        { key: 'revision',    label: 'Révision' }
+      ]
+    }
+  };
+  var STEPS = FLOWS.preplan.steps;
 
   var FINISHES = [
     { name: 'Brushed Aluminium', img: 'pyrale-silver.png' },
@@ -251,6 +267,14 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
   function stepIndex(key) {
     for (var i = 0; i < STEPS.length; i++) if (STEPS[i].key === key) return i;
     return 0;
+  }
+  function prevStep(key) {
+    var i = stepIndex(key);
+    return i > 0 ? STEPS[i - 1].key : STEPS[0].key;
+  }
+  function nextStep(key) {
+    var i = stepIndex(key);
+    return i < STEPS.length - 1 ? STEPS[i + 1].key : STEPS[STEPS.length - 1].key;
   }
   function fail(msg) {
     var e = document.createElement('div');
@@ -344,14 +368,23 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
         '<div class="kv big"><dt>Total</dt><dd>' + money(pr.totalCents) + '</dd></div></dl>';
     }
     html += '</div>';
-    html += '<div class="card-note">Today&rsquo;s price is held for you. Nothing is manufactured ' +
-      'until the balance reaches zero &mdash; and you can settle it early at any time.</div>';
+    html += KIND === 'buy_now'
+      ? '<div class="card-note">Free delivery anywhere in Canada, placed by trained ' +
+        'professionals. Built to order and serial-numbered.</div>'
+      : '<div class="card-note">Today&rsquo;s price is held for you. Nothing is manufactured ' +
+        'until the balance reaches zero &mdash; and you can settle it early at any time.</div>';
     html += '</div>';
-    html += '<ul class="trust">' +
-      '<li>Cancel at any time. Your contract never expires.</li>' +
-      '<li>No financing charge &mdash; the instalments add up to exactly the price above.</li>' +
-      '<li>Each capsule is serial-numbered and built to order.</li>' +
-      '</ul>';
+    html += KIND === 'buy_now'
+      ? '<ul class="trust">' +
+        '<li>Free white-glove delivery anywhere in Canada.</li>' +
+        '<li>Each capsule is serial-numbered and built to order.</li>' +
+        '<li>An advisor calls you within one business day.</li>' +
+        '</ul>'
+      : '<ul class="trust">' +
+        '<li>Cancel at any time. Your contract never expires.</li>' +
+        '<li>No financing charge &mdash; the instalments add up to exactly the price above.</li>' +
+        '<li>Each capsule is serial-numbered and built to order.</li>' +
+        '</ul>';
     side.innerHTML = html;
   }
 
@@ -432,11 +465,14 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
         renderSide();
       });
     });
-    document.getElementById('back').addEventListener('click', function () { go('beneficiaire'); });
+    var back = document.getElementById('back');
+    if (stepIndex('capsule') === 0) back.hidden = true;
+    else back.addEventListener('click', function () { go(prevStep('capsule')); });
     document.getElementById('next').addEventListener('click', async function () {
       var sel = pane.querySelector('.fin[aria-pressed="true"]');
       if (!sel) { fail('Please choose a finish.'); return; }
-      if (await save({ finish: sel.dataset.v }, 'modalites')) go('modalites');
+      var n = nextStep('capsule');
+      if (await save({ finish: sel.dataset.v }, n)) go(n);
     });
   }
 
@@ -498,28 +534,33 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
         fld('dob', 'Date of birth', 'date', p.dateOfBirth,
             'Identifies you on the agreement and opens your account. We never ask why you are planning.') +
       '</div>' +
-      '<h2>Address</h2>' +
-      '<label class="ck"><input type="checkbox" id="later"' + (p.addressLater ? ' checked' : '') + '>' +
-        '<span>I&rsquo;ll provide the delivery address later. <span style="color:var(--muted)">' +
-        'Perfectly normal when planning ahead &mdash; we only need it at the time of need.</span></span></label>' +
-      '<div id="addr"' + (p.addressLater ? ' hidden' : '') + '>' +
-        fld('a1', 'Street address', 'text', p.addressLine1) +
-        '<div class="row">' + fld('city', 'City', 'text', p.city) +
-          fld('region', 'Province', 'text', p.region || 'QC') + '</div>' +
-        '<div class="row">' + fld('pc', 'Postal code', 'text', p.postalCode) +
-          fld('country', 'Country', 'text', p.country || 'CA') + '</div>' +
-      '</div>' +
+      (KIND === 'buy_now' ? '' :
+        '<h2>Address</h2>' +
+        '<label class="ck"><input type="checkbox" id="later"' + (p.addressLater ? ' checked' : '') + '>' +
+          '<span>I&rsquo;ll provide the delivery address later. <span style="color:var(--muted)">' +
+          'Perfectly normal when planning ahead &mdash; we only need it at the time of need.</span></span></label>' +
+        '<div id="addr"' + (p.addressLater ? ' hidden' : '') + '>' +
+          fld('a1', 'Street address', 'text', p.addressLine1) +
+          '<div class="row">' + fld('city', 'City', 'text', p.city) +
+            fld('region', 'Province', 'text', p.region || 'QC') + '</div>' +
+          '<div class="row">' + fld('pc', 'Postal code', 'text', p.postalCode) +
+            fld('country', 'Country', 'text', p.country || 'CA') + '</div>' +
+        '</div>') +
       '<div class="acts">' +
         '<button class="back" id="back">&larr; Back</button>' +
         '<button class="btn btn--go" id="next">Continue</button>' +
       '</div>';
 
-    document.getElementById('later').addEventListener('change', function () {
+    var lt = document.getElementById('later');
+    if (lt) lt.addEventListener('change', function () {
       document.getElementById('addr').hidden = this.checked;
     });
-    document.getElementById('back').addEventListener('click', function () { go('modalites'); });
+    document.getElementById('back').addEventListener('click', function () {
+      go(prevStep('coordonnees'));
+    });
     document.getElementById('next').addEventListener('click', async function () {
-      var later = document.getElementById('later').checked;
+      var laterEl = document.getElementById('later');
+      var later = laterEl ? laterEl.checked : false;
       var data = {
         firstName: val('first'), lastName: val('last'), email: val('email'),
         phone: val('phone') || undefined, dateOfBirth: val('dob') || undefined,
@@ -546,7 +587,111 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
         fail('Please complete the highlighted fields.');
         return;
       }
+      var n = nextStep('coordonnees');
+      if (await save(data, n)) go(n);
+    });
+  }
+
+  /**
+   * Immediate purchase only. The address is required here — the capsule ships
+   * now, so there is nowhere to defer it to.
+   */
+  function stepLivraison() {
+    var p = D.payload;
+    pane.innerHTML =
+      '<h1>Where should it go?</h1>' +
+      '<p class="lede">White-glove delivery and placement by trained professionals, anywhere in ' +
+      'Canada. We confirm the date with you before anything moves.</p>' +
+      fld('a1', 'Street address', 'text', p.addressLine1) +
+      fld('a2', 'Apartment, suite (optional)', 'text', p.addressLine2) +
+      '<div class="row">' + fld('city', 'City', 'text', p.city) +
+        fld('region', 'Province', 'text', p.region || 'QC') + '</div>' +
+      '<div class="row">' + fld('pc', 'Postal code', 'text', p.postalCode) +
+        fld('country', 'Country', 'text', p.country || 'CA') + '</div>' +
+      '<div class="acts">' +
+        '<button class="back" id="back">&larr; Back</button>' +
+        '<button class="btn btn--go" id="next">Continue</button>' +
+      '</div>';
+
+    document.getElementById('back').addEventListener('click', function () { go('coordonnees'); });
+    document.getElementById('next').addEventListener('click', async function () {
+      var data = {
+        addressLine1: val('a1'), addressLine2: val('a2') || undefined,
+        city: val('city'), region: val('region') || undefined,
+        postalCode: val('pc'),
+        country: (val('country') || 'CA').toUpperCase().slice(0, 2),
+        addressLater: false
+      };
+      var miss = [];
+      if (!data.addressLine1) miss.push('a1');
+      if (!data.city) miss.push('city');
+      if (!data.postalCode) miss.push('pc');
+      pane.querySelectorAll('.f').forEach(function (f) { f.classList.remove('bad'); });
+      if (miss.length) {
+        miss.forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.closest('.f').classList.add('bad');
+        });
+        fail('We need a delivery address to send your capsule.');
+        return;
+      }
       if (await save(data, 'revision')) go('revision');
+    });
+  }
+
+  /** Immediate purchase: an order to confirm, not an agreement to sign. */
+  function stepRevisionAchat() {
+    var p = D.payload, pr = D.pricing;
+    var addr = [p.addressLine1, p.addressLine2, p.city, p.region, p.postalCode]
+      .filter(Boolean).join(', ');
+    pane.innerHTML =
+      '<h1>Review your order</h1>' +
+      '<p class="lede">Nothing is charged until you continue to payment.</p>' +
+      '<div class="ct-box" style="max-height:none">' +
+        '<div class="contract">' +
+          '<h4>Your capsule</h4>' +
+          '<dl class="ct-terms">' +
+            '<div><dt>Product</dt><dd>' + esc(D.product.nameFr) +
+              (p.finish ? ' &mdash; ' + esc(p.finish) : '') + '</dd></div>' +
+            '<div><dt>Subtotal</dt><dd>' + money(pr.subtotalCents) + '</dd></div>' +
+            '<div><dt>GST</dt><dd>' + money(pr.gstCents) + '</dd></div>' +
+            '<div><dt>QST</dt><dd>' + money(pr.qstCents) + '</dd></div>' +
+            '<div class="ct-total"><dt>Total</dt><dd>' + money(pr.totalCents) + '</dd></div>' +
+          '</dl>' +
+          '<h4>Delivered to</h4>' +
+          '<p>' + esc([p.firstName, p.lastName].filter(Boolean).join(' ')) + '<br>' +
+            esc(addr) + '</p>' +
+          '<h4>What happens next</h4>' +
+          '<ol class="ct-list">' +
+            '<li>We call you within one business day to confirm the details and agree on a ' +
+              'delivery date.</li>' +
+            '<li>Your capsule is built to order and serial-numbered. Nothing is manufactured ' +
+              'until payment clears.</li>' +
+            '<li>White-glove delivery and placement, anywhere in Canada.</li>' +
+          '</ol>' +
+        '</div>' +
+      '</div>' +
+      '<label class="ck"><input type="checkbox" id="mk"' + (p.marketingConsent ? ' checked' : '') + '>' +
+        '<span>I&rsquo;d also like to hear from Eterna occasionally. ' +
+        '<span style="color:var(--muted)">Optional &mdash; you can order without this, and ' +
+        'withdraw at any time.</span></span></label>' +
+      '<div class="acts">' +
+        '<button class="back" id="back">&larr; Back</button>' +
+        '<button class="btn btn--go" id="next">Continue to secure payment</button>' +
+      '</div>';
+
+    document.getElementById('back').addEventListener('click', function () { go('livraison'); });
+    document.getElementById('next').addEventListener('click', async function () {
+      var b = this;
+      b.disabled = true; b.textContent = 'One moment…';
+      var ok = await save({ marketingConsent: document.getElementById('mk').checked });
+      if (!ok) { b.disabled = false; b.textContent = 'Continue to secure payment'; return; }
+      try {
+        var r = await call('/api/funnel/' + token + '/complete', { method: 'POST' });
+        if (r && r.checkoutUrl) { window.location.href = r.checkoutUrl; return; }
+        fail('We could not open the payment page. Please try again or call us.');
+      } catch (e) { fail(e.message); }
+      b.disabled = false; b.textContent = 'Continue to secure payment';
     });
   }
 
@@ -619,8 +764,9 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
     renderSteps();
     renderSide();
     var f = { beneficiaire: stepBeneficiaire, capsule: stepCapsule, modalites: stepModalites,
-      coordonnees: stepCoordonnees, revision: stepRevision };
-    (f[D.step] || stepBeneficiaire)();
+      coordonnees: stepCoordonnees, livraison: stepLivraison,
+      revision: KIND === 'buy_now' ? stepRevisionAchat : stepRevision };
+    (f[D.step] || f[STEPS[0].key])();
   }
 
   /* ---- boot ---- */
@@ -638,11 +784,13 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
     try {
       if (token) {
         D = await call('/api/funnel/' + token);
+        // The draft knows what it is; the URL is only a hint.
+        KIND = D.kind === 'buy_now' ? 'buy_now' : 'preplan';
       } else {
         D = await call('/api/funnel/start', {
           method: 'POST',
           body: JSON.stringify({
-            kind: 'preplan',
+            kind: KIND,
             sku: q.get('sku') || 'PYR-STD',
             finish: q.get('finish') || undefined,
             ref: ref || undefined
@@ -650,6 +798,8 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
         });
         token = D.token;
       }
+      STEPS = FLOWS[KIND].steps;
+      BASE = FLOWS[KIND].base;
       // The URL carries the step and the token, so a refresh, a back button
       // or a link sent to a spouse all land in the right place.
       history.replaceState({ step: D.step }, '', BASE + '/' + D.step + '?c=' + token);
