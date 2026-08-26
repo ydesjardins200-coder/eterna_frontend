@@ -1,5 +1,7 @@
-# Clean URLs for the pre-planning funnel. A rewrite (200), not a redirect:
-# the address bar must keep /preplan/coordonnees so a refresh, a bookmark or a
-# link forwarded to a spouse all reopen the same step.
+# Clean URLs for both funnels. A rewrite (200), not a redirect: the address bar
+# must keep the step so a refresh, a bookmark or a link forwarded to a spouse
+# all reopen the same place.
 /preplan            /plan.html   200
 /preplan/*          /plan.html   200
+/achat              /plan.html   200
+/achat/*            /plan.html   200
