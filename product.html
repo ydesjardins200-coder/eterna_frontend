@@ -954,8 +954,19 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && ppModal.classList.contains('show')) ppCloseFn();
   });
+  /* Full page rather than a modal: six steps, a contract to read and a
+     signature do not belong in an overlay. The chosen finish and any partner
+     code travel in the URL. */
   document.querySelectorAll('.js-preplan').forEach(function (b) {
-    b.addEventListener('click', ppOpen);
+    b.addEventListener('click', function (e) {
+      e.preventDefault();
+      var active = document.querySelector('.pswatch.active');
+      var q = ['sku=' + encodeURIComponent(SKU)];
+      if (active && active.dataset.name) q.push('finish=' + encodeURIComponent(active.dataset.name));
+      var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e2) {}
+      if (ref) q.push('ref=' + encodeURIComponent(ref));
+      window.location.href = '/preplan?' + q.join('&');
+    });
   });
 
   document.getElementById('ppForm').addEventListener('submit', async function (e) {
