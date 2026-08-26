@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Pre-plan your Capsule Pyrale — Eterna</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16181c; --ink-soft:#4a4e57; --muted:#8a8f98; --line:#e4e3df;
+  --paper:#fff; --mist:#f3f2ef; --night:#0c0d10; --night-line:#2a2c33;
+  --iris:#6f5ad8; --iris-soft:#b9aef0; --iris-bg:#f6f4ff;
+  --ok:#2e6a4f; --ok-bg:#eef6f1; --warn:#8a6414; --warn-bg:#fbf5e9;
+  --danger:#8c2f2a; --danger-bg:#fbf0ef;
+  --sans:"Instrument Sans",system-ui,sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--mist);
+  -webkit-font-smoothing:antialiased;font-size:15px;line-height:1.6}
+a{color:inherit}
+[hidden]{display:none!important}
+
+/* ── chrome ─────────────────────────────────────────── */
+.top{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.top-in{max-width:1120px;margin:0 auto;padding:0 24px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px}
+.top img{height:15px;display:block}
+.top-call{font-size:13px;color:var(--muted);white-space:nowrap}
+.top-call b{color:var(--ink);font-weight:500}
+
+/* progress */
+.steps{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;
+  gap:0;overflow-x:auto;scrollbar-width:none;height:52px}
+.steps::-webkit-scrollbar{display:none}
+.st{display:flex;align-items:center;gap:9px;flex:0 0 auto;font-size:11.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.st-n{width:22px;height:22px;border-radius:50%;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:0;
+  background:var(--paper);transition:.2s var(--ease)}
+.st.on{color:var(--ink);font-weight:500}
+.st.on .st-n{background:var(--night);border-color:var(--night);color:#fff}
+.st.done .st-n{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.st.done{color:var(--ink-soft)}
+.st-bar{flex:1 1 34px;min-width:20px;height:1px;background:var(--line);margin:0 12px}
+
+/* ── layout ─────────────────────────────────────────── */
+.wrap{max-width:1120px;margin:0 auto;padding:38px 24px 80px;
+  display:grid;grid-template-columns:1fr 372px;gap:52px;align-items:start}
+.pane{min-width:0}
+h1{font-size:29px;font-weight:500;letter-spacing:-.02em;line-height:1.2;margin-bottom:9px}
+.lede{color:var(--ink-soft);font-size:15px;margin-bottom:30px;max-width:56ch}
+h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:14px}
+
+/* ── choices ────────────────────────────────────────── */
+.opts{display:grid;gap:12px;margin-bottom:30px}
+.opt{display:flex;align-items:flex-start;gap:15px;width:100%;text-align:left;
+  padding:19px 21px;border:1px solid var(--line);border-radius:13px;background:var(--paper);
+  cursor:pointer;font:inherit;transition:.18s var(--ease)}
+.opt:hover{border-color:var(--ink-soft);transform:translateY(-1px)}
+.opt[aria-pressed="true"]{border-color:var(--iris);background:var(--iris-bg);
+  box-shadow:0 0 0 1px var(--iris)}
+.opt-r{flex:0 0 auto;width:19px;height:19px;border-radius:50%;border:1.5px solid var(--line);
+  margin-top:2px;position:relative;transition:.18s var(--ease)}
+.opt[aria-pressed="true"] .opt-r{border-color:var(--iris)}
+.opt[aria-pressed="true"] .opt-r::after{content:"";position:absolute;inset:3.5px;
+  border-radius:50%;background:var(--iris)}
+.opt-b{flex:1;min-width:0}
+.opt-b b{display:block;font-size:15.5px;font-weight:500;margin-bottom:2px}
+.opt-b span{font-size:13px;color:var(--muted);line-height:1.55}
+.opt-a{text-align:right;flex:0 0 auto}
+.opt-a b{font-size:19px;font-weight:500;display:block}
+.opt-a span{font-size:11.5px;color:var(--muted)}
+
+/* finishes */
+.fins{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:13px;margin-bottom:30px}
+.fin{border:1px solid var(--line);border-radius:13px;background:var(--paper);padding:15px;
+  cursor:pointer;font:inherit;text-align:center;transition:.18s var(--ease)}
+.fin:hover{border-color:var(--ink-soft)}
+.fin[aria-pressed="true"]{border-color:var(--iris);box-shadow:0 0 0 1px var(--iris)}
+.fin img{width:100%;height:86px;object-fit:contain;margin-bottom:9px}
+.fin span{font-size:13px;font-weight:500}
+
+/* ── fields ─────────────────────────────────────────── */
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f{margin-bottom:17px}
+.f label{display:block;font-size:11.5px;font-weight:500;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
+.f input,.f select,.f textarea{width:100%;padding:13px 15px;font:inherit;font-size:15px;
+  color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:9px;
+  transition:.15s var(--ease)}
+.f input:focus,.f select:focus{outline:none;border-color:var(--iris);
+  box-shadow:0 0 0 3px rgba(111,90,216,.13)}
+.f .hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5}
+.f.bad input{border-color:var(--danger);background:var(--danger-bg)}
+.ck{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--ink-soft);
+  line-height:1.55;margin-bottom:17px;cursor:pointer}
+.ck input{width:17px;height:17px;margin-top:2px;flex:0 0 auto;accent-color:var(--iris)}
+
+/* ── contract ───────────────────────────────────────── */
+.ct-box{background:var(--paper);border:1px solid var(--line);border-radius:13px;
+  max-height:390px;overflow-y:auto;padding:26px 28px;margin-bottom:20px}
+.contract h3{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:12px}
+.contract h4{font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);margin:22px 0 10px}
+.ct-draft{background:var(--warn-bg);border-left:2px solid var(--warn);color:var(--warn);
+  padding:13px 15px;border-radius:0 8px 8px 0;font-size:12.5px;line-height:1.6;margin-bottom:20px}
+.ct-draft b{display:block;margin-bottom:3px}
+.ct-lead{font-size:14px;line-height:1.7;color:var(--ink-soft)}
+.ct-parties{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
+.ct-party h4{margin-top:16px}
+.ct-party dl>div,.ct-terms>div{display:flex;justify-content:space-between;gap:12px;
+  padding:5px 0;font-size:13.5px;border-bottom:1px solid var(--mist)}
+.ct-party dt,.ct-terms dt{color:var(--muted)}
+.ct-party dd,.ct-terms dd{text-align:right}
+.ct-total{border-top:1px solid var(--line)!important;font-weight:500;font-size:15px!important;
+  padding-top:9px!important}
+.ct-same{font-size:13.5px;color:var(--muted);font-style:italic}
+.ct-list{margin-left:19px;font-size:13.5px;line-height:1.75;color:var(--ink-soft)}
+.ct-list li{margin-bottom:8px}
+.contract p{font-size:13.5px;line-height:1.7;color:var(--ink-soft)}
+.contract em{color:var(--warn);font-style:italic}
+.ct-signed{margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.ct-sig{font-family:var(--serif);font-style:italic;font-size:25px}
+.ct-sigmeta{font-size:11.5px;color:var(--muted);margin-top:5px}
+.sign{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:24px}
+.sign input{font-family:var(--serif);font-style:italic;font-size:24px;text-align:center;
+  padding:14px}
+.sign .ack{font-size:11.5px;color:var(--muted);line-height:1.65;margin-top:12px}
+
+/* ── summary ────────────────────────────────────────── */
+.side{position:sticky;top:130px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:15px;overflow:hidden}
+.card-img{background:linear-gradient(165deg,#f8f7f4,#eceae5);padding:26px;text-align:center}
+.card-img img{width:100%;max-width:210px;height:auto;display:inline-block}
+.card-b{padding:22px 24px}
+.card-t{font-family:var(--serif);font-size:23px;line-height:1.15;margin-bottom:3px}
+.card-f{font-size:13px;color:var(--muted);margin-bottom:18px}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:8px 0;font-size:13.5px;
+  border-top:1px solid var(--mist)}
+.kv dt{color:var(--muted)}
+.kv dd{text-align:right}
+.kv.big{border-top:1px solid var(--line);margin-top:6px;padding-top:13px}
+.kv.big dd{font-size:19px;font-weight:500}
+.card-note{background:var(--mist);padding:14px 24px;font-size:12.5px;color:var(--ink-soft);
+  line-height:1.6;border-top:1px solid var(--line)}
+.trust{margin-top:16px;display:grid;gap:9px}
+.trust li{list-style:none;font-size:12.5px;color:var(--muted);padding-left:21px;position:relative;
+  line-height:1.55}
+.trust li::before{content:"";position:absolute;left:5px;top:8px;width:5px;height:5px;
+  border-radius:50%;background:var(--iris-soft)}
+
+/* ── actions ────────────────────────────────────────── */
+.acts{display:flex;gap:12px;align-items:center;margin-top:34px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font:inherit;
+  font-size:15px;font-weight:500;padding:14px 28px;border-radius:9px;border:1px solid var(--line);
+  background:var(--paper);color:var(--ink);cursor:pointer;transition:.18s var(--ease)}
+.btn:hover:not(:disabled){border-color:var(--ink-soft)}
+.btn--go{background:var(--night);border-color:var(--night);color:#fff;padding:14px 34px}
+.btn--go:hover:not(:disabled){background:#000}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.back{background:none;border:none;color:var(--muted);font:inherit;font-size:14px;cursor:pointer;
+  padding:8px 0;display:inline-flex;align-items:center;gap:7px}
+.back:hover{color:var(--ink)}
+.err{background:var(--danger-bg);border-left:2px solid var(--danger);color:var(--danger);
+  padding:13px 16px;border-radius:0 9px 9px 0;font-size:13.5px;line-height:1.55;margin-bottom:22px}
+.load{text-align:center;padding:80px 0;color:var(--muted);font-size:14px}
+
+@media(max-width:940px){
+  .wrap{grid-template-columns:1fr;gap:30px;padding:26px 20px 70px}
+  .side{position:static;order:-1}
+  .card-img{padding:18px}
+  .card-img img{max-width:150px}
+  .ct-parties{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+  h1{font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a href="/index.html" aria-label="Eterna"><img src="/brand-logo.svg" alt="Eterna" onerror="this.outerHTML='<span style=&quot;font-family:var(--serif);font-size:19px&quot;>Eterna</span>'"></a>
+    <span class="top-call">Questions? <b>1 (819) 555-0100</b></span>
+  </div>
+  <nav class="steps" id="steps" aria-label="Progress"></nav>
+</header>
+
+<main class="wrap">
+  <div class="pane" id="pane"><div class="load">Un instant…</div></div>
+  <aside class="side" id="side"></aside>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var API = 'https://eternaadmin-production.up.railway.app';
+  var BASE = '/preplan';
+
+  var STEPS = [
+    { key: 'beneficiaire', label: 'Pour qui' },
+    { key: 'capsule',      label: 'Capsule' },
+    { key: 'modalites',    label: 'Modalités' },
+    { key: 'coordonnees',  label: 'Coordonnées' },
+    { key: 'revision',     label: 'Révision' }
+  ];
+
+  var FINISHES = [
+    { name: 'Brushed Aluminium', img: 'pyrale-silver.png' },
+    { name: 'Champagne',         img: 'pyrale-champagne.png' },
+    { name: 'Graphite',          img: 'pyrale-graphite.png' },
+    { name: 'Bronze',            img: 'pyrale-bronze.png' },
+    { name: 'Onyx',              img: 'pyrale-onyx.png' }
+  ];
+
+  var pane = document.getElementById('pane');
+  var side = document.getElementById('side');
+  var stepsEl = document.getElementById('steps');
+  var D = null;          // the draft, as the server sees it
+  var token = null;
+  var busy = false;
+
+  function money(c) {
+    if (c == null) return '—';
+    return '$' + (c / 100).toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function finishImg(name) {
+    for (var i = 0; i < FINISHES.length; i++) {
+      if (FINISHES[i].name.toLowerCase() === String(name || '').toLowerCase()) return FINISHES[i].img;
+    }
+    return null;
+  }
+  function stepIndex(key) {
+    for (var i = 0; i < STEPS.length; i++) if (STEPS[i].key === key) return i;
+    return 0;
+  }
+  function fail(msg) {
+    var e = document.createElement('div');
+    e.className = 'err';
+    e.textContent = msg;
+    var old = pane.querySelector('.err');
+    if (old) old.remove();
+    pane.insertBefore(e, pane.firstChild);
+    e.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+
+  /* ---- server ---- */
+
+  /* The JSON header is only sent when there is actually a body. Declaring
+     application/json with nothing attached makes Fastify reject the request
+     outright, which is exactly what broke the final step. */
+  async function call(path, opts) {
+    var o = Object.assign({}, opts || {});
+    o.headers = Object.assign({}, o.headers);
+    if (o.body != null) o.headers['Content-Type'] = 'application/json';
+    var r = await fetch(API + path, o);
+    var d = null;
+    try { d = await r.json(); } catch (e) {}
+    if (!r.ok) {
+      var m = (d && d.error && d.error.message) || 'Something went wrong. Please try again.';
+      var err = new Error(m); err.code = d && d.error && d.error.code;
+      throw err;
+    }
+    return d;
+  }
+
+  /* Each step saves before moving on, so closing the tab loses nothing. */
+  async function save(data, nextStep) {
+    if (busy) return false;
+    busy = true;
+    try {
+      D = await call('/api/funnel/' + token, {
+        method: 'PATCH',
+        body: JSON.stringify({ step: nextStep || D.step, data: data })
+      });
+      return true;
+    } catch (e) {
+      fail(e.message);
+      return false;
+    } finally { busy = false; }
+  }
+
+  function go(key, push) {
+    if (push !== false) history.pushState({ step: key }, '', BASE + '/' + key + '?c=' + token);
+    D.step = key;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ---- chrome ---- */
+
+  function renderSteps() {
+    var cur = stepIndex(D.step);
+    var html = '';
+    STEPS.forEach(function (s, i) {
+      if (i > 0) html += '<span class="st-bar"></span>';
+      var cls = i === cur ? 'st on' : (i < cur ? 'st done' : 'st');
+      html += '<span class="' + cls + '"><span class="st-n">' +
+        (i < cur ? '&#10003;' : (i + 1)) + '</span>' + s.label + '</span>';
+    });
+    stepsEl.innerHTML = html;
+  }
+
+  function renderSide() {
+    var p = D.payload, pr = D.pricing;
+    var img = finishImg(p.finish);
+    var html = '<div class="card">';
+    html += img
+      ? '<div class="card-img"><img src="/' + img + '" alt="' + esc(p.finish) + '"></div>'
+      : '';
+    html += '<div class="card-b">' +
+      '<div class="card-t">' + esc(D.product.nameFr) + '</div>' +
+      '<div class="card-f">' + (p.finish ? esc(p.finish) : 'Finish to be chosen') + '</div>';
+
+    if (pr.months > 0) {
+      html += '<dl>' +
+        '<div class="kv"><dt>Monthly payment</dt><dd>' + money(pr.monthlyCents) + '</dd></div>' +
+        '<div class="kv"><dt>Number of payments</dt><dd>' + pr.months + '</dd></div>' +
+        (pr.firstCents !== pr.monthlyCents
+          ? '<div class="kv"><dt>First payment</dt><dd>' + money(pr.firstCents) + '</dd></div>' : '') +
+        '<div class="kv big"><dt>Total</dt><dd>' + money(pr.totalCents) + '</dd></div></dl>';
+    } else {
+      html += '<dl><div class="kv"><dt>Subtotal</dt><dd>' + money(pr.subtotalCents) + '</dd></div>' +
+        '<div class="kv"><dt>GST</dt><dd>' + money(pr.gstCents) + '</dd></div>' +
+        '<div class="kv"><dt>QST</dt><dd>' + money(pr.qstCents) + '</dd></div>' +
+        '<div class="kv big"><dt>Total</dt><dd>' + money(pr.totalCents) + '</dd></div></dl>';
+    }
+    html += '</div>';
+    html += '<div class="card-note">Today&rsquo;s price is held for you. Nothing is manufactured ' +
+      'until the balance reaches zero &mdash; and you can settle it early at any time.</div>';
+    html += '</div>';
+    html += '<ul class="trust">' +
+      '<li>Cancel at any time. Your contract never expires.</li>' +
+      '<li>No financing charge &mdash; the instalments add up to exactly the price above.</li>' +
+      '<li>Each capsule is serial-numbered and built to order.</li>' +
+      '</ul>';
+    side.innerHTML = html;
+  }
+
+  /* ---- steps ---- */
+
+  function stepBeneficiaire() {
+    var k = D.payload.beneficiaryKind;
+    pane.innerHTML =
+      '<h1>Who is this capsule for?</h1>' +
+      '<p class="lede">This tells us whose name goes on the agreement. You can change it later ' +
+      'by calling us.</p>' +
+      '<div class="opts">' +
+        opt('self', k === 'self', 'For myself',
+            'I am arranging my own capsule.') +
+        opt('loved_one', k === 'loved_one', 'For someone I love',
+            'I am arranging on behalf of another person.') +
+      '</div>' +
+      '<div id="who" ' + (k === 'loved_one' ? '' : 'hidden') + '>' +
+        '<h2>The person it is for</h2>' +
+        '<div class="row">' +
+          fld('bFirst', 'First name', 'text', D.payload.beneficiaryFirstName) +
+          fld('bLast', 'Last name', 'text', D.payload.beneficiaryLastName) +
+        '</div>' +
+        fld('bRel', 'Your relationship to them', 'text', D.payload.beneficiaryRelation,
+            'Spouse, parent, sibling&hellip;') +
+      '</div>' +
+      '<div class="acts"><button class="btn btn--go" id="next">Continue</button></div>';
+
+    pane.querySelectorAll('.opt').forEach(function (b) {
+      b.addEventListener('click', function () {
+        pane.querySelectorAll('.opt').forEach(function (x) {
+          x.setAttribute('aria-pressed', String(x === b));
+        });
+        document.getElementById('who').hidden = b.dataset.v !== 'loved_one';
+      });
+    });
+
+    document.getElementById('next').addEventListener('click', async function () {
+      var sel = pane.querySelector('.opt[aria-pressed="true"]');
+      if (!sel) { fail('Please choose one.'); return; }
+      var kind = sel.dataset.v;
+      var data = { beneficiaryKind: kind };
+      if (kind === 'loved_one') {
+        var f = val('bFirst'), l = val('bLast');
+        if (!f || !l) { fail('Please enter their name.'); return; }
+        data.beneficiaryFirstName = f;
+        data.beneficiaryLastName = l;
+        data.beneficiaryRelation = val('bRel') || undefined;
+      }
+      if (await save(data, 'capsule')) go('capsule');
+    });
+  }
+
+  function stepCapsule() {
+    pane.innerHTML =
+      '<h1>Choose the finish</h1>' +
+      '<p class="lede">Every finish is the same capsule &mdash; the same aluminium shell, the same ' +
+      'hermetic seal, the same price. Only the surface differs.</p>' +
+      '<div class="fins">' +
+        FINISHES.map(function (f) {
+          var on = String(D.payload.finish || '').toLowerCase() === f.name.toLowerCase();
+          return '<button type="button" class="fin" data-v="' + esc(f.name) + '" aria-pressed="' +
+            on + '"><img src="/' + f.img + '" alt=""><span>' + esc(f.name) + '</span></button>';
+        }).join('') +
+      '</div>' +
+      '<div class="acts">' +
+        '<button class="back" id="back">&larr; Back</button>' +
+        '<button class="btn btn--go" id="next">Continue</button>' +
+      '</div>';
+
+    pane.querySelectorAll('.fin').forEach(function (b) {
+      b.addEventListener('click', async function () {
+        pane.querySelectorAll('.fin').forEach(function (x) {
+          x.setAttribute('aria-pressed', String(x === b));
+        });
+        // Saved on click so the summary picture changes immediately.
+        await save({ finish: b.dataset.v });
+        renderSide();
+      });
+    });
+    document.getElementById('back').addEventListener('click', function () { go('beneficiaire'); });
+    document.getElementById('next').addEventListener('click', async function () {
+      var sel = pane.querySelector('.fin[aria-pressed="true"]');
+      if (!sel) { fail('Please choose a finish.'); return; }
+      if (await save({ finish: sel.dataset.v }, 'modalites')) go('modalites');
+    });
+  }
+
+  function stepModalites() {
+    var cur = D.payload.months;
+    var rows = D.plans.map(function (pl) {
+      return '<button type="button" class="opt" data-v="' + pl.months + '" aria-pressed="' +
+        (cur === pl.months) + '">' +
+        '<span class="opt-r"></span>' +
+        '<span class="opt-b"><b>' + pl.months + ' monthly payments</b>' +
+        '<span>First payment ' + money(pl.firstCents) + ', then ' + money(pl.monthlyCents) + '</span></span>' +
+        '<span class="opt-a"><b>' + money(pl.monthlyCents) + '</b><span>per month</span></span>' +
+        '</button>';
+    }).join('');
+
+    pane.innerHTML =
+      '<h1>How would you like to pay?</h1>' +
+      '<p class="lede">Every option adds up to exactly ' + money(D.pricing.totalCents) +
+      '. There is no financing charge, and no interest.</p>' +
+      '<div class="opts">' + rows +
+        '<button type="button" class="opt" data-v="0" aria-pressed="' + (cur === 0) + '">' +
+        '<span class="opt-r"></span>' +
+        '<span class="opt-b"><b>Pay in full today</b><span>One payment, nothing further.</span></span>' +
+        '<span class="opt-a"><b>' + money(D.pricing.totalCents) + '</b><span>once</span></span>' +
+        '</button>' +
+      '</div>' +
+      '<div class="acts">' +
+        '<button class="back" id="back">&larr; Back</button>' +
+        '<button class="btn btn--go" id="next">Continue</button>' +
+      '</div>';
+
+    pane.querySelectorAll('.opt').forEach(function (b) {
+      b.addEventListener('click', async function () {
+        pane.querySelectorAll('.opt').forEach(function (x) {
+          x.setAttribute('aria-pressed', String(x === b));
+        });
+        await save({ months: Number(b.dataset.v) });
+        renderSide();
+      });
+    });
+    document.getElementById('back').addEventListener('click', function () { go('capsule'); });
+    document.getElementById('next').addEventListener('click', async function () {
+      var sel = pane.querySelector('.opt[aria-pressed="true"]');
+      if (!sel) { fail('Please choose how you would like to pay.'); return; }
+      if (await save({ months: Number(sel.dataset.v) }, 'coordonnees')) go('coordonnees');
+    });
+  }
+
+  function stepCoordonnees() {
+    var p = D.payload;
+    pane.innerHTML =
+      '<h1>Your details</h1>' +
+      '<p class="lede">These go on the agreement, and open your file with us.</p>' +
+      '<h2>You</h2>' +
+      '<div class="row">' + fld('first', 'First name', 'text', p.firstName) +
+        fld('last', 'Last name', 'text', p.lastName) + '</div>' +
+      fld('email', 'Email', 'email', p.email) +
+      '<div class="row">' + fld('phone', 'Phone', 'tel', p.phone) +
+        fld('dob', 'Date of birth', 'date', p.dateOfBirth,
+            'Identifies you on the agreement and opens your account. We never ask why you are planning.') +
+      '</div>' +
+      '<h2>Address</h2>' +
+      '<label class="ck"><input type="checkbox" id="later"' + (p.addressLater ? ' checked' : '') + '>' +
+        '<span>I&rsquo;ll provide the delivery address later. <span style="color:var(--muted)">' +
+        'Perfectly normal when planning ahead &mdash; we only need it at the time of need.</span></span></label>' +
+      '<div id="addr"' + (p.addressLater ? ' hidden' : '') + '>' +
+        fld('a1', 'Street address', 'text', p.addressLine1) +
+        '<div class="row">' + fld('city', 'City', 'text', p.city) +
+          fld('region', 'Province', 'text', p.region || 'QC') + '</div>' +
+        '<div class="row">' + fld('pc', 'Postal code', 'text', p.postalCode) +
+          fld('country', 'Country', 'text', p.country || 'CA') + '</div>' +
+      '</div>' +
+      '<div class="acts">' +
+        '<button class="back" id="back">&larr; Back</button>' +
+        '<button class="btn btn--go" id="next">Continue</button>' +
+      '</div>';
+
+    document.getElementById('later').addEventListener('change', function () {
+      document.getElementById('addr').hidden = this.checked;
+    });
+    document.getElementById('back').addEventListener('click', function () { go('modalites'); });
+    document.getElementById('next').addEventListener('click', async function () {
+      var later = document.getElementById('later').checked;
+      var data = {
+        firstName: val('first'), lastName: val('last'), email: val('email'),
+        phone: val('phone') || undefined, dateOfBirth: val('dob') || undefined,
+        addressLater: later
+      };
+      if (!later) {
+        data.addressLine1 = val('a1') || undefined;
+        data.city = val('city') || undefined;
+        data.region = val('region') || undefined;
+        data.postalCode = val('pc') || undefined;
+        data.country = (val('country') || 'CA').toUpperCase().slice(0, 2);
+      }
+      var miss = [];
+      if (!data.firstName) miss.push('first');
+      if (!data.lastName) miss.push('last');
+      if (!data.email || data.email.indexOf('@') < 0) miss.push('email');
+      if (!data.dateOfBirth) miss.push('dob');
+      pane.querySelectorAll('.f').forEach(function (f) { f.classList.remove('bad'); });
+      if (miss.length) {
+        miss.forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.closest('.f').classList.add('bad');
+        });
+        fail('Please complete the highlighted fields.');
+        return;
+      }
+      if (await save(data, 'revision')) go('revision');
+    });
+  }
+
+  async function stepRevision() {
+    pane.innerHTML = '<div class="load">Preparing your agreement…</div>';
+    var c;
+    try {
+      c = await call('/api/funnel/' + token + '/contract');
+    } catch (e) { fail(e.message); return; }
+
+    var p = D.payload;
+    pane.innerHTML =
+      '<h1>Review and sign</h1>' +
+      '<p class="lede">Take your time. Nothing is charged until you continue to payment.</p>' +
+      '<div class="ct-box">' + c.html + '</div>' +
+      '<div class="sign">' +
+        '<div class="f" style="margin:0">' +
+          '<label for="sig">Type your full name to sign</label>' +
+          '<input id="sig" autocomplete="off" placeholder="' +
+            esc([p.firstName, p.lastName].filter(Boolean).join(' ')) + '" value="' +
+            esc(p.signedName || '') + '">' +
+        '</div>' +
+        '<p class="ack">' + esc(c.acknowledgement) + '</p>' +
+      '</div>' +
+      '<label class="ck" style="margin-top:20px"><input type="checkbox" id="mk"' +
+        (p.marketingConsent ? ' checked' : '') + '>' +
+        '<span>I&rsquo;d also like to hear from Eterna occasionally. ' +
+        '<span style="color:var(--muted)">Optional &mdash; you can pre-plan without this, and ' +
+        'withdraw at any time.</span></span></label>' +
+      '<div class="acts">' +
+        '<button class="back" id="back">&larr; Back</button>' +
+        '<button class="btn btn--go" id="next">Continue to secure payment</button>' +
+      '</div>';
+
+    document.getElementById('back').addEventListener('click', function () { go('coordonnees'); });
+    document.getElementById('next').addEventListener('click', async function () {
+      var b = this;
+      var sig = val('sig');
+      if (!sig) { fail('Please type your name to sign.'); return; }
+      b.disabled = true; b.textContent = 'One moment…';
+      var ok = await save({ signedName: sig, marketingConsent: document.getElementById('mk').checked });
+      if (!ok) { b.disabled = false; b.textContent = 'Continue to secure payment'; return; }
+      try {
+        var r = await call('/api/funnel/' + token + '/complete', { method: 'POST' });
+        if (r && r.checkoutUrl) { window.location.href = r.checkoutUrl; return; }
+        fail('We could not open the payment page. Please try again or call us.');
+      } catch (e) { fail(e.message); }
+      b.disabled = false; b.textContent = 'Continue to secure payment';
+    });
+  }
+
+  /* ---- helpers ---- */
+
+  function opt(v, on, title, sub) {
+    return '<button type="button" class="opt" data-v="' + v + '" aria-pressed="' + on + '">' +
+      '<span class="opt-r"></span><span class="opt-b"><b>' + title + '</b><span>' + sub +
+      '</span></span></button>';
+  }
+  function fld(id, label, type, value, hint) {
+    return '<div class="f"><label for="' + id + '">' + label + '</label>' +
+      '<input id="' + id + '" type="' + type + '" value="' + esc(value || '') + '">' +
+      (hint ? '<div class="hint">' + hint + '</div>' : '') + '</div>';
+  }
+  function val(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  function render() {
+    renderSteps();
+    renderSide();
+    var f = { beneficiaire: stepBeneficiaire, capsule: stepCapsule, modalites: stepModalites,
+      coordonnees: stepCoordonnees, revision: stepRevision };
+    (f[D.step] || stepBeneficiaire)();
+  }
+
+  /* ---- boot ---- */
+
+  window.addEventListener('popstate', function (e) {
+    if (D && e.state && e.state.step) { D.step = e.state.step; render(); }
+  });
+
+  (async function () {
+    var q = new URLSearchParams(location.search);
+    token = q.get('c');
+    var ref = q.get('ref') || q.get('fsi');
+    if (!ref) { try { ref = localStorage.getItem('eterna_ref'); } catch (e) {} }
+
+    try {
+      if (token) {
+        D = await call('/api/funnel/' + token);
+      } else {
+        D = await call('/api/funnel/start', {
+          method: 'POST',
+          body: JSON.stringify({
+            kind: 'preplan',
+            sku: q.get('sku') || 'PYR-STD',
+            finish: q.get('finish') || undefined,
+            ref: ref || undefined
+          })
+        });
+        token = D.token;
+      }
+      // The URL carries the step and the token, so a refresh, a back button
+      // or a link sent to a spouse all land in the right place.
+      history.replaceState({ step: D.step }, '', BASE + '/' + D.step + '?c=' + token);
+      render();
+    } catch (e) {
+      pane.innerHTML = '<h1>We could not open this</h1><p class="lede">' + esc(e.message) +
+        '</p><div class="acts"><a class="btn btn--go" href="/product.html">Back to the capsule</a></div>';
+      side.innerHTML = '';
+      stepsEl.innerHTML = '';
+    }
+  })();
+})();
+</script>
+</body>
+</html>
