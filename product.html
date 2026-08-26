@@ -364,6 +364,7 @@
   .cko-total b { font-size: 19px; font-weight: 500; color: var(--ink); }
   .cko-go { width: 100%; justify-content: center; }
   .cko-err { background: #fbf0ef; border-left: 2px solid #8c2f2a; color: #8c2f2a; font-size: 13px; padding: 11px 13px; margin-bottom: 16px; line-height: 1.5; }
+  .cko-hint { font-size: 11.5px; color: var(--muted); line-height: 1.55; margin-top: 6px; }
   .cko-note { font-size: 11.5px; color: var(--muted); text-align: center; margin-top: 14px; line-height: 1.55; }
   @media (max-width: 480px) { .cko { padding: 26px 22px; } .cko-row { grid-template-columns: 1fr; } }
 
@@ -662,6 +663,10 @@
     </div>
     <div class="cko-f"><label for="ckoEmail">Email</label><input id="ckoEmail" name="email" type="email" autocomplete="email" required></div>
     <div class="cko-f"><label for="ckoPhone">Phone <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="ckoPhone" name="phone" type="tel" autocomplete="tel"></div>
+    <div class="cko-f"><label for="ckoDob">Date of birth</label>
+      <input id="ckoDob" type="date" required>
+      <p class="cko-hint">Used to identify you on the contract and to open your account with us. We never ask why you are planning.</p>
+    </div>
     <label class="cko-consent">
       <input type="checkbox" id="ckoConsent">
       <span id="ckoConsentText">I agree to receive occasional emails from Eterna about pre-planning and the Capsule Pyrale. You can withdraw consent at any time.</span>
@@ -701,6 +706,10 @@
     </div>
     <div class="cko-f"><label for="ppEmail">Email</label><input id="ppEmail" type="email" autocomplete="email" required></div>
     <div class="cko-f"><label for="ppPhone">Phone <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="ppPhone" type="tel" autocomplete="tel"></div>
+    <div class="cko-f"><label for="ppDob">Date of birth</label>
+      <input id="ppDob" type="date" required>
+      <p class="cko-hint">Used to identify you on the contract and to open your account with us. We never ask why you are planning.</p>
+    </div>
     <label class="cko-consent">
       <input type="checkbox" id="ppConsent">
       <span id="ppConsentText">I&rsquo;d also like to receive occasional emails from Eterna about pre-planning. Optional &mdash; you can pre-plan without this, and withdraw at any time.</span>
@@ -838,6 +847,10 @@
       ckoErr.textContent = 'Please enter your name and email so we can reach you.';
       ckoErr.style.display = 'block'; return;
     }
+    if (!dob) {
+      ckoErr.textContent = 'Please enter your date of birth.';
+      ckoErr.style.display = 'block'; return;
+    }
 
     ckoGo.disabled = true; ckoGo.textContent = 'One moment\u2026';
     var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e2) {}
@@ -849,6 +862,7 @@
         body: JSON.stringify({
           sku: SKU, email: email, firstName: first, lastName: last,
           phone: phone || undefined,
+          dateOfBirth: dob,
           locale: 'en-CA',
           finish: active ? active.dataset.name : undefined,
           referralCode: ref || undefined,
@@ -945,11 +959,16 @@
         last = document.getElementById('ppLast').value.trim(),
         email = document.getElementById('ppEmail').value.trim(),
         phone = document.getElementById('ppPhone').value.trim(),
+        dob = document.getElementById('ppDob').value,
         consent = document.getElementById('ppConsent').checked,
         active = document.querySelector('.pswatch.active');
 
     if (!first || !last || !email) {
       ppErr.textContent = 'Please enter your name and email so we can reach you.';
+      ppErr.style.display = 'block'; return;
+    }
+    if (!dob) {
+      ppErr.textContent = 'Please enter your date of birth.';
       ppErr.style.display = 'block'; return;
     }
     if (!ppChosen) { ppErr.textContent = 'Please choose a payment term.'; ppErr.style.display = 'block'; return; }
@@ -962,7 +981,7 @@
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           sku: SKU, email: email, firstName: first, lastName: last,
-          phone: phone || undefined, locale: 'en-CA',
+          phone: phone || undefined, dateOfBirth: dob, locale: 'en-CA',
           finish: active ? active.dataset.name : undefined,
           months: ppChosen,
           referralCode: ref || undefined,
