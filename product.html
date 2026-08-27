@@ -801,25 +801,35 @@
             ' <em>CAD</em>';
         }
 
-        // Finishes: mark anything absent from the catalogue as unavailable
-        // rather than removing it, so the row keeps its shape.
-        var offered = {};
-        (d.finishes || []).forEach(function (f) { offered[f.code] = f; });
-        var boxes = document.querySelectorAll('#pSwatches .pswatch');
+        /* Three outcomes, not two.
+           A finish still listed and available stays as it is. One listed but
+           out of stock is struck through with a note, because it comes back.
+           One absent from the catalogue was retired — it is removed entirely,
+           since showing it would advertise something nobody can ever buy. */
+        var listed = {};
+        (d.finishes || []).forEach(function (f) { listed[f.code] = f; });
+        var boxes = [].slice.call(document.querySelectorAll('#pSwatches .pswatch'));
         var firstOpen = null;
+        var outOfStock = [];
+
         boxes.forEach(function (b) {
-          if (offered[b.dataset.name]) { if (!firstOpen) firstOpen = b; return; }
-          b.disabled = true;
-          b.title = b.dataset.name + ' — temporarily unavailable';
-          b.classList.remove('active');
+          var entry = listed[b.dataset.name];
+          if (!entry) { b.remove(); return; }
+          if (entry.available === false) {
+            b.disabled = true;
+            b.title = b.dataset.name + ' — temporarily unavailable';
+            b.classList.remove('active');
+            outOfStock.push(b.dataset.name);
+            return;
+          }
+          if (!firstOpen) firstOpen = b;
         });
 
         var note = document.getElementById('finishNote');
-        var out = [].slice.call(boxes).filter(function (b) { return b.disabled; })
-          .map(function (b) { return b.dataset.name; });
-        if (note && out.length) {
-          note.textContent = out.join(' and ') +
-            (out.length > 1 ? ' are ' : ' is ') + 'temporarily unavailable. Call us and we will tell you when it returns.';
+        if (note && outOfStock.length) {
+          note.textContent = outOfStock.join(' and ') +
+            (outOfStock.length > 1 ? ' are ' : ' is ') +
+            'temporarily unavailable. Call us and we will tell you when it returns.';
         }
 
         // If the pre-selected finish went out of stock, move to the first open
@@ -832,9 +842,10 @@
         var wrap = document.getElementById('pFabrics');
         var block = document.getElementById('pFabricBlock');
         var label = document.getElementById('fabricName');
-        if (wrap && (d.fabrics || []).length) {
+        var sellable = (d.fabrics || []).filter(function (f) { return f.available !== false; });
+        if (wrap && sellable.length) {
           wrap.innerHTML = '';
-          d.fabrics.forEach(function (f, i) {
+          sellable.forEach(function (f, i) {
             var b = document.createElement('button');
             b.className = 'pswatch' + (i === 0 ? ' active' : '');
             b.dataset.name = f.code;
@@ -847,7 +858,7 @@
             });
             wrap.appendChild(b);
           });
-          label.textContent = d.fabrics[0].labelEn || d.fabrics[0].code;
+          label.textContent = sellable[0].labelEn || sellable[0].code;
           block.hidden = false;
         }
       })
