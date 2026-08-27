@@ -313,12 +313,19 @@ a{color:inherit;text-decoration:none}
         document.getElementById('tyTitle').textContent = 'It\u2019s done, ' + d.firstName + '.';
       }
 
+      /* Both choices, spelled out. This is the page that says "it's yours";
+         a family who picked a lining and sees only the shell has reason to
+         wonder whether we recorded it. */
+      var spec = [d.finish, d.fabric ? d.fabric + ' interior' : null]
+        .filter(Boolean).join(' \u00b7 ');
       var img = d.finish ? FINISH_IMG[String(d.finish).toLowerCase()] : null;
-      if (img) {
-        document.getElementById('tyImg').src = '/' + img;
-        document.getElementById('tyImg').alt = (d.productName || 'Capsule Pyrale') + ' \u2014 ' + d.finish;
-        document.getElementById('tyCap').textContent =
-          (d.productName || 'Capsule Pyrale') + ' \u2014 ' + d.finish;
+      if (img || spec) {
+        var label = (d.productName || 'Capsule Pyrale') + (spec ? ' \u2014 ' + spec : '');
+        if (img) {
+          document.getElementById('tyImg').src = '/' + img;
+          document.getElementById('tyImg').alt = label;
+        }
+        document.getElementById('tyCap').textContent = label;
         document.getElementById('tyFig').hidden = false;
       }
 
