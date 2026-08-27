@@ -97,6 +97,7 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
 .fab[aria-pressed="true"]{border-color:var(--iris);box-shadow:0 0 0 1px var(--iris)}
 .fab .dot{width:20px;height:20px;border-radius:50%;border:1px solid rgba(0,0,0,.14);
   box-shadow:inset 0 1px 3px rgba(255,255,255,.45),inset 0 -2px 4px rgba(0,0,0,.16)}
+.fab .dot--img{background-size:cover;background-position:center;box-shadow:none}
 .card-sub{color:var(--muted);font-weight:400}
 
 /* ── fields ─────────────────────────────────────────── */
@@ -496,10 +497,13 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
           '<div class="fabs">' +
             FABRICS.map(function (f) {
               var on = String(D.payload.fabric || '').toLowerCase() === f.code.toLowerCase();
+              var dot = f.image
+                ? '<span class="dot dot--img" style="background-image:url(' +
+                  (/^https?:/.test(f.image) ? f.image : '/' + f.image) + ')"></span>'
+                : '<span class="dot" style="background:' +
+                  (FABRIC_HEX[f.code] || '#b9bdc4') + '"></span>';
               return '<button type="button" class="fab" data-v="' + esc(f.code) + '" aria-pressed="' +
-                on + '"><span class="dot" style="background:' +
-                (FABRIC_HEX[f.code] || '#b9bdc4') + '"></span>' + esc(f.labelEn || f.code) +
-                '</button>';
+                on + '">' + dot + esc(f.labelEn || f.code) + '</button>';
             }).join('') +
           '</div>'
         : '') +
