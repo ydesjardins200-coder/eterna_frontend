@@ -266,12 +266,17 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
       var r = await fetch(API + '/api/catalogue', { cache: 'no-store' });
       if (!r.ok) return;
       var d = await r.json();
-      if (d.finishes && d.finishes.length) {
-        FINISHES = d.finishes.map(function (f) {
+      /* Only what can actually be bought reaches the funnel. A finish out of
+         stock is shown on the product page — the family may want to wait — but
+         offering it inside a purchase would let them pick something the
+         checkout is about to refuse. */
+      var openFinishes = (d.finishes || []).filter(function (f) { return f.available !== false; });
+      if (openFinishes.length) {
+        FINISHES = openFinishes.map(function (f) {
           return { name: f.code, img: f.image || 'pyrale-silver.png' };
         });
       }
-      FABRICS = d.fabrics || [];
+      FABRICS = (d.fabrics || []).filter(function (f) { return f.available !== false; });
     } catch (e) { /* keep the fallback */ }
   }
 
