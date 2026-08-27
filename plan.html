@@ -88,6 +88,16 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
 .fin[aria-pressed="true"]{border-color:var(--iris);box-shadow:0 0 0 1px var(--iris)}
 .fin img{width:100%;height:86px;object-fit:contain;margin-bottom:9px}
 .fin span{font-size:13px;font-weight:500}
+.sub-h{font-size:19px;font-weight:500;margin:30px 0 6px}
+.fabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.fab{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);
+  border-radius:11px;background:var(--paper);padding:11px 16px 11px 12px;cursor:pointer;
+  font:inherit;font-size:13.5px;transition:.18s var(--ease)}
+.fab:hover{border-color:var(--ink-soft)}
+.fab[aria-pressed="true"]{border-color:var(--iris);box-shadow:0 0 0 1px var(--iris)}
+.fab .dot{width:20px;height:20px;border-radius:50%;border:1px solid rgba(0,0,0,.14);
+  box-shadow:inset 0 1px 3px rgba(255,255,255,.45),inset 0 -2px 4px rgba(0,0,0,.16)}
+.card-sub{color:var(--muted);font-weight:400}
 
 /* ── fields ─────────────────────────────────────────── */
 .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -235,6 +245,9 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
   };
   var STEPS = FLOWS.preplan.steps;
 
+  /* Replaced by the live catalogue on load. Kept as a fallback so a family
+     mid-purchase never meets an empty step if the call fails — a stale choice
+     is recoverable, an empty one is not. */
   var FINISHES = [
     { name: 'Brushed Aluminium', img: 'pyrale-silver.png' },
     { name: 'Champagne',         img: 'pyrale-champagne.png' },
@@ -242,6 +255,25 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
     { name: 'Bronze',            img: 'pyrale-bronze.png' },
     { name: 'Onyx',              img: 'pyrale-onyx.png' }
   ];
+  var FABRICS = [];
+  var FABRIC_HEX = {
+    'Brushed Aluminium': '#c9cdd3', 'Champagne': '#d3b47e', 'Graphite': '#6e727a',
+    'Bronze': '#9c683c', 'Onyx': '#454852'
+  };
+
+  async function loadCatalogue() {
+    try {
+      var r = await fetch(API + '/api/catalogue', { cache: 'no-store' });
+      if (!r.ok) return;
+      var d = await r.json();
+      if (d.finishes && d.finishes.length) {
+        FINISHES = d.finishes.map(function (f) {
+          return { name: f.code, img: f.image || 'pyrale-silver.png' };
+        });
+      }
+      FABRICS = d.fabrics || [];
+    } catch (e) { /* keep the fallback */ }
+  }
 
   var pane = document.getElementById('pane');
   var side = document.getElementById('side');
@@ -352,7 +384,9 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
       : '';
     html += '<div class="card-b">' +
       '<div class="card-t">' + esc(D.product.nameFr) + '</div>' +
-      '<div class="card-f">' + (p.finish ? esc(p.finish) : 'Finish to be chosen') + '</div>';
+      '<div class="card-f">' + (p.finish ? esc(p.finish) : 'Finish to be chosen') +
+        (p.fabric ? ' <span class="card-sub">&middot; ' + esc(p.fabric) + ' interior</span>' : '') +
+      '</div>';
 
     if (pr.months > 0) {
       html += '<dl>' +
@@ -450,10 +484,34 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
             on + '"><img src="/' + f.img + '" alt=""><span>' + esc(f.name) + '</span></button>';
         }).join('') +
       '</div>' +
+      (FABRICS.length
+        ? '<h2 class="sub-h">Interior lining</h2>' +
+          '<p class="lede">The fabric your capsule is lined with. Every colour is included ' +
+          'at the same price.</p>' +
+          '<div class="fabs">' +
+            FABRICS.map(function (f) {
+              var on = String(D.payload.fabric || '').toLowerCase() === f.code.toLowerCase();
+              return '<button type="button" class="fab" data-v="' + esc(f.code) + '" aria-pressed="' +
+                on + '"><span class="dot" style="background:' +
+                (FABRIC_HEX[f.code] || '#b9bdc4') + '"></span>' + esc(f.labelEn || f.code) +
+                '</button>';
+            }).join('') +
+          '</div>'
+        : '') +
       '<div class="acts">' +
         '<button class="back" id="back">&larr; Back</button>' +
         '<button class="btn btn--go" id="next">Continue</button>' +
       '</div>';
+
+    pane.querySelectorAll('.fab').forEach(function (b) {
+      b.addEventListener('click', async function () {
+        pane.querySelectorAll('.fab').forEach(function (x) {
+          x.setAttribute('aria-pressed', String(x === b));
+        });
+        await save({ fabric: b.dataset.v });
+        renderSide();
+      });
+    });
 
     pane.querySelectorAll('.fin').forEach(function (b) {
       b.addEventListener('click', async function () {
@@ -776,6 +834,10 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
   });
 
   (async function () {
+    // Loaded before the first render so the finish step never shows a colour
+    // that has since sold out.
+    await loadCatalogue();
+
     var q = new URLSearchParams(location.search);
     token = q.get('c');
     var ref = q.get('ref') || q.get('fsi');
@@ -793,6 +855,7 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
             kind: KIND,
             sku: q.get('sku') || 'PYR-STD',
             finish: q.get('finish') || undefined,
+            fabric: q.get('fabric') || undefined,
             ref: ref || undefined
           })
         });
