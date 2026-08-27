@@ -277,6 +277,15 @@
   .pswatch { width: 40px; height: 40px; border-radius: 50%; background: var(--sw); border: 1px solid rgba(0,0,0,0.14); cursor: pointer; position: relative; box-shadow: inset 0 2px 5px rgba(255,255,255,0.4), inset 0 -3px 6px rgba(0,0,0,0.18); transition: transform 0.25s var(--ease); }
   .pswatch:hover { transform: scale(1.08); }
   .pswatch.active { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--iris); }
+  /* A finish out of stock is shown, not hidden: a family who came for
+     Champagne deserves to know it exists and is coming back, rather than
+     wondering whether they imagined it. */
+  .pswatch[disabled] { cursor: not-allowed; opacity: 0.34; }
+  .pswatch[disabled]:hover { transform: none; }
+  .pswatch[disabled]::after { content: ""; position: absolute; inset: 0;
+    border-radius: 50%; background: linear-gradient(to bottom right,
+      transparent calc(50% - 1px), rgba(0,0,0,0.42) 50%, transparent calc(50% + 1px)); }
+  .sw-note { font-size: 12px; color: #8a8f96; margin-top: 8px; min-height: 16px; }
   .pprice-row { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
   .pprice { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
   .pprice em { font-style: normal; font-size: 13px; color: var(--muted); font-weight: 400; }
@@ -469,10 +478,16 @@
             <button class="pswatch" data-name="Bronze" data-src="pyrale-bronze.png" data-sheet="pyrale-spin-bronze.jpg" style="--sw:#9c683c" aria-label="Bronze"></button>
             <button class="pswatch" data-name="Onyx" data-src="pyrale-onyx.png" data-sheet="pyrale-spin-onyx.jpg" style="--sw:#454852" aria-label="Onyx"></button>
           </div>
+          <div class="sw-note" id="finishNote"></div>
+        </div>
+
+        <div class="pfinish" id="pFabricBlock" hidden>
+          <div class="pfinish-head">Interior — <span id="fabricName"></span></div>
+          <div class="pswatches" id="pFabrics"></div>
         </div>
 
         <div class="pprice-row">
-          <div class="pprice">$14,500 <em>CAD</em></div>
+          <div class="pprice" id="pPrice">$14,500 <em>CAD</em></div>
           <div class="pprice-note">Prepayment &amp; installment plans available. Reserve today with a refundable deposit.</div>
         </div>
 
@@ -760,6 +775,93 @@
     setTimeout(() => reveals.forEach(el => el.classList.add('in')), 2500);
   } else { reveals.forEach(el => el.classList.add('in')); }
 
+  /* ---- Live catalogue ----
+     Finishes, interior fabrics and the price come from the back office so a
+     colour that runs out stops being sellable within a minute — without a
+     deploy. The markup above is the fallback: if this call fails the page
+     still shows the five finishes rather than an empty configurator, because
+     a broken shop is worse than a slightly stale one. */
+  var CATALOGUE = null;
+  var SWATCH_HEX = {
+    'Brushed Aluminium': '#c9cdd3', 'Champagne': '#d3b47e', 'Graphite': '#6e727a',
+    'Bronze': '#9c683c', 'Onyx': '#454852'
+  };
+
+  (function loadCatalogue() {
+    var API = 'https://eternaadmin-production.up.railway.app/api/catalogue';
+    fetch(API, { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d) return;
+        CATALOGUE = d;
+
+        if (d.priceCents) {
+          var el = document.getElementById('pPrice');
+          if (el) el.innerHTML = '$' + Math.round(d.priceCents / 100).toLocaleString('en-CA') +
+            ' <em>CAD</em>';
+        }
+
+        // Finishes: mark anything absent from the catalogue as unavailable
+        // rather than removing it, so the row keeps its shape.
+        var offered = {};
+        (d.finishes || []).forEach(function (f) { offered[f.code] = f; });
+        var boxes = document.querySelectorAll('#pSwatches .pswatch');
+        var firstOpen = null;
+        boxes.forEach(function (b) {
+          if (offered[b.dataset.name]) { if (!firstOpen) firstOpen = b; return; }
+          b.disabled = true;
+          b.title = b.dataset.name + ' — temporarily unavailable';
+          b.classList.remove('active');
+        });
+
+        var note = document.getElementById('finishNote');
+        var out = [].slice.call(boxes).filter(function (b) { return b.disabled; })
+          .map(function (b) { return b.dataset.name; });
+        if (note && out.length) {
+          note.textContent = out.join(' and ') +
+            (out.length > 1 ? ' are ' : ' is ') + 'temporarily unavailable. Call us and we will tell you when it returns.';
+        }
+
+        // If the pre-selected finish went out of stock, move to the first open
+        // one — leaving a disabled swatch selected would let someone buy it.
+        if (firstOpen && !document.querySelector('#pSwatches .pswatch.active')) {
+          firstOpen.click();
+        }
+
+        // Interior fabrics.
+        var wrap = document.getElementById('pFabrics');
+        var block = document.getElementById('pFabricBlock');
+        var label = document.getElementById('fabricName');
+        if (wrap && (d.fabrics || []).length) {
+          wrap.innerHTML = '';
+          d.fabrics.forEach(function (f, i) {
+            var b = document.createElement('button');
+            b.className = 'pswatch' + (i === 0 ? ' active' : '');
+            b.dataset.name = f.code;
+            b.style.setProperty('--sw', SWATCH_HEX[f.code] || '#b9bdc4');
+            b.setAttribute('aria-label', f.labelEn || f.code);
+            b.addEventListener('click', function () {
+              wrap.querySelectorAll('.pswatch').forEach(function (s) { s.classList.remove('active'); });
+              b.classList.add('active');
+              label.textContent = f.labelEn || f.code;
+            });
+            wrap.appendChild(b);
+          });
+          label.textContent = d.fabrics[0].labelEn || d.fabrics[0].code;
+          block.hidden = false;
+        }
+      })
+      .catch(function () { /* keep the static fallback */ });
+  })();
+
+  /* Scoped on purpose: an unscoped '.pswatch.active' would pick whichever
+     swatch appears first in the document, and adding the interior row above
+     the price made that ambiguous. */
+  function chosenFabric() {
+    var el = document.querySelector('#pFabrics .pswatch.active');
+    return el ? el.dataset.name : null;
+  }
+
   // ---- Product configurator ----
   var pMain = document.getElementById('pMain');
   var swatches = document.getElementById('pSwatches');
@@ -816,7 +918,7 @@
 
   function ckoOpen() {
     lastFocus = document.activeElement;
-    var active = document.querySelector('.pswatch.active');
+    var active = document.querySelector('#pSwatches .pswatch.active');
     if (active && ckoFinishEl) ckoFinishEl.textContent = active.dataset.name;
     ckoErr.style.display = 'none';
     cko.classList.add('show'); ckoVeil.classList.add('show');
@@ -839,9 +941,11 @@
   document.querySelectorAll('.js-buy').forEach(function (b) {
     b.addEventListener('click', function (e) {
       e.preventDefault();
-      var active = document.querySelector('.pswatch.active');
+      var active = document.querySelector('#pSwatches .pswatch.active');
       var q = ['sku=' + encodeURIComponent(SKU)];
       if (active && active.dataset.name) q.push('finish=' + encodeURIComponent(active.dataset.name));
+      var fab = chosenFabric();
+      if (fab) q.push('fabric=' + encodeURIComponent(fab));
       var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e2) {}
       if (ref) q.push('ref=' + encodeURIComponent(ref));
       window.location.href = '/achat?' + q.join('&');
@@ -857,7 +961,7 @@
         email = document.getElementById('ckoEmail').value.trim(),
         phone = document.getElementById('ckoPhone').value.trim(),
         consent = document.getElementById('ckoConsent').checked,
-        active = document.querySelector('.pswatch.active');
+        active = document.querySelector('#pSwatches .pswatch.active');
 
     if (!first || !last || !email) {
       ckoErr.textContent = 'Please enter your name and email so we can reach you.';
@@ -881,6 +985,7 @@
           dateOfBirth: dob,
           locale: 'en-CA',
           finish: active ? active.dataset.name : undefined,
+          fabric: chosenFabric() || undefined,
           referralCode: ref || undefined,
           marketingConsent: consent,
           /* CASL requires proof of the exact wording shown at opt-in. */
@@ -970,9 +1075,11 @@
   document.querySelectorAll('.js-preplan').forEach(function (b) {
     b.addEventListener('click', function (e) {
       e.preventDefault();
-      var active = document.querySelector('.pswatch.active');
+      var active = document.querySelector('#pSwatches .pswatch.active');
       var q = ['sku=' + encodeURIComponent(SKU)];
       if (active && active.dataset.name) q.push('finish=' + encodeURIComponent(active.dataset.name));
+      var fab = chosenFabric();
+      if (fab) q.push('fabric=' + encodeURIComponent(fab));
       var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e2) {}
       if (ref) q.push('ref=' + encodeURIComponent(ref));
       window.location.href = '/preplan?' + q.join('&');
@@ -988,7 +1095,7 @@
         phone = document.getElementById('ppPhone').value.trim(),
         dob = document.getElementById('ppDob').value,
         consent = document.getElementById('ppConsent').checked,
-        active = document.querySelector('.pswatch.active');
+        active = document.querySelector('#pSwatches .pswatch.active');
 
     if (!first || !last || !email) {
       ppErr.textContent = 'Please enter your name and email so we can reach you.';
@@ -1010,6 +1117,7 @@
           sku: SKU, email: email, firstName: first, lastName: last,
           phone: phone || undefined, dateOfBirth: dob, locale: 'en-CA',
           finish: active ? active.dataset.name : undefined,
+          fabric: chosenFabric() || undefined,
           months: ppChosen,
           referralCode: ref || undefined,
           marketingConsent: consent,
