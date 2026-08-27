@@ -286,6 +286,8 @@
     border-radius: 50%; background: linear-gradient(to bottom right,
       transparent calc(50% - 1px), rgba(0,0,0,0.42) 50%, transparent calc(50% + 1px)); }
   .sw-note { font-size: 12px; color: #8a8f96; margin-top: 8px; min-height: 16px; }
+  .pswatch--img { background-size: cover; background-position: center;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06); }
   .pprice-row { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
   .pprice { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
   .pprice em { font-style: normal; font-size: 13px; color: var(--muted); font-weight: 400; }
@@ -849,12 +851,24 @@
             var b = document.createElement('button');
             b.className = 'pswatch' + (i === 0 ? ' active' : '');
             b.dataset.name = f.code;
-            b.style.setProperty('--sw', SWATCH_HEX[f.code] || '#b9bdc4');
             b.setAttribute('aria-label', f.labelEn || f.code);
+
+            /* A photo when there is one, a coloured dot when there is not.
+               A lining is chosen for its texture, which a flat circle cannot
+               show — so the moment a real photo exists it replaces the dot. */
+            if (f.image) {
+              b.classList.add('pswatch--img');
+              b.style.backgroundImage = 'url(' + (/^https?:/.test(f.image) ? f.image : '/' + f.image) + ')';
+              b.dataset.img = f.image;
+            } else {
+              b.style.setProperty('--sw', SWATCH_HEX[f.code] || '#b9bdc4');
+            }
+
             b.addEventListener('click', function () {
               wrap.querySelectorAll('.pswatch').forEach(function (s) { s.classList.remove('active'); });
               b.classList.add('active');
               label.textContent = f.labelEn || f.code;
+              showInterior(b);
             });
             wrap.appendChild(b);
           });
@@ -864,6 +878,20 @@
       })
       .catch(function () { /* keep the static fallback */ });
   })();
+
+  /* Clicking a lining swaps the main picture to the capsule open, and picking
+     a finish swaps it back to the capsule closed. Without this the swatch
+     changes a word and nothing else, which reads as broken. */
+  function showInterior(btn) {
+    var pMainEl = document.getElementById('pMain');
+    if (!pMainEl || !btn || !btn.dataset.img) return;
+    var src = /^https?:/.test(btn.dataset.img) ? btn.dataset.img : '/' + btn.dataset.img;
+    pMainEl.style.opacity = '0';
+    var img = new Image();
+    img.onload = function () { pMainEl.src = src; pMainEl.style.opacity = '1'; };
+    img.onerror = function () { pMainEl.style.opacity = '1'; };
+    img.src = src;
+  }
 
   /* Scoped on purpose: an unscoped '.pswatch.active' would pick whichever
      swatch appears first in the document, and adding the interior row above
@@ -882,11 +910,18 @@
   if (swatches) {
     swatches.querySelectorAll('.pswatch').forEach(function (b) {
       b.addEventListener('click', function () {
-        if (b.classList.contains('active')) return;
+        /* Normally a no-op when already selected — but if the picture is
+           currently showing an interior, clicking the chosen finish is how
+           someone asks to see the outside again. Without this they are stuck
+           on the lining with no way back. */
+        var showingInterior = pMain.src.indexOf('/photo') > -1;
+        if (b.classList.contains('active') && !showingInterior) return;
         swatches.querySelectorAll('.pswatch').forEach(function (s) { s.classList.remove('active'); });
         b.classList.add('active');
         var src = b.dataset.src, name = b.dataset.name;
         finishName.textContent = name; if (pbarFinish) pbarFinish.textContent = name;
+        // Choosing a finish always returns to the capsule closed — the
+        // handler below loads `src`, which undoes any interior preview.
         pMain.style.opacity = '0';
         var img = new Image();
         img.onload = function () { pMain.src = src; pMain.style.opacity = '1'; if (pbarImg) pbarImg.src = src; };
