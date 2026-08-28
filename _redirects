@@ -5,3 +5,10 @@
 /preplan/*          /plan.html   200
 /achat              /plan.html   200
 /achat/*            /plan.html   200
+
+# Becoming a partner. A redirect (302), not a rewrite: the application lives on
+# the admin host with its own session cookie, and pretending otherwise would
+# put a login on a domain that cannot set one.
+/partenaires        https://eternaadmin-production.up.railway.app/partner/apply   302
+/partners           https://eternaadmin-production.up.railway.app/partner/apply   302
+/partner            https://eternaadmin-production.up.railway.app/partner         302
