@@ -855,6 +855,14 @@
   <div class="foot-portal"><a href="https://eternaadmin-production.up.railway.app/portal">Access your file &mdash; view your plan, payments and balance</a></div>
 </footer>
 
+<!-- Formulaire statique cache: Netlify ne detecte un formulaire qu au
+     build, dans du HTML. Sans lui, la soumission ci-dessus ne serait recue
+     par personne. Meme nom que la page contact, meme mecanique. -->
+<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bot-field" />
+  <input name="fullname" /><input name="email" /><input name="phone" /><input name="province" /><input name="time" /><textarea name="message"></textarea>
+</form>
+
 <script>
   // Nav scroll state
   const nav = document.getElementById('nav');
@@ -936,9 +944,26 @@
     const name = form.fullname.value.trim();
     const email = form.email.value.trim();
     if (!name || !email) { note.textContent = 'Please add your name and email so we can reach you.'; note.style.color = '#e2b4b4'; return; }
-    note.textContent = 'Thank you, ' + name.split(' ')[0] + '. An Eterna advisor will be in touch within one business day.';
-    note.style.color = '#9fb39f';
-    form.reset();
+    /* Ce formulaire remerciait la famille puis se vidait — sans rien envoyer
+       nulle part. Il passe maintenant par Netlify Forms, comme la page
+       contact, et ne remercie qu une fois la soumission acceptee. */
+    const btn = form.querySelector('button[type="submit"], .btn');
+    if (btn) btn.disabled = true;
+    const data = { 'form-name': 'contact', fullname: name, email: email, phone: form.phone.value,
+      province: form.province.value, time: form.time.value, message: form.message.value };
+    const body = Object.keys(data).map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(data[k] || ''); }).join('&');
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
+      .then(function (r) {
+        if (!r.ok) throw new Error('form');
+        note.textContent = 'Thank you, ' + name.split(' ')[0] + '. An Eterna advisor will be in touch within one business day.';
+        note.style.color = '#9fb39f';
+        form.reset();
+      })
+      .catch(function () {
+        note.textContent = 'Something went wrong on our side. Please call 1 844 695-5613 and we will take it from there.';
+        note.style.color = '#e2b4b4';
+      })
+      .then(function () { if (btn) btn.disabled = false; });
   });
 </script>
 </body>
