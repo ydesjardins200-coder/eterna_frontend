@@ -530,10 +530,6 @@
             <option value="Sable velvet">Sable velvet</option>
           </select>
         </div>
-        <div class="pp-field">
-          <label for="ppEngraving">Personal engraving (optional)</label>
-          <input id="ppEngraving" data-field="engraving" type="text" maxlength="60" placeholder="A name, a date, or a few words…" />
-        </div>
       </div>
 
       <!-- Step 3: priorities -->
@@ -610,7 +606,7 @@
 <!-- Hidden static form so Netlify detects and captures pre-plan leads -->
 <form name="preplan" data-netlify="true" netlify-honeypot="bot-field" hidden>
   <input type="text" name="bot-field" />
-  <input name="beneficiary" /><input name="capsule" /><input name="interior" /><input name="engraving" />
+  <input name="beneficiary" /><input name="capsule" /><input name="interior" />
   <input name="priorities" /><input name="firstName" /><input name="lastName" /><input name="email" />
   <input name="phone" /><input name="province" /><input name="path" /><textarea name="message"></textarea>
 </form>
@@ -661,7 +657,7 @@
 
   // The pre-plan record — this is the object a Stripe Checkout session will map to later.
   const plan = {
-    beneficiary: '', capsule: '', interior: '', engraving: '',
+    beneficiary: '', capsule: '', interior: '',
     priorities: [], firstName: '', lastName: '', email: '', phone: '',
     province: 'Québec', message: '', path: '', priceLocked: null
   };
@@ -760,7 +756,6 @@
     const rows = [
       ['Planning for', plan.beneficiary],
       ['Capsule', plan.capsule + (plan.interior ? ' · ' + plan.interior : '')],
-      plan.engraving ? ['Engraving', '“' + plan.engraving + '”'] : null,
       plan.priorities.length ? ['Priorities', plan.priorities.join(', ')] : null,
       ['Contact', (plan.firstName + ' ' + plan.lastName).trim() + ' · ' + plan.email],
       ['Next step', plan.path]
@@ -799,7 +794,7 @@
     const data = {
       'form-name': 'preplan',
       beneficiary: plan.beneficiary, capsule: plan.capsule, interior: plan.interior,
-      engraving: plan.engraving, priorities: plan.priorities.join(', '),
+      priorities: plan.priorities.join(', '),
       firstName: plan.firstName, lastName: plan.lastName, email: plan.email,
       phone: plan.phone, province: plan.province, path: plan.path, message: plan.message
     };
