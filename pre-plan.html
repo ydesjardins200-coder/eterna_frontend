@@ -516,20 +516,17 @@
         <div class="pp-kick">Step 2 of 5</div>
         <h3>Choose your Capsule Pyrale</h3>
         <p class="pp-sub">You can refine any of this later with your advisor.</p>
+        <!-- Les cinq finis du catalogue, sous leur vrai nom: ce que l atelier
+             fabrique, et ce que le tunnel de reservation reconnait dans l URL.
+             L interieur se choisit dans le tunnel, avec les tissus du jour. -->
         <div class="pp-opts" data-field="capsule" data-single="1">
-          <div class="pp-opt" data-value="Signature"><span class="tick"></span><span class="lbl"><b>Signature</b><span>The essential Capsule Pyrale in its classic finish.</span></span></div>
-          <div class="pp-opt" data-value="Noir"><span class="tick"></span><span class="lbl"><b>Noir</b><span>A deep, matte-dark finish for a quieter statement.</span></span></div>
-          <div class="pp-opt" data-value="Bespoke"><span class="tick"></span><span class="lbl"><b>Bespoke</b><span>Personalized finish and details, shaped with our team.</span></span></div>
+          <div class="pp-opt" data-value="Brushed Aluminium"><span class="tick"></span><span class="lbl"><b>Brushed Aluminium</b><span>The classic finish — quiet, timeless.</span></span></div>
+          <div class="pp-opt" data-value="Champagne"><span class="tick"></span><span class="lbl"><b>Champagne</b><span>Warm and luminous.</span></span></div>
+          <div class="pp-opt" data-value="Graphite"><span class="tick"></span><span class="lbl"><b>Graphite</b><span>Deep grey, understated.</span></span></div>
+          <div class="pp-opt" data-value="Bronze"><span class="tick"></span><span class="lbl"><b>Bronze</b><span>Rich and earthy.</span></span></div>
+          <div class="pp-opt" data-value="Onyx"><span class="tick"></span><span class="lbl"><b>Onyx</b><span>Matte black, for a quieter statement.</span></span></div>
         </div>
-        <div class="pp-field" style="margin-top:18px">
-          <label for="ppInterior">Interior lining</label>
-          <select id="ppInterior" data-field="interior">
-            <option value="">Choose later</option>
-            <option value="Ivory silk">Ivory silk</option>
-            <option value="Slate linen">Slate linen</option>
-            <option value="Sable velvet">Sable velvet</option>
-          </select>
-        </div>
+        <p class="pp-sub" style="margin-top:14px">You will choose the interior lining in the next step, from the fabrics available today.</p>
       </div>
 
       <!-- Step 3: priorities -->
@@ -606,7 +603,7 @@
 <!-- Hidden static form so Netlify detects and captures pre-plan leads -->
 <form name="preplan" data-netlify="true" netlify-honeypot="bot-field" hidden>
   <input type="text" name="bot-field" />
-  <input name="beneficiary" /><input name="capsule" /><input name="interior" />
+  <input name="beneficiary" /><input name="capsule" />
   <input name="priorities" /><input name="firstName" /><input name="lastName" /><input name="email" />
   <input name="phone" /><input name="province" /><input name="path" /><textarea name="message"></textarea>
 </form>
@@ -657,7 +654,7 @@
 
   // The pre-plan record — this is the object a Stripe Checkout session will map to later.
   const plan = {
-    beneficiary: '', capsule: '', interior: '',
+    beneficiary: '', capsule: '',
     priorities: [], firstName: '', lastName: '', email: '', phone: '',
     province: 'Québec', message: '', path: '', priceLocked: null
   };
@@ -755,7 +752,7 @@
     // Build the recap
     const rows = [
       ['Planning for', plan.beneficiary],
-      ['Capsule', plan.capsule + (plan.interior ? ' · ' + plan.interior : '')],
+      plan.capsule ? ['Capsule', plan.capsule] : null,
       plan.priorities.length ? ['Priorities', plan.priorities.join(', ')] : null,
       ['Contact', (plan.firstName + ' ' + plan.lastName).trim() + ' · ' + plan.email],
       ['Next step', plan.path]
@@ -773,19 +770,26 @@
       msg = 'Your plan is reserved and current pricing is locked to your file. An advisor will confirm the details and, when you\'re ready, secure it — payment in full or by installments will be available at that step.';
     } else {
       title = 'Your summary is on its way';
-      msg = 'We\'ve saved your plan and will email a written summary shortly. There\'s no obligation — revisit it whenever you\'re ready.';
+      msg = 'Thank you, ' + (plan.firstName || 'friend') + '. An Eterna advisor will send you a written summary within one business day. There\'s no obligation.';
     }
     document.getElementById('ppDoneTitle').textContent = title;
     document.getElementById('ppDoneMsg').textContent = msg;
 
+    /* « Reserve & lock today's pricing » n est plus une promesse: c est le
+       tunnel de reservation — contrat, signature, paiement — avec le fini
+       deja choisi. Les deux autres chemins restent des demandes, qui deviennent
+       des billets pour un conseiller. */
+    if (plan.path === "Reserve & lock today's pricing") {
+      var q = ['sku=PYR-STD'];
+      if (plan.capsule) q.push('finish=' + encodeURIComponent(plan.capsule));
+      var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e) {}
+      if (ref) q.push('ref=' + encodeURIComponent(ref));
+      try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+      window.location.href = '/preplan?' + q.join('&');
+      return;
+    }
+
     submitLead();
-
-    // NOTE: Stripe integration seam.
-    // When the checkout engine is added, the "Reserve & lock today's pricing" path
-    // should call startCheckout(plan) here instead of only saving the lead —
-    // e.g. POST plan to a Netlify Function that creates a Stripe Checkout /
-    // Billing (installments) session, then redirect to session.url.
-
     try { localStorage.removeItem(STORE_KEY); } catch (e) {}
     go(INPUT_STEPS); // show confirmation
   }
@@ -793,7 +797,7 @@
   function submitLead() {
     const data = {
       'form-name': 'preplan',
-      beneficiary: plan.beneficiary, capsule: plan.capsule, interior: plan.interior,
+      beneficiary: plan.beneficiary, capsule: plan.capsule,
       priorities: plan.priorities.join(', '),
       firstName: plan.firstName, lastName: plan.lastName, email: plan.email,
       phone: plan.phone, province: plan.province, path: plan.path, message: plan.message
