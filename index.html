@@ -7,7 +7,7 @@
 <meta name="description" content="The Capsule Pyrale is a hermetic aluminium capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without compromise. Designed and manufactured in Québec." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <style>
   :root {
     --ink: #16181c;
@@ -112,120 +112,6 @@
   .nav-cta { display: flex; align-items: center; gap: 16px; }
   .menu-toggle { display: none; background: none; border: 0; cursor: pointer; flex-direction: column; gap: 4px; }
   .menu-toggle span { width: 22px; height: 1.5px; background: var(--ink); display: block; }
-
-  /* ---------- HERO (cinematic + glass) ---------- */
-  .hero {
-    position: relative;
-    padding-top: 64px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; top: -14%; left: 0; right: 0; height: 128%;
-    background: #c9b59a url("hero-terrace.jpg") center 62% / cover no-repeat;
-    z-index: 0; will-change: transform;
-  }
-  .hero::before {
-    content: "";
-    position: absolute; inset: 0; pointer-events: none; z-index: 1;
-    background:
-      linear-gradient(180deg, rgba(38,26,16,0.22) 0%, rgba(38,26,16,0) 26%, rgba(38,26,16,0) 52%, rgba(38,26,16,0.30) 78%, rgba(28,18,10,0.62) 100%);
-  }
-  @keyframes heroSlideLeft { from { opacity: 0; transform: translateX(-8vw); } to { opacity: 1; transform: translateX(0); } }
-  @keyframes heroFadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  .hero-stage {
-    position: relative; z-index: 2; flex: 1;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    padding: 20px 0 0;
-  }
-  .hero-word {
-    font-family: var(--display);
-    font-weight: 400;
-    color: rgba(255,255,255,0.9);
-    font-size: clamp(78px, 19.5vw, 310px);
-    letter-spacing: 0.02em;
-    line-height: 0.9;
-    text-align: center;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-    filter: drop-shadow(0 0 42px rgba(28,14,34,0.72)) drop-shadow(0 4px 18px rgba(44,24,42,0.5));
-    animation: heroSlideLeft 1.2s cubic-bezier(.22,1,.36,1) both;
-  }
-  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
-    .hero-word {
-      background:
-        linear-gradient(105deg, transparent 42%, rgba(255,255,255,0.85) 50%, transparent 58%),
-        linear-gradient(176deg, #ffffff 0%, #f7f0e7 46%, #ecdcc8 100%);
-      background-size: 260% 100%, 100% 100%;
-      background-position: 135% 0, 0 0;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: heroSlideLeft 1.2s cubic-bezier(.22,1,.36,1) both, heroShine 8s ease-in-out 1.6s infinite;
-    }
-  }
-  @keyframes heroShine {
-    0%   { background-position: 135% 0, 0 0; }
-    26%  { background-position: -35% 0, 0 0; }
-    100% { background-position: -35% 0, 0 0; }
-  }
-  .hero-capsule {
-    position: relative;
-    width: min(78%, 1080px);
-    margin: -2.5% auto 0;
-    z-index: 2;
-    animation: heroFadeUp 1.2s cubic-bezier(.22,1,.36,1) 0.15s both;
-  }
-  .hero-capsule img {
-    width: 100%; height: auto; display: block;
-    position: relative; z-index: 2;
-    filter: drop-shadow(0 30px 30px rgba(50,34,18,0.40)) drop-shadow(0 64px 84px rgba(50,34,18,0.26));
-  }
-  .hero-capsule::after {
-    content: "";
-    position: absolute; z-index: 1;
-    left: 12%; right: 12%; bottom: -5%;
-    height: 64px;
-    background: radial-gradient(50% 100% at 50% 50%, rgba(40,26,12,0.55) 0%, rgba(40,26,12,0.28) 40%, transparent 74%);
-    filter: blur(22px);
-  }
-  .hero-panel-wrap {
-    position: relative; z-index: 3;
-    padding: 0 0 clamp(26px, 4.5vh, 54px);
-    animation: heroFadeUp 1s cubic-bezier(.22,1,.36,1) 0.4s both;
-  }
-  .hero-glass {
-    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 32px; align-items: center;
-    padding: 32px 40px;
-    border-radius: 22px;
-    background: rgba(30,20,40,0.30);
-    backdrop-filter: blur(30px) saturate(1.3);
-    -webkit-backdrop-filter: blur(30px) saturate(1.3);
-    border: 1px solid rgba(255,255,255,0.22);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.34),
-      inset 0 -1px 0 rgba(255,255,255,0.04),
-      0 34px 74px rgba(18,10,28,0.46);
-    position: relative; overflow: hidden;
-  }
-  .hero-glass::before {
-    content: ""; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
-  }
-  .hero-title {
-    margin: 0;
-    font-weight: 500; font-size: clamp(30px, 3.8vw, 52px); color: #fff;
-    letter-spacing: -0.025em; line-height: 1.05;
-    text-shadow: 0 2px 22px rgba(24,14,34,0.5);
-  }
-  .hero-lead { display: flex; flex-direction: column; align-items: flex-start; }
-  .hero-lead p { color: rgba(255,255,255,0.82); font-size: 14.5px; margin: 0 0 22px; line-height: 1.6; }
-  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-  .hero-glass .btn--dark { background: #fff; color: var(--ink); }
-  .hero-glass .btn--dark:hover { background: #ece9f3; transform: translateY(-1px); }
   .btn--partner {
     background: rgba(255,255,255,0.10); color: #fff;
     border: 1px solid rgba(255,255,255,0.42);
@@ -463,10 +349,6 @@
     .nav-links, .nav-cta .btn { display: none; }
     .menu-toggle { display: flex; }
     .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
-    .hero-glass { grid-template-columns: 1fr; gap: 18px; padding: 24px 22px; }
-    .hero-lead { align-items: flex-start; }
-    .hero-capsule { width: 100%; margin-top: -4%; }
-    .hero-word { font-size: clamp(60px, 22vw, 150px); }
     .values-grid, .cert-track { grid-template-columns: 1fr 1fr; }
     .how-grid { grid-template-columns: 1fr; gap: 30px; }
     .why-grid, .faq-grid, .voices-grid { grid-template-columns: 1fr; gap: 34px; }
@@ -485,12 +367,62 @@
   @media (prefers-reduced-motion: reduce) {
     * { scroll-behavior: auto !important; }
     .reveal { opacity: 1 !important; transform: none !important; transition: none; }
-    .hero-word, .hero-capsule, .hero-panel-wrap, .hero-title, .hero-lead { animation: none !important; opacity: 1 !important; transform: none !important; }
   }
 
   .foot-portal { text-align: center; padding: 18px 24px 0; }
   .foot-portal a { font-size: 12.5px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
   .foot-portal a:hover { color: var(--ink); }
+
+/* ── Héros d’accueil (maquette v5) ── */
+
+.hb{display:inline-flex;align-items:center;gap:10px;font:inherit;font-size:14.5px;font-weight:500;padding:14px 24px;border-radius:999px;text-decoration:none;border:1px solid transparent;transition:transform .2s,background .2s}
+.hb:hover{transform:translateY(-1px)}
+.hb-light{background:#F5F1EA;color:#171D1F}.hb-light:hover{background:#fff}
+.hb-glass{border-color:rgba(255,255,255,.5);color:#fff;background:rgba(255,255,255,.06);backdrop-filter:blur(8px)}.hb-glass:hover{background:rgba(255,255,255,.14)}
+.hb svg{width:15px;height:15px}
+.hero{position:relative;color:#fff;font-family:'Instrument Sans',system-ui,sans-serif;height:100vh;min-height:720px;max-height:980px;isolation:isolate;overflow:hidden}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%;z-index:-2}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(112deg,rgba(24,18,12,.66) 0%,rgba(24,18,12,.44) 28%,rgba(24,18,12,.08) 54%,rgba(24,18,12,0) 66%),
+             linear-gradient(180deg,rgba(24,18,12,.30) 0%,rgba(24,18,12,0) 24%)}
+.t{position:relative;z-index:2;padding-top:176px;max-width:620px}
+.t>*{opacity:0;transform:translateY(14px);animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}
+.t>*:nth-child(2){animation-delay:.1s}.t>*:nth-child(3){animation-delay:.22s}.t>*:nth-child(4){animation-delay:.32s}.t>*:nth-child(5){animation-delay:.42s}
+@keyframes up{to{opacity:1;transform:none}}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.66);display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:26px;height:1px;background:currentColor}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(54px,6.4vw,96px);line-height:.94;letter-spacing:-.02em;margin-top:24px;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.18)}
+h1 em{font-style:italic}
+.sub{margin-top:26px;font-size:17px;line-height:1.55;color:rgba(255,255,255,.84);max-width:42ch}
+.acts{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap;align-items:center}
+/* La bande de confiance: pleine largeur, verre sombre, un filet dessus.
+   Chaque fait: une icone au trait fin, un chiffre en serif, un mot dessous. */
+.trust{position:absolute;left:0;right:0;bottom:0;z-index:3;background:linear-gradient(180deg,rgba(18,14,10,.34),rgba(18,14,10,.58));backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,.16)}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr) auto;align-items:center;min-height:96px}
+.trust .it{display:flex;align-items:center;gap:16px;padding:18px 28px 18px 0;border-right:1px solid rgba(255,255,255,.12);margin-right:28px}
+.trust .it:nth-child(4){border-right:none}
+.trust .ic{width:38px;height:38px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.92)}
+.trust .ic svg{width:18px;height:18px}
+.trust b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:24px;line-height:1;letter-spacing:-.01em;color:#fff}
+.trust span{display:block;font-size:12.5px;color:rgba(255,255,255,.66);margin-top:5px;line-height:1.3}
+.trust .seal{justify-self:end;display:flex;align-items:center;gap:12px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.trust .seal svg{width:30px;height:30px;color:rgba(255,255,255,.75)}
+@media(max-width:1000px){.trust{position:relative;background:rgba(18,14,10,.7)}.trust .wrap{grid-template-columns:1fr 1fr;min-height:0;padding-top:6px;padding-bottom:10px}.trust .it{border-right:none;margin-right:0;padding:14px 0}.trust .seal{display:none}}
+@media(max-width:1000px){
+  /* Sur un telephone, deux etages: le texte sur un ciel uni tire de l image,
+     puis l image elle-meme en bande, recadree pour que la capsule y tienne
+     entiere et petite — c est le produit qu on presente, pas un detail. */
+  .hero{height:auto;min-height:0;max-height:none;display:flex;flex-direction:column;background:linear-gradient(180deg,#8f7a66 0%,#b89a7a 55%,#c59f71 100%)}
+  .hero::before{background:linear-gradient(180deg,rgba(24,18,12,.55) 0%,rgba(24,18,12,.25) 60%,rgba(24,18,12,0) 100%)}
+  .hero>img{position:relative;order:2;height:clamp(300px,88vw,420px);object-position:76% 64%;z-index:0;
+    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,#000 14%);mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,#000 14%)}
+  .hero>.wrap{order:1}
+  .hero .wrap{padding-left:20px;padding-right:20px}
+  .t{padding:118px 0 22px;max-width:none}
+  h1{font-size:50px}
+  .sub{font-size:16px}
+  .trust{order:3}
+}
 </style>
 </head>
 <body>
@@ -523,26 +455,24 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg" id="heroBg"></div>
-    <div class="hero-stage">
-      <div class="hero-word">ETERNA</div>
-      <div class="hero-capsule">
-        <img src="capsule-hero.png" alt="The Capsule Pyrale — a hermetic aluminium capsule with a dark glass viewing dome" />
-      </div>
+  <img src="hero-scene.jpg" alt="The Capsule Pyrale resting on a marble terrace above the sea at first light">
+  <div class="wrap"><div class="t">
+    <div class="eyebrow">Capsule Pyrale · Québec</div>
+    <h1>A new way<br>to say <em>goodbye.</em></h1>
+    <p class="sub">A hermetic aluminium capsule that preserves the body naturally, with nitrogen — for sixty to a hundred years, without chemicals or embalming.</p>
+    <div class="acts">
+      <a class="hb hb-light" href="product.html">Discover the Pyrale <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="hb hb-glass" href="/partenaires">Partner with us</a>
     </div>
-    <div class="wrap hero-panel-wrap">
-      <div class="hero-glass">
-        <h1 class="hero-title">A New Way<br />to Say Goodbye</h1>
-        <div class="hero-lead">
-          <p>The Capsule Pyrale is a hermetic aluminum capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without embalming, without compromise.</p>
-          <div class="hero-actions">
-            <a href="#capsule" class="btn btn--dark">Discover the Pyrale</a>
-            <a href="/partenaires" class="btn btn--partner">Partner With Us <span class="btn-arrow">&rarr;</span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div></div>
+  <div class="trust"><div class="wrap">
+    <div class="it"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><div><b>60–100</b><span>years of natural preservation</span></div></div>
+    <div class="it"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20c9 1 14-4 14-14 0 0-5.5-1-9.5 1S4.5 13 5 20z"/><path d="M5.5 19.5C9.5 15.5 12 13 16.5 11"/></svg></span><div><b>0</b><span>chemicals — nitrogen only</span></div></div>
+    <div class="it"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.6-3 8.6-7 9.5-4-.9-7-4.9-7-9.5V6z"/><path d="M9 12l2 2 4-4.5"/></svg></span><div><b>10+</b><span>years of research, certified</span></div></div>
+    <div class="it"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 3.9 4.2.4-3.2 2.8.9 4.1L12 12.1l-3.5 2.1.9-4.1L6.2 7.3l4.2-.4z"/><path d="M12 14v7"/></svg></span><div><b>Québec</b><span>designed, engineered and made</span></div></div>
+    <div class="seal"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="16" cy="16" r="13"/><circle cx="16" cy="16" r="9.5" stroke-dasharray="1.5 2.2"/><path d="M11.5 16.5l3 3 6-7"/></svg>Certified · Canada &amp; USA</div>
+  </div></div>
+</section>
 
   <!-- VALUE STRIP -->
   <section class="values" id="capsule">
