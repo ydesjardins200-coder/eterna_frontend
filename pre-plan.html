@@ -7,7 +7,7 @@
 <meta name="description" content="Pre-plan the Capsule Pyrale with Eterna. Lock in today's pricing, spare your family difficult decisions, and ensure your wishes are honored. Prearrangement designed in Québec." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <style>
   :root {
     --ink: #16181c;
@@ -70,13 +70,6 @@
   header.nav:not(.scrolled) .menu-toggle span { background: #fff; }
   header.nav:not(.scrolled) .nav-cta .btn--dark { background: rgba(255,255,255,0.14); color: #fff; border: 1px solid rgba(255,255,255,0.42); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
   header.nav:not(.scrolled) .nav-cta .btn--dark:hover { background: rgba(255,255,255,0.24); }
-
-  /* HERO */
-
-  /* BENEFIT CARDS (3D + iris hover) */
-  .benefits { background: var(--mist); padding: 84px 0; }
-  .benefits .head { text-align: center; margin-bottom: 52px; }
-  .benefits .head h2 { font-size: clamp(30px, 3.6vw, 48px); margin-top: 14px; }
   .benefit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .bcard { background: #fff; border: 1px solid rgba(228,227,223,0.9); border-radius: 16px; padding: 28px 26px; position: relative; overflow: hidden; box-shadow: 0 1px 2px rgba(40,44,60,0.05), 0 8px 18px rgba(40,44,60,0.06), 0 24px 44px rgba(40,44,60,0.05); transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease); }
   .bcard::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--iris), var(--iris-soft)); transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease); }
@@ -87,51 +80,11 @@
   .bcard:hover .ic { background: var(--iris); transform: scale(1.08); }
   .bcard h3 { font-size: 19px; margin-bottom: 8px; }
   .bcard p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
-
-  /* STEPS */
-  .steps { padding: 96px 0; }
-  .steps .head { text-align: center; margin-bottom: 56px; }
-  .steps .head h2 { font-size: clamp(30px, 3.6vw, 48px); margin-top: 14px; }
   .step-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .step-card { position: relative; padding: 34px 30px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
   .step-num { font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: 0.16em; color: var(--iris); margin-bottom: 16px; }
   .step-card h3 { font-size: 20px; margin-bottom: 10px; }
   .step-card p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
-
-  /* TRUST band */
-  .trust { background: var(--night); color: #fff; padding: 96px 0; }
-  .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-  .trust h2 { font-size: clamp(28px, 3.4vw, 44px); color: #fff; margin: 16px 0 18px; }
-  .trust p { color: var(--night-text); font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
-  .trust .small { font-size: 11.5px; color: var(--muted); }
-  .trust-points { list-style: none; display: flex; flex-direction: column; gap: 18px; }
-  .trust-points li { display: flex; gap: 14px; align-items: flex-start; padding: 20px 22px; border: 1px solid var(--night-line); border-radius: 14px; background: var(--night-soft); }
-  .trust-points .tp-ic { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; background: rgba(111,90,216,0.18); color: var(--iris-soft); display: grid; place-items: center; font-size: 15px; }
-  .trust-points b { display: block; font-size: 14px; color: #fff; margin-bottom: 3px; font-weight: 600; }
-  .trust-points span { font-size: 12.5px; color: var(--night-text); }
-
-  /* COST band */
-  .cost { padding: 90px 0; text-align: center; background: var(--mist); }
-  .cost .wrap { max-width: 760px; }
-  .cost h2 { font-size: clamp(26px, 3.2vw, 40px); margin: 14px 0 16px; }
-  .cost p { color: var(--ink-soft); font-size: 15px; margin-bottom: 30px; }
-
-  /* FAQ */
-  .faq { padding: 90px 0; }
-  .faq-grid { display: grid; grid-template-columns: 0.6fr 1.4fr; gap: 50px; }
-  .faq-grid h2 { font-size: clamp(28px, 3.4vw, 42px); }
-  .faq-item { border-top: 1px solid var(--line); }
-  .faq-item:last-child { border-bottom: 1px solid var(--line); }
-  .faq-q { width: 100%; background: none; border: 0; cursor: pointer; text-align: left; padding: 24px 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-family: var(--sans); font-size: 15px; color: var(--ink); }
-  .faq-q .sign { font-size: 20px; color: var(--muted); transition: transform 0.3s; flex: 0 0 auto; }
-  .faq-item.open .faq-q .sign { transform: rotate(45deg); }
-  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); }
-  .faq-a p { padding: 0 40px 24px 0; font-size: 13.5px; color: var(--ink-soft); }
-
-  /* FINAL CTA */
-  .final { background: var(--night); color: #fff; padding: 100px 0; text-align: center; }
-  .final h2 { font-size: clamp(32px, 4.2vw, 54px); color: #fff; margin: 16px 0 16px; }
-  .final p { color: var(--night-text); font-size: 14.5px; max-width: 540px; margin: 0 auto 36px; }
 
   /* FOOTER */
   footer { position: relative; overflow: hidden; color: #fff; background: linear-gradient(180deg, rgba(10,11,14,0.88) 0%, rgba(10,11,14,0.72) 34%, rgba(10,11,14,0.82) 62%, rgba(9,10,13,0.96) 100%), #0c0d10 url("footer-mist.jpg") center 32% / cover no-repeat; }
@@ -196,9 +149,156 @@
   .foot-portal { text-align: center; padding: 18px 24px 0; }
   .foot-portal a { font-size: 12.5px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
   .foot-portal a:hover { color: var(--ink); }
+
+/* Cette page ouvre sur un fond clair: la barre reste sombre des le depart,
+   au lieu du blanc prevu pour un heros sombre. */
+header.nav:not(.scrolled) .brand { color: var(--ink); }
+header.nav:not(.scrolled) .nav-links a { color: var(--ink-soft); }
+header.nav:not(.scrolled) .nav-links a.active { color: var(--ink); }
+header.nav:not(.scrolled) .nav-cta .btn--dark { background: #2F4F49; color: #fff; }
+header.nav:not(.scrolled) .menu-toggle span { background: var(--ink); }
+/* ── Page pré-arrangement — maquette v4, portée sous .pp ── */
+.pp{--paper:#F5F4EF;--paper-2:#ECEBE4;--ink:#1F2A2C;--ink-2:#465254;--muted:#71797B;--pine:#2F4F49;--pine-2:#233C38;--pine-3:#1C3330;--line:#DEE0DA;--white:#fff;--serif:'Instrument Serif',Georgia,serif;--sans:'Instrument Sans',system-ui,sans-serif}
+.pp *{box-sizing:border-box;margin:0;padding:0}
+.pp{scroll-behavior:smooth}
+.pp{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:14.5px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-top:64px}
+.pp a{color:inherit}
+.pp img,.pp svg{display:block;max-width:100%}
+.pp :focus-visible{outline:2px solid var(--pine);outline-offset:3px}
+.pp .wrap{max-width:1160px;margin:0 auto;padding:0 40px}
+@media(max-width:640px){.pp .wrap{padding:0 20px}}
+.pp h1,.pp h2{font-family:var(--serif);font-weight:400;letter-spacing:-.005em}
+.pp h2{font-size:34px;line-height:1.1}
+.pp .st{text-align:center}
+.pp .st h2::after{content:"";display:block;width:8px;height:8px;background:var(--pine);opacity:.55;transform:rotate(45deg);margin:14px auto 0;border-radius:1px}
+.pp .btn{display:inline-flex;align-items:center;justify-content:center;font:inherit;font-size:13.5px;font-weight:500;padding:11px 20px;border-radius:999px;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:background .15s,color .15s}
+.pp .btn-pine{background:var(--pine);color:var(--white)}
+.pp .btn-pine:hover{background:var(--pine-2)}
+.pp .btn-ghost{border-color:var(--ink);color:var(--ink)}
+.pp .btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.pp .btn-light{background:var(--white);color:var(--ink)}
+.pp .btn-light:hover{background:#F0EFE9}
+.pp .btn-lg{border-color:rgba(255,255,255,.75);color:var(--white)}
+.pp .btn-lg:hover{background:var(--white);color:var(--ink)}
+.pp .brand svg{height:22px;width:auto;color:var(--ink)}
+.pp .hero{position:relative;overflow:hidden}
+.pp .hero .wrap{display:grid;grid-template-columns:1fr 1fr;min-height:560px;align-items:center}
+.pp .hero-t{position:relative;z-index:1;padding:36px 0 56px;max-width:500px}
+.pp .hero h1{font-size:58px;line-height:1.02;text-wrap:balance}
+.pp .hero .sub{margin-top:22px;font-size:16px;color:var(--ink-2);max-width:40ch}
+.pp .hero .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.pp .made{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2);margin-top:22px}
+.pp .made svg{width:14px;height:14px;color:var(--pine)}
+.pp .hero-i{position:absolute;top:0;right:0;bottom:0;width:60%;z-index:0}
+.pp .hero-i img{width:100%;height:100%;object-fit:cover;object-position:center 45%}
+.pp .hero-i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--paper) 0%,rgba(245,244,239,.94) 18%,rgba(245,244,239,.55) 40%,rgba(245,244,239,0) 68%),linear-gradient(180deg,rgba(245,244,239,0) 78%,var(--paper) 100%)}
+@media(max-width:900px){.pp .hero .wrap{grid-template-columns:1fr;min-height:0}
+.pp .hero-i{position:relative;width:auto;aspect-ratio:4/3}
+.pp .hero-i::after{background:linear-gradient(180deg,rgba(245,244,239,0) 60%,var(--paper) 100%)}
+.pp .hero h1{font-size:42px}}
+.pp .why-s{position:relative;background:var(--paper-2);padding:56px 0 52px;overflow:hidden}
+.pp .leaf{position:absolute;top:22px;width:230px;height:300px;color:#B6C2BC;opacity:.55;pointer-events:none}
+.pp .leaf.l{left:-40px}
+.pp .leaf.r{right:-40px;transform:scaleX(-1)}
+.pp .why{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:38px;text-align:center}
+.pp .why .ic{width:30px;height:30px;margin:0 auto 14px;color:var(--pine)}
+.pp .why h3{font-size:14px;font-weight:500;max-width:15ch;margin:0 auto;line-height:1.3}
+.pp .why p{font-size:13px;color:var(--ink-2);margin:10px auto 0;max-width:24ch}
+@media(max-width:900px){.pp .why{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pp .why{grid-template-columns:1fr}}
+.pp .cap{padding:64px 0}
+.pp .cap-g{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;margin-top:32px}
+.pp .cap-img{position:relative;aspect-ratio:16/9;border-radius:8px;background:linear-gradient(160deg,#EDEBE4,#E2DFD6)}
+.pp .cap-img img{position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;opacity:0;transition:opacity .35s;filter:drop-shadow(0 22px 30px rgba(20,24,26,.16))}
+.pp .cap-img img.on{opacity:1}
+.pp .cap-name{font-family:var(--serif);font-size:34px;line-height:1;font-style:italic}
+.pp .cap-d{margin-top:10px;color:var(--ink-2);font-size:14px;max-width:34ch}
+.pp .sw-row{display:flex;gap:8px;margin-top:18px}
+.pp .sw{width:34px;height:34px;border-radius:50%;border:2px solid transparent;padding:3px;background:transparent;cursor:pointer}
+.pp .sw i{display:block;width:100%;height:100%;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.pp .sw.on{border-color:var(--ink)}
+.pp .cap-facts{display:flex;gap:22px;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+.pp .cap-facts b{display:block;font-family:var(--serif);font-size:22px;line-height:1}
+.pp .cap-facts span{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.pp .cap-cta{margin-top:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.pp .cap-cta small{font-size:12px;color:var(--muted)}
+@media(max-width:900px){.pp .cap-g{grid-template-columns:1fr}}
+.pp .steps-s{background:var(--white);padding:60px 0}
+.pp .steps{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.pp .step-l{list-style:none;counter-reset:s;position:relative;padding-left:56px;margin-top:20px}
+.pp .step-l::before{content:"";position:absolute;left:17px;top:22px;bottom:22px;width:1px;background:var(--line)}
+.pp .step-l li{position:relative;padding:0 0 28px;counter-increment:s}
+.pp .step-l li:last-child{padding-bottom:0}
+.pp .step-l li::before{content:counter(s);position:absolute;left:-56px;top:-4px;width:34px;height:34px;border-radius:50%;background:var(--white);border:1px solid var(--pine);color:var(--pine);display:flex;align-items:center;justify-content:center;font-size:14px}
+.pp .step-l h3{font-size:15.5px;font-weight:500}
+.pp .step-l p{color:var(--ink-2);margin-top:5px;font-size:13.5px;max-width:42ch}
+.pp .steps-i{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:#ddd}
+.pp .steps-i img{width:100%;height:100%;object-fit:cover}
+.pp .steps-i figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px;background:var(--pine-3);color:var(--white);font-size:14px;text-align:center}
+@media(max-width:900px){.pp .steps{grid-template-columns:1fr}
+.pp .steps-i{order:-1}}
+.pp .cost-s{background:var(--pine);color:var(--paper);padding:56px 0}
+.pp .cost-s h2{color:var(--white)}
+.pp .cost{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.pp .cost .lede{color:rgba(245,244,239,.82);margin-top:12px;font-size:14px;max-width:36ch}
+.pp .ctl{margin-top:26px}
+.pp .ctl label{display:flex;justify-content:space-between;font-size:12px;color:rgba(245,244,239,.8);margin-bottom:6px}
+.pp .ctl label output{color:var(--white);font-weight:500}
+.pp .ctl input[type=range]{width:100%;accent-color:var(--paper);height:24px}
+.pp .cmp{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:18px;padding-top:12px;border-top:1px solid rgba(245,244,239,.25)}
+.pp .cmp .n{font-size:22px;color:var(--white);font-variant-numeric:tabular-nums}
+.pp .cmp .k{font-size:12px;color:rgba(245,244,239,.7);margin-top:2px}
+.pp .cost-f{font-size:11.5px;color:rgba(245,244,239,.55);margin-top:14px;max-width:44ch;line-height:1.5}
+.pp .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:26px 30px}
+.pp .card .k{font-size:13px;color:rgba(245,244,239,.82)}
+.pp .card .v{font-family:var(--serif);font-size:56px;line-height:1;color:var(--white);margin-top:6px;font-variant-numeric:tabular-nums}
+.pp .card .v small{font-family:var(--sans);font-size:14px;margin-left:8px;color:rgba(245,244,239,.75)}
+.pp .card hr{border:0;border-top:1px solid rgba(255,255,255,.16);margin:20px 0 16px}
+.pp .card .mo{font-size:14px;color:rgba(245,244,239,.9);max-width:32ch}
+.pp .card .mo b{color:var(--white);font-weight:500}
+.pp .seg{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.pp .seg button{font:inherit;font-size:12.5px;padding:6px 12px;border-radius:999px;border:1px solid rgba(245,244,239,.35);background:transparent;color:var(--paper);cursor:pointer}
+.pp .seg button.on{background:var(--paper);color:var(--pine);border-color:var(--paper)}
+.pp .card p{font-size:12px;color:rgba(245,244,239,.65);margin-top:14px}
+@media(max-width:900px){.pp .cost{grid-template-columns:1fr}}
+.pp .prot-s{padding:60px 0}
+.pp .prot{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+.pp .prot .lede{color:var(--ink-2);margin-top:12px;font-size:14px;max-width:44ch}
+.pp .prot-g{display:grid;grid-template-columns:1fr 1fr;gap:20px 26px;margin-top:26px}
+.pp .prot-g>div{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.pp .prot-g .ic{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--pine)}
+.pp .prot-g .ic svg{width:16px;height:16px}
+.pp .prot-g h3{font-size:14px;font-weight:500}
+.pp .prot-g p{font-size:13px;color:var(--ink-2);margin-top:3px;max-width:26ch}
+.pp .prot .note{font-size:12px;color:var(--muted);margin-top:22px;max-width:52ch}
+.pp .prot-i{border-radius:10px;overflow:hidden;aspect-ratio:4/3}
+.pp .prot-i img{width:100%;height:100%;object-fit:cover}
+@media(max-width:900px){.pp .prot{grid-template-columns:1fr}
+.pp .prot-g{grid-template-columns:1fr}}
+.pp .faq-s{padding:48px 0 60px}
+.pp .faq{margin:26px auto 0;max-width:920px;border:1px solid var(--line);border-radius:8px;background:var(--white);text-align:left}
+.pp .faq details{border-bottom:1px solid var(--line)}
+.pp .faq details:last-child{border-bottom:none}
+.pp .faq summary{list-style:none;cursor:pointer;padding:15px 48px 15px 18px;font-size:13.5px;font-weight:500;position:relative}
+.pp .faq summary::-webkit-details-marker{display:none}
+.pp .faq summary::after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-52%);font-size:19px;font-weight:300;color:var(--ink-2)}
+.pp .faq details[open] summary::after{content:"–"}
+.pp .faq details p{padding:0 18px 16px;color:var(--ink-2);font-size:13.5px;max-width:72ch}
+.pp .final{position:relative;color:var(--white);isolation:isolate;text-align:center}
+.pp .final img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;z-index:-2}
+.pp .final::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(28,40,44,.35),rgba(28,40,44,.62))}
+.pp .final .wrap{padding:80px 40px}
+.pp .final h2{color:var(--white);margin:0 auto;max-width:14ch;font-size:44px}
+.pp .final p{margin:12px auto 0;color:rgba(255,255,255,.88);font-size:15px}
+.pp .final .a{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+.pp .stick{display:none}
+@media(max-width:900px){.pp .stick{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(245,244,239,.95);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.pp .stick .btn{flex:1}
+.pp{padding-bottom:74px}}
 </style>
 </head>
 <body>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ic-leaf" viewBox="0 0 24 24"><path d="M4 20c10 1 16-5 16-15 0 0-6-1-10.5 1.2S3.5 12.5 4 20Z"/><path d="M4.5 19.5C9 15 12 12 17 10"/></symbol><symbol id="ic-nochem" viewBox="0 0 24 24"><path d="M12 3.5s5.5 6 5.5 10a5.5 5.5 0 0 1-11 0c0-2 1.4-4.3 2.8-6"/><line x1="4.5" y1="4.5" x2="19.5" y2="19.5"/></symbol><symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path d="M12 7.2V12l3.2 2"/></symbol><symbol id="ic-medal" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M8.5 13.2 7 21l5-2.8L17 21l-1.5-7.8"/></symbol><symbol id="ic-lock" viewBox="0 0 24 24"><rect x="4.8" y="10.5" width="14.4" height="9.5" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol><symbol id="ic-heart" viewBox="0 0 24 24"><path d="M12 20.2C7 16.5 4.3 13.4 4.3 10.2A3.7 3.7 0 0 1 12 8.1a3.7 3.7 0 0 1 7.7 2.1c0 3.2-2.7 6.3-7.7 10Z"/></symbol><symbol id="ic-badge-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path d="M8.4 12.3 11 15l4.6-5.2"/></symbol><symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 3.2 19 6v5.2c0 4.6-3 8.2-7 10-4-1.8-7-5.4-7-10V6l7-2.8Z"/></symbol><symbol id="ic-flask" viewBox="0 0 24 24"><path d="M9.2 3.2h5.6M10.2 3.2V9l-4.7 8.1A2 2 0 0 0 7.3 20.2h9.4a2 2 0 0 0 1.8-3.1L13.8 9V3.2"/><line x1="8" y1="14.5" x2="16" y2="14.5"/></symbol><symbol id="ic-factory" viewBox="0 0 24 24"><path d="M3 20.5V10l6 3.6V10l6 3.6V6.4l6 3.2v10.9Z"/></symbol></svg>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="eterna-logo" viewBox="0 0 114 22"><path d="M1.22 7.44H12.72L13.45 6.51H1.22V1.2H13.2L14 0.15H0V13.96H13.32L14.13 12.93H1.22V7.44Z" fill="currentColor"/><path d="M14.27 1.2H22.04V13.96H23.23V1.2H30.46L31.27 0.15H15.14L14.27 1.2Z" fill="currentColor"/><path d="M33.69 7.44H45.19L45.91 6.51H33.69V1.2H45.66L46.47 0.15H32.47V13.96H45.79L46.59 12.93H33.69V7.44Z" fill="currentColor"/><path d="M64.23 4.59C64.23 1.49 61.5 0.15 58.22 0.15H48.72L47.89 1.2H57.83C60.82 1.2 62.97 2.21 62.97 4.65C62.97 7.08 60.7 7.95 57.83 7.95H47.96V13.96H49.15V8.96H57.79L63.67 13.96H65.35L59.11 8.74C62.16 8.63 64.23 7.23 64.23 4.58V4.59Z" fill="currentColor"/><path d="M80.8 14.02C81.19 14.02 81.5 13.78 81.5 13.24V0.15H80.38V12.37L67.97 0.27C67.76 0.06 67.56 0 67.39 0C67.02 0 66.69 0.25 66.69 0.79V13.96H67.81V1.65L80.24 13.78C80.42 13.96 80.63 14.02 80.8 14.02Z" fill="currentColor"/><path d="M98.05 8.07L97.94 8.1C97.78 8.15 97.63 8.2 97.48 8.25L97.41 8.27L97.37 8.29C97.26 8.32 97.15 8.36 97.04 8.4L100.7 13.96H102.19L98.24 8.01C98.19 8.03 98.13 8.04 98.08 8.06L98.05 8.07V8.07Z" fill="currentColor"/><path d="M84.56 11.5C84.73 11.37 84.9 11.23 85.07 11.1L85.08 11.09C85.61 10.68 86.15 10.27 86.7 9.89L86.71 9.89C86.74 9.87 86.77 9.85 86.8 9.83L92.42 1.38L95.2 5.59C95.51 5.49 95.83 5.38 96.15 5.29L96.18 5.28L96.23 5.26C96.28 5.25 96.34 5.23 96.4 5.22L93.25 0.47C93.09 0.23 92.8 0 92.43 0C92.07 0 91.76 0.25 91.62 0.47L83.87 12.08C84.09 11.89 84.32 11.7 84.56 11.51L84.57 11.5L84.56 11.5Z" fill="currentColor"/><path d="M112.89 5.44C113.01 5.44 113.11 5.45 113.19 5.46C113.19 5.46 113.2 5.46 113.2 5.46C113.24 5.47 113.27 5.47 113.31 5.47C113.31 5.47 113.31 5.47 113.31 5.47C113.31 5.47 113.32 5.47 113.32 5.47C113.32 5.47 113.32 5.47 113.33 5.47C113.35 5.48 113.38 5.48 113.4 5.48C113.4 5.48 113.41 5.48 113.41 5.48C113.43 5.48 113.45 5.49 113.47 5.49C113.47 5.49 113.47 5.49 113.47 5.49C113.49 5.49 113.49 5.49 113.5 5.49C113.5 5.49 113.51 5.49 113.51 5.49C113.51 5.49 113.51 5.49 113.51 5.49C113.52 5.49 113.52 5.49 113.52 5.49C113.22 5.43 112.91 5.37 112.61 5.32C112.56 5.31 112.51 5.3 112.45 5.29C112.17 5.24 111.88 5.19 111.59 5.15C111.57 5.14 111.55 5.14 111.53 5.14C111.49 5.13 111.46 5.13 111.42 5.12C111.26 5.1 111.1 5.08 110.94 5.06C110.81 5.04 110.69 5.02 110.56 5C110.53 5 110.5 5 110.47 4.99C110.28 4.97 110.08 4.95 109.89 4.93C109.81 4.92 109.74 4.91 109.66 4.9C109.66 4.9 109.64 4.9 109.64 4.9C109.6 4.89 109.57 4.89 109.53 4.89C109.33 4.87 109.12 4.85 108.91 4.83C108.85 4.83 108.78 4.82 108.71 4.81C108.65 4.81 108.6 4.81 108.54 4.8C108.27 4.78 108 4.76 107.73 4.75C107.69 4.75 107.66 4.75 107.62 4.74C107.62 4.74 107.61 4.74 107.61 4.74C107.52 4.74 107.44 4.74 107.35 4.73C107.17 4.73 107 4.72 106.83 4.72C106.8 4.72 106.78 4.71 106.75 4.71C106.48 4.71 106.22 4.7 105.95 4.7C105.94 4.7 105.94 4.7 105.94 4.7C105.89 4.7 105.85 4.7 105.8 4.7H105.8C105.53 4.7 105.26 4.71 104.99 4.71C104.98 4.71 104.97 4.71 104.95 4.71C104.92 4.71 104.88 4.72 104.85 4.72C104.58 4.73 104.31 4.73 104.04 4.75C104.02 4.75 104 4.75 103.98 4.75C103.97 4.75 103.96 4.75 103.94 4.76C103.67 4.77 103.39 4.79 103.12 4.81C103.11 4.81 103.11 4.81 103.1 4.81C102.82 4.83 102.55 4.86 102.28 4.89C102.25 4.89 102.22 4.89 102.2 4.9C102.19 4.9 102.18 4.9 102.18 4.9C102.12 4.91 102.07 4.91 102.01 4.92C101.81 4.94 101.61 4.97 101.41 4.99C101.38 5 101.36 5 101.33 5C101.31 5.01 101.3 5.01 101.28 5.01C101.03 5.05 100.78 5.08 100.53 5.12C100.5 5.13 100.48 5.13 100.45 5.14C100.44 5.14 100.43 5.14 100.42 5.14C100.31 5.16 100.22 5.18 100.11 5.19C99.96 5.22 99.81 5.25 99.66 5.27C99.65 5.28 99.64 5.28 99.63 5.28C99.62 5.28 99.62 5.28 99.61 5.28C99.35 5.33 99.1 5.38 98.85 5.44C98.84 5.44 98.84 5.44 98.84 5.44C98.83 5.44 98.82 5.44 98.81 5.45C98.67 5.48 98.53 5.51 98.39 5.54C98.28 5.57 98.17 5.59 98.07 5.62C98.04 5.63 98 5.63 97.97 5.64C97.91 5.66 97.84 5.67 97.78 5.69C97.61 5.73 97.44 5.78 97.27 5.82C97.23 5.83 97.2 5.84 97.16 5.85C97.02 5.89 96.88 5.93 96.74 5.97C96.65 6 96.56 6.02 96.47 6.05C96.44 6.06 96.42 6.07 96.39 6.07C95.91 6.22 95.43 6.38 94.96 6.54C94.95 6.55 94.93 6.55 94.92 6.56C94.69 6.64 94.47 6.72 94.24 6.81C94.22 6.82 94.19 6.83 94.17 6.83C93.95 6.92 93.73 7.01 93.52 7.09C93.49 7.1 93.47 7.11 93.45 7.12C93.23 7.21 93.01 7.31 92.8 7.4C92.79 7.4 92.78 7.41 92.77 7.41C92.77 7.41 92.77 7.41 92.77 7.41C92.54 7.51 92.32 7.61 92.1 7.71C91.88 7.82 91.67 7.92 91.45 8.03C91.45 8.03 91.45 8.03 91.45 8.03C91.44 8.03 91.43 8.04 91.42 8.04C91.22 8.14 91.01 8.25 90.81 8.36C90.79 8.36 90.77 8.37 90.76 8.38C90.56 8.49 90.36 8.6 90.16 8.71C90.15 8.71 90.15 8.71 90.15 8.71C90.14 8.72 90.13 8.72 90.12 8.73C89.81 8.9 89.51 9.07 89.21 9.25C88.91 9.43 88.62 9.61 88.33 9.79C88.32 9.79 88.32 9.8 88.32 9.8C88.2 9.87 88.09 9.95 87.98 10.02C87.91 10.07 87.83 10.12 87.76 10.17C87.75 10.17 87.75 10.17 87.75 10.17C87.74 10.18 87.74 10.18 87.73 10.18C87.65 10.24 87.57 10.29 87.49 10.35C87.39 10.42 87.28 10.49 87.18 10.56C87.18 10.56 87.18 10.56 87.18 10.56C86.76 10.85 86.36 11.14 85.97 11.44C85.84 11.54 85.71 11.64 85.59 11.74C85.59 11.74 85.58 11.74 85.58 11.74C85.41 11.87 85.25 12 85.09 12.14C85.08 12.14 85.08 12.14 85.08 12.14C82.95 13.87 81.23 15.67 79.91 17.25C79.69 17.52 79.49 17.77 79.29 18.02C79.16 18.19 79.03 18.35 78.91 18.51C78.85 18.59 78.79 18.67 78.73 18.75C78.26 19.37 77.87 19.93 77.56 20.41C77.56 20.41 77.56 20.41 77.56 20.41C77.55 20.42 77.55 20.43 77.54 20.44C77.49 20.51 77.45 20.58 77.4 20.65C77.39 20.66 77.39 20.67 77.38 20.69C77.24 20.9 77.12 21.09 77.02 21.26C77.02 21.26 77.02 21.26 77.02 21.26C77.02 21.26 77.02 21.26 77.02 21.26C77.02 21.27 77.01 21.27 77.01 21.27C76.98 21.33 76.95 21.38 76.92 21.42C76.92 21.43 76.92 21.43 76.92 21.43C76.89 21.48 76.86 21.53 76.83 21.57C76.83 21.58 76.83 21.58 76.83 21.58C76.78 21.67 76.73 21.74 76.7 21.8C76.7 21.81 76.7 21.81 76.7 21.81C76.68 21.84 76.67 21.87 76.65 21.89C76.65 21.89 76.65 21.89 76.65 21.9C76.64 21.92 76.63 21.93 76.62 21.95C76.62 21.95 76.61 21.95 76.61 21.96C76.61 21.96 76.61 21.97 76.61 21.97C76.6 21.98 76.6 21.98 76.6 21.99C76.6 21.99 76.59 21.99 76.59 21.99C76.59 21.99 76.59 22 76.59 22V22V22C76.59 22 76.59 22 76.59 22C76.76 21.79 76.92 21.59 77.08 21.38C77.12 21.34 77.16 21.29 77.2 21.24C77.21 21.23 77.22 21.22 77.22 21.22C77.38 21.02 77.54 20.84 77.69 20.65C77.71 20.64 77.72 20.62 77.73 20.61C77.73 20.6 77.74 20.6 77.75 20.59C77.8 20.52 77.86 20.46 77.92 20.39C78.02 20.28 78.11 20.17 78.21 20.06C78.22 20.04 78.24 20.02 78.26 20C78.28 19.98 78.3 19.95 78.32 19.93C78.49 19.74 78.65 19.56 78.82 19.37C78.85 19.34 78.87 19.32 78.9 19.29C78.95 19.23 79 19.18 79.06 19.12C79.15 19.02 79.25 18.91 79.35 18.81C79.36 18.79 79.38 18.78 79.39 18.76C79.41 18.74 79.43 18.71 79.46 18.69C79.63 18.51 79.79 18.34 79.96 18.17C79.98 18.15 80 18.13 80.01 18.12C80.03 18.1 80.05 18.08 80.06 18.06C80.21 17.92 80.36 17.77 80.51 17.62C80.52 17.61 80.54 17.59 80.56 17.57C80.58 17.56 80.59 17.54 80.61 17.52C80.74 17.4 80.86 17.28 80.99 17.16C81.03 17.12 81.08 17.07 81.12 17.03C81.16 17 81.2 16.96 81.24 16.92C81.39 16.78 81.54 16.64 81.69 16.5C81.71 16.48 81.73 16.47 81.75 16.45C81.76 16.44 81.77 16.43 81.77 16.42C81.86 16.35 81.95 16.27 82.03 16.19C82.12 16.12 82.2 16.04 82.29 15.96C82.33 15.93 82.37 15.89 82.42 15.85C82.46 15.81 82.51 15.77 82.56 15.73C82.67 15.63 82.78 15.54 82.89 15.44C82.9 15.43 82.92 15.42 82.93 15.41C82.94 15.4 82.94 15.4 82.95 15.39C83.12 15.25 83.3 15.1 83.47 14.96C83.49 14.94 83.52 14.92 83.54 14.91C83.56 14.89 83.58 14.87 83.61 14.85C83.68 14.79 83.75 14.73 83.83 14.67C83.93 14.6 84.02 14.51 84.12 14.44C84.13 14.43 84.13 14.43 84.14 14.42C84.14 14.42 84.15 14.42 84.15 14.42C84.28 14.31 84.41 14.21 84.54 14.11C84.58 14.08 84.62 14.05 84.66 14.02C84.71 13.99 84.75 13.95 84.8 13.92C84.97 13.79 85.15 13.66 85.32 13.53C85.34 13.52 85.36 13.5 85.38 13.49C85.38 13.48 85.39 13.48 85.39 13.48C85.55 13.37 85.7 13.25 85.86 13.14L85.89 13.12C85.92 13.1 85.96 13.07 86 13.05C86.17 12.93 86.34 12.81 86.51 12.69C86.55 12.66 86.58 12.64 86.62 12.62C86.77 12.52 86.92 12.42 87.06 12.32C87.09 12.31 87.11 12.29 87.13 12.28C87.15 12.26 87.17 12.25 87.19 12.24C87.37 12.12 87.54 12.01 87.71 11.91C87.74 11.88 87.78 11.86 87.81 11.84C87.82 11.84 87.83 11.83 87.83 11.83C87.84 11.83 87.84 11.82 87.85 11.82C87.99 11.73 88.13 11.64 88.27 11.56C88.3 11.54 88.32 11.53 88.35 11.51C88.36 11.5 88.38 11.49 88.39 11.48C88.52 11.4 88.66 11.33 88.79 11.25C88.83 11.23 88.87 11.2 88.9 11.18C88.95 11.15 89 11.13 89.04 11.1C89.07 11.08 89.1 11.06 89.13 11.05C89.25 10.98 89.36 10.91 89.48 10.85C89.52 10.83 89.55 10.81 89.59 10.79C89.76 10.69 89.93 10.6 90.1 10.51C90.15 10.48 90.19 10.45 90.24 10.43C90.39 10.35 90.55 10.27 90.7 10.19C90.72 10.17 90.75 10.16 90.78 10.15C90.89 10.09 91.01 10.03 91.12 9.97C91.18 9.94 91.23 9.91 91.29 9.89C91.34 9.86 91.39 9.84 91.44 9.81C91.51 9.78 91.58 9.74 91.65 9.71C91.74 9.66 91.83 9.62 91.93 9.57C91.95 9.56 91.97 9.55 91.99 9.54C92.15 9.46 92.31 9.39 92.47 9.31C92.52 9.29 92.57 9.27 92.62 9.25C92.79 9.17 92.96 9.09 93.12 9.02C93.15 9.01 93.18 8.99 93.21 8.98C93.24 8.97 93.27 8.96 93.3 8.94C93.42 8.89 93.53 8.84 93.65 8.79C93.69 8.77 93.74 8.75 93.78 8.74C93.79 8.73 93.79 8.73 93.8 8.73C93.84 8.71 93.89 8.69 93.94 8.67C94.06 8.62 94.17 8.57 94.29 8.52C94.33 8.51 94.37 8.49 94.4 8.48C94.48 8.45 94.56 8.42 94.63 8.39C94.69 8.36 94.76 8.34 94.82 8.31C94.85 8.3 94.88 8.29 94.91 8.28C94.93 8.27 94.94 8.26 94.96 8.26C95.12 8.2 95.28 8.14 95.44 8.07C95.49 8.06 95.53 8.04 95.57 8.03C95.71 7.98 95.84 7.93 95.97 7.88C96.02 7.86 96.06 7.85 96.1 7.83C96.26 7.78 96.42 7.72 96.58 7.67C96.63 7.65 96.67 7.63 96.72 7.62C96.74 7.61 96.77 7.6 96.79 7.6C96.9 7.56 97.01 7.52 97.12 7.48C97.16 7.47 97.19 7.46 97.23 7.45C97.39 7.4 97.55 7.35 97.7 7.3C97.71 7.3 97.71 7.3 97.71 7.3C97.76 7.28 97.8 7.27 97.85 7.25C97.92 7.23 97.98 7.21 98.05 7.19C98.12 7.17 98.19 7.15 98.25 7.13C98.28 7.12 98.3 7.12 98.32 7.11C98.33 7.11 98.33 7.11 98.34 7.1C98.5 7.06 98.65 7.01 98.81 6.97C98.85 6.96 98.9 6.94 98.95 6.93C99.04 6.9 99.13 6.88 99.21 6.86C99.27 6.84 99.33 6.83 99.39 6.81C99.39 6.81 99.4 6.81 99.41 6.81C99.43 6.8 99.44 6.8 99.46 6.79C99.61 6.75 99.75 6.72 99.89 6.68C99.91 6.68 99.94 6.67 99.96 6.66C99.98 6.66 100 6.65 100.03 6.64C100.11 6.62 100.2 6.6 100.28 6.58C100.35 6.57 100.42 6.55 100.48 6.53C100.49 6.53 100.51 6.53 100.53 6.52C100.54 6.52 100.55 6.52 100.56 6.51C100.63 6.5 100.7 6.48 100.77 6.47C100.83 6.45 100.89 6.44 100.95 6.42C100.99 6.41 101.04 6.4 101.08 6.39C101.23 6.36 101.37 6.33 101.52 6.3C101.55 6.29 101.59 6.28 101.62 6.27C101.74 6.25 101.86 6.22 101.98 6.2C102.03 6.19 102.07 6.18 102.11 6.18C102.25 6.15 102.39 6.12 102.53 6.09C102.56 6.09 102.59 6.08 102.61 6.08C102.62 6.08 102.63 6.07 102.64 6.07C102.66 6.07 102.69 6.06 102.71 6.06C102.81 6.04 102.9 6.02 103 6.01C103.03 6 103.07 6 103.1 5.99C103.24 5.96 103.38 5.94 103.52 5.92C103.53 5.92 103.54 5.91 103.55 5.91C103.58 5.91 103.6 5.9 103.63 5.9C103.75 5.88 103.87 5.86 103.98 5.84C104 5.84 104.01 5.84 104.03 5.83C104.04 5.83 104.06 5.83 104.07 5.83C104.2 5.81 104.34 5.79 104.47 5.77C104.5 5.76 104.54 5.76 104.57 5.75C104.58 5.75 104.58 5.75 104.58 5.75C104.64 5.74 104.7 5.74 104.76 5.73C104.82 5.72 104.88 5.71 104.94 5.7C104.96 5.7 104.98 5.7 105 5.7C105.13 5.68 105.26 5.66 105.39 5.65C105.43 5.64 105.46 5.64 105.5 5.63C105.61 5.62 105.72 5.61 105.83 5.59C105.85 5.59 105.86 5.59 105.88 5.59C105.88 5.59 105.88 5.59 105.88 5.59C105.89 5.59 105.9 5.59 105.91 5.59C105.96 5.58 106 5.58 106.04 5.57C106.12 5.56 106.2 5.56 106.28 5.55C106.31 5.54 106.34 5.54 106.38 5.54C106.4 5.53 106.42 5.53 106.44 5.53C106.55 5.52 106.65 5.51 106.75 5.5C106.77 5.5 106.78 5.5 106.8 5.5C106.85 5.49 106.91 5.49 106.96 5.48C107.02 5.48 107.07 5.47 107.12 5.47C107.15 5.47 107.19 5.46 107.22 5.46C107.33 5.45 107.45 5.44 107.57 5.44C107.59 5.44 107.61 5.43 107.63 5.43C107.73 5.43 107.83 5.42 107.93 5.41C107.95 5.41 107.96 5.41 107.97 5.41C107.98 5.41 108 5.41 108.01 5.41C108.02 5.41 108.03 5.41 108.03 5.41C108.14 5.4 108.24 5.4 108.34 5.39C108.36 5.39 108.39 5.39 108.41 5.39C108.41 5.39 108.41 5.39 108.42 5.39C108.51 5.38 108.61 5.38 108.7 5.37C108.72 5.37 108.74 5.37 108.76 5.37C108.86 5.37 108.96 5.36 109.06 5.36C109.06 5.36 109.07 5.36 109.08 5.36C109.1 5.36 109.12 5.36 109.15 5.36C109.24 5.35 109.33 5.35 109.42 5.35C109.44 5.35 109.45 5.35 109.47 5.35C109.57 5.35 109.67 5.34 109.76 5.34C109.77 5.34 109.78 5.34 109.8 5.34H109.83C109.92 5.34 110 5.34 110.08 5.34C110.09 5.34 110.09 5.34 110.1 5.34C110.11 5.34 110.12 5.34 110.12 5.34C110.22 5.34 110.31 5.34 110.4 5.34C110.41 5.34 110.41 5.34 110.42 5.34C110.42 5.34 110.43 5.34 110.43 5.34C110.44 5.34 110.45 5.34 110.46 5.34C110.57 5.34 110.67 5.34 110.77 5.34C110.79 5.34 110.8 5.34 110.82 5.34C110.87 5.34 110.92 5.34 110.97 5.34C111.02 5.34 111.07 5.34 111.12 5.34C111.13 5.34 111.14 5.34 111.14 5.34C111.35 5.35 111.55 5.35 111.73 5.36C111.74 5.36 111.74 5.36 111.75 5.36C111.84 5.36 111.92 5.37 112 5.37C112.01 5.37 112.02 5.37 112.03 5.37C112.11 5.38 112.18 5.38 112.25 5.38C112.25 5.38 112.26 5.38 112.26 5.38C112.27 5.38 112.28 5.38 112.29 5.38C112.3 5.38 112.31 5.39 112.33 5.39C112.39 5.39 112.44 5.39 112.5 5.4C112.51 5.4 112.51 5.4 112.52 5.4C112.58 5.4 112.64 5.41 112.7 5.41C112.7 5.41 112.71 5.41 112.71 5.41C112.72 5.41 112.72 5.41 112.73 5.41C112.74 5.41 112.74 5.41 112.75 5.41C112.8 5.42 112.86 5.42 112.91 5.42L112.89 5.44Z" fill="currentColor"/></svg></svg>
 
@@ -224,157 +324,113 @@
   </div>
 </header>
 
-<main>
+<main class="pp">
+<header class="hero">
+  <figure class="hero-i"><img src="preplan-hero.jpg" alt="Mist over a still lake, pines along the shore"></figure>
+  <div class="wrap"><div class="hero-t">
+    <h1>The most thoughtful gift is the one they will never have to choose.</h1>
+    <p class="sub">Arrange your Capsule Pyrale today, at today's price. When the time comes, your family makes one call — and every decision is already made, in your words.</p>
+    <div class="acts"><a class="btn btn-pine" href="/preplan?sku=PYR-STD">Start your plan</a><a class="btn btn-ghost" href="contact.html">Talk to an advisor</a></div>
+    <div class="made"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.4 3.6 3.6.4-2.7 2.5.8 3.6L12 10.4 8.9 12.1l.8-3.6L7 6l3.6-.4z"/><path d="M11 12h2v10h-2z"/></svg>Proud to be a Canadian family-owned company</div>
+  </div></div>
+</header>
 
-  <!-- HERO -->
-  <section class="pp-hero">
-    <div class="wrap">
-      <span class="eyebrow pp-eyebrow-center">Pre-Planning</span>
-      <h1>The most thoughtful gift is the one they'll never have to choose.</h1>
-      <p>Pre-plan the Capsule Pyrale today. Lock in current pricing, spare your family impossible decisions in a moment of grief, and make certain your wishes are honored — exactly as you intend them.</p>
-      <div class="actions">
-        <a href="/preplan?sku=PYR-STD" class="btn btn--dark">Start Pre-Planning <span class="btn-arrow">&rarr;</span></a>
-        <a href="index.html#contact" class="btn btn--ghost">Book a Consultation</a>
-      </div>
+<section class="why-s">
+  <svg class="leaf l" viewBox="0 0 120 220" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M60 215V8"/><path d="M60 52c-16-1-30-11-36-26M60 52c16-1 30-11 36-26M60 88c-19-1-34-13-40-30M60 88c19-1 34-13 40-30M60 124c-21-1-37-14-43-32M60 124c21-1 37-14 43-32M60 160c-19-1-33-12-39-28M60 160c19-1 33-12 39-28M60 194c-14-1-25-9-30-21M60 194c14-1 25-9 30-21"/></svg>
+  <svg class="leaf r" viewBox="0 0 120 220" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M60 215V8"/><path d="M60 52c-16-1-30-11-36-26M60 52c16-1 30-11 36-26M60 88c-19-1-34-13-40-30M60 88c19-1 34-13 40-30M60 124c-21-1-37-14-43-32M60 124c21-1 37-14 43-32M60 160c-19-1-33-12-39-28M60 160c19-1 33-12 39-28M60 194c-14-1-25-9-30-21M60 194c14-1 25-9 30-21"/></svg>
+  <div class="wrap st"><h2>A quiet act of love</h2>
+    <div class="why">
+      <div><svg class="ic" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M15 3l9 3.5v7.5c0 6-3.9 10.3-9 12.5-5.1-2.2-9-6.5-9-12.5V6.5z"/><path d="M11 15l3 3 5.5-6"/></svg><h3>The price is settled</h3><p>What you arrange today is what your family pays — never more, whatever the years bring.</p></div>
+      <div><svg class="ic" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M15 25S5 18.5 5 11.5A5.3 5.3 0 0115 8.8a5.3 5.3 0 0110 2.7C25 18.5 15 25 15 25z"/></svg><h3>Your wishes, exactly</h3><p>The capsule, its finish, the interior, the words. Down to the detail, and in writing.</p></div>
+      <div><svg class="ic" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="7" y="13" width="16" height="12" rx="2"/><path d="M10 13V9.5a5 5 0 0110 0V13"/></svg><h3>Protected, and yours to change</h3><p>Safeguarded under Québec rules. Revisit or cancel your plan as life changes.</p></div>
+      <div><svg class="ic" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="11" r="3.8"/><circle cx="20" cy="12.5" r="3"/><path d="M4 24c.8-4.2 3.8-6.7 8-6.7s7.2 2.5 8 6.7M18.5 24c.5-3 2.5-4.6 5-4.6s3.8 1.6 4.2 4.6"/></svg><h3>The choices are made</h3><p>Grief is heavy enough. They will not have to decide anything, or wonder what you would have wanted.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- BENEFITS -->
-  <section class="benefits">
-    <div class="wrap">
-      <div class="head reveal">
-        <span class="eyebrow pp-eyebrow-center">Why plan ahead</span>
-        <h2>A quiet act of love</h2>
+<section class="cap"><div class="wrap">
+  <div class="st"><h2>Choose the finish you will be remembered in</h2></div>
+  <div class="cap-g">
+    <div class="cap-img" id="capImg"><img src="pyrale-silver.png" alt="" data-f="Brushed Aluminium" class="on"><img src="pyrale-champagne.png" alt="" data-f="Champagne"><img src="pyrale-graphite.png" alt="" data-f="Graphite"><img src="pyrale-bronze.png" alt="" data-f="Bronze"><img src="pyrale-onyx.png" alt="" data-f="Onyx"></div>
+    <div>
+      <div class="cap-name" id="capName">Brushed Aluminium</div>
+      <p class="cap-d" id="capDesc">The classic finish. Quiet, timeless, and true to the metal itself.</p>
+      <div class="sw-row" role="radiogroup" aria-label="Finish">
+        <button class="sw on" data-f="Brushed Aluminium" data-d="The classic finish. Quiet, timeless, and true to the metal itself." aria-label="Brushed Aluminium"><i style="background:linear-gradient(135deg,#d9dcdd,#a9b0b3)"></i></button>
+        <button class="sw" data-f="Champagne" data-d="Warm and luminous, with a soft gold cast." aria-label="Champagne"><i style="background:linear-gradient(135deg,#e8d9b6,#c8b58a)"></i></button>
+        <button class="sw" data-f="Graphite" data-d="Deep grey and understated." aria-label="Graphite"><i style="background:linear-gradient(135deg,#7d8386,#4e5457)"></i></button>
+        <button class="sw" data-f="Bronze" data-d="Rich and earthy, with the warmth of old metal." aria-label="Bronze"><i style="background:linear-gradient(135deg,#a8865c,#6e5537)"></i></button>
+        <button class="sw" data-f="Onyx" data-d="Matte black, for the quietest statement of all." aria-label="Onyx"><i style="background:linear-gradient(135deg,#3a3d3f,#171a1b)"></i></button>
       </div>
-      <div class="benefit-grid">
-        <article class="bcard reveal">
-          <div class="ic"><svg class="ic-svg"><use href="#ic-lock"/></svg></div>
-          <h3>Lock in today's price</h3>
-          <p>Secure current pricing and protect your family from years of rising funeral costs. What you arrange today is what they'll pay — never more.</p>
-        </article>
-        <article class="bcard reveal">
-          <div class="ic"><svg class="ic-svg"><use href="#ic-heart"/></svg></div>
-          <h3>Lift the burden</h3>
-          <p>Grief is heavy enough. Deciding everything in advance means your loved ones never face difficult choices — or guilt — at the hardest moment.</p>
-        </article>
-        <article class="bcard reveal">
-          <div class="ic"><svg class="ic-svg"><use href="#ic-badge-check"/></svg></div>
-          <h3>Honor your wishes</h3>
-          <p>Down to the finest detail, your arrangement reflects exactly what you want. No guesswork, no compromise, no "what would they have wanted?"</p>
-        </article>
-        <article class="bcard reveal">
-          <div class="ic"><svg class="ic-svg"><use href="#ic-shield"/></svg></div>
-          <h3>Protected &amp; flexible</h3>
-          <p>Your prearrangement is safeguarded under Québec regulation, and you can revisit or adjust it whenever life changes.</p>
-        </article>
-      </div>
+      <div class="cap-facts"><div><b>60–100</b><span>years of natural preservation</span></div><div><b>0</b><span>chemicals, ever</span></div><div><b>Québec</b><span>designed and made</span></div></div>
+      <div class="cap-cta"><a class="btn btn-pine" id="capCta" href="/preplan?sku=PYR-STD&finish=Brushed%20Aluminium">Plan with this finish</a><small>The interior lining is chosen in the next step.</small></div>
     </div>
-  </section>
+  </div>
+</div></section>
 
-  <!-- STEPS -->
-  <section class="steps">
-    <div class="wrap">
-      <div class="head reveal">
-        <span class="eyebrow pp-eyebrow-center">The process</span>
-        <h2>Three unhurried steps</h2>
-      </div>
-      <div class="step-grid">
-        <article class="step-card reveal">
-          <div class="step-num">STEP 01</div>
-          <h3>Shape your plan</h3>
-          <p>Answer a few gentle questions — who you're planning for, your capsule and preservation preferences, and the details that matter to you. It takes only a few minutes.</p>
-        </article>
-        <article class="step-card reveal">
-          <div class="step-num">STEP 02</div>
-          <h3>Confirm &amp; lock</h3>
-          <p>Review your plan with an Eterna advisor, lock in today's pricing, and receive a written summary of everything you've arranged.</p>
-        </article>
-        <article class="step-card reveal">
-          <div class="step-num">STEP 03</div>
-          <h3>Rest easy</h3>
-          <p>We keep your plan on file. When the time comes, your family simply reaches out — everything is already decided, arranged, and protected.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+<section class="steps-s"><div class="wrap">
+  <div class="steps">
+    <div><div class="st" style="text-align:left"><h2>Three unhurried steps</h2></div>
+      <ol class="step-l">
+        <li><h3>Shape your plan</h3><p>Who you are planning for, the capsule and finish you prefer, and the details that matter to you. A few calm questions — you can stop and come back.</p></li>
+        <li><h3>Read, sign, and settle the price</h3><p>Your agreement is written in plain language. You read it, sign it, and choose how to pay — in full, or monthly at no interest. Today's price is then yours.</p></li>
+        <li><h3>Rest easy</h3><p>We keep your plan on file, protected. When the time comes, your family reaches out — and finds everything already decided, arranged, and paid for.</p></li>
+      </ol></div>
+    <figure class="steps-i"><img src="preplan-workshop.jpg" alt="Hands at a workbench in the Eterna workshop"><figcaption>Care today is relief tomorrow.</figcaption></figure>
+  </div>
+</div></section>
 
-  <!-- TRUST -->
-  <section class="trust">
-    <div class="wrap">
-      <div class="trust-grid">
-        <div class="reveal">
-          <span class="eyebrow">Peace of mind</span>
-          <h2>Your prearrangement, protected.</h2>
-          <p>Prearranging in Québec carries legal protections designed to safeguard your prepayment and preserve your right to change or cancel your arrangement. Your Eterna advisor walks you through exactly how your plan is held and protected before anything is finalized.</p>
-          <p class="small">This page provides general information about pre-planning and is not legal advice. Specific protections are confirmed with you in writing.</p>
-        </div>
-        <ul class="trust-points reveal">
-          <li><span class="tp-ic">⛨</span><div><b>Funds safeguarded</b><span>Prepaid arrangements are held in accordance with Québec prearrangement rules.</span></div></li>
-          <li><span class="tp-ic">↺</span><div><b>Change anytime</b><span>Revisit or adjust your plan as your circumstances evolve.</span></div></li>
-          <li><span class="tp-ic">◈</span><div><b>Cancel with confidence</b><span>Should you change your mind, your cancellation rights are preserved.</span></div></li>
-        </ul>
-      </div>
-    </div>
-  </section>
+<section class="cost-s"><div class="wrap cost">
+  <div>
+    <h2>What waiting costs</h2>
+    <p class="lede">Funeral costs in Canada have risen by roughly four percent a year. Move the slider to see the difference between arranging now and arranging later.</p>
+    <div class="ctl"><label><span>If you arrange in</span><output id="yOut">5 years</output></label><input id="y" type="range" min="0" max="15" value="5" step="1" aria-label="Years from now"></div>
+    <div class="cmp"><div><div class="n">$14,500</div><div class="k">Today</div></div><div><div class="n" id="later">$17,641</div><div class="k">In <span id="yTxt">5 years</span></div></div></div>
+    <p class="cost-f">Capsule Pyrale before taxes. A four-percent yearly increase is used for illustration; yours is fixed the day you sign.</p>
+  </div>
+  <div class="card">
+    <div class="k">If you wait, it may cost</div>
+    <div class="v"><span id="diff">$3,141</span><small>more</small></div>
+    <hr>
+    <div class="mo">Or as little as <b id="mo">$278</b>/month with our interest-free payment plans</div>
+    <div class="seg" role="group" aria-label="Months"><button data-m="12">12 mo.</button><button data-m="24">24 mo.</button><button data-m="36">36 mo.</button><button class="on" data-m="60">60 mo.</button></div>
+    <p>$16,671.38 with Québec taxes, divided evenly. No fees, no interest.</p>
+  </div>
+</div></section>
 
-  <!-- COST -->
-  <section class="cost">
-    <div class="wrap reveal">
-      <span class="eyebrow pp-eyebrow-center">The cost of waiting</span>
-      <h2>Prices rise. Your plan won't.</h2>
-      <p>Funeral and memorial costs climb every year. By arranging the Capsule Pyrale now, you fix today's price in place — turning an unpredictable future expense into a settled, one-time decision made calmly, on your terms.</p>
-      <a href="/preplan?sku=PYR-STD" class="btn btn--dark">Start Pre-Planning <span class="btn-arrow">&rarr;</span></a>
+<section class="prot-s"><div class="wrap prot">
+  <div>
+    <h2>Your prearrangement, protected</h2>
+    <p class="lede">Prearranging in Québec comes with rules written to protect you — how your money is held, and your right to change your mind. Your advisor confirms each of them in writing.</p>
+    <div class="prot-g">
+      <div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h18M5 10v9h14v-9M12 4L3 10h18z"/></svg></span><div><h3>Funds safeguarded</h3><p>Prepaid amounts are held under Québec's prearrangement rules, not spent ahead of time.</p></div></div>
+      <div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12a8 8 0 0113.7-5.7M20 12a8 8 0 01-13.7 5.7M17 3v4h-4M7 21v-4h4"/></svg></span><div><h3>Change anytime</h3><p>Revisit the capsule, the finish, the interior, or the beneficiary as circumstances evolve.</p></div></div>
+      <div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span><div><h3>Cancel with confidence</h3><p>Should you change your mind, your cancellation rights are preserved and explained plainly.</p></div></div>
+      <div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V8l7-5 7 5v13M10 21v-6h4v6"/></svg></span><div><h3>Works with your funeral home</h3><p>We coordinate with your chosen provider, so the capsule is delivered and used as arranged.</p></div></div>
     </div>
-  </section>
+    <p class="note">This page is general information, not legal advice. The protections that apply to you are confirmed in your written agreement.</p>
+  </div>
+  <figure class="prot-i"><img src="preplan-forest.jpg" alt="Pine forest in soft fog, light between the trunks"></figure>
+</div></section>
 
-  <!-- FAQ -->
-  <section class="faq">
-    <div class="wrap faq-grid">
-      <div class="reveal">
-        <span class="eyebrow">Questions</span>
-        <h2>Good to know</h2>
-      </div>
-      <div class="reveal">
-        <div class="faq-item open">
-          <button class="faq-q">Why plan ahead now, while I'm healthy? <span class="sign">+</span></button>
-          <div class="faq-a"><p>Precisely because it's unexpected. Planning while you're well means the decision is made calmly and thoughtfully — not under pressure or grief. It's a kindness you extend to the people you love, sparing them cost, doubt, and difficult choices later.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Why pre-plan with Eterna specifically? <span class="sign">+</span></button>
-          <div class="faq-a"><p>The Capsule Pyrale is unlike anything else — a hermetic aluminium capsule that preserves the body naturally with nitrogen gas for 60 to 100 years, without chemicals or embalming. Pre-planning ensures this specific choice is documented, priced, and ready, rather than left to chance.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">What if I change my mind or my circumstances change? <span class="sign">+</span></button>
-          <div class="faq-a"><p>Your plan is never set in stone. You can revisit and adjust the details at any time, and your cancellation rights are preserved. Simply reach out to your advisor and we'll take care of the changes.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">How is my prepayment protected? <span class="sign">+</span></button>
-          <div class="faq-a"><p>Prepaid prearrangements in Québec are safeguarded under provincial regulation. Before anything is finalized, your advisor explains in writing exactly how your funds are held and what protections apply to your specific arrangement.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Can the Capsule Pyrale be used with my chosen funeral home? <span class="sign">+</span></button>
-          <div class="faq-a"><p>Yes. Eterna works alongside partner funeral homes, and our team coordinates directly with your chosen provider so the capsule is delivered and used exactly as arranged.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">What happens when the time comes? <span class="sign">+</span></button>
-          <div class="faq-a"><p>Your family makes a single call. Because everything is already selected, arranged, and protected, there are no decisions to make and no costs to negotiate — only the space to grieve and remember.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="faq-s"><div class="wrap st"><h2>Good to know</h2>
+  <div class="faq">
+    <details><summary>Why plan for something I hope I never need?</summary><p>Precisely because it is unexpected. Deciding while you are well means the decision is made calmly — not under pressure, and not by someone else in grief. It is a kindness you extend forward.</p></details>
+    <details><summary>What makes the Capsule Pyrale different?</summary><p>A hermetic aluminium capsule that preserves naturally, with nitrogen, for sixty to a hundred years — without chemicals or embalming. Designed and made in Québec; each one carries its own serial number.</p></details>
+    <details><summary>Can I change my mind later?</summary><p>Yes. You can revisit the details at any time, and your cancellation rights are preserved. One call to your advisor is all it takes.</p></details>
+    <details><summary>How is my money protected?</summary><p>Prepaid prearrangements in Québec are safeguarded under provincial regulation. Before anything is finalized, your advisor explains in writing exactly how your funds are held.</p></details>
+    <details><summary>What if I move, or my family lives in another province?</summary><p>Your plan stays on file with us. We coordinate with a funeral home wherever the service takes place, and your advisor walks you through what changes, if anything.</p></details>
+  </div>
+</div></section>
 
-  <!-- FINAL CTA -->
-  <section class="final">
-    <div class="wrap reveal">
-      <span class="eyebrow pp-eyebrow-center" style="color:var(--night-text)">Begin</span>
-      <h2>Give them one less thing to carry.</h2>
-      <p>It takes only a few minutes to shape your plan. There's no payment today — just a calm, considered start.</p>
-      <a href="/preplan?sku=PYR-STD" class="btn btn--light">Start Pre-Planning</a>
-    </div>
-  </section>
+<section class="final"><img src="preplan-lake.jpg" alt=""><div class="wrap">
+  <h2>Give them one less thing to carry.</h2>
+  <p>Plan with clarity. Leave with peace of mind.</p>
+  <div class="a"><a class="btn btn-light" href="/preplan?sku=PYR-STD">Start your plan</a><a class="btn btn-lg" href="contact.html">Talk to an advisor</a></div>
+</div></section>
+
+<div class="stick"><a class="btn btn-pine" href="/preplan?sku=PYR-STD">Start your plan</a></div>
 </main>
-
-<!-- FOOTER -->
 <footer>
   <div class="foot-glow"></div>
   <div class="wrap">
@@ -434,6 +490,22 @@
      le tunnel /preplan reserve. Un seul chemin, un seul brouillon par famille. -->
 
 
+<script>
+(function(){
+  var imgs=document.querySelectorAll('#capImg img'),name=document.getElementById('capName'),desc=document.getElementById('capDesc'),cta=document.getElementById('capCta');
+  document.querySelectorAll('.sw').forEach(function(b){b.addEventListener('click',function(){var f=b.dataset.f;
+    document.querySelectorAll('.sw').forEach(function(x){x.classList.toggle('on',x===b);});
+    imgs.forEach(function(i){i.classList.toggle('on',i.dataset.f===f);});
+    name.textContent=f;desc.textContent=b.dataset.d;cta.href='/preplan?sku=PYR-STD&finish='+encodeURIComponent(f);});});
+  var BASE=14500,TAXED=16671.38,RATE=0.04,y=document.getElementById('y'),yOut=document.getElementById('yOut'),yTxt=document.getElementById('yTxt'),later=document.getElementById('later'),diff=document.getElementById('diff'),cur=0,raf;
+  function money(n){return '$'+Math.round(n).toLocaleString('en-CA');}
+  function tween(to){cancelAnimationFrame(raf);var from=cur,t0=performance.now();(function s(t){var k=Math.min(1,(t-t0)/380);k=1-Math.pow(1-k,3);cur=from+(to-from)*k;diff.textContent=money(cur);if(k<1)raf=requestAnimationFrame(s);})(t0);}
+  function upd(){var n=+y.value,proj=BASE*Math.pow(1+RATE,n),w=n===0?'now':n===1?'1 year':n+' years';yOut.textContent=w;yTxt.textContent=w;later.textContent=money(proj);tween(proj-BASE);}
+  y.addEventListener('input',upd);upd();
+  var mo=document.getElementById('mo');
+  document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.seg button').forEach(function(x){x.classList.toggle('on',x===b);});mo.textContent='$'+(TAXED/+b.dataset.m).toFixed(0);});});
+})();
+</script>
 <script>
 
   // ---- Nav + shared behaviors ----
