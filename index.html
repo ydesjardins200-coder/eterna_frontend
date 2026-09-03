@@ -498,41 +498,44 @@ h1 em{font-style:italic}
 /* ── « Book a Free Consultation » — une conversation privee commence ici ── */
 .pc{position:relative;overflow:hidden;color:#F4EDE4;background:#17110D;background-image:radial-gradient(circle at 24% 50%,rgba(170,113,60,.10),transparent 34%);padding:120px 0;min-height:900px;display:flex;align-items:center;font-family:'Instrument Sans',system-ui,sans-serif}
 .pc .wrap{max-width:1320px;width:100%}
-.pc-g{display:grid;grid-template-columns:45fr 55fr;gap:100px;align-items:center}
-.pc-ph{position:relative;height:720px;border-radius:24px;overflow:hidden;background:#241a14}
-.pc-ph img{width:100%;height:100%;object-fit:cover;object-position:center 24%;display:block;filter:saturate(.86) sepia(.08)}
+.pc-g{display:grid;grid-template-columns:44fr 56fr 150px;gap:0 64px;align-items:stretch}
+.pc-ph{position:relative;min-height:820px;border-radius:22px;overflow:hidden;background:#241a14;box-shadow:0 40px 80px rgba(0,0,0,.35)}
+.pc-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;filter:saturate(.86) sepia(.08)}
 .pc-ph::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(19,13,9,.15) 65%,rgba(19,13,9,.82) 100%)}
-.pc-q{position:absolute;left:45px;right:45px;bottom:45px;z-index:1;max-width:470px}
+.pc-q{position:absolute;left:45px;right:45px;bottom:42px;z-index:1;max-width:470px}
 .pc-q svg{width:16px;height:16px;color:#C18B52;margin-bottom:16px}
-.pc-q p{font-family:'Instrument Serif',Georgia,serif;font-size:30px;line-height:1.35;color:#F5EFE6;letter-spacing:-.005em}
+.pc-q p{font-family:'Instrument Serif',Georgia,serif;font-size:31px;line-height:1.3;color:#F5EFE6;letter-spacing:-.005em}
 .pc-q span{display:block;font-size:10px;letter-spacing:.20em;text-transform:uppercase;color:#C18B52;margin-top:16px}
 .pc-eye{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C18B52;font-weight:500}
 .pc-eye::before{content:"";width:18px;height:1px;background:#C18B52}
 .pc h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(52px,4vw,70px);line-height:1;letter-spacing:-.025em;color:#F4EDE4;margin-top:20px}
 .pc-lead{margin-top:20px;font-size:17px;line-height:1.7;color:rgba(244,237,228,.68);max-width:580px}
-.pc form{margin-top:45px}
-.pc .f{margin-bottom:26px;position:relative}
+.pc form{margin-top:38px}
+.pc .f{margin-bottom:22px;position:relative}
 .pc .f label{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#B99068;margin-bottom:2px}
-.pc .f input,.pc .f select,.pc .f textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(239,223,204,.22);border-radius:0;height:56px;font:inherit;font-size:15px;color:#F4EDE4;padding:0;transition:border-color .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.pc .f input,.pc .f select,.pc .f textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(239,223,204,.22);border-radius:0;height:50px;font:inherit;font-size:15px;color:#F4EDE4;padding:0;transition:border-color .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
 .pc .f input::placeholder,.pc .f textarea::placeholder{color:rgba(244,237,228,.30)}
 .pc .f input:focus,.pc .f select:focus,.pc .f textarea:focus{outline:none;border-bottom-color:#C18B52;box-shadow:0 1px 0 0 rgba(193,139,82,.35)}
 .pc .f select{-webkit-appearance:none;appearance:none;padding-right:28px;cursor:pointer;color:#F4EDE4}
 .pc .f select:invalid,.pc .f select option[value=""]{color:rgba(244,237,228,.45)}
 .pc .f select option{color:#24170F;background:#F3EDE4}
 .pc .f.sel::after{content:"";position:absolute;right:6px;bottom:22px;width:8px;height:8px;border-right:1px solid #C18B52;border-bottom:1px solid #C18B52;transform:rotate(45deg);pointer-events:none}
-.pc .f textarea{height:auto;min-height:118px;padding:14px 0 10px;resize:vertical;line-height:1.55}
+.pc .f textarea{height:auto;min-height:104px;padding:12px 12px 10px;resize:vertical;line-height:1.55;border:1px solid rgba(239,223,204,.22);border-radius:6px;margin-top:6px}
+.pc .f textarea:focus{border-color:#C18B52;box-shadow:none}
 .pc .f2{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
-.pc-priv{display:flex;align-items:center;gap:10px;font-size:12.5px;color:rgba(244,237,228,.52);margin:6px 0 24px}
+.pc-priv{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(244,237,228,.62);margin:4px 0 20px}
 .pc-priv svg{width:12px;height:12px;color:#C18B52;flex:none}
-.pc-btn{display:inline-flex;align-items:center;justify-content:center;gap:14px;height:58px;padding:0 32px;min-width:290px;background:#F3EDE4;color:#24170F;border:0;border-radius:999px;font:inherit;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .4s cubic-bezier(.22,1,.36,1),color .4s cubic-bezier(.22,1,.36,1)}
+.pc-btn{display:flex;width:100%;align-items:center;justify-content:center;gap:14px;height:58px;padding:0 32px;background:#F3EDE4;color:#24170F;border:0;border-radius:999px;font:inherit;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .4s cubic-bezier(.22,1,.36,1),color .4s cubic-bezier(.22,1,.36,1)}
 .pc-btn svg{width:16px;height:16px;transition:transform .4s cubic-bezier(.22,1,.36,1)}
 .pc-btn:hover{background:#C18B52;color:#17110D}.pc-btn:hover svg{transform:translateX(5px)}
 .pc-btn:disabled{opacity:.6;cursor:default}
 .pc-note{margin-top:18px;font-size:12px;line-height:1.7;color:rgba(244,237,228,.46)}
 .pc-note a{color:#C18B52;text-decoration:none}.pc-note a:hover{text-decoration:underline}
 .pc-note.err{color:#B96F5B}
-.pc-trust{display:flex;gap:18px;align-items:center;margin-top:34px;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:rgba(244,237,228,.35);flex-wrap:wrap}
-.pc-trust i{width:3px;height:3px;border-radius:50%;background:rgba(244,237,228,.35);display:block}
+.pc-side{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding-left:44px;border-left:1px solid rgba(239,223,204,.14)}
+.pc-side .it{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(244,237,228,.52);line-height:1.6}
+.pc-side .it svg{width:34px;height:34px;color:#C18B52;stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.pc-side .dot{width:4px;height:4px;border-radius:50%;background:#C18B52;opacity:.7}
 .pc-done{display:none;margin-top:45px}
 .pc-done svg{width:18px;height:18px;color:#C18B52;margin-bottom:18px}
 .pc-done h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:44px;line-height:1;color:#F4EDE4}
@@ -540,14 +543,15 @@ h1 em{font-style:italic}
 .pc.sent form{display:none}.pc.sent .pc-done{display:block;animation:pcIn .8s cubic-bezier(.22,1,.36,1)}
 @keyframes pcIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 /* Arrivee */
-.pc .pc-ph,.pc .pc-eye,.pc h2,.pc-lead,.pc .f,.pc .f2,.pc-priv,.pc-btn,.pc-note,.pc-trust{opacity:0;transform:translateY(15px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.pc .pc-ph,.pc .pc-eye,.pc h2,.pc-lead,.pc .f,.pc .f2,.pc-priv,.pc-btn,.pc-note,.pc-side .it{opacity:0;transform:translateY(15px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
 .pc .pc-ph{transform:scale(1.015)}
-.pc.in .pc-ph,.pc.in .pc-eye,.pc.in h2,.pc.in .pc-lead,.pc.in .f,.pc.in .f2,.pc.in .pc-priv,.pc.in .pc-btn,.pc.in .pc-note,.pc.in .pc-trust{opacity:1;transform:none}
+.pc.in .pc-ph,.pc.in .pc-eye,.pc.in h2,.pc.in .pc-lead,.pc.in .f,.pc.in .f2,.pc.in .pc-priv,.pc.in .pc-btn,.pc.in .pc-note,.pc.in .pc-side .it{opacity:1;transform:none}
 .pc.in h2{transition-delay:.06s}.pc.in .pc-lead{transition-delay:.12s}
 .pc.in form>*:nth-child(1){transition-delay:.2s}.pc.in form>*:nth-child(2){transition-delay:.26s}.pc.in form>*:nth-child(3){transition-delay:.32s}.pc.in form>*:nth-child(4){transition-delay:.38s}.pc.in form>*:nth-child(5){transition-delay:.44s}.pc.in form>*:nth-child(6){transition-delay:.5s}.pc.in form>*:nth-child(7){transition-delay:.56s}.pc.in form>*:nth-child(8){transition-delay:.62s}.pc.in form>*:nth-child(9){transition-delay:.68s}
 .pc.in .f2 .f{transition-delay:0s;opacity:1;transform:none}
-@media(max-width:850px){.pc{padding:88px 0;min-height:0}.pc-g{grid-template-columns:1fr;gap:56px}.pc-ph{order:2;height:540px}.pc-form{order:1}.pc h2{font-size:46px}.pc .f2{grid-template-columns:1fr}.pc-btn{width:100%}.pc-q{left:24px;right:24px;bottom:28px}.pc-q p{font-size:24px}.pc-trust{gap:12px}}
-@media(prefers-reduced-motion:reduce){.pc .pc-ph,.pc .pc-eye,.pc h2,.pc-lead,.pc .f,.pc .f2,.pc-priv,.pc-btn,.pc-note,.pc-trust{opacity:1;transform:none;transition:none}}
+@media(max-width:1100px){.pc-g{grid-template-columns:44fr 56fr}.pc-side{display:none}}
+@media(max-width:850px){.pc{padding:88px 0;min-height:0}.pc-g{grid-template-columns:1fr;gap:56px}.pc-ph{order:2;min-height:540px;height:540px}.pc-form{order:1}.pc h2{font-size:46px}.pc .f2{grid-template-columns:1fr}.pc-q{left:24px;right:24px;bottom:28px}.pc-q p{font-size:24px}}
+@media(prefers-reduced-motion:reduce){.pc .pc-ph,.pc .pc-eye,.pc h2,.pc-lead,.pc .f,.pc .f2,.pc-priv,.pc-btn,.pc-note,.pc-side .it{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -834,10 +838,16 @@ h1 em{font-style:italic}
           <div class="pc-priv"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg><span>Your conversation is private and without obligation.</span></div>
           <button type="submit" class="pc-btn">Request a consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           <p class="pc-note" id="formNote">We respond within one business day.<br>For urgent matters, call <a href="tel:18446955613">1 844 695-5613</a>.</p>
-          <div class="pc-trust"><span>Private conversation</span><i></i><span>No obligation</span><i></i><span>Human support</span></div>
         </form>
         <div class="pc-done" id="pcDone"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg><h3>Thank you.</h3><p>Your request has been received.<br>An ETERNA advisor will be in touch within one business day.</p></div>
       </div>
+      <aside class="pc-side" aria-label="What to expect">
+        <div class="it"><svg viewBox="0 0 24 24"><path d="M12 3c.5 4.6 4.4 8.5 9 9-4.6.5-8.5 4.4-9 9-.5-4.6-4.4-8.5-9-9 4.6-.5 8.5-4.4 9-9z"/></svg>Private<br>conversation</div>
+        <span class="dot"></span>
+        <div class="it"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>No<br>obligation</div>
+        <span class="dot"></span>
+        <div class="it"><svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M12 13c-3.5 0-6-2.5-6-6 3.5 0 6 2.5 6 6zM12 9c0-3.5 2.5-6 6-6 0 3.5-2.5 6-6 6z"/></svg>Human<br>support</div>
+      </aside>
     </div></div>
   </section>
 </main>
