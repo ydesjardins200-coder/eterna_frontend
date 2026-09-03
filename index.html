@@ -124,15 +124,14 @@
   }
   .hero-bg {
     position: absolute; top: -14%; left: 0; right: 0; height: 128%;
-    background: #bfe0f2 url("hero-sky.jpg") center / cover no-repeat;
+    background: #c9b59a url("hero-terrace.jpg") center 62% / cover no-repeat;
     z-index: 0; will-change: transform;
   }
   .hero::before {
     content: "";
     position: absolute; inset: 0; pointer-events: none; z-index: 1;
     background:
-      radial-gradient(70% 46% at 50% 26%, rgba(60,40,72,0.14), transparent 72%),
-      linear-gradient(180deg, rgba(40,26,48,0.16) 0%, rgba(40,26,48,0) 24%, rgba(34,20,44,0) 46%, rgba(30,18,40,0.34) 74%, rgba(22,13,32,0.62) 100%);
+      linear-gradient(180deg, rgba(38,26,16,0.22) 0%, rgba(38,26,16,0) 26%, rgba(38,26,16,0) 52%, rgba(38,26,16,0.30) 78%, rgba(28,18,10,0.62) 100%);
   }
   @keyframes heroSlideLeft { from { opacity: 0; transform: translateX(-8vw); } to { opacity: 1; transform: translateX(0); } }
   @keyframes heroFadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
@@ -183,14 +182,14 @@
   .hero-capsule img {
     width: 100%; height: auto; display: block;
     position: relative; z-index: 2;
-    filter: drop-shadow(0 30px 30px rgba(40,24,46,0.42)) drop-shadow(0 64px 84px rgba(48,30,68,0.28));
+    filter: drop-shadow(0 30px 30px rgba(50,34,18,0.40)) drop-shadow(0 64px 84px rgba(50,34,18,0.26));
   }
   .hero-capsule::after {
     content: "";
     position: absolute; z-index: 1;
     left: 12%; right: 12%; bottom: -5%;
     height: 64px;
-    background: radial-gradient(50% 100% at 50% 50%, rgba(34,18,44,0.6) 0%, rgba(40,22,52,0.32) 40%, transparent 74%);
+    background: radial-gradient(50% 100% at 50% 50%, rgba(40,26,12,0.55) 0%, rgba(40,26,12,0.28) 40%, transparent 74%);
     filter: blur(22px);
   }
   .hero-panel-wrap {
