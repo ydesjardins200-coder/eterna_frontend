@@ -7,7 +7,7 @@
 <meta name="description" content="The Capsule Pyrale is a hermetic aluminium capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without compromise. Designed and manufactured in Québec." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
 <style>
   :root {
     --ink: #16181c;
@@ -18,7 +18,7 @@
     --mist: #f3f2ef;
     --silver-1: #d9dade;
     --silver-2: #c4c6cc;
-    --night: #0E1012;
+    --night: #0c0d10;
     --night-soft: #16181d;
     --night-line: #2a2c33;
     --night-text: #b9bcc4;
@@ -103,6 +103,7 @@
   .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .brand { font-family: var(--display); font-size: 19px; letter-spacing: 0.16em; font-weight: 600; }
   .brand-logo { height: 20px; width: auto; aspect-ratio: 114 / 22; display: block; }
+  .foot-brand .brand-logo { height: 26px; }
 
   .nav-links { display: flex; gap: 26px; list-style: none; }
   .nav-links a { font-size: 13px; color: var(--ink-soft); transition: color 0.3s; display: inline-flex; align-items: center; gap: 8px; }
@@ -111,6 +112,121 @@
   .nav-cta { display: flex; align-items: center; gap: 16px; }
   .menu-toggle { display: none; background: none; border: 0; cursor: pointer; flex-direction: column; gap: 4px; }
   .menu-toggle span { width: 22px; height: 1.5px; background: var(--ink); display: block; }
+
+  /* ---------- HERO (cinematic + glass) ---------- */
+  .hero {
+    position: relative;
+    padding-top: 64px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; top: -14%; left: 0; right: 0; height: 128%;
+    background: #bfe0f2 url("hero-sky.jpg") center / cover no-repeat;
+    z-index: 0; will-change: transform;
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background:
+      radial-gradient(70% 46% at 50% 26%, rgba(60,40,72,0.14), transparent 72%),
+      linear-gradient(180deg, rgba(40,26,48,0.16) 0%, rgba(40,26,48,0) 24%, rgba(34,20,44,0) 46%, rgba(30,18,40,0.34) 74%, rgba(22,13,32,0.62) 100%);
+  }
+  @keyframes heroSlideLeft { from { opacity: 0; transform: translateX(-8vw); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes heroFadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-stage {
+    position: relative; z-index: 2; flex: 1;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 20px 0 0;
+  }
+  .hero-word {
+    font-family: var(--display);
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    font-size: clamp(78px, 19.5vw, 310px);
+    letter-spacing: 0.02em;
+    line-height: 0.9;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 42px rgba(28,14,34,0.72)) drop-shadow(0 4px 18px rgba(44,24,42,0.5));
+    animation: heroSlideLeft 1.2s cubic-bezier(.22,1,.36,1) both;
+  }
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .hero-word {
+      background:
+        linear-gradient(105deg, transparent 42%, rgba(255,255,255,0.85) 50%, transparent 58%),
+        linear-gradient(176deg, #ffffff 0%, #f7f0e7 46%, #ecdcc8 100%);
+      background-size: 260% 100%, 100% 100%;
+      background-position: 135% 0, 0 0;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: heroSlideLeft 1.2s cubic-bezier(.22,1,.36,1) both, heroShine 8s ease-in-out 1.6s infinite;
+    }
+  }
+  @keyframes heroShine {
+    0%   { background-position: 135% 0, 0 0; }
+    26%  { background-position: -35% 0, 0 0; }
+    100% { background-position: -35% 0, 0 0; }
+  }
+  .hero-capsule {
+    position: relative;
+    width: min(78%, 1080px);
+    margin: -2.5% auto 0;
+    z-index: 2;
+    animation: heroFadeUp 1.2s cubic-bezier(.22,1,.36,1) 0.15s both;
+  }
+  .hero-capsule img {
+    width: 100%; height: auto; display: block;
+    position: relative; z-index: 2;
+    filter: drop-shadow(0 30px 30px rgba(40,24,46,0.42)) drop-shadow(0 64px 84px rgba(48,30,68,0.28));
+  }
+  .hero-capsule::after {
+    content: "";
+    position: absolute; z-index: 1;
+    left: 12%; right: 12%; bottom: -5%;
+    height: 64px;
+    background: radial-gradient(50% 100% at 50% 50%, rgba(34,18,44,0.6) 0%, rgba(40,22,52,0.32) 40%, transparent 74%);
+    filter: blur(22px);
+  }
+  .hero-panel-wrap {
+    position: relative; z-index: 3;
+    padding: 0 0 clamp(26px, 4.5vh, 54px);
+    animation: heroFadeUp 1s cubic-bezier(.22,1,.36,1) 0.4s both;
+  }
+  .hero-glass {
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 32px; align-items: center;
+    padding: 32px 40px;
+    border-radius: 22px;
+    background: rgba(30,20,40,0.30);
+    backdrop-filter: blur(30px) saturate(1.3);
+    -webkit-backdrop-filter: blur(30px) saturate(1.3);
+    border: 1px solid rgba(255,255,255,0.22);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.34),
+      inset 0 -1px 0 rgba(255,255,255,0.04),
+      0 34px 74px rgba(18,10,28,0.46);
+    position: relative; overflow: hidden;
+  }
+  .hero-glass::before {
+    content: ""; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
+  }
+  .hero-title {
+    margin: 0;
+    font-weight: 500; font-size: clamp(30px, 3.8vw, 52px); color: #fff;
+    letter-spacing: -0.025em; line-height: 1.05;
+    text-shadow: 0 2px 22px rgba(24,14,34,0.5);
+  }
+  .hero-lead { display: flex; flex-direction: column; align-items: flex-start; }
+  .hero-lead p { color: rgba(255,255,255,0.82); font-size: 14.5px; margin: 0 0 22px; line-height: 1.6; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-glass .btn--dark { background: #fff; color: var(--ink); }
+  .hero-glass .btn--dark:hover { background: #ece9f3; transform: translateY(-1px); }
   .btn--partner {
     background: rgba(255,255,255,0.10); color: #fff;
     border: 1px solid rgba(255,255,255,0.42);
@@ -119,9 +235,225 @@
   }
   .btn--partner:hover { background: rgba(255,255,255,0.20); }
   .btn-arrow { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); font-size: 15px; }
+
+  /* ---------- VALUE STRIP ---------- */
+  .values { background: var(--mist); padding: 84px 0; }
+  .values-head { text-align: center; margin-bottom: 50px; }
+  .values-head .eyebrow { margin-bottom: 14px; }
+  .values-head h2 { font-size: clamp(30px, 3.6vw, 46px); }
+  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; z-index: 3; }
+  .value-card {
+    background: #fff;
+    border: 1px solid rgba(228,227,223,0.9);
+    border-radius: 16px;
+    padding: 28px 26px;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 1px 2px rgba(40,44,60,0.05),
+      0 8px 18px rgba(40,44,60,0.06),
+      0 24px 44px rgba(40,44,60,0.05);
+    transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
+  }
+  .value-card::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--iris), var(--iris-soft));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.5s var(--ease);
+  }
+  .value-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(111,90,216,0.28);
+    box-shadow:
+      0 2px 4px rgba(40,44,60,0.05),
+      0 18px 34px rgba(70,56,140,0.12),
+      0 40px 70px rgba(70,56,140,0.12);
+  }
+  .value-card:hover::before { transform: scaleX(1); }
+  .value-ic {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--ink); color: #fff;
+    display: grid; place-items: center; margin-bottom: 20px;
+    transition: background 0.45s var(--ease), transform 0.45s var(--ease);
+  }
   .ic-svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; display: block; }
+  .value-card:hover .value-ic { background: var(--iris); transform: scale(1.08); }
+  .value-card h3 { font-size: 21px; margin-bottom: 8px; }
+  .value-card p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how { padding: 100px 0 90px; }
+  .how-head-top { text-align: center; margin-bottom: 50px; }
+  .how-head-top h2 { font-size: clamp(30px, 3.6vw, 50px); margin-top: 14px; }
+  .how-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; }
+  .how-steps { display: flex; flex-direction: column; gap: 30px; }
+  .how-step { display: flex; gap: 18px; align-items: flex-start; }
+  .how-step-n { font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: 0.12em; color: var(--iris); flex: 0 0 auto; padding-top: 4px; width: 26px; }
+  .how-step h4 { font-size: 18px; margin-bottom: 6px; }
+  .how-step p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.62; }
+  .how-main { border-radius: 16px; overflow: hidden; background: var(--mist); aspect-ratio: 16 / 10; box-shadow: 0 26px 54px rgba(45,32,66,0.18); }
+  .how-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.35s var(--ease); }
+  .how-thumbs { display: flex; gap: 12px; margin-top: 14px; }
+  .how-thumb { flex: 1; aspect-ratio: 3 / 2; border: 2px solid transparent; border-radius: 10px; overflow: hidden; padding: 0; background: none; cursor: pointer; transition: border-color 0.3s var(--ease), transform 0.3s var(--ease); }
+  .how-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .how-thumb:hover { transform: translateY(-2px); }
+  .how-thumb.active { border-color: var(--iris); box-shadow: 0 6px 16px rgba(111,90,216,0.22); }
+
+  /* ---------- WHY (DARK) ---------- */
+  .why { position: relative; overflow: hidden; background: #0c0d10; color: #fff; padding: 100px 0; }
+  .why::before { content: ""; position: absolute; z-index: 0; left: 50%; bottom: 0; transform: translateX(-50%); width: min(38%, 520px); aspect-ratio: 3 / 2; background: url("why-bg.jpg") center bottom / contain no-repeat; -webkit-mask-image: radial-gradient(54% 58% at 50% 62%, #000 26%, transparent 72%); mask-image: radial-gradient(54% 58% at 50% 62%, #000 26%, transparent 72%); pointer-events: none; }
+  .why .wrap { position: relative; z-index: 1; }
+  .why .top { display: flex; justify-content: flex-end; margin-bottom: 40px; }
+  .why .top span { font-family: var(--display); font-size: clamp(20px,2.4vw,30px); color: #fff; opacity: 0.9; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .why-grid h2 { font-size: clamp(32px, 4vw, 50px); color: #fff; margin-bottom: 22px; }
+  .why-grid > div > p { color: var(--night-text); font-size: 14.5px; max-width: 400px; }
+  .why-visual {
+    margin: 24px 0 0;
+  }
+  .why-visual img { width: 100%; max-width: 560px; height: auto; display: block; }
+  .why-list { display: flex; flex-direction: column; gap: 14px; }
+  .why-item {
+    background: rgba(20,22,27,0.55);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 13px;
+    padding: 22px 24px;
+    display: flex; gap: 16px;
+    transition: border-color 0.4s var(--ease), transform 0.4s var(--ease), background 0.4s var(--ease);
+  }
+  .why-item:hover { border-color: var(--iris); background: rgba(20,22,27,0.68); transform: translateX(4px); }
+  .why-item .ic { flex: 0 0 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; }
+  .why-item h4 { font-family: var(--sans); font-size: 14.5px; font-weight: 600; margin-bottom: 6px; }
+  .why-item p { font-size: 12.5px; color: var(--night-text); line-height: 1.55; }
+
+  /* ---------- CERTIFICATION ---------- */
+  .cert { padding: 100px 0; text-align: center; }
+  .cert h2 { font-size: clamp(32px, 4vw, 50px); margin: 16px 0 0; }
+  .cert-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin: 46px 0 0; padding: 14px 4px 20px; }
+  .cert-card {
+    text-align: left;
+    background: #fff;
+    border: 1px solid rgba(228,227,223,0.9);
+    border-radius: 16px;
+    padding: 30px 26px 28px;
+    position: relative;
+    box-shadow:
+      0 1px 2px rgba(40,44,60,0.05),
+      0 8px 18px rgba(40,44,60,0.06),
+      0 24px 44px rgba(40,44,60,0.05);
+    transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
+  }
+  .cert-card::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 3px; z-index: 2;
+    background: linear-gradient(90deg, var(--iris), var(--iris-soft));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.5s var(--ease);
+  }
+  .cert-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(111,90,216,0.28);
+    box-shadow:
+      0 2px 4px rgba(40,44,60,0.05),
+      0 18px 34px rgba(70,56,140,0.12),
+      0 40px 70px rgba(70,56,140,0.12);
+  }
+  .cert-card:hover::before { transform: scaleX(1); }
+  .cert-ic { width: 52px; height: 52px; border-radius: 13px; background: linear-gradient(150deg, rgba(111,90,216,0.14), rgba(111,90,216,0.05)); color: var(--iris); display: grid; place-items: center; margin-bottom: 20px; transition: background 0.45s var(--ease), transform 0.45s var(--ease); }
+  .cert-ic .ic-svg { width: 24px; height: 24px; }
+  .cert-card:hover .cert-ic { background: var(--iris); color: #fff; transform: scale(1.06); }
+  .cert-card h3 { font-size: 20px; margin-bottom: 4px; }
+  .cert-card .lbl { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .cert-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+
+  /* ---------- FAQ ---------- */
+  .faq { position: relative; overflow: hidden; padding: 104px 0; background: linear-gradient(180deg, rgba(248,247,244,0.80) 0%, rgba(250,249,246,0.86) 50%, rgba(246,245,242,0.9) 100%), radial-gradient(46% 68% at 15% 24%, rgba(111,90,216,0.20), transparent 66%), #eef0f2 url("footer-mist.jpg") center 24% / cover no-repeat; }
+  .faq::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(111,90,216,0.28), transparent); }
+  .faq .wrap { position: relative; z-index: 1; }
+  .faq-grid { display: grid; grid-template-columns: 0.6fr 1.4fr; gap: 50px; }
+  .faq-grid h2 { font-size: clamp(28px, 3.4vw, 42px); }
+  .faq-aside p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; margin: 18px 0 22px; max-width: 300px; }
+  .faq-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--iris); transition: gap 0.3s var(--ease); }
+  .faq-link:hover { gap: 12px; }
+  .faq-item { border-top: 1px solid var(--line); }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-q { width: 100%; background: none; border: 0; cursor: pointer; text-align: left; padding: 24px 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-family: var(--sans); font-size: 15px; color: var(--ink); }
+  .faq-q .sign { font-size: 20px; color: var(--muted); transition: transform 0.3s; flex: 0 0 auto; }
+  .faq-item.open .faq-q .sign { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); }
+  .faq-a p { padding: 0 40px 24px 0; font-size: 13.5px; color: var(--ink-soft); }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .voices { padding: 90px 0; background: var(--mist); text-align: center; }
+  .voices h2 { font-size: clamp(30px, 3.6vw, 46px); margin: 16px 0 50px; }
+  .voices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; }
+  .voice { position: relative; background: #fff; border: 1px solid rgba(228,227,223,0.9); border-radius: 16px; padding: 34px 30px 30px; box-shadow: 0 1px 2px rgba(40,44,60,0.05), 0 10px 22px rgba(40,44,60,0.06), 0 30px 50px rgba(40,44,60,0.05); transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease); }
+  .voice::before { content: "\201C"; position: absolute; top: 14px; right: 26px; font-family: var(--display); font-size: 64px; line-height: 1; color: rgba(111,90,216,0.16); }
+  .voice:hover { transform: translateY(-6px); border-color: rgba(111,90,216,0.24); box-shadow: 0 2px 4px rgba(40,44,60,0.05), 0 16px 30px rgba(70,56,140,0.12), 0 40px 66px rgba(70,56,140,0.10); }
+  .voice p { font-family: var(--display); font-size: 17.5px; line-height: 1.5; color: var(--ink); margin-bottom: 26px; position: relative; }
+  .voice .who { display: flex; align-items: center; gap: 13px; }
+  .voice .av { width: 42px; height: 42px; border-radius: 50%; flex: 0 0 auto; display: grid; place-items: center; font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--iris); background: linear-gradient(150deg, rgba(111,90,216,0.16), rgba(111,90,216,0.05)); border: 1px solid rgba(111,90,216,0.2); }
+  .voice .who b { font-size: 13px; font-weight: 600; display: block; }
+  .voice .who span { font-size: 12px; color: var(--muted); }
+
+  /* ---------- CONTACT ---------- */
+  .contact { background: var(--night); color: #fff; padding: 90px 0; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 46px; align-items: stretch; }
+  .contact-visual { position: relative; border-radius: 18px; overflow: hidden; min-height: 540px; background: linear-gradient(180deg, rgba(12,13,17,0.10) 0%, rgba(12,13,17,0.30) 50%, rgba(9,10,13,0.9) 100%), #14161c url("director.jpg") center 24% / cover no-repeat; box-shadow: 0 30px 64px rgba(0,0,0,0.4); }
+  .contact-visual-inner { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 36px; }
+  .cv-quote { font-family: var(--display); font-weight: 500; font-size: clamp(18px, 1.9vw, 24px); line-height: 1.42; letter-spacing: -0.01em; color: #fff; margin-bottom: 14px; }
+  .cv-by { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--night-text); }
+  .contact-form-side { display: flex; flex-direction: column; justify-content: center; }
+  .contact-form-side .eyebrow { margin-bottom: 14px; }
+  .contact-form-side h2 { font-size: clamp(30px, 3.4vw, 46px); color: #fff; margin: 0 0 14px; line-height: 1.06; }
+  .contact-form-side > p { color: var(--night-text); font-size: 14px; line-height: 1.7; margin: 0 0 30px; max-width: 480px; }
   form.consult { max-width: none; margin: 0; background: transparent; border: 0; border-radius: 0; padding: 0; text-align: left; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 12px; color: var(--night-text); margin-bottom: 7px; letter-spacing: 0.02em; }
+  .field input, .field select, .field textarea {
+    width: 100%; background: #0a0b0e; border: 1px solid var(--night-line); border-radius: 9px;
+    padding: 12px 14px; color: #fff; font-family: var(--sans); font-size: 13.5px; transition: border-color 0.3s;
+  }
+  .field input::placeholder, .field textarea::placeholder { color: #565a63; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--iris); }
+  .field textarea { resize: vertical; min-height: 92px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   form.consult .btn { width: 100%; justify-content: center; margin-top: 6px; }
+  .form-note { text-align: center; font-size: 12px; color: var(--muted); margin-top: 26px; }
+  .form-note a { color: var(--night-text); text-decoration: underline; }
+
+  /* ---------- FOOTER ---------- */
+  footer { position: relative; overflow: hidden; color: #fff; background: linear-gradient(180deg, rgba(10,11,14,0.88) 0%, rgba(10,11,14,0.72) 34%, rgba(10,11,14,0.82) 62%, rgba(9,10,13,0.96) 100%), #0c0d10 url("footer-mist.jpg") center 32% / cover no-repeat; }
+  .foot-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: min(780px, 82%); height: 200px; background: radial-gradient(60% 100% at 50% 0%, rgba(111,90,216,0.16), transparent 72%); pointer-events: none; }
+  footer .wrap { position: relative; z-index: 1; }
+  .foot-main { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1.25fr; gap: 44px; padding: 78px 0 54px; }
+  .foot-brand .brand { display: inline-block; margin-bottom: 22px; }
+  .foot-tag { font-size: 13.5px; color: var(--night-text); line-height: 1.72; max-width: 340px; margin-bottom: 26px; }
+  .foot-social { display: flex; gap: 11px; }
+  .foot-social a { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--night-line); display: grid; place-items: center; color: var(--night-text); transition: color .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease), transform .35s var(--ease); }
+  .foot-social a:hover { color: #fff; border-color: var(--iris); background: rgba(111,90,216,0.16); transform: translateY(-2px); }
+  .foot-social svg { width: 16px; height: 16px; }
+  .foot-col h5 { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; font-weight: 600; }
+  .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .foot-col a { font-size: 13px; color: var(--night-text); transition: color 0.3s; }
+  .foot-col a:hover { color: #fff; }
+  .foot-col address { font-style: normal; font-size: 13px; color: var(--night-text); line-height: 1.95; }
+  .foot-bottom { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; padding: 22px 0 34px; border-top: 1px solid var(--night-line); }
+  .foot-bottom > span { font-size: 12px; color: var(--muted); }
+  .foot-legal { display: flex; gap: 22px; flex-wrap: wrap; }
+  .foot-legal a { font-size: 12px; color: var(--night-text); transition: color 0.3s; }
+  .foot-legal a:hover { color: #fff; }
+  @media (max-width: 860px) {
+    .foot-main { grid-template-columns: 1fr 1fr; gap: 36px 24px; padding: 60px 0 40px; }
+    .foot-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 480px) {
+    .foot-main { grid-template-columns: 1fr; }
+    .foot-bottom { justify-content: flex-start; }
+  }
 
   /* ---------- REVEAL ---------- */
   .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
@@ -132,474 +464,34 @@
     .nav-links, .nav-cta .btn { display: none; }
     .menu-toggle { display: flex; }
     .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+    .hero-glass { grid-template-columns: 1fr; gap: 18px; padding: 24px 22px; }
+    .hero-lead { align-items: flex-start; }
+    .hero-capsule { width: 100%; margin-top: -4%; }
+    .hero-word { font-size: clamp(60px, 22vw, 150px); }
+    .values-grid, .cert-track { grid-template-columns: 1fr 1fr; }
+    .how-grid { grid-template-columns: 1fr; gap: 30px; }
+    .why-grid, .faq-grid, .voices-grid { grid-template-columns: 1fr; gap: 34px; }
+    .why::before { display: none; }
+    .why .top { justify-content: flex-start; }
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 18px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .cert-track { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 26px; }
+    .contact-visual { min-height: 300px; }
+    .cv-quote { font-size: 18px; }
   }
   @media (prefers-reduced-motion: reduce) {
     * { scroll-behavior: auto !important; }
     .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+    .hero-word, .hero-capsule, .hero-panel-wrap, .hero-title, .hero-lead { animation: none !important; opacity: 1 !important; transform: none !important; }
   }
 
-
-/* ── La barre, comme la maquette: logo blanc, liens dans une pilule de verre,
-   bouton clair. Meme balisage que les autres pages; seul l habillage change. */
-header.nav:not(.scrolled) .nav-inner { height: 84px; }
-header.nav:not(.scrolled) .brand { color: #fff; }
-header.nav:not(.scrolled) .nav-links { gap: 2px; padding: 5px; border-radius: 999px; background: rgba(20,16,12,.26); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.12); }
-header.nav:not(.scrolled) .nav-links a { color: rgba(255,255,255,.88); padding: 8px 14px; border-radius: 999px; font-size: 13.5px; }
-header.nav:not(.scrolled) .nav-links a::before { content: none; }
-header.nav:not(.scrolled) .nav-links a:hover, header.nav:not(.scrolled) .nav-links a.active { background: rgba(255,255,255,.12); color: #fff; }
-header.nav:not(.scrolled) .nav-cta .btn--dark { background: #F5F1EA; color: #171D1F; box-shadow: none; }
-header.nav:not(.scrolled) .nav-cta .btn--dark:hover { background: #fff; }
-header.nav:not(.scrolled) .menu-toggle span { background: #fff; }
-@media (max-width: 960px) { header.nav:not(.scrolled) .nav-links { background: none; border: 0; padding: 0; } }
-
-/* ── Héros d’accueil (maquette v5) ── */
-
-.hb{display:inline-flex;align-items:center;gap:10px;font:inherit;font-size:14.5px;font-weight:500;padding:14px 24px;border-radius:999px;text-decoration:none;border:1px solid transparent;transition:transform .2s,background .2s}
-.hb:hover{transform:translateY(-1px)}
-.hb-light{background:#F5F1EA;color:#171D1F}.hb-light:hover{background:#fff}
-.hb-glass{border-color:rgba(255,255,255,.5);color:#fff;background:rgba(255,255,255,.06);backdrop-filter:blur(8px)}.hb-glass:hover{background:rgba(255,255,255,.14)}
-.hb svg{width:15px;height:15px}
-.hero{position:relative;color:#fff;font-family:'Instrument Sans',system-ui,sans-serif;isolation:isolate;overflow:hidden}
-.hero .stage{position:relative;height:82vh;min-height:620px;max-height:860px}
-.hero .stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%;z-index:-2;transform:none!important;animation:none!important}
-.hero .stage::before{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(112deg,rgba(14,16,18,.70) 0%,rgba(14,16,18,.46) 28%,rgba(14,16,18,.08) 54%,rgba(14,16,18,0) 66%),
-             linear-gradient(180deg,rgba(14,16,18,.32) 0%,rgba(14,16,18,0) 24%)}
-.t{position:relative;z-index:2;padding-top:150px;max-width:620px}
-.t>*{opacity:0;transform:translateY(14px);animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}
-.t>*:nth-child(2){animation-delay:.1s}.t>*:nth-child(3){animation-delay:.22s}.t>*:nth-child(4){animation-delay:.32s}.t>*:nth-child(5){animation-delay:.42s}
-@keyframes up{to{opacity:1;transform:none}}
-.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.66);display:flex;align-items:center;gap:12px}
-.eyebrow::before{content:"";width:26px;height:1px;background:currentColor}
-h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(54px,6.4vw,96px);line-height:.94;letter-spacing:-.02em;margin-top:24px;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.18)}
-h1 em{font-style:italic}
-.sub{margin-top:26px;font-size:17px;line-height:1.55;color:rgba(255,255,255,.84);max-width:42ch}
-.acts{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;align-items:center}
-/* La bande de confiance: pleine largeur, verre sombre, un filet dessus.
-   Chaque fait: une icone au trait fin, un chiffre en serif, un mot dessous. */
-@media(max-width:1000px){.trust{background:#231b14}.trust .wrap{grid-template-columns:1fr 1fr;min-height:0;padding-top:6px;padding-bottom:10px}.trust .it{border-right:none;margin-right:0;padding:14px 0}.trust .seal{display:none}}
-@media(max-width:1000px){
-  /* Sur un telephone, deux etages: le texte sur un ciel uni tire de l image,
-     puis l image elle-meme en bande, recadree pour que la capsule y tienne
-     entiere et petite — c est le produit qu on presente, pas un detail. */
-  .hero .stage{height:auto;min-height:0;max-height:none;display:flex;flex-direction:column;background:linear-gradient(180deg,#8f7a66 0%,#b89a7a 55%,#c59f71 100%)}
-  .hero .stage::before{background:linear-gradient(180deg,rgba(24,18,12,.55) 0%,rgba(24,18,12,.25) 60%,rgba(24,18,12,0) 100%)}
-  .hero .stage>img{position:relative;order:2;height:clamp(300px,88vw,420px);object-position:76% 64%;z-index:0;
-    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,#000 14%);mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,#000 14%)}
-  .hero .stage>.wrap{order:1}
-  .hero .wrap{padding-left:20px;padding-right:20px}
-  .t{padding:118px 0 22px;max-width:none}
-  h1{font-size:50px}
-  .sub{font-size:16px}
-  }
-
-/* ── « Why the Capsule Pyrale » — composition editoriale, sans cartes ── */
-.diff{background:#E4E7E9;color:#0E1012;padding:64px 0 56px;font-family:'Instrument Sans',system-ui,sans-serif}
-.diff .wrap{max-width:1400px}
-.diff-intro{text-align:center}
-.diff-eye{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#6C767D;font-weight:500}
-.diff-eye::before{content:"";width:18px;height:1px;background:#6C767D}
-.diff-intro h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(52px,4.5vw,76px);line-height:1.05;letter-spacing:-.015em;color:#0E1012;margin-top:22px}
-.diff-lead{margin:28px auto 0;max-width:720px;font-size:19px;line-height:1.55;color:#5E686F}
-.diff-grid{display:grid;grid-template-columns:repeat(4,1fr);align-items:stretch;margin-top:40px;min-height:0}
-.diff-f{position:relative;text-align:center;padding:44px 30px 6px;border-right:1px solid rgba(14,16,18,.15)}
-.diff-f:last-child{border-right:none}
-.diff-n{position:absolute;left:24px;top:-18px;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(100px,8vw,125px);line-height:1;color:rgba(108,118,125,.10);letter-spacing:-.02em;pointer-events:none;user-select:none}
-.diff-m{position:relative;width:76px;height:76px;margin:0 auto;border-radius:50%;background:#0E1012;border:1px solid #6C767D;display:flex;align-items:center;justify-content:center;color:#6C767D;box-shadow:0 12px 30px rgba(40,25,15,.10);transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s cubic-bezier(.2,.7,.2,1)}
-.diff-m svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
-.diff-f:hover .diff-m{transform:translateY(-4px);box-shadow:0 16px 34px rgba(40,25,15,.14),0 0 0 4px rgba(201,155,97,.12)}
-.diff-f h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:28px;line-height:1.1;color:#0E1012;margin-top:24px;letter-spacing:-.005em;text-wrap:balance}
-.diff-r{width:30px;height:1px;background:#6C767D;margin:18px auto 0}
-.diff-f p{font-size:15.5px;line-height:1.7;color:#5E686F;max-width:260px;margin:18px auto 0}
-.diff-div{display:flex;align-items:center;gap:22px;margin:65px auto 0;max-width:1100px}
-.diff-div::before,.diff-div::after{content:"";flex:1;height:1px;background:rgba(108,118,125,.45)}
-.diff-div svg{width:18px;height:18px;color:#6C767D;flex:none}
-.diff-quote{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:19px;color:#0E1012;text-align:center;margin-top:42px}
-.diff-cta{display:inline-flex;align-items:center;gap:10px;margin-top:22px;color:#6C767D;text-decoration:none;font-size:15.5px;font-weight:500;transition:color .3s}
-.diff-cta svg{width:16px;height:16px;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
-.diff-cta:hover{color:#6C767D}
-.diff-cta:hover svg{transform:translateX(5px)}
-.diff-cta-w{text-align:center}
-/* Arrivee: le numero apparait, le medaillon monte, le texte suit — en cascade. */
-.diff-f .diff-n,.diff-f .diff-m,.diff-f .diff-t{opacity:0;transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
-.diff-f .diff-m{transform:translateY(10px)}.diff-f .diff-t{transform:translateY(12px)}
-.diff-f.in .diff-n,.diff-f.in .diff-m,.diff-f.in .diff-t{opacity:1;transform:none}
-.diff-f.in .diff-n{opacity:1}
-.diff-f:nth-child(2) .diff-n,.diff-f:nth-child(2) .diff-m,.diff-f:nth-child(2) .diff-t{transition-delay:.09s}
-.diff-f:nth-child(3) .diff-n,.diff-f:nth-child(3) .diff-m,.diff-f:nth-child(3) .diff-t{transition-delay:.18s}
-.diff-f:nth-child(4) .diff-n,.diff-f:nth-child(4) .diff-m,.diff-f:nth-child(4) .diff-t{transition-delay:.27s}
-@media(max-width:1100px){.diff-grid{grid-template-columns:1fr 1fr;row-gap:40px}.diff-f:nth-child(2){border-right:none}}
-@media(max-width:700px){.diff{padding:84px 0 72px}.diff-grid{grid-template-columns:1fr;margin-top:50px;min-height:0;row-gap:0}
-  .diff-f{text-align:left;padding:44px 0 50px;border-right:none;border-bottom:1px solid rgba(14,16,18,.15)}.diff-f:last-child{border-bottom:none}
-  .diff-n{left:0;top:6px;font-size:96px}.diff-m{margin:0;width:64px;height:64px}.diff-m svg{width:26px;height:26px}
-  .diff-f h3{font-size:27px;margin-top:26px}.diff-r{margin-left:0}.diff-f p{margin-left:0}.diff-lead{font-size:17px}}
-@media(prefers-reduced-motion:reduce){.diff-f .diff-n,.diff-f .diff-m,.diff-f .diff-t{opacity:1;transform:none;transition:none}}
-
-/* ── « How it works » — chapitre suivant, composition asymetrique ── */
-.how{background:#0E1012;color:#D9DDE0;padding:64px 0 64px;font-family:'Instrument Sans',system-ui,sans-serif}
-.how .wrap{max-width:1320px}
-.how-g{display:grid;grid-template-columns:39fr 61fr;gap:80px;align-items:start}
-.how-eye{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.20em;text-transform:uppercase;color:#8A949B;font-weight:500}
-.how-eye::before{content:"";width:18px;height:1px;background:#8A949B}
-.how h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(42px,3.4vw,52px);line-height:1;letter-spacing:-.015em;color:#D9DDE0;margin-top:20px}
-.how-lead{margin-top:22px;font-size:18px;line-height:1.7;color:#8A949B;max-width:520px}
-.how-tl{position:relative;margin-top:40px;padding-left:0}
-.how-tl::before{content:"";position:absolute;left:70px;top:10px;bottom:10px;width:1px;background:rgba(138,148,155,.45);transform:scaleY(0);transform-origin:top;transition:transform 1.1s cubic-bezier(.22,1,.36,1) .25s}
-.how.in .how-tl::before{transform:scaleY(1)}
-.how-s{position:relative;display:grid;grid-template-columns:70px 1fr;gap:0 40px;padding:0 0 38px}
-.how-s:last-child{padding-bottom:0}
-.how-s::before{content:"";position:absolute;left:67px;top:18px;width:7px;height:7px;border-radius:50%;background:#8A949B}
-.how-n{font-family:'Instrument Serif',Georgia,serif;font-size:46px;line-height:1;color:#8A949B;letter-spacing:-.01em;margin-top:-4px}
-.how-s h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:27px;line-height:1.15;color:#D9DDE0;letter-spacing:-.005em}
-.how-s p{font-size:15px;line-height:1.7;color:#8A949B;margin-top:8px;max-width:400px}
-.how-main{position:relative;aspect-ratio:1.6;border-radius:24px;overflow:hidden;background:#15181B;box-shadow:0 25px 70px rgba(54,37,24,.08)}
-.how-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .45s cubic-bezier(.22,1,.36,1)}
-.how-main img.out,.how-main img.entering{opacity:0}
-.how-thumbs{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-.how-thumb{position:relative;width:118px;height:80px;border-radius:10px;overflow:visible;border:0;padding:0;background:none;cursor:pointer;opacity:.82;flex:none;transition:opacity .35s ease,transform .35s ease}
-.how-thumb img{width:100%;height:100%;object-fit:cover;display:block;border-radius:13px;border:1px solid transparent;transition:border-color .35s ease,box-shadow .35s ease}
-.how-thumb:hover{opacity:1;transform:translateY(-2px)}
-.how-thumb.active{opacity:1}
-.how-thumb.active img{border-color:#8A949B;box-shadow:0 5px 18px rgba(126,86,45,.12)}
-.how-thumb::after{content:"";position:absolute;left:50%;bottom:-11px;width:30px;height:2px;margin-left:-15px;background:#8A949B;opacity:0;transition:opacity .35s ease}
-.how-thumb.active::after{opacity:1}
-.how-div{display:flex;align-items:center;gap:22px;margin:80px auto 0;max-width:1240px}
-.how-div::before,.how-div::after{content:"";flex:1;height:1px;background:rgba(138,148,155,.35)}
-.how-div svg{width:18px;height:18px;color:rgba(138,148,155,.7);flex:none}
-.how-quote{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:21px;color:#D9DDE0;text-align:center;margin-top:40px}
-/* Arrivee, retenue. */
-.how .how-eye,.how h2,.how-lead,.how-s,.how-media{opacity:0;transform:translateY(15px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
-.how-media{transform:scale(1.015)}
-.how.in .how-eye,.how.in h2,.how.in .how-lead,.how.in .how-s,.how.in .how-media{opacity:1;transform:none}
-.how.in h2{transition-delay:.05s}.how.in .how-lead{transition-delay:.13s}.how.in .how-s:nth-child(1){transition-delay:.3s}.how.in .how-s:nth-child(2){transition-delay:.4s}.how.in .how-s:nth-child(3){transition-delay:.5s}.how.in .how-media{transition-delay:.15s}
-@media(max-width:1100px){.how-g{grid-template-columns:1fr;gap:56px}.how-tl{max-width:640px}}
-@media(max-width:700px){.how{padding:84px 0 72px}.how-g{gap:40px}.how-media{order:1}.how-text{order:2;display:contents}.how-intro{order:0}.how-tl{order:3;margin-top:8px}
-  .how-tl::before{left:0}.how-s{grid-template-columns:1fr;gap:6px;padding:0 0 46px 26px}.how-s::before{left:-3px}.how-n{font-size:38px}.how-s h3{font-size:24px}
-  .how-thumbs{display:flex;overflow-x:auto;gap:12px;padding:0 2px 14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.how-thumb{flex:0 0 31%;scroll-snap-align:start}}
-@media(prefers-reduced-motion:reduce){.how .how-eye,.how h2,.how-lead,.how-s,.how-media,.how-tl::before{opacity:1;transform:none;transition:none}}
-
-
-/* ── La respiration: une matiere, une phrase, rien d autre ── */
-.breath{position:relative;height:clamp(300px,40vh,420px);overflow:hidden;background:#3a3a3a}
-.breath img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%}
-.breath::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,14,10,.10),rgba(20,14,10,.42))}
-.breath .wrap{position:relative;z-index:1;height:100%;display:flex;align-items:center;justify-content:center;text-align:center}
-.breath p{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:clamp(28px,3vw,42px);line-height:1.25;color:#D9DDE0;letter-spacing:-.01em;text-shadow:0 2px 24px rgba(0,0,0,.25);opacity:0;transform:translateY(12px);transition:opacity 1s cubic-bezier(.22,1,.36,1) .2s,transform 1s cubic-bezier(.22,1,.36,1) .2s}
-.breath.in p{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.breath img,.breath p{opacity:1;transform:none;transition:none}}
-
-/* ── « Why Families Choose » — le premier chapitre sombre ── */
-.fam{position:relative;overflow:hidden;color:#D9DDE0;padding:64px 0 56px;font-family:'Instrument Sans',system-ui,sans-serif;
-  background:#15181B;background-image:radial-gradient(circle at 30% 60%,rgba(201,169,110,.06),transparent 35%)}
-.fam .wrap{max-width:1320px;position:relative;z-index:1}
-.fam-g{display:grid;grid-template-columns:54fr 46fr;gap:64px;align-items:start}
-.fam-eye{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#8A949B;font-weight:500}
-.fam-eye::before{content:"";width:18px;height:1px;background:#8A949B}
-.fam h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(44px,3.6vw,56px);line-height:.98;letter-spacing:-.025em;color:#D9DDE0;margin-top:22px;max-width:11ch}
-.fam-r{width:45px;height:1px;background:#8A949B;margin-top:26px}
-.fam-lead{margin-top:22px;font-size:18px;line-height:1.7;color:rgba(217,221,224,.72);max-width:520px}
-/* Le produit: le vrai fichier, en grand, eclaire par-dessous en CSS. */
-.fam-stage{position:relative;margin-top:28px;min-height:0}
-.fam-glow{position:absolute;left:8%;right:8%;bottom:6%;height:46%;background:radial-gradient(ellipse at 50% 60%,rgba(138,148,155,.16),transparent 65%);filter:blur(6px);pointer-events:none}
-.fam-floor{position:absolute;left:14%;right:22%;bottom:5%;height:9%;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.65),rgba(0,0,0,.25) 45%,transparent 72%);filter:blur(12px)}
-.fam-cap{position:relative;z-index:2;width:100%;max-width:560px;margin:0 auto;display:block;height:auto;animation:famFloat 9s ease-in-out infinite}
-@keyframes famFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-/* La pousse: le fichier existant, petit, masque en rond, sous un rai chaud. */
-/* Les trois panneaux, fondus dans le noir. */
-.fam-list{display:flex;flex-direction:column;gap:14px}
-.fam-p{background:rgba(255,255,255,.018);border:1px solid rgba(217,221,224,.18);border-radius:16px;padding:26px 28px;display:grid;grid-template-columns:64px 1fr;gap:24px;align-items:start;transition:border-color .45s cubic-bezier(.22,1,.36,1),background .45s cubic-bezier(.22,1,.36,1)}
-.fam-p:hover{border-color:rgba(138,148,155,.45);background:rgba(255,255,255,.03)}
-.fam-m{width:64px;height:64px;border-radius:50%;border:1px solid rgba(138,148,155,.45);display:flex;align-items:center;justify-content:center;color:#8A949B;transition:transform .45s cubic-bezier(.22,1,.36,1)}
-.fam-p:hover .fam-m{transform:none}
-.fam-m svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
-.fam-p h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:29px;line-height:1.15;color:#D9DDE0;letter-spacing:-.005em;text-wrap:balance}
-.fam-p p{font-size:15.5px;line-height:1.7;color:rgba(217,221,224,.68);margin-top:12px}
-.fam-div{display:flex;align-items:center;gap:22px;margin:96px auto 0;max-width:1240px}
-.fam-div::before,.fam-div::after{content:"";flex:1;height:1px;background:rgba(138,148,155,.35)}
-.fam-div svg{width:18px;height:18px;color:rgba(138,148,155,.7);flex:none}
-.fam-quote{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:21px;color:rgba(217,221,224,.82);text-align:center;margin-top:40px}
-/* Arrivee. */
-.fam .fam-eye,.fam h2,.fam .fam-r,.fam-lead,.fam-stage,.fam-p{opacity:0;transform:translateY(18px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
-.fam-stage{transform:translateY(25px)}
-.fam.in .fam-eye,.fam.in h2,.fam.in .fam-r,.fam.in .fam-lead,.fam.in .fam-stage,.fam.in .fam-p{opacity:1;transform:none}
-.fam.in h2{transition-delay:.06s}.fam.in .fam-r{transition-delay:.12s}.fam.in .fam-lead{transition-delay:.16s}.fam.in .fam-stage{transition-delay:.25s}
-.fam.in .fam-p:nth-child(1){transition-delay:.4s}.fam.in .fam-p:nth-child(2){transition-delay:.5s}.fam.in .fam-p:nth-child(3){transition-delay:.6s}
-@media(max-width:1100px){.fam-g{grid-template-columns:1fr;gap:48px}.fam-cap{width:100%;max-width:720px;margin-left:0}}
-@media(max-width:700px){.fam{padding:88px 0 76px}.fam h2{font-size:46px}.fam-lead{font-size:16.5px}.fam-stage{margin-top:28px;min-height:0;overflow:visible}
-  .fam-cap{width:116%;max-width:none;margin-left:-8%}.fam-p{padding:26px 22px;grid-template-columns:56px 1fr;gap:16px}.fam-m{width:56px;height:56px}.fam-p h3{font-size:25px}}
-@media(prefers-reduced-motion:reduce){.fam .fam-eye,.fam h2,.fam .fam-r,.fam-lead,.fam-stage,.fam-p{opacity:1;transform:none;transition:none}.fam-cap{animation:none}}
-
-/* ── « Innovation & Certification » — la preuve, en dossier d ingenierie ── */
-.proof{background:#E4E7E9;color:#0E1012;padding:64px 0 56px;font-family:'Instrument Sans',system-ui,sans-serif;position:relative;overflow:hidden}
-.proof .wrap{max-width:1320px}
-.proof-eye{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#6C767D;font-weight:500}
-.proof-eye::before{content:"";width:18px;height:1px;background:#6C767D}
-.proof-head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end}
-.proof h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(44px,3.6vw,56px);line-height:.98;letter-spacing:-.025em;color:#0E1012;margin-top:20px}
-.proof-lead{font-size:18px;line-height:1.7;color:#5E686F;max-width:540px;justify-self:end;padding-bottom:6px}
-.proof-g{display:grid;grid-template-columns:minmax(380px,42fr) 1px 58fr;gap:0 48px;margin-top:44px;align-items:stretch}
-/* Le 10+ */
-.proof-big{position:relative;padding-top:14px;overflow:hidden}
-.proof-ghost{position:absolute;left:-1%;bottom:-2%;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(64px,6vw,92px);line-height:1;color:rgba(14,16,18,.035);letter-spacing:-.02em;white-space:nowrap;pointer-events:none;user-select:none}
-.proof-n{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(110px,10vw,150px);line-height:.8;color:#0E1012;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
-.proof-n sup{font-size:.42em;vertical-align:.55em;letter-spacing:0;margin-left:.02em}
-.proof-k{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:#6C767D;margin-top:22px;font-weight:500}
-.proof-dates{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;margin-top:34px;max-width:460px}
-.proof-dates .d span{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#5E686F;font-weight:500}
-.proof-dates .d b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:30px;line-height:1.1;color:#0E1012;margin-top:4px}
-.proof-dates .d:last-child{text-align:right}
-.proof-dates .rule{position:relative;height:1px;background:rgba(108,118,125,.55)}
-.proof-dates .rule svg{position:absolute;left:50%;top:50%;width:16px;height:16px;transform:translate(-50%,-50%);color:#6C767D;background:#E6E9EB}
-.proof-big p{font-size:16px;line-height:1.7;color:#5E686F;max-width:380px;margin-top:34px}
-/* Le filet vertical, avec l etoile au milieu */
-.proof-v{position:relative;background:rgba(108,118,125,.35)}
-.proof-v svg{position:absolute;left:50%;top:50%;width:18px;height:18px;transform:translate(-50%,-50%);color:#6C767D;background:#E6E9EB}
-/* Le registre */
-.proof-row{display:grid;grid-template-columns:52px 66px minmax(190px,.8fr) minmax(230px,1.2fr) auto;gap:0 18px;align-items:start;padding:22px 0;border-bottom:1px solid rgba(14,16,18,.14);transition:border-color .45s cubic-bezier(.22,1,.36,1)}
-.proof-row:first-child{padding-top:8px}
-.proof-row:hover{border-color:rgba(14,16,18,.32)}
-.proof-i{font-family:'Instrument Serif',Georgia,serif;font-size:28px;line-height:1;color:#6C767D;padding-top:8px;transition:transform .45s cubic-bezier(.22,1,.36,1)}
-.proof-row:hover .proof-i{transform:translateX(3px)}
-.proof-ic{width:62px;height:62px;border-radius:50%;border:1px solid rgba(108,118,125,.5);display:flex;align-items:center;justify-content:center;color:#6C767D}
-.proof-ic .ic-svg{width:26px;height:26px;stroke-width:1.25}
-.proof-t h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:27px;line-height:1.15;color:#0E1012;letter-spacing:-.005em;transition:transform .45s cubic-bezier(.22,1,.36,1)}
-.proof-row:hover .proof-t h3{transform:translateX(2px)}
-.proof-t .meta{display:block;font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:#6C767D;margin-top:8px;font-weight:500}
-.proof-d{font-size:14.5px;line-height:1.65;color:#5E686F;padding-top:6px}
-.proof-s{display:inline-flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#6C767D;border:1px solid rgba(108,118,125,.5);border-radius:999px;padding:6px 12px;white-space:nowrap;margin-top:6px}
-.proof-s i{width:6px;height:6px;border-radius:50%;background:#6C767D;display:block}
-.proof-s svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.proof-row.no-s .proof-s{visibility:hidden}
-.proof-div{display:flex;align-items:center;gap:22px;margin:96px auto 0;max-width:1240px}
-.proof-div::before,.proof-div::after{content:"";flex:1;height:1px;background:rgba(108,118,125,.45)}
-.proof-div svg{width:18px;height:18px;color:#6C767D;flex:none}
-.proof-q{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:21px;color:#38281C;text-align:center;margin-top:40px}
-.proof-cta{display:flex;justify-content:center;margin-top:18px}
-.proof-cta a{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:#6C767D;text-decoration:none;font-weight:500;transition:color .3s}
-.proof-cta a svg{width:16px;height:16px;transition:transform .35s cubic-bezier(.22,1,.36,1)}
-.proof-cta a:hover{color:#6C767D}.proof-cta a:hover svg{transform:translateX(5px)}
-/* Arrivee: le 10+ lentement, les lignes l une apres l autre */
-.proof .proof-eye,.proof h2,.proof-lead,.proof-big,.proof-row{opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
-.proof-big{transition-duration:1.3s}
-.proof.in .proof-eye,.proof.in h2,.proof.in .proof-lead,.proof.in .proof-big,.proof.in .proof-row{opacity:1;transform:none}
-.proof.in h2{transition-delay:.06s}.proof.in .proof-lead{transition-delay:.14s}.proof.in .proof-big{transition-delay:.2s}
-.proof.in .proof-row:nth-child(1){transition-delay:.35s}.proof.in .proof-row:nth-child(2){transition-delay:.45s}.proof.in .proof-row:nth-child(3){transition-delay:.55s}.proof.in .proof-row:nth-child(4){transition-delay:.65s}
-@media(max-width:1100px){.proof-head{grid-template-columns:1fr;gap:18px}.proof-lead{justify-self:start}.proof-g{grid-template-columns:1fr;gap:48px}.proof-v{display:none}.proof-row{grid-template-columns:52px 60px 1fr;gap:0 18px}.proof-d{grid-column:3}.proof-s{grid-column:3;justify-self:start}}
-@media(max-width:700px){.proof{padding:88px 0 76px}.proof h2{font-size:48px}.proof-lead{font-size:16.5px}.proof-n{font-size:120px}.proof-row{grid-template-columns:1fr;gap:10px;padding:28px 0}.proof-ic{display:none}.proof-i{font-size:22px;padding:0}.proof-d,.proof-s{grid-column:auto}.proof-ghost{display:none}}
-@media(prefers-reduced-motion:reduce){.proof .proof-eye,.proof h2,.proof-lead,.proof-big,.proof-row{opacity:1;transform:none;transition:none}}
-
-/* ── « What families say » — des voix de famille, pas des avis ── */
-.fv{position:relative;overflow:hidden;color:#D9DDE0;padding:64px 0 64px;font-family:'Instrument Sans',system-ui,sans-serif;background:#15181B}
-.fv .wrap{max-width:1320px;position:relative}
-.fv-head{text-align:center}
-.fv-eye{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8A949B;font-weight:500}
-.fv-eye::before{content:"";width:18px;height:1px;background:#8A949B}
-.fv h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(56px,4.6vw,76px);line-height:1;letter-spacing:-.025em;color:#D9DDE0;margin-top:20px}
-.fv-lead{margin:22px auto 0;max-width:620px;font-size:17.5px;line-height:1.65;color:#8A949B}
-/* La voix principale */
-.fv-main{position:relative;max-width:900px;margin:40px auto 0;text-align:center}
-.fv-word{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font-family:'Instrument Serif',Georgia,serif;font-size:clamp(140px,17vw,250px);letter-spacing:.04em;color:rgba(14,16,18,.018);white-space:nowrap;pointer-events:none;user-select:none;line-height:1}
-.fv-qm{font-family:'Instrument Serif',Georgia,serif;font-size:220px;line-height:.6;color:rgba(138,148,155,.16);height:88px;display:block;will-change:transform}
-.fv-main blockquote{position:relative;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,1.9vw,30px);line-height:1.45;letter-spacing:-.01em;color:#D9DDE0;margin:0}
-.fv-by{margin-top:30px}
-.fv-by .r{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:16px}
-.fv-by .r::before,.fv-by .r::after{content:"";width:110px;height:1px;background:rgba(138,148,155,.45)}
-.fv-by .r svg{width:14px;height:14px;color:#8A949B}
-.fv-by b{display:block;font-size:14px;font-weight:600;color:#D9DDE0}
-.fv-by span{display:block;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#8A949B;margin-top:5px}
-/* Le diviseur, puis les deux voix */
-.fv-div{display:flex;align-items:center;gap:22px;margin:56px auto 0;max-width:1240px}
-.fv-div::before,.fv-div::after{content:"";flex:1;height:1px;background:rgba(138,148,155,.38)}
-.fv-div svg{width:16px;height:16px;color:#8A949B;flex:none}
-.fv-two{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 56px;margin-top:40px;align-items:start}
-.fv-two .v{position:relative}
-.fv-two .vr{background:rgba(217,221,224,.15);align-self:stretch}
-.fv-s{display:grid;grid-template-columns:64px 1fr;gap:0 28px}
-.fv-s .n{font-family:'Instrument Serif',Georgia,serif;font-size:20px;color:#8A949B;line-height:1}
-.fv-s .n i{display:block;width:28px;height:1px;background:rgba(138,148,155,.6);margin-top:12px}
-.fv-s .n b{display:block;font-family:'Instrument Serif',Georgia,serif;font-size:44px;line-height:.5;color:rgba(138,148,155,.55);margin-top:34px;font-weight:400}
-.fv-s blockquote{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(21px,1.6vw,24px);line-height:1.5;color:#D9DDE0;margin:0;letter-spacing:-.005em}
-.fv-s .by{margin-top:26px}
-.fv-s .by .r{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.fv-s .by .r::before,.fv-s .by .r::after{content:"";width:34px;height:1px;background:rgba(138,148,155,.45)}
-.fv-s .by .r svg{width:12px;height:12px;color:#8A949B}
-.fv-s .by b{display:block;font-size:14px;font-weight:600;color:#D9DDE0}
-.fv-s .by span{display:block;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#8A949B;margin-top:5px}
-.fv-end{text-align:center;margin-top:56px}
-.fv-end svg{width:18px;height:18px;color:#8A949B;display:block;margin:0 auto 22px}
-.fv-end p{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:21px;line-height:1.4;color:#D9DDE0}
-/* Arrivee */
-.fv .fv-eye,.fv h2,.fv-lead,.fv-qm,.fv-main blockquote,.fv-by,.fv-two .v,.fv-end{opacity:0;transform:translateY(16px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
-.fv-qm{transform:none}
-.fv.in .fv-eye,.fv.in h2,.fv.in .fv-lead,.fv.in .fv-qm,.fv.in .fv-main blockquote,.fv.in .fv-by,.fv.in .fv-two .v,.fv.in .fv-end{opacity:1;transform:none}
-.fv.in h2{transition-delay:.06s}.fv.in .fv-lead{transition-delay:.12s}.fv.in .fv-qm{transition-delay:.2s}.fv.in .fv-main blockquote{transition-delay:.28s}.fv.in .fv-by{transition-delay:.4s}.fv.in .fv-two .v:nth-child(1){transition-delay:.55s}.fv.in .fv-two .v:nth-child(3){transition-delay:.65s}.fv.in .fv-end{transition-delay:.8s}
-@media(max-width:750px){.fv{padding:88px 0 90px}.fv h2{font-size:46px}.fv-lead{font-size:16px}.fv-main{margin-top:44px}.fv-main blockquote{font-size:29px;line-height:1.4}.fv-qm{font-size:120px;height:48px}.fv-word{display:none}
-  .fv-two{grid-template-columns:1fr;gap:44px;margin-top:40px}.fv-two .vr{height:1px;width:100%;align-self:auto}.fv-s{grid-template-columns:44px 1fr;gap:0 16px}.fv-s blockquote{font-size:22px}.fv-div{margin-top:64px}.fv-end{margin-top:64px}}
-@media(prefers-reduced-motion:reduce){.fv .fv-eye,.fv h2,.fv-lead,.fv-qm,.fv-main blockquote,.fv-by,.fv-two .v,.fv-end{opacity:1;transform:none;transition:none}}
-
-/* ── « Book a Free Consultation » — une conversation privee commence ici ── */
-.pc{position:relative;overflow:hidden;color:#D9DDE0;background:#0E1012;background-image:radial-gradient(circle at 24% 50%,rgba(138,148,155,.10),transparent 34%);padding:64px 0;min-height:0;display:flex;align-items:center;font-family:'Instrument Sans',system-ui,sans-serif}
-.pc .wrap{max-width:1320px;width:100%}
-.pc-g{display:grid;grid-template-columns:44fr 56fr 150px;gap:0 64px;align-items:stretch}
-.pc-ph{position:relative;min-height:0;border-radius:22px;overflow:hidden;background:#0E1012;box-shadow:0 40px 80px rgba(0,0,0,.35)}
-.pc-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;filter:saturate(.86) sepia(.08)}
-.pc-ph::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(19,13,9,.15) 65%,rgba(19,13,9,.82) 100%)}
-.pc-q{position:absolute;left:45px;right:45px;bottom:42px;z-index:1;max-width:470px}
-.pc-q svg{width:16px;height:16px;color:#8A949B;margin-bottom:16px}
-.pc-q p{font-family:'Instrument Serif',Georgia,serif;font-size:31px;line-height:1.3;color:#D9DDE0;letter-spacing:-.005em}
-.pc-q span{display:block;font-size:10px;letter-spacing:.20em;text-transform:uppercase;color:#8A949B;margin-top:16px}
-.pc-eye{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8A949B;font-weight:500}
-.pc-eye::before{content:"";width:18px;height:1px;background:#8A949B}
-.pc h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(42px,3.4vw,52px);line-height:1;letter-spacing:-.025em;color:#D9DDE0;margin-top:20px}
-.pc-lead{margin-top:20px;font-size:17px;line-height:1.7;color:rgba(217,221,224,.68);max-width:580px}
-.pc form{margin-top:38px}
-.pc .f{margin-bottom:22px;position:relative}
-.pc .f label{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8A949B;margin-bottom:2px}
-.pc .f input,.pc .f select,.pc .f textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(217,221,224,.22);border-radius:0;height:50px;font:inherit;font-size:15px;color:#D9DDE0;padding:0;transition:border-color .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
-.pc .f input::placeholder,.pc .f textarea::placeholder{color:rgba(217,221,224,.30)}
-.pc .f input:focus,.pc .f select:focus,.pc .f textarea:focus{outline:none;border-bottom-color:#8A949B;box-shadow:0 1px 0 0 rgba(138,148,155,.35)}
-.pc .f select{-webkit-appearance:none;appearance:none;padding-right:28px;cursor:pointer;color:#D9DDE0}
-.pc .f select:invalid,.pc .f select option[value=""]{color:rgba(217,221,224,.45)}
-.pc .f select option{color:#D9DDE0;background:#D9DDE0}
-.pc .f.sel::after{content:"";position:absolute;right:6px;bottom:22px;width:8px;height:8px;border-right:1px solid #8A949B;border-bottom:1px solid #8A949B;transform:rotate(45deg);pointer-events:none}
-.pc .f textarea{height:auto;min-height:104px;padding:12px 12px 10px;resize:vertical;line-height:1.55;border:1px solid rgba(217,221,224,.22);border-radius:6px;margin-top:6px}
-.pc .f textarea:focus{border-color:#8A949B;box-shadow:none}
-.pc .f2{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
-.pc-priv{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(217,221,224,.62);margin:4px 0 20px}
-.pc-priv svg{width:12px;height:12px;color:#8A949B;flex:none}
-.pc-btn{display:flex;width:100%;align-items:center;justify-content:center;gap:14px;height:58px;padding:0 32px;background:#D9DDE0;color:#D9DDE0;border:0;border-radius:999px;font:inherit;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .4s cubic-bezier(.22,1,.36,1),color .4s cubic-bezier(.22,1,.36,1)}
-.pc-btn svg{width:16px;height:16px;transition:transform .4s cubic-bezier(.22,1,.36,1)}
-.pc-btn:hover{background:#8A949B;color:#0E1012}.pc-btn:hover svg{transform:translateX(5px)}
-.pc-btn:disabled{opacity:.6;cursor:default}
-.pc-note{margin-top:18px;font-size:12px;line-height:1.7;color:rgba(217,221,224,.46)}
-.pc-note a{color:#8A949B;text-decoration:none}.pc-note a:hover{text-decoration:underline}
-.pc-note.err{color:#B96F5B}
-.pc-side{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding-left:44px;border-left:1px solid rgba(217,221,224,.14)}
-.pc-side .it{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(217,221,224,.52);line-height:1.6}
-.pc-side .it svg{width:34px;height:34px;color:#8A949B;stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
-.pc-side .dot{width:4px;height:4px;border-radius:50%;background:#8A949B;opacity:.7}
-.pc-done{display:none;margin-top:45px}
-.pc-done svg{width:18px;height:18px;color:#8A949B;margin-bottom:18px}
-.pc-done h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:44px;line-height:1;color:#D9DDE0}
-.pc-done p{margin-top:16px;font-size:16px;line-height:1.7;color:rgba(217,221,224,.68);max-width:480px}
-.pc.sent form{display:none}.pc.sent .pc-done{display:block;animation:pcIn .8s cubic-bezier(.22,1,.36,1)}
-@keyframes pcIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-/* Arrivee */
-.pc .pc-ph,.pc .pc-eye,.pc h2,.pc-lead,.pc .f,.pc .f2,.pc-priv,.pc-btn,.pc-note,.pc-side .it{opacity:0;transform:translateY(15px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
-.pc .pc-ph{transform:none}
-.pc.in .pc-ph,.pc.in .pc-eye,.pc.in h2,.pc.in .pc-lead,.pc.in .f,.pc.in .f2,.pc.in .pc-priv,.pc.in .pc-btn,.pc.in .pc-note,.pc.in .pc-side .it{opacity:1;transform:none}
-.pc.in h2{transition-delay:.06s}.pc.in .pc-lead{transition-delay:.12s}
-.pc.in form>*:nth-child(1){transition-delay:.2s}.pc.in form>*:nth-child(2){transition-delay:.26s}.pc.in form>*:nth-child(3){transition-delay:.32s}.pc.in form>*:nth-child(4){transition-delay:.38s}.pc.in form>*:nth-child(5){transition-delay:.44s}.pc.in form>*:nth-child(6){transition-delay:.5s}.pc.in form>*:nth-child(7){transition-delay:.56s}.pc.in form>*:nth-child(8){transition-delay:.62s}.pc.in form>*:nth-child(9){transition-delay:.68s}
-.pc.in .f2 .f{transition-delay:0s;opacity:1;transform:none}
-@media(max-width:1100px){.pc-g{grid-template-columns:44fr 56fr}.pc-side{display:none}}
-@media(max-width:850px){.pc{padding:88px 0;min-height:0}.pc-g{grid-template-columns:1fr;gap:56px}.pc-ph{order:2;min-height:540px;height:540px}.pc-form{order:1}.pc h2{font-size:46px}.pc .f2{grid-template-columns:1fr}.pc-q{left:24px;right:24px;bottom:28px}.pc-q p{font-size:24px}}
-@media(prefers-reduced-motion:reduce){.pc .pc-ph,.pc .pc-eye,.pc h2,.pc-lead,.pc .f,.pc .f2,.pc-priv,.pc-btn,.pc-note,.pc-side .it{opacity:1;transform:none;transition:none}}
-
-/* ── La FAQ, au meme langage que le reste ── */
-.faq{background:#0E1012;color:#D9DDE0;padding:64px 0 56px;font-family:'Instrument Sans',system-ui,sans-serif}
-.faq .wrap{max-width:1320px}
-.faq-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:72px;align-items:start}
-.faq-aside .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8A949B;font-weight:500;font-family:inherit}
-.faq-aside .eyebrow::before{content:"";width:18px;height:1px;background:#8A949B}
-.faq-grid h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(42px,3.4vw,52px);line-height:1.02;letter-spacing:-.02em;color:#D9DDE0}
-.faq-aside p{font-size:15.5px;color:#8A949B;line-height:1.7;margin:18px 0 22px;max-width:320px}
-.faq-link{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#8A949B;text-decoration:none;font-weight:500;transition:gap .3s}
-.faq-link:hover{gap:14px}
-.faq-item{border-top:1px solid rgba(217,221,224,.16)}
-.faq-item:last-child{border-bottom:1px solid rgba(217,221,224,.16)}
-.faq-q{width:100%;background:none;border:0;cursor:pointer;text-align:left;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;font-family:'Instrument Serif',Georgia,serif;font-size:23px;line-height:1.2;color:#D9DDE0;letter-spacing:-.005em;transition:color .3s}
-.faq-q:hover{color:#8A949B}
-.faq-q .sign{font-family:'Instrument Sans',system-ui,sans-serif;font-size:22px;font-weight:300;color:#8A949B;transition:transform .3s;flex:0 0 auto}
-.faq-item.open .faq-q .sign{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.22,1,.36,1)}
-.faq-a p{font-size:15px;line-height:1.7;color:#8A949B;padding:0 0 24px;max-width:66ch}
-@media(max-width:900px){.faq-grid{grid-template-columns:1fr;gap:28px}.faq-q{font-size:20px}}
-
-/* ── Obsidienne & platine: l or ne sert qu a trois choses — le bouton
-   principal, la promesse, les icones. Tout le reste est platine ou gris. ── */
-.hb-light,.pc-btn,.nav-cta .btn--dark{background:#C9A96E!important;color:#0E1012!important;box-shadow:0 12px 30px rgba(201,169,110,.28)}
-.hb-light:hover,.pc-btn:hover,.nav-cta .btn--dark:hover{background:#D8B97F!important;color:#0E1012!important}
-header.nav.scrolled .nav-cta .btn--dark{background:#C9A96E!important;color:#0E1012!important}
-.hero .promise{margin-top:22px;font-size:15.5px;font-weight:500;letter-spacing:.01em;color:#C9A96E}
-.diff-m{background:#0E1012;border:1px solid rgba(201,169,110,.55);color:#C9A96E;box-shadow:0 10px 26px rgba(14,16,18,.18)}
-.diff-m svg{stroke-width:1.7}
-.diff-n{color:rgba(14,16,18,.06)}
-.fam-m{border-color:rgba(201,169,110,.55);color:#C9A96E;background:rgba(201,169,110,.05)}
-.fam-m svg{stroke-width:1.7}
-.proof-ic{border-color:rgba(201,169,110,.55);color:#C9A96E;background:#0E1012}
-.proof-ic .ic-svg{stroke-width:1.6}
-.pc-side .it svg,.ft-touch svg,.ft-help svg,.pc-q svg,.pc-priv svg,.fv-by .r svg,.fv-s .by .r svg,.fv-end svg,.faq-q .sign{color:#C9A96E}
-.proof-i,.how-n,.fv-s .n,.fv-s .n b{color:#C9A96E}
-.how-s::before{background:#C9A96E}
-.ft-cta a svg,.ft-brand .brand svg.star,.ft-bottom .st svg,.ft-div svg,.ft-rule svg,.diff h2::after,.st h2::after{color:#C9A96E;background:#C9A96E}
-.st h2::after{background:#C9A96E}
-.ft-portal a,.ft-col a:hover,.ft-touch a:hover,.faq-link,.faq-q:hover{color:#C9A96E}
-.faq-link{color:#C9A96E}
-.pc .f input:focus,.pc .f select:focus,.pc .f textarea:focus{border-bottom-color:#C9A96E;box-shadow:0 1px 0 0 rgba(201,169,110,.35)}
-.pc .f textarea:focus{border-color:#C9A96E}
-.pc .f.sel::after{border-color:#C9A96E}
-/* Les titres des sections claires restent obsidienne; l accroche et les filets en gris platine. */
-
-/* Les ancres du menu s arretent sous la barre; les images se decodent sans bloquer. */
-section[id]{scroll-margin-top:72px}
-img{decoding:async}
-
-/* ── Le pied de page: la montagne au couchant, et le meme langage ── */
-footer{position:relative;overflow:hidden;color:#D9DDE0;font-family:'Instrument Sans',system-ui,sans-serif;background:#0E1012}
-footer .bg{position:absolute;inset:0;z-index:0}
-footer .bg img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block;opacity:.85}
-footer .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,16,12,.55) 0%,rgba(21,16,12,.35) 35%,rgba(21,16,12,.62) 70%,rgba(21,16,12,.92) 100%)}
-footer .wrap{position:relative;z-index:1;max-width:1320px}
-.ft-main{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:44px;padding:72px 0 44px}
-.ft-brand .brand{display:inline-flex;align-items:center;gap:14px;margin-bottom:26px;text-decoration:none}
-.ft-brand .brand-logo{height:30px;width:auto;color:#D9DDE0}
-.ft-brand .brand svg.star{width:24px;height:24px;color:#8A949B}
-.ft-tag{font-family:'Instrument Serif',Georgia,serif;font-size:22px;line-height:1.5;color:#D9DDE0;max-width:420px;letter-spacing:-.005em}
-.ft-rule{display:flex;align-items:center;gap:14px;margin:26px 0 30px;max-width:340px}
-.ft-rule::before,.ft-rule::after{content:"";flex:1;height:1px;background:rgba(138,148,155,.45)}
-.ft-rule svg{width:14px;height:14px;color:#8A949B;flex:none}
-.ft-social{display:flex;gap:12px}
-.ft-social a{width:52px;height:52px;border-radius:50%;border:1px solid rgba(217,221,224,.22);display:flex;align-items:center;justify-content:center;color:rgba(217,221,224,.85);transition:border-color .35s,color .35s,transform .35s}
-.ft-social a:hover{border-color:#8A949B;color:#fff;transform:translateY(-2px)}
-.ft-social svg{width:18px;height:18px}
-.ft-col h5{font-size:12px;letter-spacing:.20em;text-transform:uppercase;color:#8A949B;font-weight:500;margin-bottom:26px}
-.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:20px}
-.ft-col a{font-family:'Instrument Serif',Georgia,serif;font-size:21px;color:#D9DDE0;text-decoration:none;transition:color .3s}
-.ft-col a:hover{color:#8A949B}
-.ft-touch{list-style:none;display:flex;flex-direction:column;gap:20px}
-.ft-touch li{display:grid;grid-template-columns:22px 1fr;gap:14px;align-items:start;font-size:15.5px;line-height:1.6;color:#D9DDE0}
-.ft-touch svg{width:20px;height:20px;color:#8A949B;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;margin-top:3px}
-.ft-touch a{color:#D9DDE0;text-decoration:none}.ft-touch a:hover{color:#8A949B}
-.ft-div{display:flex;align-items:center;gap:22px}
-.ft-div::before,.ft-div::after{content:"";flex:1;height:1px;background:rgba(138,148,155,.45)}
-.ft-div svg{width:18px;height:18px;color:#8A949B;flex:none}
-.ft-band{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 56px;align-items:center;padding:36px 0}
-.ft-band .vr{height:100%;min-height:80px;background:rgba(217,221,224,.14)}
-.ft-help{display:flex;gap:26px;align-items:center}
-.ft-help svg{width:64px;height:64px;color:#8A949B;stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.ft-help h4{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:26px;color:#D9DDE0;line-height:1.2}
-.ft-help p{font-size:15px;line-height:1.6;color:rgba(217,221,224,.7);margin-top:6px;max-width:380px}
-.ft-cta{padding-left:8px}
-.ft-cta span{display:block;font-size:12px;letter-spacing:.20em;text-transform:uppercase;color:#8A949B;font-weight:500;margin-bottom:12px}
-.ft-cta a{display:inline-flex;align-items:center;gap:22px;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,2.6vw,38px);color:#D9DDE0;text-decoration:none;letter-spacing:-.01em;transition:color .3s}
-.ft-cta a svg{width:48px;height:20px;color:#8A949B;stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s cubic-bezier(.22,1,.36,1)}
-.ft-cta a:hover{color:#8A949B}.ft-cta a:hover svg{transform:translateX(8px)}
-.ft-bottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding:28px 0 26px;border-top:1px solid rgba(217,221,224,.12)}
-.ft-bottom>span{font-size:14px;color:rgba(217,221,224,.7)}
-.ft-bottom .st svg{width:22px;height:22px;color:#8A949B;display:block}
-.ft-legal{display:flex;justify-content:flex-end;gap:0;flex-wrap:wrap}
-.ft-legal a{font-size:14px;color:rgba(217,221,224,.7);text-decoration:none;padding:0 22px;border-left:1px solid rgba(217,221,224,.18);transition:color .3s}
-.ft-legal a:first-child{border-left:0}.ft-legal a:last-child{padding-right:0}
-.ft-legal a:hover{color:#8A949B}
-.ft-portal{position:relative;z-index:1;text-align:center;padding:20px 24px 24px;border-top:1px solid rgba(217,221,224,.10);background:rgba(10,7,5,.55)}
-.ft-portal a{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:#8A949B;text-decoration:none}
-.ft-portal a:hover{text-decoration:underline}
-.ft-portal svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-@media(max-width:1000px){.ft-main{grid-template-columns:1fr 1fr;gap:40px;padding-top:72px}.ft-band{grid-template-columns:1fr;gap:28px}.ft-band .vr{display:none}.ft-bottom{grid-template-columns:1fr;text-align:center;gap:14px}.ft-legal{justify-content:center}}
-@media(max-width:640px){.ft-main{grid-template-columns:1fr;gap:34px}.ft-col a{font-size:19px}.ft-cta a{font-size:26px}.ft-legal a{padding:0 12px}}
+  .foot-portal { text-align: center; padding: 18px 24px 0; }
+  .foot-portal a { font-size: 12.5px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+  .foot-portal a:hover { color: var(--ink); }
 </style>
 </head>
 <body>
@@ -632,42 +524,55 @@ footer .wrap{position:relative;z-index:1;max-width:1320px}
 
   <!-- HERO -->
   <section class="hero">
-  <div class="stage">
-  <img src="hero-scene.jpg" alt="The Capsule Pyrale resting on a marble terrace above the sea at first light">
-  <div class="wrap"><div class="t">
-    <div class="eyebrow">Capsule Pyrale · Québec</div>
-    <h1>A new way<br>to say <em>goodbye.</em></h1>
-    <p class="sub">A hermetic aluminium capsule that preserves the body naturally, with nitrogen — without chemicals or embalming.</p>
-    <p class="promise">60–100 years. No chemicals. Made in Québec.</p>
-    <div class="acts">
-      <a class="hb hb-light" href="product.html">Discover the Pyrale <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="hb hb-glass" href="/partenaires">Partner with us</a>
-    </div>
-  </div></div>
-  </div>
-</section>
-
-  <!-- WHY THE CAPSULE PYRALE -->
-  <section class="diff" id="capsule">
-    <div class="wrap">
-      <div class="diff-intro reveal">
-        <span class="diff-eye">The difference</span>
-        <h2>Why the Capsule Pyrale</h2>
-        <p class="diff-lead">We didn’t just build a capsule.<br>We reimagined preservation with science, precision, and purpose.</p>
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-stage">
+      <div class="hero-word">ETERNA</div>
+      <div class="hero-capsule">
+        <img src="capsule-hero.png" alt="The Capsule Pyrale — a hermetic aluminium capsule with a dark glass viewing dome" />
       </div>
-      <div class="diff-grid">
-        <div class="diff-f"><div class="diff-n" aria-hidden="true">01</div>
-          <div class="diff-m"><svg viewBox="0 0 24 24"><path d="M5 20c9 1 14-4 14-14 0 0-5.5-1-9.5 1S4.5 13 5 20z"/><path d="M5.5 19.5C9.5 15.5 12 13 16.5 11"/></svg></div>
-          <div class="diff-t"><h3>100% Québec</h3><div class="diff-r"></div><p>Designed, engineered, and manufactured entirely in Québec, Canada.</p></div></div>
-        <div class="diff-f"><div class="diff-n" aria-hidden="true">02</div>
-          <div class="diff-m"><svg viewBox="0 0 24 24"><path d="M9.5 3h5M10 3v6.2L4.8 18.3A1.5 1.5 0 006.1 20.5h11.8a1.5 1.5 0 001.3-2.2L14 9.2V3"/><path d="M8 15h8"/><circle cx="12" cy="12" r="10"/><path d="M4.9 4.9l14.2 14.2"/></svg></div>
-          <div class="diff-t"><h3>No Chemicals</h3><div class="diff-r"></div><p>No embalming fluids, no toxic treatments. Preservation through inert nitrogen gas only.</p></div></div>
-        <div class="diff-f"><div class="diff-n" aria-hidden="true">03</div>
-          <div class="diff-m"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg></div>
-          <div class="diff-t"><h3>60–100 Year<br>Preservation</h3><div class="diff-r"></div><p>The body is naturally preserved for up to a century inside the hermetically sealed capsule.</p></div></div>
-        <div class="diff-f"><div class="diff-n" aria-hidden="true">04</div>
-          <div class="diff-m"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M12 5.8l.9 1.9 2.1.3-1.5 1.5.4 2.1-1.9-1-1.9 1 .4-2.1-1.5-1.5 2.1-.3z"/><path d="M8.5 13.6L7 21l5-2.6L17 21l-1.5-7.4"/></svg></div>
-          <div class="diff-t"><h3>Patented Technology</h3><div class="diff-r"></div><p>A unique, certified innovation — 10+ years of research, certified in Canada and the USA.</p></div></div>
+    </div>
+    <div class="wrap hero-panel-wrap">
+      <div class="hero-glass">
+        <h1 class="hero-title">A New Way<br />to Say Goodbye</h1>
+        <div class="hero-lead">
+          <p>The Capsule Pyrale is a hermetic aluminum capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without embalming, without compromise.</p>
+          <div class="hero-actions">
+            <a href="#capsule" class="btn btn--dark">Discover the Pyrale</a>
+            <a href="/partenaires" class="btn btn--partner">Partner With Us <span class="btn-arrow">&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE STRIP -->
+  <section class="values" id="capsule">
+    <div class="wrap">
+      <div class="values-head reveal">
+        <span class="eyebrow" style="display:inline-flex;">The difference</span>
+        <h2>Why the Capsule Pyrale</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <div class="value-ic"><svg class="ic-svg"><use href="#ic-leaf"/></svg></div>
+          <h3>100% Québec</h3>
+          <p>Designed, engineered, and manufactured entirely in Québec, Canada.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-ic"><svg class="ic-svg"><use href="#ic-nochem"/></svg></div>
+          <h3>No Chemicals</h3>
+          <p>No embalming fluids, no toxic treatments. Preservation through inert nitrogen gas only.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-ic"><svg class="ic-svg"><use href="#ic-clock"/></svg></div>
+          <h3>60–100 Year Preservation</h3>
+          <p>The body is naturally preserved for up to a century inside the hermetically sealed capsule.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-ic"><svg class="ic-svg"><use href="#ic-medal"/></svg></div>
+          <h3>Patented Technology</h3>
+          <p>A unique, certified innovation — 10+ years of research, certified in Canada and the USA.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -675,20 +580,26 @@ footer .wrap{position:relative;z-index:1;max-width:1320px}
   <!-- HOW IT WORKS -->
   <section class="how" id="how">
     <div class="wrap">
-      <div class="how-g">
-        <div class="how-text">
-          <div class="how-intro">
-            <span class="how-eye">The process</span>
-            <h2>How it works</h2>
-            <p class="how-lead">A seamless, controlled process that combines engineering precision with the deepest respect for life.</p>
+      <div class="how-head-top reveal">
+        <span class="eyebrow" style="display:inline-flex;">The Capsule Pyrale</span>
+        <h2>How it works</h2>
+      </div>
+      <div class="how-grid">
+        <div class="how-steps reveal">
+          <div class="how-step">
+            <span class="how-step-n">01</span>
+            <div><h4>Hermetic Sealing</h4><p>The cover is lowered and locked with a special key, creating a completely airtight barrier — no leaks, no odors, no infiltration possible.</p></div>
           </div>
-          <div class="how-tl">
-            <div class="how-s"><div class="how-n">01</div><div><h3>Hermetic Sealing</h3><p>The cover is lowered and locked with a special key, creating a completely airtight barrier — no leaks, no odors, no infiltration possible.</p></div></div>
-            <div class="how-s"><div class="how-n">02</div><div><h3>Inert Gas Preservation</h3><p>The capsule is filled with nitrogen gas, naturally drying the body without chemicals or toxic release. Preservation lasts up to 100 years.</p></div></div>
-            <div class="how-s"><div class="how-n">03</div><div><h3>Gentle Placement</h3><p>The body is placed inside by qualified professionals. Every gesture is slow, deliberate, and respectful — no rushed movements, no compromise on dignity.</p></div></div>
+          <div class="how-step">
+            <span class="how-step-n">02</span>
+            <div><h4>Inert Gas Preservation</h4><p>The capsule is filled with nitrogen gas, naturally drying the body without chemicals or toxic release. Preservation lasts up to 100 years.</p></div>
+          </div>
+          <div class="how-step">
+            <span class="how-step-n">03</span>
+            <div><h4>Gentle Placement</h4><p>The body is placed inside by qualified professionals. Every gesture is slow, deliberate, and respectful — no rushed movements, no compromise on dignity.</p></div>
           </div>
         </div>
-        <div class="how-media">
+        <div class="how-gallery reveal">
           <div class="how-main"><img id="howMain" src="how-bg.jpg" alt="The open Capsule Pyrale" /></div>
           <div class="how-thumbs" id="howThumbs">
             <button class="how-thumb active" data-src="how-bg.jpg" aria-label="Overview"><img src="how-bg.jpg" alt="Overview of the capsule" loading="lazy" /></button>
@@ -702,77 +613,73 @@ footer .wrap{position:relative;z-index:1;max-width:1320px}
     </div>
   </section>
 
-  <!-- A BREATH: the material -->
-  <section class="breath" aria-label="Brushed aluminium">
-    <img src="breath-aluminium.jpg" alt="The brushed aluminium skin of the capsule, in soft light" loading="lazy" />
-    <div class="wrap"><p>Made by hand in Québec.<br>Sealed for a century.</p></div>
-  </section>
-
-  <!-- WHY FAMILIES CHOOSE — the dark chapter -->
-  <section class="fam" id="about">
+  <!-- WHY (DARK) -->
+  <section class="why" id="about">
     <div class="wrap">
-      <div class="fam-g">
-        <div>
-          <span class="fam-eye">For families</span>
-          <h2>Why Families Choose the Capsule Pyrale</h2>
-          <div class="fam-r"></div>
-          <p class="fam-lead">For families who want more than a traditional farewell — a gentler, more meaningful, and more responsible way to honor the departed.</p>
-          <div class="fam-stage">
-            <div class="fam-glow"></div>
-            <div class="fam-floor"></div>
-            <img class="fam-cap" src="why-capsule.png" alt="The Capsule Pyrale, lit from within" loading="lazy" />
-          </div>
+      <div class="top"><span>No decomposition, no chemicals</span></div>
+      <div class="why-grid">
+        <div class="reveal">
+          <h2>Why Families<br />Choose the Capsule Pyrale</h2>
+          <p>For families who want more than a traditional farewell — a gentler, more meaningful, and more responsible way to honor the departed.</p>
+          <div class="why-visual"><img src="why-capsule.png" alt="The Capsule Pyrale glowing from within" loading="lazy" /></div>
         </div>
-        <div class="fam-list">
-          <div class="fam-p"><div class="fam-m"><svg viewBox="0 0 24 24"><path d="M12 3c.5 4.6 4.4 8.5 9 9-4.6.5-8.5 4.4-9 9-.5-4.6-4.4-8.5-9-9 4.6-.5 8.5-4.4 9-9z"/></svg></div>
-            <div><h3>Extended viewing and prolonged farewell</h3><p>No color, no degradation. Families are not forced to rush their goodbyes — there is time to gather, to grieve, and to be present with their loved one.</p></div></div>
-          <div class="fam-p"><div class="fam-m"><svg viewBox="0 0 24 24"><path d="M5 20c9 1 14-4 14-14 0 0-5.5-1-9.5 1S4.5 13 5 20z"/><path d="M5.5 19.5C9.5 15.5 12 13 16.5 11"/></svg></div>
-            <div><h3>Environmentally responsible</h3><p>100% recyclable aluminium. No soil contamination, no groundwater impact, no toxic releases. Compatible with crypts, mausoleums, and above-ground interment.</p></div></div>
-          <div class="fam-p"><div class="fam-m"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg></div>
-            <div><h3>International transport compliant</h3><p>Hermetically sealed with no fluid or odor — fully compatible with international air-cargo regulations. Certified in Canada and the USA.</p></div></div>
+        <div class="why-list">
+          <div class="why-item reveal">
+            <span class="ic">&#9670;</span>
+            <div>
+              <h4>Extended viewing and prolonged farewell</h4>
+              <p>No color, no degradation. Families are not forced to rush their goodbyes — there is time to gather, to grieve, and to be present with their loved one.</p>
+            </div>
+          </div>
+          <div class="why-item reveal">
+            <span class="ic">&#10003;</span>
+            <div>
+              <h4>Environmentally responsible</h4>
+              <p>100% recyclable aluminium. No soil contamination, no groundwater impact, no toxic release. Compatible with crypts, mausoleums, and above-ground interment.</p>
+            </div>
+          </div>
+          <div class="why-item reveal">
+            <span class="ic">&#9678;</span>
+            <div>
+              <h4>International transport compliant</h4>
+              <p>Hermetically sealed with no fluid or odor — fully compatible with international air-cargo regulations. Certified in Canada and the USA.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- INNOVATION & CERTIFICATION — the proof -->
-  <section class="proof" id="research">
+  <!-- CERTIFICATION -->
+  <section class="cert" id="research">
     <div class="wrap">
-      <div class="proof-head">
-        <div><span class="proof-eye">Proven by research</span><h2>Innovation &amp;<br>Certification</h2></div>
-        <p class="proof-lead">More than a decade of research, engineering and validation stands behind every Capsule Pyrale.</p>
-      </div>
-      <div class="proof-g">
-        <div class="proof-big">
-          <div class="proof-ghost" aria-hidden="true">2011 → 2014</div>
-          <div class="proof-n">10<sup>+</sup></div>
-          <div class="proof-k">Years of research</div>
-          <div class="proof-dates">
-            <div class="d"><span>First test</span><b>2011</b></div>
-            <div class="rule"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
-            <div class="d"><span>Results confirmed</span><b>2014</b></div>
-          </div>
-          <p>More than a decade of rigorous development, testing and refinement went into the Capsule Pyrale.</p>
-        </div>
-        <div class="proof-v"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
-        <div class="proof-ledger">
-          <div class="proof-row"><div class="proof-i">01</div><div class="proof-ic"><svg class="ic-svg"><use href="#ic-medal"/></svg></div>
-            <div class="proof-t"><h3>Patented Technology</h3><span class="meta">Certified · Canada &amp; USA</span></div>
-            <p class="proof-d">The Capsule Pyrale uses a proprietary hermetic sealing system and inert-gas preservation process — patented and certified in Canada and the United States, with additional certifications in progress.</p>
-            <span class="proof-s"><i></i>Certified</span></div>
-          <div class="proof-row"><div class="proof-i">02</div><div class="proof-ic"><svg class="ic-svg"><use href="#ic-flask"/></svg></div>
-            <div class="proof-t"><h3>10+ Years of Research</h3><span class="meta">First test 2011 · Results 2014</span></div>
-            <p class="proof-d">More than a decade of rigorous development, testing, and refinement went into the Capsule Pyrale. The first prototype was tested in 2011. Conclusive preservation results were confirmed in 2014.</p>
-            <span class="proof-s"><svg viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></svg>Verified</span></div>
-          <div class="proof-row"><div class="proof-i">03</div><div class="proof-ic"><svg class="ic-svg"><use href="#ic-factory"/></svg></div>
-            <div class="proof-t"><h3>100% Québec Manufacturing</h3><span class="meta">Designed · Engineered · Assembled in Québec</span></div>
-            <p class="proof-d">Every Capsule Pyrale is designed, engineered, and assembled in Granby, Québec. Built from recyclable aluminium and aviation-grade polycarbonate.</p>
-            <span class="proof-s"><i></i>Made in Québec</span></div>
-          <div class="proof-row"><div class="proof-i">04</div><div class="proof-ic"><svg class="ic-svg"><use href="#ic-badge-check"/></svg></div>
-            <div class="proof-t"><h3>Independently Validated</h3><span class="meta">Third-party review</span></div>
-            <p class="proof-d">Preservation performance has been reviewed by independent specialists, confirming the integrity of the seal and the stability of the inert-gas environment over time.</p>
-            <span class="proof-s"><svg viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></svg>Validated</span></div>
-        </div>
+      <span class="eyebrow reveal" style="margin:0 auto; display:flex; justify-content:center;">Research</span>
+      <h2 class="reveal">Innovation &amp; Certification</h2>
+      <div class="cert-track" id="certTrack">
+        <article class="cert-card reveal">
+          <div class="cert-ic"><svg class="ic-svg"><use href="#ic-medal"/></svg></div>
+          <h3>Patented Technology</h3>
+          <p class="lbl">Certified · Canada &amp; USA</p>
+          <p>The Capsule Pyrale uses a proprietary hermetic sealing system and inert gas preservation process — patented and certified in Canada and the United States, with additional certifications in progress.</p>
+        </article>
+        <article class="cert-card reveal">
+          <div class="cert-ic"><svg class="ic-svg"><use href="#ic-flask"/></svg></div>
+          <h3>10+ Years of Research</h3>
+          <p class="lbl">First Test 2011 · Results 2014</p>
+          <p>More than a decade of rigorous development, testing, and refinement went into the Capsule Pyrale. The first prototype was tested in 2011. Conclusive preservation results were confirmed in 2014.</p>
+        </article>
+        <article class="cert-card reveal">
+          <div class="cert-ic"><svg class="ic-svg"><use href="#ic-factory"/></svg></div>
+          <h3>100% Québec Manufacturing</h3>
+          <p class="lbl">Lifetime Warranty</p>
+          <p>Every Capsule Pyrale is designed, engineered, and assembled in Granby, Québec. Built from recyclable aluminium and aviation-grade polycarbonate — and backed by a lifetime structural warranty.</p>
+        </article>
+        <article class="cert-card reveal">
+          <div class="cert-ic"><svg class="ic-svg"><use href="#ic-badge-check"/></svg></div>
+          <h3>Independently Validated</h3>
+          <p class="lbl">Third-Party Review</p>
+          <p>Preservation performance has been reviewed by independent specialists, confirming the integrity of the seal and the stability of the inert-gas environment over time.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -813,51 +720,57 @@ footer .wrap{position:relative;z-index:1;max-width:1320px}
     </div>
   </section>
 
-  <!-- FAMILY VOICES -->
-  <section class="fv" id="voices">
+  <!-- TESTIMONIALS -->
+  <section class="voices" id="voices">
     <div class="wrap">
-      <div class="fv-head">
-        <span class="fv-eye">Family voices</span>
-        <h2>What families say</h2>
-        <p class="fv-lead">Every farewell is personal.<br>These are the experiences of families who chose a different way.</p>
+      <span class="eyebrow reveal" style="margin:0 auto; display:flex; justify-content:center;">Families</span>
+      <h2 class="reveal">What families say</h2>
+      <div class="voices-grid">
+        <article class="voice reveal">
+          <p>"Seeing my mother in the Capsule Pyrale was unlike anything I expected. She looked peaceful, truly at rest. We were able to take the time we needed to say goodbye, without any of the distress we feared. It changed how we experienced grief."</p>
+          <div class="who"><span class="av">MH</span><div><b>Marie-Hélène D.</b><span>Montréal, QC</span></div></div>
+        </article>
+        <article class="voice reveal">
+          <p>"We had to repatriate my father from abroad. The Capsule Pyrale made that possible without the complications we had been warned about. The team at Eterna guided us every step of the way. I am deeply grateful."</p>
+          <div class="who"><span class="av">RC</span><div><b>Robert C.</b><span>Ottawa, ON</span></div></div>
+        </article>
+        <article class="voice reveal">
+          <p>"We chose the Capsule Pyrale because we did not want chemicals anywhere near our father's body. The nitrogen process felt natural, respectful, and right. We are proud of the choice we made for him. He deserved nothing less."</p>
+          <div class="who"><span class="av">ST</span><div><b>Sandra &amp; Tom P.</b><span>Granby, QC</span></div></div>
+        </article>
       </div>
-      <div class="fv-main">
-        <div class="fv-word" aria-hidden="true">FAMILIES</div>
-        <span class="fv-qm" id="fvQm" aria-hidden="true">“</span>
-        <blockquote>“Seeing my mother in the Capsule Pyrale was unlike anything I expected. She looked peaceful, truly at rest. We were able to take the time we needed to say goodbye, without any of the distress we feared. It changed how we experienced grief.”</blockquote>
-        <div class="fv-by"><div class="r"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div><b>Marie-Hélène D.</b><span>Montréal, QC</span></div>
-      </div>
-      <div class="fv-div"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
-      <div class="fv-two">
-        <div class="v"><div class="fv-s"><div class="n">01<i></i><b>“</b></div>
-          <div><blockquote>“We had to repatriate my father from abroad. The Capsule Pyrale made that possible without the complications we had been warned about. The team at Eterna guided us every step of the way. I am deeply grateful.”</blockquote>
-            <div class="by"><div class="r"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div><b>Robert C.</b><span>Ottawa, ON</span></div></div></div></div>
-        <div class="vr" aria-hidden="true"></div>
-        <div class="v"><div class="fv-s"><div class="n">02<i></i><b>“</b></div>
-          <div><blockquote>“We chose the Capsule Pyrale because we did not want chemicals anywhere near our father's body. The nitrogen process felt natural, respectful, and right. We are proud of the choice we made for him. He deserved nothing less.”</blockquote>
-            <div class="by"><div class="r"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div><b>Sandra &amp; Tom P.</b><span>Granby, QC</span></div></div></div></div>
-      </div>
-      <div class="fv-end"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg><p>Every story is different.<br>Every farewell deserves time.</p></div>
     </div>
   </section>
 
-  <!-- PRIVATE CONSULTATION -->
-  <section class="pc" id="contact">
-    <div class="wrap"><div class="pc-g">
-      <div class="pc-ph">
-        <img src="director.jpg" alt="An Eterna advisor, kneeling quietly in a garden" loading="lazy" />
-        <div class="pc-q"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg><p>“To carry a family through their hardest days — with patience, dignity, and quiet respect for the one they have lost.”</p><span>The Eterna promise</span></div>
+  <!-- CONTACT -->
+  <section class="contact dark" id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-visual reveal">
+        <div class="contact-visual-inner">
+          <p class="cv-quote">"To carry a family through their hardest days — with patience, dignity, and quiet respect for the one they have lost."</p>
+          <span class="cv-by">The Eterna promise</span>
+        </div>
       </div>
-      <div class="pc-form">
-        <span class="pc-eye">Private consultation</span>
-        <h2>Book a Free<br>Consultation</h2>
-        <p class="pc-lead">Speak with an Eterna advisor — no sales pressure, no obligation. We are here to answer your questions and help your family find the right path forward.</p>
-        <form class="consult" id="consultForm" novalidate>
-          <div class="f"><label for="fullname">Full name</label><input id="fullname" name="fullname" type="text" placeholder="Your name" required autocomplete="name" /></div>
-          <div class="f"><label for="email">Email address</label><input id="email" name="email" type="email" placeholder="Your email address" required autocomplete="email" /></div>
-          <div class="f"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" placeholder="Your phone number" autocomplete="tel" /></div>
-          <div class="f2">
-            <div class="f sel"><label for="province">Province</label>
+      <div class="contact-form-side">
+        <span class="eyebrow reveal">Contact</span>
+        <h2 class="reveal">Book a Free Consultation</h2>
+        <p class="reveal">Speak with an Eterna advisor — no sales pressure, no obligation. We are here to answer your questions and help your family find the right path forward.</p>
+        <form class="consult reveal" id="consultForm" novalidate>
+          <div class="field">
+            <label for="fullname">Full name</label>
+            <input id="fullname" name="fullname" type="text" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" placeholder="Your email address" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" placeholder="Your phone number" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="province">Province</label>
               <select id="province" name="province">
                 <option value="">Select your province…</option>
                 <option>Québec</option><option>Ontario</option><option>British Columbia</option>
@@ -865,70 +778,81 @@ footer .wrap{position:relative;z-index:1;max-width:1320px}
                 <option>Nova Scotia</option><option>New Brunswick</option>
                 <option>Newfoundland and Labrador</option><option>Prince Edward Island</option>
                 <option>Other</option>
-              </select></div>
-            <div class="f sel"><label for="time">Preferred contact time</label>
+              </select>
+            </div>
+            <div class="field">
+              <label for="time">Preferred contact time</label>
               <select id="time" name="time">
                 <option value="">Select a time…</option>
                 <option>Morning</option><option>Afternoon</option><option>Evening</option>
-              </select></div>
+              </select>
+            </div>
           </div>
-          <div class="f"><label for="message">Message (optional)</label><textarea id="message" name="message" placeholder="Tell us a bit about your situation or any questions you have…"></textarea></div>
-          <div class="pc-priv"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg><span>Your conversation is private and without obligation.</span></div>
-          <button type="submit" class="pc-btn">Request a consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          <p class="pc-note" id="formNote">We respond within one business day.<br>For urgent matters, call <a href="tel:18446955613">1 844 695-5613</a>.</p>
+          <div class="field">
+            <label for="message">Message (optional)</label>
+            <textarea id="message" name="message" placeholder="Tell us a bit about your situation or any questions you have…"></textarea>
+          </div>
+          <button type="submit" class="btn btn--light">Request Consultation</button>
+          <p class="form-note" id="formNote">We respond within one business day. For urgent matters, call <a href="tel:18446955613">1 844 695-5613</a>.</p>
         </form>
-        <div class="pc-done" id="pcDone"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg><h3>Thank you.</h3><p>Your request has been received.<br>An ETERNA advisor will be in touch within one business day.</p></div>
       </div>
-      <aside class="pc-side" aria-label="What to expect">
-        <div class="it"><svg viewBox="0 0 24 24"><path d="M12 3c.5 4.6 4.4 8.5 9 9-4.6.5-8.5 4.4-9 9-.5-4.6-4.4-8.5-9-9 4.6-.5 8.5-4.4 9-9z"/></svg>Private<br>conversation</div>
-        <span class="dot"></span>
-        <div class="it"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>No<br>obligation</div>
-        <span class="dot"></span>
-        <div class="it"><svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M12 13c-3.5 0-6-2.5-6-6 3.5 0 6 2.5 6 6zM12 9c0-3.5 2.5-6 6-6 0 3.5-2.5 6-6 6z"/></svg>Human<br>support</div>
-      </aside>
-    </div></div>
+    </div>
   </section>
 </main>
 
 <!-- FOOTER -->
 <footer id="footer">
-  <div class="bg"><img src="footer-mountains.jpg" alt="" loading="lazy" /></div>
+  <div class="foot-glow"></div>
   <div class="wrap">
-    <div class="ft-main">
-      <div class="ft-brand">
-        <a href="#top" class="brand"><svg class="brand-logo" role="img" aria-label="Eterna"><use href="#eterna-logo"/></svg><svg class="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></a>
-        <p class="ft-tag">A gentler, more enduring farewell — natural preservation for 60 to 100 years, without chemicals or compromise. Designed and made in Québec.</p>
-        <div class="ft-rule"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
-        <div class="ft-social">
-          <a href="#" aria-label="Eterna on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5H3.56V21h3.38V8.5zM5.25 3a1.94 1.94 0 110 3.88 1.94 1.94 0 010-3.88zM20.5 21h-3.37v-6.1c0-1.45-.03-3.32-2.02-3.32-2.03 0-2.34 1.58-2.34 3.21V21H9.4V8.5h3.24v1.7h.05c.45-.85 1.55-1.75 3.19-1.75 3.41 0 4.04 2.25 4.04 5.17V21z"/></svg></a>
-          <a href="#" aria-label="Eterna on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg></a>
-          <a href="#" aria-label="Eterna on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.2l.4-3h-2.6V8.1c0-.85.25-1.42 1.5-1.42H16.4V4.1c-.3-.04-1.2-.12-2.3-.12-2.3 0-3.8 1.4-3.8 3.9V10H8v3h2.3v8h3.2z"/></svg></a>
+    <div class="foot-main">
+      <div class="foot-brand">
+        <a href="#top" class="brand"><svg class="brand-logo" role="img" aria-label="Eterna"><use href="#eterna-logo"/></svg></a>
+        <p class="foot-tag">A gentler, more enduring farewell — natural preservation for 60 to 100 years, without chemicals or compromise. Designed and made in Québec.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Eterna on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5H3.56V21h3.38V8.5zM5.25 3a1.94 1.94 0 1 0 0 3.88 1.94 1.94 0 0 0 0-3.88zM21 21h-3.37v-6.11c0-1.46-.03-3.33-2.03-3.33-2.03 0-2.34 1.59-2.34 3.23V21H9.9V8.5h3.24v1.71h.05c.45-.86 1.55-1.76 3.2-1.76 3.42 0 4.06 2.25 4.06 5.18V21z"/></svg></a>
+          <a href="#" aria-label="Eterna on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.1" cy="6.9" r="1.15" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Eterna on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.2l.4-3h-2.6V8.1c0-.85.25-1.42 1.5-1.42h1.4V4.13c-.7-.1-1.5-.15-2.3-.15-2.3 0-3.9 1.4-3.9 4v2.02H8v3h2.2V21h3.3z"/></svg></a>
         </div>
       </div>
-      <div class="ft-col"><h5>Explore</h5><ul>
-        <li><a href="product.html">The Capsule Pyrale</a></li><li><a href="#how">How It Works</a></li><li><a href="pre-plan.html">Pre-Planning</a></li><li><a href="/partenaires">Partner With Us</a></li></ul></div>
-      <div class="ft-col"><h5>Company</h5><ul>
-        <li><a href="#about">About Us</a></li><li><a href="#research">Innovation</a></li><li><a href="#blog">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div class="ft-col"><h5>Get in touch</h5><ul class="ft-touch">
-        <li><svg viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-10.5a6 6 0 0112 0C18 15.7 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></svg><address style="font-style:normal">411 Saint-Vallier<br>Granby, Québec&nbsp; J2G 7Y2<br>Canada</address></li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg><a href="tel:18446955613">1 844 695-5613</a></li>
-        <li><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><a href="mailto:info@pyramidedetail.com">info@pyramidedetail.com</a></li>
-        <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg><span>Mon–Fri: 9am–5pm ET</span></li></ul></div>
+      <div class="foot-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="product.html">The Capsule Pyrale</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="pre-plan.html">Pre-Planning</a></li>
+          <li><a href="/partenaires">Partner With Us</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#research">Innovation</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Get in touch</h5>
+        <address>
+          411 Saint-Vallier<br />
+          Granby, Québec J2G 7Y2<br />
+          <a href="tel:18446955613">1 844 695-5613</a><br />
+          <a href="mailto:info@pyramidedetail.com">info@pyramidedetail.com</a><br />
+          <span style="color:var(--muted)">Mon–Fri · 9am–5pm ET</span>
+        </address>
+      </div>
     </div>
-    <div class="ft-div"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
-    <div class="ft-band">
-      <div class="ft-help"><svg viewBox="0 0 64 64"><path d="M32 30c-6-7-16-4-14 4 1 5 8 8 14 13 6-5 13-8 14-13 2-8-8-11-14-4z"/><path d="M8 44c6-4 10-5 14-4l8 2c2 1 2 4 0 5l-8 1M56 44c-6-4-10-5-14-4l-8 2"/><path d="M8 44v12l10 2c4 1 8 0 12-2l16-8M56 44v12l-10 2"/></svg>
-        <div><h4>Here for you, every step of the way.</h4><p>Our advisors are here to guide and support you with care, clarity, and complete confidentiality.</p></div></div>
-      <div class="vr" aria-hidden="true"></div>
-      <div class="ft-cta"><span>Speak with an advisor</span><a href="#contact">Book a private consultation <svg viewBox="0 0 48 20"><path d="M2 10h42M36 3l8 7-8 7"/></svg></a></div>
-    </div>
-    <div class="ft-bottom">
+    <div class="foot-bottom">
       <span>© 2026 Eterna. All rights reserved.</span>
-      <span class="st"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></span>
-      <div class="ft-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Français</a></div>
+      <div class="foot-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Français</a>
+      </div>
     </div>
   </div>
-  <div class="ft-portal"><a href="https://eternaadmin-production.up.railway.app/portal"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Access your file — view your plan, payments and balance</a></div>
+  <div class="foot-portal"><a href="https://eternaadmin-production.up.railway.app/portal">Access your file &mdash; view your plan, payments and balance</a></div>
 </footer>
 
 <!-- Formulaire statique cache: Netlify ne detecte un formulaire qu au
@@ -991,15 +915,9 @@ footer .wrap{position:relative;z-index:1;max-width:1320px}
         if (!src || btn.classList.contains('active')) return;
         howThumbs.querySelectorAll('.how-thumb').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        howMain.classList.add('out');
+        howMain.style.opacity = '0';
         const img = new Image();
-        img.onload = () => {
-          setTimeout(() => {
-            howMain.src = src;
-            howMain.classList.remove('out'); howMain.classList.add('entering');
-            requestAnimationFrame(() => requestAnimationFrame(() => howMain.classList.remove('entering')));
-          }, 220);
-        };
+        img.onload = () => { howMain.src = src; howMain.style.opacity = '1'; };
         img.src = src;
       });
     });
@@ -1025,8 +943,7 @@ footer .wrap{position:relative;z-index:1;max-width:1320px}
     e.preventDefault();
     const name = form.fullname.value.trim();
     const email = form.email.value.trim();
-    if (!name || !email) { note.textContent = 'Please add your name and email so we can reach you.'; note.classList.add('err'); return; }
-    note.classList.remove('err');
+    if (!name || !email) { note.textContent = 'Please add your name and email so we can reach you.'; note.style.color = '#e2b4b4'; return; }
     /* Ce formulaire remerciait la famille puis se vidait — sans rien envoyer
        nulle part. Il passe maintenant par Netlify Forms, comme la page
        contact, et ne remercie qu une fois la soumission acceptee. */
@@ -1038,72 +955,16 @@ footer .wrap{position:relative;z-index:1;max-width:1320px}
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
       .then(function (r) {
         if (!r.ok) throw new Error('form');
+        note.textContent = 'Thank you, ' + name.split(' ')[0] + '. An Eterna advisor will be in touch within one business day.';
+        note.style.color = '#9fb39f';
         form.reset();
-        var sec = document.getElementById('contact'); if (sec) sec.classList.add('sent');
       })
       .catch(function () {
         note.textContent = 'Something went wrong on our side. Please call 1 844 695-5613 and we will take it from there.';
-        note.classList.add('err');
+        note.style.color = '#e2b4b4';
       })
       .then(function () { if (btn) btn.disabled = false; });
   });
-</script>
-<script>
-(function(){
-  var br = document.querySelector('.breath');
-  if (br) {
-    if (!('IntersectionObserver' in window)) br.classList.add('in');
-    else { var iob = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { br.classList.add('in'); iob.unobserve(br); } }); }, { threshold: 0.3 }); iob.observe(br); }
-    setTimeout(function(){ br.classList.add('in'); }, 3500);
-  }
-  var pc = document.getElementById('contact');
-  if (pc && pc.classList.contains('pc')) {
-    if (!('IntersectionObserver' in window)) pc.classList.add('in');
-    else { var ioc = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { pc.classList.add('in'); ioc.unobserve(pc); } }); }, { threshold: 0.12 }); ioc.observe(pc); }
-    setTimeout(function(){ pc.classList.add('in'); }, 3500);
-  }
-  var fv = document.getElementById('voices');
-  if (fv && fv.classList.contains('fv')) {
-    if (!('IntersectionObserver' in window)) fv.classList.add('in');
-    else { var iov = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { fv.classList.add('in'); iov.unobserve(fv); } }); }, { threshold: 0.15 }); iov.observe(fv); }
-    setTimeout(function(){ fv.classList.add('in'); }, 3500);
-    /* Le grand guillemet glisse de quelques pixels au defilement — a peine. */
-    var qm = document.getElementById('fvQm');
-    if (qm && window.matchMedia('(min-width: 900px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      var tick = false;
-      window.addEventListener('scroll', function(){
-        if (tick) return; tick = true;
-        requestAnimationFrame(function(){
-          var r = fv.getBoundingClientRect(); var p = Math.max(-1, Math.min(1, (window.innerHeight/2 - (r.top + r.height/2)) / window.innerHeight));
-          qm.style.transform = 'translateY(' + (p * 8).toFixed(1) + 'px)'; tick = false;
-        });
-      }, { passive: true });
-    }
-  }
-  var pr = document.getElementById('research');
-  if (pr && pr.classList.contains('proof')) {
-    if (!('IntersectionObserver' in window)) pr.classList.add('in');
-    else { var iop = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { pr.classList.add('in'); iop.unobserve(pr); } }); }, { threshold: 0.15 }); iop.observe(pr); }
-    setTimeout(function(){ pr.classList.add('in'); }, 3500);
-  }
-  var fam = document.getElementById('about');
-  if (fam && fam.classList.contains('fam')) {
-    if (!('IntersectionObserver' in window)) fam.classList.add('in');
-    else { var iof = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { fam.classList.add('in'); iof.unobserve(fam); } }); }, { threshold: 0.15 }); iof.observe(fam); }
-    setTimeout(function(){ fam.classList.add('in'); }, 3500);
-  }
-  var how = document.getElementById('how');
-  if (how) {
-    if (!('IntersectionObserver' in window)) how.classList.add('in');
-    else { var ioh = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { how.classList.add('in'); ioh.unobserve(how); } }); }, { threshold: 0.18 }); ioh.observe(how); }
-    setTimeout(function(){ how.classList.add('in'); }, 3500);
-  }
-  var fs = document.querySelectorAll('.diff-f'); if (!fs.length) return;
-  if (!('IntersectionObserver' in window)) { fs.forEach(function(f){ f.classList.add('in'); }); return; }
-  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.25 });
-  fs.forEach(function(f){ io.observe(f); });
-  setTimeout(function(){ fs.forEach(function(f){ f.classList.add('in'); }); }, 3000);
-})();
 </script>
 </body>
 </html>
