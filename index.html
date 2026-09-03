@@ -120,52 +120,7 @@
   }
   .btn--partner:hover { background: rgba(255,255,255,0.20); }
   .btn-arrow { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); font-size: 15px; }
-
-  /* ---------- VALUE STRIP ---------- */
-  .values { background: var(--mist); padding: 84px 0; }
-  .values-head { text-align: center; margin-bottom: 50px; }
-  .values-head .eyebrow { margin-bottom: 14px; }
-  .values-head h2 { font-size: clamp(30px, 3.6vw, 46px); }
-  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; z-index: 3; }
-  .value-card {
-    background: #fff;
-    border: 1px solid rgba(228,227,223,0.9);
-    border-radius: 16px;
-    padding: 28px 26px;
-    position: relative;
-    overflow: hidden;
-    box-shadow:
-      0 1px 2px rgba(40,44,60,0.05),
-      0 8px 18px rgba(40,44,60,0.06),
-      0 24px 44px rgba(40,44,60,0.05);
-    transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
-  }
-  .value-card::before {
-    content: "";
-    position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--iris), var(--iris-soft));
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.5s var(--ease);
-  }
-  .value-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(111,90,216,0.28);
-    box-shadow:
-      0 2px 4px rgba(40,44,60,0.05),
-      0 18px 34px rgba(70,56,140,0.12),
-      0 40px 70px rgba(70,56,140,0.12);
-  }
-  .value-card:hover::before { transform: scaleX(1); }
-  .value-ic {
-    width: 44px; height: 44px; border-radius: 50%;
-    background: var(--ink); color: #fff;
-    display: grid; place-items: center; margin-bottom: 20px;
-    transition: background 0.45s var(--ease), transform 0.45s var(--ease);
-  }
   .ic-svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; display: block; }
-  .value-card:hover .value-ic { background: var(--iris); transform: scale(1.08); }
-  .value-card h3 { font-size: 21px; margin-bottom: 8px; }
-  .value-card p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
 
   /* ---------- HOW IT WORKS ---------- */
   .how { padding: 100px 0 90px; }
@@ -349,7 +304,6 @@
     .nav-links, .nav-cta .btn { display: none; }
     .menu-toggle { display: flex; }
     .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
-    .values-grid, .cert-track { grid-template-columns: 1fr 1fr; }
     .how-grid { grid-template-columns: 1fr; gap: 30px; }
     .why-grid, .faq-grid, .voices-grid { grid-template-columns: 1fr; gap: 34px; }
     .why::before { display: none; }
@@ -357,7 +311,6 @@
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 18px; }
-    .values-grid { grid-template-columns: 1fr; }
     .cert-track { grid-template-columns: 1fr; }
     .field-row { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; gap: 26px; }
@@ -438,6 +391,48 @@ h1 em{font-style:italic}
   .sub{font-size:16px}
   .trust{background:#231b14}
 }
+
+/* ── « Why the Capsule Pyrale » — composition editoriale, sans cartes ── */
+.why{background:#F5F2ED;color:#2A1C12;padding:120px 0 100px;font-family:'Instrument Sans',system-ui,sans-serif}
+.why .wrap{max-width:1400px}
+.why-intro{text-align:center}
+.why-eye{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9B744B;font-weight:500}
+.why-eye::before{content:"";width:18px;height:1px;background:#9B744B}
+.why-intro h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(52px,4.5vw,76px);line-height:1.05;letter-spacing:-.015em;color:#2A1C12;margin-top:22px}
+.why-lead{margin:28px auto 0;max-width:720px;font-size:19px;line-height:1.55;color:#6D6259}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);align-items:stretch;margin-top:70px;min-height:330px}
+.why-f{position:relative;text-align:center;padding:60px 34px 10px;border-right:1px solid rgba(75,52,35,.15)}
+.why-f:last-child{border-right:none}
+.why-n{position:absolute;left:24px;top:-18px;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(100px,8vw,125px);line-height:1;color:rgba(160,115,70,.10);letter-spacing:-.02em;pointer-events:none;user-select:none}
+.why-m{position:relative;width:76px;height:76px;margin:0 auto;border-radius:50%;background:#2A1B12;border:1px solid #B88750;display:flex;align-items:center;justify-content:center;color:#C99B61;box-shadow:0 12px 30px rgba(40,25,15,.10);transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s cubic-bezier(.2,.7,.2,1)}
+.why-m svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+.why-f:hover .why-m{transform:translateY(-4px);box-shadow:0 16px 34px rgba(40,25,15,.14),0 0 0 4px rgba(201,155,97,.12)}
+.why-f h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:30px;line-height:1.1;color:#2A1C12;margin-top:34px;letter-spacing:-.005em;text-wrap:balance}
+.why-r{width:30px;height:1px;background:#B88750;margin:18px auto 0}
+.why-f p{font-size:15.5px;line-height:1.7;color:#6D6259;max-width:260px;margin:18px auto 0}
+.why-div{display:flex;align-items:center;gap:22px;margin:65px auto 0;max-width:1100px}
+.why-div::before,.why-div::after{content:"";flex:1;height:1px;background:rgba(184,135,80,.45)}
+.why-div svg{width:18px;height:18px;color:#B88750;flex:none}
+.why-quote{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:19px;color:#2A1C12;text-align:center;margin-top:42px}
+.why-cta{display:inline-flex;align-items:center;gap:10px;margin-top:22px;color:#9B744B;text-decoration:none;font-size:15.5px;font-weight:500;transition:color .3s}
+.why-cta svg{width:16px;height:16px;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.why-cta:hover{color:#7A5734}
+.why-cta:hover svg{transform:translateX(5px)}
+.why-cta-w{text-align:center}
+/* Arrivee: le numero apparait, le medaillon monte, le texte suit — en cascade. */
+.why-f .why-n,.why-f .why-m,.why-f .why-t{opacity:0;transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.why-f .why-m{transform:translateY(10px)}.why-f .why-t{transform:translateY(12px)}
+.why-f.in .why-n,.why-f.in .why-m,.why-f.in .why-t{opacity:1;transform:none}
+.why-f.in .why-n{opacity:1}
+.why-f:nth-child(2) .why-n,.why-f:nth-child(2) .why-m,.why-f:nth-child(2) .why-t{transition-delay:.09s}
+.why-f:nth-child(3) .why-n,.why-f:nth-child(3) .why-m,.why-f:nth-child(3) .why-t{transition-delay:.18s}
+.why-f:nth-child(4) .why-n,.why-f:nth-child(4) .why-m,.why-f:nth-child(4) .why-t{transition-delay:.27s}
+@media(max-width:1100px){.why-grid{grid-template-columns:1fr 1fr;row-gap:40px}.why-f:nth-child(2){border-right:none}}
+@media(max-width:700px){.why{padding:84px 0 72px}.why-grid{grid-template-columns:1fr;margin-top:50px;min-height:0;row-gap:0}
+  .why-f{text-align:left;padding:44px 0 50px;border-right:none;border-bottom:1px solid rgba(75,52,35,.15)}.why-f:last-child{border-bottom:none}
+  .why-n{left:0;top:6px;font-size:96px}.why-m{margin:0;width:64px;height:64px}.why-m svg{width:26px;height:26px}
+  .why-f h3{font-size:27px;margin-top:26px}.why-r{margin-left:0}.why-f p{margin-left:0}.why-lead{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.why-f .why-n,.why-f .why-m,.why-f .why-t{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -491,35 +486,31 @@ h1 em{font-style:italic}
   </div></div>
 </section>
 
-  <!-- VALUE STRIP -->
-  <section class="values" id="capsule">
+  <!-- WHY THE CAPSULE PYRALE -->
+  <section class="why" id="capsule">
     <div class="wrap">
-      <div class="values-head reveal">
-        <span class="eyebrow" style="display:inline-flex;">The difference</span>
+      <div class="why-intro reveal">
+        <span class="why-eye">The difference</span>
         <h2>Why the Capsule Pyrale</h2>
+        <p class="why-lead">We didn’t just build a capsule.<br>We reimagined preservation with science, precision, and purpose.</p>
       </div>
-      <div class="values-grid">
-        <div class="value-card reveal">
-          <div class="value-ic"><svg class="ic-svg"><use href="#ic-leaf"/></svg></div>
-          <h3>100% Québec</h3>
-          <p>Designed, engineered, and manufactured entirely in Québec, Canada.</p>
-        </div>
-        <div class="value-card reveal">
-          <div class="value-ic"><svg class="ic-svg"><use href="#ic-nochem"/></svg></div>
-          <h3>No Chemicals</h3>
-          <p>No embalming fluids, no toxic treatments. Preservation through inert nitrogen gas only.</p>
-        </div>
-        <div class="value-card reveal">
-          <div class="value-ic"><svg class="ic-svg"><use href="#ic-clock"/></svg></div>
-          <h3>60–100 Year Preservation</h3>
-          <p>The body is naturally preserved for up to a century inside the hermetically sealed capsule.</p>
-        </div>
-        <div class="value-card reveal">
-          <div class="value-ic"><svg class="ic-svg"><use href="#ic-medal"/></svg></div>
-          <h3>Patented Technology</h3>
-          <p>A unique, certified innovation — 10+ years of research, certified in Canada and the USA.</p>
-        </div>
+      <div class="why-grid">
+        <div class="why-f"><div class="why-n" aria-hidden="true">01</div>
+          <div class="why-m"><svg viewBox="0 0 24 24"><path d="M5 20c9 1 14-4 14-14 0 0-5.5-1-9.5 1S4.5 13 5 20z"/><path d="M5.5 19.5C9.5 15.5 12 13 16.5 11"/></svg></div>
+          <div class="why-t"><h3>100% Québec</h3><div class="why-r"></div><p>Designed, engineered, and manufactured entirely in Québec, Canada.</p></div></div>
+        <div class="why-f"><div class="why-n" aria-hidden="true">02</div>
+          <div class="why-m"><svg viewBox="0 0 24 24"><path d="M9.5 3h5M10 3v6.2L4.8 18.3A1.5 1.5 0 006.1 20.5h11.8a1.5 1.5 0 001.3-2.2L14 9.2V3"/><path d="M8 15h8"/><circle cx="12" cy="12" r="10"/><path d="M4.9 4.9l14.2 14.2"/></svg></div>
+          <div class="why-t"><h3>No Chemicals</h3><div class="why-r"></div><p>No embalming fluids, no toxic treatments. Preservation through inert nitrogen gas only.</p></div></div>
+        <div class="why-f"><div class="why-n" aria-hidden="true">03</div>
+          <div class="why-m"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg></div>
+          <div class="why-t"><h3>60–100 Year<br>Preservation</h3><div class="why-r"></div><p>The body is naturally preserved for up to a century inside the hermetically sealed capsule.</p></div></div>
+        <div class="why-f"><div class="why-n" aria-hidden="true">04</div>
+          <div class="why-m"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M12 5.8l.9 1.9 2.1.3-1.5 1.5.4 2.1-1.9-1-1.9 1 .4-2.1-1.5-1.5 2.1-.3z"/><path d="M8.5 13.6L7 21l5-2.6L17 21l-1.5-7.4"/></svg></div>
+          <div class="why-t"><h3>Patented Technology</h3><div class="why-r"></div><p>A unique, certified innovation — 10+ years of research, certified in Canada and the USA.</p></div></div>
       </div>
+      <div class="why-div reveal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
+      <p class="why-quote reveal">Preservation, elevated. Because every life deserves eternity.</p>
+      <div class="why-cta-w reveal"><a class="why-cta" href="product.html">Discover the Capsule Pyrale <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     </div>
   </section>
 
@@ -911,6 +902,15 @@ h1 em{font-style:italic}
       })
       .then(function () { if (btn) btn.disabled = false; });
   });
+</script>
+<script>
+(function(){
+  var fs = document.querySelectorAll('.why-f'); if (!fs.length) return;
+  if (!('IntersectionObserver' in window)) { fs.forEach(function(f){ f.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.25 });
+  fs.forEach(function(f){ io.observe(f); });
+  setTimeout(function(){ fs.forEach(function(f){ f.classList.add('in'); }); }, 3000);
+})();
 </script>
 </body>
 </html>
