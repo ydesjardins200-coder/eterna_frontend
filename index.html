@@ -103,7 +103,6 @@
   .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .brand { font-family: var(--display); font-size: 19px; letter-spacing: 0.16em; font-weight: 600; }
   .brand-logo { height: 20px; width: auto; aspect-ratio: 114 / 22; display: block; }
-  .foot-brand .brand-logo { height: 26px; }
 
   .nav-links { display: flex; gap: 26px; list-style: none; }
   .nav-links a { font-size: 13px; color: var(--ink-soft); transition: color 0.3s; display: inline-flex; align-items: center; gap: 8px; }
@@ -124,36 +123,6 @@
   form.consult { max-width: none; margin: 0; background: transparent; border: 0; border-radius: 0; padding: 0; text-align: left; }
   form.consult .btn { width: 100%; justify-content: center; margin-top: 6px; }
 
-  /* ---------- FOOTER ---------- */
-  footer { position: relative; overflow: hidden; color: #fff; background: linear-gradient(180deg, rgba(21,16,12,0.88) 0%, rgba(21,16,12,0.72) 34%, rgba(21,16,12,0.82) 62%, rgba(21,16,12,0.96) 100%), #15100C url("footer-mist.jpg") center 32% / cover no-repeat; }
-  .foot-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: min(780px, 82%); height: 200px; background: radial-gradient(60% 100% at 50% 0%, rgba(111,90,216,0.16), transparent 72%); pointer-events: none; }
-  footer .wrap { position: relative; z-index: 1; }
-  .foot-main { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1.25fr; gap: 44px; padding: 78px 0 54px; }
-  .foot-brand .brand { display: inline-block; margin-bottom: 22px; }
-  .foot-tag { font-size: 13.5px; color: var(--night-text); line-height: 1.72; max-width: 340px; margin-bottom: 26px; }
-  .foot-social { display: flex; gap: 11px; }
-  .foot-social a { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--night-line); display: grid; place-items: center; color: var(--night-text); transition: color .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease), transform .35s var(--ease); }
-  .foot-social a:hover { color: #fff; border-color: var(--iris); background: rgba(111,90,216,0.16); transform: translateY(-2px); }
-  .foot-social svg { width: 16px; height: 16px; }
-  .foot-col h5 { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; font-weight: 600; }
-  .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .foot-col a { font-size: 13px; color: var(--night-text); transition: color 0.3s; }
-  .foot-col a:hover { color: #fff; }
-  .foot-col address { font-style: normal; font-size: 13px; color: var(--night-text); line-height: 1.95; }
-  .foot-bottom { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; padding: 22px 0 34px; border-top: 1px solid var(--night-line); }
-  .foot-bottom > span { font-size: 12px; color: var(--muted); }
-  .foot-legal { display: flex; gap: 22px; flex-wrap: wrap; }
-  .foot-legal a { font-size: 12px; color: var(--night-text); transition: color 0.3s; }
-  .foot-legal a:hover { color: #fff; }
-  @media (max-width: 860px) {
-    .foot-main { grid-template-columns: 1fr 1fr; gap: 36px 24px; padding: 60px 0 40px; }
-    .foot-brand { grid-column: 1 / -1; }
-  }
-  @media (max-width: 480px) {
-    .foot-main { grid-template-columns: 1fr; }
-    .foot-bottom { justify-content: flex-start; }
-  }
-
   /* ---------- REVEAL ---------- */
   .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
   .reveal.in { opacity: 1; transform: none; }
@@ -171,10 +140,6 @@
     * { scroll-behavior: auto !important; }
     .reveal { opacity: 1 !important; transform: none !important; transition: none; }
   }
-
-  .foot-portal { text-align: center; padding: 18px 24px 0; }
-  .foot-portal a { font-size: 12.5px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
-  .foot-portal a:hover { color: var(--ink); }
 
 
 /* ── La barre, comme la maquette: logo blanc, liens dans une pilule de verre,
@@ -567,6 +532,60 @@ h1 em{font-style:italic}
 /* Les ancres du menu s arretent sous la barre; les images se decodent sans bloquer. */
 section[id]{scroll-margin-top:72px}
 img{decoding:async}
+
+/* ── Le pied de page: la montagne au couchant, et le meme langage ── */
+footer{position:relative;overflow:hidden;color:#EDE4D6;font-family:'Instrument Sans',system-ui,sans-serif;background:#15100C}
+footer .bg{position:absolute;inset:0;z-index:0}
+footer .bg img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block;opacity:.85}
+footer .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,16,12,.55) 0%,rgba(21,16,12,.35) 35%,rgba(21,16,12,.62) 70%,rgba(21,16,12,.92) 100%)}
+footer .wrap{position:relative;z-index:1;max-width:1320px}
+.ft-main{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:48px;padding:96px 0 56px}
+.ft-brand .brand{display:inline-flex;align-items:center;gap:14px;margin-bottom:26px;text-decoration:none}
+.ft-brand .brand-logo{height:30px;width:auto;color:#F2EAE0}
+.ft-brand .brand svg.star{width:24px;height:24px;color:#C18B52}
+.ft-tag{font-family:'Instrument Serif',Georgia,serif;font-size:22px;line-height:1.5;color:#E3D8C8;max-width:420px;letter-spacing:-.005em}
+.ft-rule{display:flex;align-items:center;gap:14px;margin:26px 0 30px;max-width:340px}
+.ft-rule::before,.ft-rule::after{content:"";flex:1;height:1px;background:rgba(193,139,82,.45)}
+.ft-rule svg{width:14px;height:14px;color:#C18B52;flex:none}
+.ft-social{display:flex;gap:12px}
+.ft-social a{width:52px;height:52px;border-radius:50%;border:1px solid rgba(237,228,214,.22);display:flex;align-items:center;justify-content:center;color:rgba(237,228,214,.85);transition:border-color .35s,color .35s,transform .35s}
+.ft-social a:hover{border-color:#C18B52;color:#fff;transform:translateY(-2px)}
+.ft-social svg{width:18px;height:18px}
+.ft-col h5{font-size:12px;letter-spacing:.20em;text-transform:uppercase;color:#C18B52;font-weight:500;margin-bottom:26px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:20px}
+.ft-col a{font-family:'Instrument Serif',Georgia,serif;font-size:21px;color:#EDE4D6;text-decoration:none;transition:color .3s}
+.ft-col a:hover{color:#C18B52}
+.ft-touch{list-style:none;display:flex;flex-direction:column;gap:20px}
+.ft-touch li{display:grid;grid-template-columns:22px 1fr;gap:14px;align-items:start;font-size:15.5px;line-height:1.6;color:#E3D8C8}
+.ft-touch svg{width:20px;height:20px;color:#C18B52;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;margin-top:3px}
+.ft-touch a{color:#E3D8C8;text-decoration:none}.ft-touch a:hover{color:#C18B52}
+.ft-div{display:flex;align-items:center;gap:22px}
+.ft-div::before,.ft-div::after{content:"";flex:1;height:1px;background:rgba(193,139,82,.45)}
+.ft-div svg{width:18px;height:18px;color:#C18B52;flex:none}
+.ft-band{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 56px;align-items:center;padding:36px 0}
+.ft-band .vr{height:100%;min-height:80px;background:rgba(237,228,214,.14)}
+.ft-help{display:flex;gap:26px;align-items:center}
+.ft-help svg{width:64px;height:64px;color:#C18B52;stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ft-help h4{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:26px;color:#F2EAE0;line-height:1.2}
+.ft-help p{font-size:15px;line-height:1.6;color:rgba(237,228,214,.7);margin-top:6px;max-width:380px}
+.ft-cta{padding-left:8px}
+.ft-cta span{display:block;font-size:12px;letter-spacing:.20em;text-transform:uppercase;color:#C18B52;font-weight:500;margin-bottom:12px}
+.ft-cta a{display:inline-flex;align-items:center;gap:22px;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,2.6vw,38px);color:#F2EAE0;text-decoration:none;letter-spacing:-.01em;transition:color .3s}
+.ft-cta a svg{width:48px;height:20px;color:#C18B52;stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.ft-cta a:hover{color:#C18B52}.ft-cta a:hover svg{transform:translateX(8px)}
+.ft-bottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding:28px 0 26px;border-top:1px solid rgba(237,228,214,.12)}
+.ft-bottom>span{font-size:14px;color:rgba(237,228,214,.7)}
+.ft-bottom .st svg{width:22px;height:22px;color:#C18B52;display:block}
+.ft-legal{display:flex;justify-content:flex-end;gap:0;flex-wrap:wrap}
+.ft-legal a{font-size:14px;color:rgba(237,228,214,.7);text-decoration:none;padding:0 22px;border-left:1px solid rgba(237,228,214,.18);transition:color .3s}
+.ft-legal a:first-child{border-left:0}.ft-legal a:last-child{padding-right:0}
+.ft-legal a:hover{color:#C18B52}
+.ft-portal{position:relative;z-index:1;text-align:center;padding:20px 24px 24px;border-top:1px solid rgba(237,228,214,.10);background:rgba(10,7,5,.55)}
+.ft-portal a{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:#C18B52;text-decoration:none}
+.ft-portal a:hover{text-decoration:underline}
+.ft-portal svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:1000px){.ft-main{grid-template-columns:1fr 1fr;gap:40px;padding-top:72px}.ft-band{grid-template-columns:1fr;gap:28px}.ft-band .vr{display:none}.ft-bottom{grid-template-columns:1fr;text-align:center;gap:14px}.ft-legal{justify-content:center}}
+@media(max-width:640px){.ft-main{grid-template-columns:1fr;gap:34px}.ft-col a{font-size:19px}.ft-cta a{font-size:26px}.ft-legal a{padding:0 12px}}
 </style>
 </head>
 <body>
@@ -863,57 +882,43 @@ img{decoding:async}
 
 <!-- FOOTER -->
 <footer id="footer">
-  <div class="foot-glow"></div>
+  <div class="bg"><img src="footer-mountains.jpg" alt="" loading="lazy" /></div>
   <div class="wrap">
-    <div class="foot-main">
-      <div class="foot-brand">
-        <a href="#top" class="brand"><svg class="brand-logo" role="img" aria-label="Eterna"><use href="#eterna-logo"/></svg></a>
-        <p class="foot-tag">A gentler, more enduring farewell — natural preservation for 60 to 100 years, without chemicals or compromise. Designed and made in Québec.</p>
-        <div class="foot-social">
-          <a href="#" aria-label="Eterna on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5H3.56V21h3.38V8.5zM5.25 3a1.94 1.94 0 1 0 0 3.88 1.94 1.94 0 0 0 0-3.88zM21 21h-3.37v-6.11c0-1.46-.03-3.33-2.03-3.33-2.03 0-2.34 1.59-2.34 3.23V21H9.9V8.5h3.24v1.71h.05c.45-.86 1.55-1.76 3.2-1.76 3.42 0 4.06 2.25 4.06 5.18V21z"/></svg></a>
-          <a href="#" aria-label="Eterna on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.1" cy="6.9" r="1.15" fill="currentColor"/></svg></a>
-          <a href="#" aria-label="Eterna on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.2l.4-3h-2.6V8.1c0-.85.25-1.42 1.5-1.42h1.4V4.13c-.7-.1-1.5-.15-2.3-.15-2.3 0-3.9 1.4-3.9 4v2.02H8v3h2.2V21h3.3z"/></svg></a>
+    <div class="ft-main">
+      <div class="ft-brand">
+        <a href="#top" class="brand"><svg class="brand-logo" role="img" aria-label="Eterna"><use href="#eterna-logo"/></svg><svg class="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></a>
+        <p class="ft-tag">A gentler, more enduring farewell — natural preservation for 60 to 100 years, without chemicals or compromise. Designed and made in Québec.</p>
+        <div class="ft-rule"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
+        <div class="ft-social">
+          <a href="#" aria-label="Eterna on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5H3.56V21h3.38V8.5zM5.25 3a1.94 1.94 0 110 3.88 1.94 1.94 0 010-3.88zM20.5 21h-3.37v-6.1c0-1.45-.03-3.32-2.02-3.32-2.03 0-2.34 1.58-2.34 3.21V21H9.4V8.5h3.24v1.7h.05c.45-.85 1.55-1.75 3.19-1.75 3.41 0 4.04 2.25 4.04 5.17V21z"/></svg></a>
+          <a href="#" aria-label="Eterna on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Eterna on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.2l.4-3h-2.6V8.1c0-.85.25-1.42 1.5-1.42H16.4V4.1c-.3-.04-1.2-.12-2.3-.12-2.3 0-3.8 1.4-3.8 3.9V10H8v3h2.3v8h3.2z"/></svg></a>
         </div>
       </div>
-      <div class="foot-col">
-        <h5>Explore</h5>
-        <ul>
-          <li><a href="product.html">The Capsule Pyrale</a></li>
-          <li><a href="#how">How It Works</a></li>
-          <li><a href="pre-plan.html">Pre-Planning</a></li>
-          <li><a href="/partenaires">Partner With Us</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h5>Company</h5>
-        <ul>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#research">Innovation</a></li>
-          <li><a href="#blog">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h5>Get in touch</h5>
-        <address>
-          411 Saint-Vallier<br />
-          Granby, Québec J2G 7Y2<br />
-          <a href="tel:18446955613">1 844 695-5613</a><br />
-          <a href="mailto:info@pyramidedetail.com">info@pyramidedetail.com</a><br />
-          <span style="color:var(--muted)">Mon–Fri · 9am–5pm ET</span>
-        </address>
-      </div>
+      <div class="ft-col"><h5>Explore</h5><ul>
+        <li><a href="product.html">The Capsule Pyrale</a></li><li><a href="#how">How It Works</a></li><li><a href="pre-plan.html">Pre-Planning</a></li><li><a href="/partenaires">Partner With Us</a></li></ul></div>
+      <div class="ft-col"><h5>Company</h5><ul>
+        <li><a href="#about">About Us</a></li><li><a href="#research">Innovation</a></li><li><a href="#blog">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="ft-col"><h5>Get in touch</h5><ul class="ft-touch">
+        <li><svg viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-10.5a6 6 0 0112 0C18 15.7 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></svg><address style="font-style:normal">411 Saint-Vallier<br>Granby, Québec&nbsp; J2G 7Y2<br>Canada</address></li>
+        <li><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg><a href="tel:18446955613">1 844 695-5613</a></li>
+        <li><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><a href="mailto:info@pyramidedetail.com">info@pyramidedetail.com</a></li>
+        <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg><span>Mon–Fri: 9am–5pm ET</span></li></ul></div>
     </div>
-    <div class="foot-bottom">
+    <div class="ft-div"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
+    <div class="ft-band">
+      <div class="ft-help"><svg viewBox="0 0 64 64"><path d="M32 30c-6-7-16-4-14 4 1 5 8 8 14 13 6-5 13-8 14-13 2-8-8-11-14-4z"/><path d="M8 44c6-4 10-5 14-4l8 2c2 1 2 4 0 5l-8 1M56 44c-6-4-10-5-14-4l-8 2"/><path d="M8 44v12l10 2c4 1 8 0 12-2l16-8M56 44v12l-10 2"/></svg>
+        <div><h4>Here for you, every step of the way.</h4><p>Our advisors are here to guide and support you with care, clarity, and complete confidentiality.</p></div></div>
+      <div class="vr" aria-hidden="true"></div>
+      <div class="ft-cta"><span>Speak with an advisor</span><a href="#contact">Book a private consultation <svg viewBox="0 0 48 20"><path d="M2 10h42M36 3l8 7-8 7"/></svg></a></div>
+    </div>
+    <div class="ft-bottom">
       <span>© 2026 Eterna. All rights reserved.</span>
-      <div class="foot-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-        <a href="#">Français</a>
-      </div>
+      <span class="st"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></span>
+      <div class="ft-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Français</a></div>
     </div>
   </div>
-  <div class="foot-portal"><a href="https://eternaadmin-production.up.railway.app/portal">Access your file &mdash; view your plan, payments and balance</a></div>
+  <div class="ft-portal"><a href="https://eternaadmin-production.up.railway.app/portal"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Access your file — view your plan, payments and balance</a></div>
 </footer>
 
 <!-- Formulaire statique cache: Netlify ne detecte un formulaire qu au
