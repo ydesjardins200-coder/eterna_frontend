@@ -122,35 +122,6 @@
   .btn-arrow { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); font-size: 15px; }
   .ic-svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; display: block; }
 
-  /* ---------- WHY (DARK) ---------- */
-  .why { position: relative; overflow: hidden; background: #0c0d10; color: #fff; padding: 100px 0; }
-  .why::before { content: ""; position: absolute; z-index: 0; left: 50%; bottom: 0; transform: translateX(-50%); width: min(38%, 520px); aspect-ratio: 3 / 2; background: url("why-bg.jpg") center bottom / contain no-repeat; -webkit-mask-image: radial-gradient(54% 58% at 50% 62%, #000 26%, transparent 72%); mask-image: radial-gradient(54% 58% at 50% 62%, #000 26%, transparent 72%); pointer-events: none; }
-  .why .wrap { position: relative; z-index: 1; }
-  .why .top { display: flex; justify-content: flex-end; margin-bottom: 40px; }
-  .why .top span { font-family: var(--display); font-size: clamp(20px,2.4vw,30px); color: #fff; opacity: 0.9; }
-  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-  .why-grid h2 { font-size: clamp(32px, 4vw, 50px); color: #fff; margin-bottom: 22px; }
-  .why-grid > div > p { color: var(--night-text); font-size: 14.5px; max-width: 400px; }
-  .why-visual {
-    margin: 24px 0 0;
-  }
-  .why-visual img { width: 100%; max-width: 560px; height: auto; display: block; }
-  .why-list { display: flex; flex-direction: column; gap: 14px; }
-  .why-item {
-    background: rgba(20,22,27,0.55);
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 13px;
-    padding: 22px 24px;
-    display: flex; gap: 16px;
-    transition: border-color 0.4s var(--ease), transform 0.4s var(--ease), background 0.4s var(--ease);
-  }
-  .why-item:hover { border-color: var(--iris); background: rgba(20,22,27,0.68); transform: translateX(4px); }
-  .why-item .ic { flex: 0 0 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; }
-  .why-item h4 { font-family: var(--sans); font-size: 14.5px; font-weight: 600; margin-bottom: 6px; }
-  .why-item p { font-size: 12.5px; color: var(--night-text); line-height: 1.55; }
-
   /* ---------- CERTIFICATION ---------- */
   .cert { padding: 100px 0; text-align: center; }
   .cert h2 { font-size: clamp(32px, 4vw, 50px); margin: 16px 0 0; }
@@ -286,9 +257,6 @@
     .nav-links, .nav-cta .btn { display: none; }
     .menu-toggle { display: flex; }
     .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
-    .why-grid, .faq-grid, .voices-grid { grid-template-columns: 1fr; gap: 34px; }
-    .why::before { display: none; }
-    .why .top { justify-content: flex-start; }
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 18px; }
@@ -459,6 +427,51 @@ h1 em{font-style:italic}
   .how-tl::before{left:0}.how-s{grid-template-columns:1fr;gap:6px;padding:0 0 46px 26px}.how-s::before{left:-3px}.how-n{font-size:38px}.how-s h3{font-size:24px}
   .how-thumbs{display:flex;overflow-x:auto;gap:12px;padding:0 2px 14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.how-thumb{flex:0 0 31%;scroll-snap-align:start}}
 @media(prefers-reduced-motion:reduce){.how .how-eye,.how h2,.how-lead,.how-s,.how-media,.how-tl::before{opacity:1;transform:none;transition:none}}
+
+/* ── « Why Families Choose » — le premier chapitre sombre ── */
+.fam{position:relative;overflow:hidden;color:#F1EADF;padding:130px 0 110px;font-family:'Instrument Sans',system-ui,sans-serif;
+  background:#0B0C0D;background-image:radial-gradient(circle at 35% 65%,rgba(145,96,50,.10),transparent 35%),radial-gradient(circle at 25% 45%,rgba(72,82,92,.07),transparent 32%)}
+.fam .wrap{max-width:1320px;position:relative;z-index:1}
+.fam-g{display:grid;grid-template-columns:54fr 46fr;gap:64px;align-items:start}
+.fam-eye{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#B9844C;font-weight:500}
+.fam-eye::before{content:"";width:18px;height:1px;background:#B9844C}
+.fam h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(58px,5vw,82px);line-height:.98;letter-spacing:-.025em;color:#F1EADF;margin-top:22px;max-width:11ch}
+.fam-r{width:45px;height:1px;background:#B9844C;margin-top:26px}
+.fam-lead{margin-top:22px;font-size:18px;line-height:1.7;color:rgba(241,234,223,.72);max-width:520px}
+/* Le produit: le vrai fichier, en grand, eclaire par-dessous en CSS. */
+.fam-stage{position:relative;margin-top:44px;min-height:360px}
+.fam-word{position:absolute;left:-2%;bottom:-6%;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(150px,15vw,240px);line-height:1;letter-spacing:-.02em;color:rgba(255,255,255,.011);pointer-events:none;user-select:none;white-space:nowrap}
+.fam-glow{position:absolute;left:8%;right:8%;bottom:6%;height:46%;background:radial-gradient(ellipse at 50% 60%,rgba(187,128,69,.16),transparent 65%);filter:blur(6px);pointer-events:none}
+.fam-floor{position:absolute;left:14%;right:22%;bottom:5%;height:9%;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.65),rgba(0,0,0,.25) 45%,transparent 72%);filter:blur(12px)}
+.fam-cap{position:relative;z-index:2;width:118%;max-width:780px;margin-left:-3%;display:block;height:auto;animation:famFloat 9s ease-in-out infinite}
+@keyframes famFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+/* La pousse: le fichier existant, petit, masque en rond, sous un rai chaud. */
+.fam-plant{position:absolute;z-index:1;right:4%;bottom:2%;width:min(26%,190px);aspect-ratio:1;background:url("why-bg.jpg") 50% 60% / 230% no-repeat;
+  -webkit-mask-image:radial-gradient(circle at 50% 55%,#000 18%,transparent 60%);mask-image:radial-gradient(circle at 50% 55%,#000 18%,transparent 60%);opacity:.85}
+.fam-plant::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(210,160,90,.16),transparent 55%);pointer-events:none}
+/* Les trois panneaux, fondus dans le noir. */
+.fam-list{display:flex;flex-direction:column;gap:20px}
+.fam-p{background:rgba(255,255,255,.018);border:1px solid rgba(226,198,163,.18);border-radius:18px;padding:36px;display:grid;grid-template-columns:64px 1fr;gap:24px;align-items:start;transition:border-color .45s cubic-bezier(.22,1,.36,1),background .45s cubic-bezier(.22,1,.36,1)}
+.fam-p:hover{border-color:rgba(197,139,77,.45);background:rgba(255,255,255,.03)}
+.fam-m{width:64px;height:64px;border-radius:50%;border:1px solid rgba(190,134,73,.45);display:flex;align-items:center;justify-content:center;color:#C38A4B;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.fam-p:hover .fam-m{transform:translateY(-2px)}
+.fam-m svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+.fam-p h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:29px;line-height:1.15;color:#F1EADF;letter-spacing:-.005em;text-wrap:balance}
+.fam-p p{font-size:15.5px;line-height:1.7;color:rgba(241,234,223,.68);margin-top:12px}
+.fam-div{display:flex;align-items:center;gap:22px;margin:96px auto 0;max-width:1240px}
+.fam-div::before,.fam-div::after{content:"";flex:1;height:1px;background:rgba(192,135,73,.35)}
+.fam-div svg{width:18px;height:18px;color:rgba(192,135,73,.7);flex:none}
+.fam-quote{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:21px;color:rgba(241,234,223,.82);text-align:center;margin-top:40px}
+/* Arrivee. */
+.fam .fam-eye,.fam h2,.fam .fam-r,.fam-lead,.fam-stage,.fam-p{opacity:0;transform:translateY(18px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.fam-stage{transform:translateY(25px)}
+.fam.in .fam-eye,.fam.in h2,.fam.in .fam-r,.fam.in .fam-lead,.fam.in .fam-stage,.fam.in .fam-p{opacity:1;transform:none}
+.fam.in h2{transition-delay:.06s}.fam.in .fam-r{transition-delay:.12s}.fam.in .fam-lead{transition-delay:.16s}.fam.in .fam-stage{transition-delay:.25s}
+.fam.in .fam-p:nth-child(1){transition-delay:.4s}.fam.in .fam-p:nth-child(2){transition-delay:.5s}.fam.in .fam-p:nth-child(3){transition-delay:.6s}
+@media(max-width:1100px){.fam-g{grid-template-columns:1fr;gap:48px}.fam-cap{width:100%;max-width:720px;margin-left:0}.fam-word{display:none}}
+@media(max-width:700px){.fam{padding:88px 0 76px}.fam h2{font-size:46px}.fam-lead{font-size:16.5px}.fam-stage{margin-top:28px;min-height:0;overflow:visible}
+  .fam-cap{width:116%;max-width:none;margin-left:-8%}.fam-plant{width:120px;right:-2%;bottom:-4%}.fam-p{padding:26px 22px;grid-template-columns:56px 1fr;gap:16px}.fam-m{width:56px;height:56px}.fam-p h3{font-size:25px}}
+@media(prefers-reduced-motion:reduce){.fam .fam-eye,.fam h2,.fam .fam-r,.fam-lead,.fam-stage,.fam-p{opacity:1;transform:none;transition:none}.fam-cap{animation:none}}
 </style>
 </head>
 <body>
@@ -572,40 +585,34 @@ h1 em{font-style:italic}
     </div>
   </section>
 
-  <!-- WHY (DARK) -->
-  <section class="why" id="about">
+  <!-- WHY FAMILIES CHOOSE — the dark chapter -->
+  <section class="fam" id="about">
     <div class="wrap">
-      <div class="top"><span>No decomposition, no chemicals</span></div>
-      <div class="why-grid">
-        <div class="reveal">
-          <h2>Why Families<br />Choose the Capsule Pyrale</h2>
-          <p>For families who want more than a traditional farewell — a gentler, more meaningful, and more responsible way to honor the departed.</p>
-          <div class="why-visual"><img src="why-capsule.png" alt="The Capsule Pyrale glowing from within" loading="lazy" /></div>
+      <div class="fam-g">
+        <div>
+          <span class="fam-eye">For families</span>
+          <h2>Why Families Choose the Capsule Pyrale</h2>
+          <div class="fam-r"></div>
+          <p class="fam-lead">For families who want more than a traditional farewell — a gentler, more meaningful, and more responsible way to honor the departed.</p>
+          <div class="fam-stage">
+            <div class="fam-word" aria-hidden="true">Care</div>
+            <div class="fam-glow"></div>
+            <div class="fam-floor"></div>
+            <img class="fam-cap" src="capsule-hero.png" alt="The Capsule Pyrale" loading="lazy" />
+            <div class="fam-plant" aria-hidden="true"></div>
+          </div>
         </div>
-        <div class="why-list">
-          <div class="why-item reveal">
-            <span class="ic">&#9670;</span>
-            <div>
-              <h4>Extended viewing and prolonged farewell</h4>
-              <p>No color, no degradation. Families are not forced to rush their goodbyes — there is time to gather, to grieve, and to be present with their loved one.</p>
-            </div>
-          </div>
-          <div class="why-item reveal">
-            <span class="ic">&#10003;</span>
-            <div>
-              <h4>Environmentally responsible</h4>
-              <p>100% recyclable aluminium. No soil contamination, no groundwater impact, no toxic release. Compatible with crypts, mausoleums, and above-ground interment.</p>
-            </div>
-          </div>
-          <div class="why-item reveal">
-            <span class="ic">&#9678;</span>
-            <div>
-              <h4>International transport compliant</h4>
-              <p>Hermetically sealed with no fluid or odor — fully compatible with international air-cargo regulations. Certified in Canada and the USA.</p>
-            </div>
-          </div>
+        <div class="fam-list">
+          <div class="fam-p"><div class="fam-m"><svg viewBox="0 0 24 24"><path d="M12 3c.5 4.6 4.4 8.5 9 9-4.6.5-8.5 4.4-9 9-.5-4.6-4.4-8.5-9-9 4.6-.5 8.5-4.4 9-9z"/></svg></div>
+            <div><h3>Extended viewing and prolonged farewell</h3><p>No color, no degradation. Families are not forced to rush their goodbyes — there is time to gather, to grieve, and to be present with their loved one.</p></div></div>
+          <div class="fam-p"><div class="fam-m"><svg viewBox="0 0 24 24"><path d="M5 20c9 1 14-4 14-14 0 0-5.5-1-9.5 1S4.5 13 5 20z"/><path d="M5.5 19.5C9.5 15.5 12 13 16.5 11"/></svg></div>
+            <div><h3>Environmentally responsible</h3><p>100% recyclable aluminium. No soil contamination, no groundwater impact, no toxic releases. Compatible with crypts, mausoleums, and above-ground interment.</p></div></div>
+          <div class="fam-p"><div class="fam-m"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg></div>
+            <div><h3>International transport compliant</h3><p>Hermetically sealed with no fluid or odor — fully compatible with international air-cargo regulations. Certified in Canada and the USA.</p></div></div>
         </div>
       </div>
+      <div class="fam-div"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
+      <p class="fam-quote">A new standard of care. For today, for tomorrow, for generations.</p>
     </div>
   </section>
 
@@ -933,6 +940,12 @@ h1 em{font-style:italic}
 </script>
 <script>
 (function(){
+  var fam = document.getElementById('about');
+  if (fam && fam.classList.contains('fam')) {
+    if (!('IntersectionObserver' in window)) fam.classList.add('in');
+    else { var iof = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { fam.classList.add('in'); iof.unobserve(fam); } }); }, { threshold: 0.15 }); iof.observe(fam); }
+    setTimeout(function(){ fam.classList.add('in'); }, 3500);
+  }
   var how = document.getElementById('how');
   if (how) {
     if (!('IntersectionObserver' in window)) how.classList.add('in');
