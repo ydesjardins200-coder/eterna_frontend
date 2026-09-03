@@ -122,24 +122,6 @@
   .btn-arrow { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); font-size: 15px; }
   .ic-svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; display: block; }
 
-  /* ---------- HOW IT WORKS ---------- */
-  .how { padding: 100px 0 90px; }
-  .how-head-top { text-align: center; margin-bottom: 50px; }
-  .how-head-top h2 { font-size: clamp(30px, 3.6vw, 50px); margin-top: 14px; }
-  .how-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; }
-  .how-steps { display: flex; flex-direction: column; gap: 30px; }
-  .how-step { display: flex; gap: 18px; align-items: flex-start; }
-  .how-step-n { font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: 0.12em; color: var(--iris); flex: 0 0 auto; padding-top: 4px; width: 26px; }
-  .how-step h4 { font-size: 18px; margin-bottom: 6px; }
-  .how-step p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.62; }
-  .how-main { border-radius: 16px; overflow: hidden; background: var(--mist); aspect-ratio: 16 / 10; box-shadow: 0 26px 54px rgba(45,32,66,0.18); }
-  .how-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.35s var(--ease); }
-  .how-thumbs { display: flex; gap: 12px; margin-top: 14px; }
-  .how-thumb { flex: 1; aspect-ratio: 3 / 2; border: 2px solid transparent; border-radius: 10px; overflow: hidden; padding: 0; background: none; cursor: pointer; transition: border-color 0.3s var(--ease), transform 0.3s var(--ease); }
-  .how-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .how-thumb:hover { transform: translateY(-2px); }
-  .how-thumb.active { border-color: var(--iris); box-shadow: 0 6px 16px rgba(111,90,216,0.22); }
-
   /* ---------- WHY (DARK) ---------- */
   .why { position: relative; overflow: hidden; background: #0c0d10; color: #fff; padding: 100px 0; }
   .why::before { content: ""; position: absolute; z-index: 0; left: 50%; bottom: 0; transform: translateX(-50%); width: min(38%, 520px); aspect-ratio: 3 / 2; background: url("why-bg.jpg") center bottom / contain no-repeat; -webkit-mask-image: radial-gradient(54% 58% at 50% 62%, #000 26%, transparent 72%); mask-image: radial-gradient(54% 58% at 50% 62%, #000 26%, transparent 72%); pointer-events: none; }
@@ -304,7 +286,6 @@
     .nav-links, .nav-cta .btn { display: none; }
     .menu-toggle { display: flex; }
     .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
-    .how-grid { grid-template-columns: 1fr; gap: 30px; }
     .why-grid, .faq-grid, .voices-grid { grid-template-columns: 1fr; gap: 34px; }
     .why::before { display: none; }
     .why .top { justify-content: flex-start; }
@@ -433,6 +414,51 @@ h1 em{font-style:italic}
   .why-n{left:0;top:6px;font-size:96px}.why-m{margin:0;width:64px;height:64px}.why-m svg{width:26px;height:26px}
   .why-f h3{font-size:27px;margin-top:26px}.why-r{margin-left:0}.why-f p{margin-left:0}.why-lead{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.why-f .why-n,.why-f .why-m,.why-f .why-t{opacity:1;transform:none;transition:none}}
+
+/* ── « How it works » — chapitre suivant, composition asymetrique ── */
+.how{background:linear-gradient(180deg,#F5F2ED 0%,#F7F3EE 45%,#F3EEE7 100%);color:#2A1C12;padding:120px 0 100px;font-family:'Instrument Sans',system-ui,sans-serif}
+.how .wrap{max-width:1320px}
+.how-g{display:grid;grid-template-columns:39fr 61fr;gap:80px;align-items:start}
+.how-eye{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.20em;text-transform:uppercase;color:#A57543;font-weight:500}
+.how-eye::before{content:"";width:18px;height:1px;background:#A57543}
+.how h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(54px,4.5vw,76px);line-height:1;letter-spacing:-.015em;color:#2A1C12;margin-top:20px}
+.how-lead{margin-top:22px;font-size:18px;line-height:1.7;color:#62574E;max-width:520px}
+.how-tl{position:relative;margin-top:56px;padding-left:0}
+.how-tl::before{content:"";position:absolute;left:70px;top:10px;bottom:10px;width:1px;background:rgba(169,119,68,.45);transform:scaleY(0);transform-origin:top;transition:transform 1.1s cubic-bezier(.22,1,.36,1) .25s}
+.how.in .how-tl::before{transform:scaleY(1)}
+.how-s{position:relative;display:grid;grid-template-columns:70px 1fr;gap:0 46px;padding:0 0 54px}
+.how-s:last-child{padding-bottom:0}
+.how-s::before{content:"";position:absolute;left:67px;top:18px;width:7px;height:7px;border-radius:50%;background:#B78148}
+.how-n{font-family:'Instrument Serif',Georgia,serif;font-size:46px;line-height:1;color:#B78148;letter-spacing:-.01em;margin-top:-4px}
+.how-s h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:27px;line-height:1.15;color:#2A1C12;letter-spacing:-.005em}
+.how-s p{font-size:15px;line-height:1.7;color:#5F554D;margin-top:8px;max-width:400px}
+.how-main{position:relative;aspect-ratio:1.6;border-radius:24px;overflow:hidden;background:#EAE4DB;box-shadow:0 25px 70px rgba(54,37,24,.08)}
+.how-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .45s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.how-main img.out{opacity:0;transform:scale(.995)}
+.how-main img.entering{opacity:0;transform:scale(1.01)}
+@media(hover:hover){.how-main:hover img:not(.out){transform:scale(1.012)}}
+.how-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:20px}
+.how-thumb{position:relative;aspect-ratio:1.45;border-radius:13px;overflow:visible;border:0;padding:0;background:none;cursor:pointer;opacity:.82;transition:opacity .35s ease,transform .35s ease}
+.how-thumb img{width:100%;height:100%;object-fit:cover;display:block;border-radius:13px;border:1px solid transparent;transition:border-color .35s ease,box-shadow .35s ease}
+.how-thumb:hover{opacity:1;transform:translateY(-2px)}
+.how-thumb.active{opacity:1}
+.how-thumb.active img{border-color:#B98248;box-shadow:0 5px 18px rgba(126,86,45,.12)}
+.how-thumb::after{content:"";position:absolute;left:50%;bottom:-11px;width:30px;height:2px;margin-left:-15px;background:#B98248;opacity:0;transition:opacity .35s ease}
+.how-thumb.active::after{opacity:1}
+.how-div{display:flex;align-items:center;gap:22px;margin:80px auto 0;max-width:1240px}
+.how-div::before,.how-div::after{content:"";flex:1;height:1px;background:rgba(169,119,68,.35)}
+.how-div svg{width:18px;height:18px;color:rgba(169,119,68,.7);flex:none}
+.how-quote{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:21px;color:#38271C;text-align:center;margin-top:40px}
+/* Arrivee, retenue. */
+.how .how-eye,.how h2,.how-lead,.how-s,.how-media{opacity:0;transform:translateY(15px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.how-media{transform:scale(1.015)}
+.how.in .how-eye,.how.in h2,.how.in .how-lead,.how.in .how-s,.how.in .how-media{opacity:1;transform:none}
+.how.in h2{transition-delay:.05s}.how.in .how-lead{transition-delay:.13s}.how.in .how-s:nth-child(1){transition-delay:.3s}.how.in .how-s:nth-child(2){transition-delay:.4s}.how.in .how-s:nth-child(3){transition-delay:.5s}.how.in .how-media{transition-delay:.15s}
+@media(max-width:1100px){.how-g{grid-template-columns:1fr;gap:56px}.how-tl{max-width:640px}}
+@media(max-width:700px){.how{padding:84px 0 72px}.how-g{gap:40px}.how-media{order:1}.how-text{order:2;display:contents}.how-intro{order:0}.how-tl{order:3;margin-top:8px}
+  .how-tl::before{left:0}.how-s{grid-template-columns:1fr;gap:6px;padding:0 0 46px 26px}.how-s::before{left:-3px}.how-n{font-size:38px}.how-s h3{font-size:24px}
+  .how-thumbs{display:flex;overflow-x:auto;gap:12px;padding:0 2px 14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.how-thumb{flex:0 0 31%;scroll-snap-align:start}}
+@media(prefers-reduced-motion:reduce){.how .how-eye,.how h2,.how-lead,.how-s,.how-media,.how-tl::before{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -517,26 +543,20 @@ h1 em{font-style:italic}
   <!-- HOW IT WORKS -->
   <section class="how" id="how">
     <div class="wrap">
-      <div class="how-head-top reveal">
-        <span class="eyebrow" style="display:inline-flex;">The Capsule Pyrale</span>
-        <h2>How it works</h2>
-      </div>
-      <div class="how-grid">
-        <div class="how-steps reveal">
-          <div class="how-step">
-            <span class="how-step-n">01</span>
-            <div><h4>Hermetic Sealing</h4><p>The cover is lowered and locked with a special key, creating a completely airtight barrier — no leaks, no odors, no infiltration possible.</p></div>
+      <div class="how-g">
+        <div class="how-text">
+          <div class="how-intro">
+            <span class="how-eye">The process</span>
+            <h2>How it works</h2>
+            <p class="how-lead">A seamless, controlled process that combines engineering precision with the deepest respect for life.</p>
           </div>
-          <div class="how-step">
-            <span class="how-step-n">02</span>
-            <div><h4>Inert Gas Preservation</h4><p>The capsule is filled with nitrogen gas, naturally drying the body without chemicals or toxic release. Preservation lasts up to 100 years.</p></div>
-          </div>
-          <div class="how-step">
-            <span class="how-step-n">03</span>
-            <div><h4>Gentle Placement</h4><p>The body is placed inside by qualified professionals. Every gesture is slow, deliberate, and respectful — no rushed movements, no compromise on dignity.</p></div>
+          <div class="how-tl">
+            <div class="how-s"><div class="how-n">01</div><div><h3>Hermetic Sealing</h3><p>The cover is lowered and locked with a special key, creating a completely airtight barrier — no leaks, no odors, no infiltration possible.</p></div></div>
+            <div class="how-s"><div class="how-n">02</div><div><h3>Inert Gas Preservation</h3><p>The capsule is filled with nitrogen gas, naturally drying the body without chemicals or toxic release. Preservation lasts up to 100 years.</p></div></div>
+            <div class="how-s"><div class="how-n">03</div><div><h3>Gentle Placement</h3><p>The body is placed inside by qualified professionals. Every gesture is slow, deliberate, and respectful — no rushed movements, no compromise on dignity.</p></div></div>
           </div>
         </div>
-        <div class="how-gallery reveal">
+        <div class="how-media">
           <div class="how-main"><img id="howMain" src="how-bg.jpg" alt="The open Capsule Pyrale" /></div>
           <div class="how-thumbs" id="howThumbs">
             <button class="how-thumb active" data-src="how-bg.jpg" aria-label="Overview"><img src="how-bg.jpg" alt="Overview of the capsule" loading="lazy" /></button>
@@ -547,6 +567,8 @@ h1 em{font-style:italic}
           </div>
         </div>
       </div>
+      <div class="how-div"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
+      <p class="how-quote">Science protects. Dignity guides. Eternity remains.</p>
     </div>
   </section>
 
@@ -852,9 +874,15 @@ h1 em{font-style:italic}
         if (!src || btn.classList.contains('active')) return;
         howThumbs.querySelectorAll('.how-thumb').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        howMain.style.opacity = '0';
+        howMain.classList.add('out');
         const img = new Image();
-        img.onload = () => { howMain.src = src; howMain.style.opacity = '1'; };
+        img.onload = () => {
+          setTimeout(() => {
+            howMain.src = src;
+            howMain.classList.remove('out'); howMain.classList.add('entering');
+            requestAnimationFrame(() => requestAnimationFrame(() => howMain.classList.remove('entering')));
+          }, 220);
+        };
         img.src = src;
       });
     });
@@ -905,6 +933,12 @@ h1 em{font-style:italic}
 </script>
 <script>
 (function(){
+  var how = document.getElementById('how');
+  if (how) {
+    if (!('IntersectionObserver' in window)) how.classList.add('in');
+    else { var ioh = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { how.classList.add('in'); ioh.unobserve(how); } }); }, { threshold: 0.18 }); ioh.observe(how); }
+    setTimeout(function(){ how.classList.add('in'); }, 3500);
+  }
   var fs = document.querySelectorAll('.why-f'); if (!fs.length) return;
   if (!('IntersectionObserver' in window)) { fs.forEach(function(f){ f.classList.add('in'); }); return; }
   var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.25 });
