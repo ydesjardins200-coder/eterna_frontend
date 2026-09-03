@@ -139,19 +139,6 @@
   .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); }
   .faq-a p { padding: 0 40px 24px 0; font-size: 13.5px; color: var(--ink-soft); }
 
-  /* ---------- TESTIMONIALS ---------- */
-  .voices { padding: 90px 0; background: var(--mist); text-align: center; }
-  .voices h2 { font-size: clamp(30px, 3.6vw, 46px); margin: 16px 0 50px; }
-  .voices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; }
-  .voice { position: relative; background: #fff; border: 1px solid rgba(228,227,223,0.9); border-radius: 16px; padding: 34px 30px 30px; box-shadow: 0 1px 2px rgba(40,44,60,0.05), 0 10px 22px rgba(40,44,60,0.06), 0 30px 50px rgba(40,44,60,0.05); transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease); }
-  .voice::before { content: "\201C"; position: absolute; top: 14px; right: 26px; font-family: var(--display); font-size: 64px; line-height: 1; color: rgba(111,90,216,0.16); }
-  .voice:hover { transform: translateY(-6px); border-color: rgba(111,90,216,0.24); box-shadow: 0 2px 4px rgba(40,44,60,0.05), 0 16px 30px rgba(70,56,140,0.12), 0 40px 66px rgba(70,56,140,0.10); }
-  .voice p { font-family: var(--display); font-size: 17.5px; line-height: 1.5; color: var(--ink); margin-bottom: 26px; position: relative; }
-  .voice .who { display: flex; align-items: center; gap: 13px; }
-  .voice .av { width: 42px; height: 42px; border-radius: 50%; flex: 0 0 auto; display: grid; place-items: center; font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--iris); background: linear-gradient(150deg, rgba(111,90,216,0.16), rgba(111,90,216,0.05)); border: 1px solid rgba(111,90,216,0.2); }
-  .voice .who b { font-size: 13px; font-weight: 600; display: block; }
-  .voice .who span { font-size: 12px; color: var(--muted); }
-
   /* ---------- CONTACT ---------- */
   .contact { background: var(--night); color: #fff; padding: 90px 0; }
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 46px; align-items: stretch; }
@@ -486,6 +473,55 @@ h1 em{font-style:italic}
 @media(max-width:1100px){.proof-head{grid-template-columns:1fr;gap:18px}.proof-lead{justify-self:start}.proof-g{grid-template-columns:1fr;gap:48px}.proof-v{display:none}.proof-row{grid-template-columns:52px 60px 1fr;gap:0 18px}.proof-d{grid-column:3}.proof-s{grid-column:3;justify-self:start}}
 @media(max-width:700px){.proof{padding:88px 0 76px}.proof h2{font-size:48px}.proof-lead{font-size:16.5px}.proof-n{font-size:120px}.proof-row{grid-template-columns:1fr;gap:10px;padding:28px 0}.proof-ic{display:none}.proof-i{font-size:22px;padding:0}.proof-d,.proof-s{grid-column:auto}.proof-ghost{display:none}}
 @media(prefers-reduced-motion:reduce){.proof .proof-eye,.proof h2,.proof-lead,.proof-big,.proof-row{opacity:1;transform:none;transition:none}}
+
+/* ── « What families say » — des voix de famille, pas des avis ── */
+.fv{position:relative;overflow:hidden;color:#291C13;padding:130px 0 135px;font-family:'Instrument Sans',system-ui,sans-serif;background:#F3F0EA;background-image:radial-gradient(circle at 50% 45%,rgba(177,127,74,.055),transparent 38%)}
+.fv .wrap{max-width:1320px;position:relative}
+.fv-head{text-align:center}
+.fv-eye{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#A87542;font-weight:500}
+.fv-eye::before{content:"";width:18px;height:1px;background:#A87542}
+.fv h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(56px,4.6vw,76px);line-height:1;letter-spacing:-.025em;color:#291C13;margin-top:20px}
+.fv-lead{margin:22px auto 0;max-width:620px;font-size:17.5px;line-height:1.65;color:#70645A}
+/* La voix principale */
+.fv-main{position:relative;max-width:960px;margin:64px auto 0;text-align:center}
+.fv-word{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font-family:'Instrument Serif',Georgia,serif;font-size:clamp(140px,17vw,250px);letter-spacing:.04em;color:rgba(113,77,47,.018);white-space:nowrap;pointer-events:none;user-select:none;line-height:1}
+.fv-qm{font-family:'Instrument Serif',Georgia,serif;font-size:220px;line-height:.6;color:rgba(169,117,66,.16);height:88px;display:block;will-change:transform}
+.fv-main blockquote{position:relative;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(29px,2.4vw,40px);line-height:1.45;letter-spacing:-.01em;color:#302117;margin:0}
+.fv-by{margin-top:30px}
+.fv-by .r{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:16px}
+.fv-by .r::before,.fv-by .r::after{content:"";width:110px;height:1px;background:rgba(168,117,66,.45)}
+.fv-by .r svg{width:14px;height:14px;color:#A87542}
+.fv-by b{display:block;font-size:14px;font-weight:600;color:#302117}
+.fv-by span{display:block;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#A87542;margin-top:5px}
+/* Le diviseur, puis les deux voix */
+.fv-div{display:flex;align-items:center;gap:22px;margin:90px auto 0;max-width:1240px}
+.fv-div::before,.fv-div::after{content:"";flex:1;height:1px;background:rgba(168,117,66,.38)}
+.fv-div svg{width:16px;height:16px;color:#A87542;flex:none}
+.fv-two{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 64px;margin-top:56px;align-items:start}
+.fv-two .v{position:relative}
+.fv-two .vr{background:rgba(92,65,44,.15);align-self:stretch}
+.fv-s{display:grid;grid-template-columns:64px 1fr;gap:0 28px}
+.fv-s .n{font-family:'Instrument Serif',Georgia,serif;font-size:20px;color:#A87542;line-height:1}
+.fv-s .n i{display:block;width:28px;height:1px;background:rgba(168,117,66,.6);margin-top:12px}
+.fv-s .n b{display:block;font-family:'Instrument Serif',Georgia,serif;font-size:44px;line-height:.5;color:rgba(169,117,66,.55);margin-top:34px;font-weight:400}
+.fv-s blockquote{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(23px,1.8vw,27px);line-height:1.5;color:#33251B;margin:0;letter-spacing:-.005em}
+.fv-s .by{margin-top:26px}
+.fv-s .by .r{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.fv-s .by .r::before,.fv-s .by .r::after{content:"";width:34px;height:1px;background:rgba(168,117,66,.45)}
+.fv-s .by .r svg{width:12px;height:12px;color:#A87542}
+.fv-s .by b{display:block;font-size:14px;font-weight:600;color:#302117}
+.fv-s .by span{display:block;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#A87542;margin-top:5px}
+.fv-end{text-align:center;margin-top:90px}
+.fv-end svg{width:18px;height:18px;color:#A87542;display:block;margin:0 auto 22px}
+.fv-end p{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:21px;line-height:1.4;color:#39291E}
+/* Arrivee */
+.fv .fv-eye,.fv h2,.fv-lead,.fv-qm,.fv-main blockquote,.fv-by,.fv-two .v,.fv-end{opacity:0;transform:translateY(16px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.fv-qm{transform:none}
+.fv.in .fv-eye,.fv.in h2,.fv.in .fv-lead,.fv.in .fv-qm,.fv.in .fv-main blockquote,.fv.in .fv-by,.fv.in .fv-two .v,.fv.in .fv-end{opacity:1;transform:none}
+.fv.in h2{transition-delay:.06s}.fv.in .fv-lead{transition-delay:.12s}.fv.in .fv-qm{transition-delay:.2s}.fv.in .fv-main blockquote{transition-delay:.28s}.fv.in .fv-by{transition-delay:.4s}.fv.in .fv-two .v:nth-child(1){transition-delay:.55s}.fv.in .fv-two .v:nth-child(3){transition-delay:.65s}.fv.in .fv-end{transition-delay:.8s}
+@media(max-width:750px){.fv{padding:88px 0 90px}.fv h2{font-size:46px}.fv-lead{font-size:16px}.fv-main{margin-top:44px}.fv-main blockquote{font-size:29px;line-height:1.4}.fv-qm{font-size:120px;height:48px}.fv-word{display:none}
+  .fv-two{grid-template-columns:1fr;gap:44px;margin-top:40px}.fv-two .vr{height:1px;width:100%;align-self:auto}.fv-s{grid-template-columns:44px 1fr;gap:0 16px}.fv-s blockquote{font-size:22px}.fv-div{margin-top:64px}.fv-end{margin-top:64px}}
+@media(prefers-reduced-motion:reduce){.fv .fv-eye,.fv h2,.fv-lead,.fv-qm,.fv-main blockquote,.fv-by,.fv-two .v,.fv-end{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -709,25 +745,31 @@ h1 em{font-style:italic}
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section class="voices" id="voices">
+  <!-- FAMILY VOICES -->
+  <section class="fv" id="voices">
     <div class="wrap">
-      <span class="eyebrow reveal" style="margin:0 auto; display:flex; justify-content:center;">Families</span>
-      <h2 class="reveal">What families say</h2>
-      <div class="voices-grid">
-        <article class="voice reveal">
-          <p>"Seeing my mother in the Capsule Pyrale was unlike anything I expected. She looked peaceful, truly at rest. We were able to take the time we needed to say goodbye, without any of the distress we feared. It changed how we experienced grief."</p>
-          <div class="who"><span class="av">MH</span><div><b>Marie-Hélène D.</b><span>Montréal, QC</span></div></div>
-        </article>
-        <article class="voice reveal">
-          <p>"We had to repatriate my father from abroad. The Capsule Pyrale made that possible without the complications we had been warned about. The team at Eterna guided us every step of the way. I am deeply grateful."</p>
-          <div class="who"><span class="av">RC</span><div><b>Robert C.</b><span>Ottawa, ON</span></div></div>
-        </article>
-        <article class="voice reveal">
-          <p>"We chose the Capsule Pyrale because we did not want chemicals anywhere near our father's body. The nitrogen process felt natural, respectful, and right. We are proud of the choice we made for him. He deserved nothing less."</p>
-          <div class="who"><span class="av">ST</span><div><b>Sandra &amp; Tom P.</b><span>Granby, QC</span></div></div>
-        </article>
+      <div class="fv-head">
+        <span class="fv-eye">Family voices</span>
+        <h2>What families say</h2>
+        <p class="fv-lead">Every farewell is personal.<br>These are the experiences of families who chose a different way.</p>
       </div>
+      <div class="fv-main">
+        <div class="fv-word" aria-hidden="true">FAMILIES</div>
+        <span class="fv-qm" id="fvQm" aria-hidden="true">“</span>
+        <blockquote>“Seeing my mother in the Capsule Pyrale was unlike anything I expected. She looked peaceful, truly at rest. We were able to take the time we needed to say goodbye, without any of the distress we feared. It changed how we experienced grief.”</blockquote>
+        <div class="fv-by"><div class="r"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div><b>Marie-Hélène D.</b><span>Montréal, QC</span></div>
+      </div>
+      <div class="fv-div"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
+      <div class="fv-two">
+        <div class="v"><div class="fv-s"><div class="n">01<i></i><b>“</b></div>
+          <div><blockquote>“We had to repatriate my father from abroad. The Capsule Pyrale made that possible without the complications we had been warned about. The team at Eterna guided us every step of the way. I am deeply grateful.”</blockquote>
+            <div class="by"><div class="r"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div><b>Robert C.</b><span>Ottawa, ON</span></div></div></div></div>
+        <div class="vr" aria-hidden="true"></div>
+        <div class="v"><div class="fv-s"><div class="n">02<i></i><b>“</b></div>
+          <div><blockquote>“We chose the Capsule Pyrale because we did not want chemicals anywhere near our father's body. The nitrogen process felt natural, respectful, and right. We are proud of the choice we made for him. He deserved nothing less.”</blockquote>
+            <div class="by"><div class="r"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div><b>Sandra &amp; Tom P.</b><span>Granby, QC</span></div></div></div></div>
+      </div>
+      <div class="fv-end"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg><p>Every story is different.<br>Every farewell deserves time.</p></div>
     </div>
   </section>
 
@@ -963,6 +1005,24 @@ h1 em{font-style:italic}
 </script>
 <script>
 (function(){
+  var fv = document.getElementById('voices');
+  if (fv && fv.classList.contains('fv')) {
+    if (!('IntersectionObserver' in window)) fv.classList.add('in');
+    else { var iov = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { fv.classList.add('in'); iov.unobserve(fv); } }); }, { threshold: 0.15 }); iov.observe(fv); }
+    setTimeout(function(){ fv.classList.add('in'); }, 3500);
+    /* Le grand guillemet glisse de quelques pixels au defilement — a peine. */
+    var qm = document.getElementById('fvQm');
+    if (qm && window.matchMedia('(min-width: 900px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var tick = false;
+      window.addEventListener('scroll', function(){
+        if (tick) return; tick = true;
+        requestAnimationFrame(function(){
+          var r = fv.getBoundingClientRect(); var p = Math.max(-1, Math.min(1, (window.innerHeight/2 - (r.top + r.height/2)) / window.innerHeight));
+          qm.style.transform = 'translateY(' + (p * 8).toFixed(1) + 'px)'; tick = false;
+        });
+      }, { passive: true });
+    }
+  }
   var pr = document.getElementById('research');
   if (pr && pr.classList.contains('proof')) {
     if (!('IntersectionObserver' in window)) pr.classList.add('in');
