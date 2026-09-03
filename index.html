@@ -122,46 +122,6 @@
   .btn-arrow { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); font-size: 15px; }
   .ic-svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; display: block; }
 
-  /* ---------- CERTIFICATION ---------- */
-  .cert { padding: 100px 0; text-align: center; }
-  .cert h2 { font-size: clamp(32px, 4vw, 50px); margin: 16px 0 0; }
-  .cert-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin: 46px 0 0; padding: 14px 4px 20px; }
-  .cert-card {
-    text-align: left;
-    background: #fff;
-    border: 1px solid rgba(228,227,223,0.9);
-    border-radius: 16px;
-    padding: 30px 26px 28px;
-    position: relative;
-    box-shadow:
-      0 1px 2px rgba(40,44,60,0.05),
-      0 8px 18px rgba(40,44,60,0.06),
-      0 24px 44px rgba(40,44,60,0.05);
-    transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
-  }
-  .cert-card::before {
-    content: "";
-    position: absolute; top: 0; left: 0; right: 0; height: 3px; z-index: 2;
-    background: linear-gradient(90deg, var(--iris), var(--iris-soft));
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.5s var(--ease);
-  }
-  .cert-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(111,90,216,0.28);
-    box-shadow:
-      0 2px 4px rgba(40,44,60,0.05),
-      0 18px 34px rgba(70,56,140,0.12),
-      0 40px 70px rgba(70,56,140,0.12);
-  }
-  .cert-card:hover::before { transform: scaleX(1); }
-  .cert-ic { width: 52px; height: 52px; border-radius: 13px; background: linear-gradient(150deg, rgba(111,90,216,0.14), rgba(111,90,216,0.05)); color: var(--iris); display: grid; place-items: center; margin-bottom: 20px; transition: background 0.45s var(--ease), transform 0.45s var(--ease); }
-  .cert-ic .ic-svg { width: 24px; height: 24px; }
-  .cert-card:hover .cert-ic { background: var(--iris); color: #fff; transform: scale(1.06); }
-  .cert-card h3 { font-size: 20px; margin-bottom: 4px; }
-  .cert-card .lbl { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-  .cert-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
-
   /* ---------- FAQ ---------- */
   .faq { position: relative; overflow: hidden; padding: 104px 0; background: linear-gradient(180deg, rgba(248,247,244,0.80) 0%, rgba(250,249,246,0.86) 50%, rgba(246,245,242,0.9) 100%), radial-gradient(46% 68% at 15% 24%, rgba(111,90,216,0.20), transparent 66%), #eef0f2 url("footer-mist.jpg") center 24% / cover no-repeat; }
   .faq::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(111,90,216,0.28), transparent); }
@@ -260,7 +220,6 @@
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 18px; }
-    .cert-track { grid-template-columns: 1fr; }
     .field-row { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; gap: 26px; }
     .contact-visual { min-height: 300px; }
@@ -468,6 +427,65 @@ h1 em{font-style:italic}
 @media(max-width:700px){.fam{padding:88px 0 76px}.fam h2{font-size:46px}.fam-lead{font-size:16.5px}.fam-stage{margin-top:28px;min-height:0;overflow:visible}
   .fam-cap{width:116%;max-width:none;margin-left:-8%}.fam-p{padding:26px 22px;grid-template-columns:56px 1fr;gap:16px}.fam-m{width:56px;height:56px}.fam-p h3{font-size:25px}}
 @media(prefers-reduced-motion:reduce){.fam .fam-eye,.fam h2,.fam .fam-r,.fam-lead,.fam-stage,.fam-p{opacity:1;transform:none;transition:none}.fam-cap{animation:none}}
+
+/* ── « Innovation & Certification » — la preuve, en dossier d ingenierie ── */
+.proof{background:#F3F0EA;color:#291C13;padding:130px 0 120px;font-family:'Instrument Sans',system-ui,sans-serif;position:relative;overflow:hidden}
+.proof .wrap{max-width:1320px}
+.proof-eye{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#A87542;font-weight:500}
+.proof-eye::before{content:"";width:18px;height:1px;background:#A87542}
+.proof-head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end}
+.proof h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(58px,5vw,82px);line-height:.98;letter-spacing:-.025em;color:#291C13;margin-top:20px}
+.proof-lead{font-size:18px;line-height:1.7;color:#6A5F55;max-width:540px;justify-self:end;padding-bottom:6px}
+.proof-g{display:grid;grid-template-columns:minmax(400px,42fr) 1px 58fr;gap:0 56px;margin-top:64px;align-items:stretch}
+/* Le 10+ */
+.proof-big{position:relative;padding-top:14px;overflow:hidden}
+.proof-ghost{position:absolute;left:-1%;bottom:-2%;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(64px,6vw,92px);line-height:1;color:rgba(42,28,18,.035);letter-spacing:-.02em;white-space:nowrap;pointer-events:none;user-select:none}
+.proof-n{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(150px,14vw,230px);line-height:.8;color:#2A1C12;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.proof-n sup{font-size:.42em;vertical-align:.55em;letter-spacing:0;margin-left:.02em}
+.proof-k{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:#A87542;margin-top:22px;font-weight:500}
+.proof-dates{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;margin-top:34px;max-width:460px}
+.proof-dates .d span{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#6A5F55;font-weight:500}
+.proof-dates .d b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:30px;line-height:1.1;color:#291C13;margin-top:4px}
+.proof-dates .d:last-child{text-align:right}
+.proof-dates .rule{position:relative;height:1px;background:rgba(168,117,66,.55)}
+.proof-dates .rule svg{position:absolute;left:50%;top:50%;width:16px;height:16px;transform:translate(-50%,-50%);color:#A87542;background:#F3F0EA}
+.proof-big p{font-size:16px;line-height:1.7;color:#6A5F55;max-width:380px;margin-top:34px}
+/* Le filet vertical, avec l etoile au milieu */
+.proof-v{position:relative;background:rgba(168,117,66,.35)}
+.proof-v svg{position:absolute;left:50%;top:50%;width:18px;height:18px;transform:translate(-50%,-50%);color:#A87542;background:#F3F0EA}
+/* Le registre */
+.proof-row{display:grid;grid-template-columns:52px 66px minmax(190px,.8fr) minmax(230px,1.2fr) auto;gap:0 18px;align-items:start;padding:32px 0;border-bottom:1px solid rgba(74,52,35,.14);transition:border-color .45s cubic-bezier(.22,1,.36,1)}
+.proof-row:first-child{padding-top:8px}
+.proof-row:hover{border-color:rgba(74,52,35,.32)}
+.proof-i{font-family:'Instrument Serif',Georgia,serif;font-size:28px;line-height:1;color:#A87542;padding-top:8px;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.proof-row:hover .proof-i{transform:translateX(3px)}
+.proof-ic{width:62px;height:62px;border-radius:50%;border:1px solid rgba(168,117,66,.5);display:flex;align-items:center;justify-content:center;color:#A87542}
+.proof-ic .ic-svg{width:26px;height:26px;stroke-width:1.25}
+.proof-t h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:27px;line-height:1.15;color:#291C13;letter-spacing:-.005em;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.proof-row:hover .proof-t h3{transform:translateX(2px)}
+.proof-t .meta{display:block;font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:#A87542;margin-top:8px;font-weight:500}
+.proof-d{font-size:14.5px;line-height:1.65;color:#6A6057;padding-top:6px}
+.proof-s{display:inline-flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#A87542;border:1px solid rgba(168,117,66,.5);border-radius:999px;padding:6px 12px;white-space:nowrap;margin-top:6px}
+.proof-s i{width:6px;height:6px;border-radius:50%;background:#A87542;display:block}
+.proof-s svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.proof-row.no-s .proof-s{visibility:hidden}
+.proof-div{display:flex;align-items:center;gap:22px;margin:96px auto 0;max-width:1240px}
+.proof-div::before,.proof-div::after{content:"";flex:1;height:1px;background:rgba(168,117,66,.45)}
+.proof-div svg{width:18px;height:18px;color:#A87542;flex:none}
+.proof-q{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:21px;color:#38281C;text-align:center;margin-top:40px}
+.proof-cta{display:flex;justify-content:center;margin-top:18px}
+.proof-cta a{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:#A87542;text-decoration:none;font-weight:500;transition:color .3s}
+.proof-cta a svg{width:16px;height:16px;transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.proof-cta a:hover{color:#7A5734}.proof-cta a:hover svg{transform:translateX(5px)}
+/* Arrivee: le 10+ lentement, les lignes l une apres l autre */
+.proof .proof-eye,.proof h2,.proof-lead,.proof-big,.proof-row{opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.proof-big{transition-duration:1.3s}
+.proof.in .proof-eye,.proof.in h2,.proof.in .proof-lead,.proof.in .proof-big,.proof.in .proof-row{opacity:1;transform:none}
+.proof.in h2{transition-delay:.06s}.proof.in .proof-lead{transition-delay:.14s}.proof.in .proof-big{transition-delay:.2s}
+.proof.in .proof-row:nth-child(1){transition-delay:.35s}.proof.in .proof-row:nth-child(2){transition-delay:.45s}.proof.in .proof-row:nth-child(3){transition-delay:.55s}.proof.in .proof-row:nth-child(4){transition-delay:.65s}
+@media(max-width:1100px){.proof-head{grid-template-columns:1fr;gap:18px}.proof-lead{justify-self:start}.proof-g{grid-template-columns:1fr;gap:48px}.proof-v{display:none}.proof-row{grid-template-columns:52px 60px 1fr;gap:0 18px}.proof-d{grid-column:3}.proof-s{grid-column:3;justify-self:start}}
+@media(max-width:700px){.proof{padding:88px 0 76px}.proof h2{font-size:48px}.proof-lead{font-size:16.5px}.proof-n{font-size:120px}.proof-row{grid-template-columns:1fr;gap:10px;padding:28px 0}.proof-ic{display:none}.proof-i{font-size:22px;padding:0}.proof-d,.proof-s{grid-column:auto}.proof-ghost{display:none}}
+@media(prefers-reduced-motion:reduce){.proof .proof-eye,.proof h2,.proof-lead,.proof-big,.proof-row{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -610,37 +628,48 @@ h1 em{font-style:italic}
     </div>
   </section>
 
-  <!-- CERTIFICATION -->
-  <section class="cert" id="research">
+  <!-- INNOVATION & CERTIFICATION — the proof -->
+  <section class="proof" id="research">
     <div class="wrap">
-      <span class="eyebrow reveal" style="margin:0 auto; display:flex; justify-content:center;">Research</span>
-      <h2 class="reveal">Innovation &amp; Certification</h2>
-      <div class="cert-track" id="certTrack">
-        <article class="cert-card reveal">
-          <div class="cert-ic"><svg class="ic-svg"><use href="#ic-medal"/></svg></div>
-          <h3>Patented Technology</h3>
-          <p class="lbl">Certified · Canada &amp; USA</p>
-          <p>The Capsule Pyrale uses a proprietary hermetic sealing system and inert gas preservation process — patented and certified in Canada and the United States, with additional certifications in progress.</p>
-        </article>
-        <article class="cert-card reveal">
-          <div class="cert-ic"><svg class="ic-svg"><use href="#ic-flask"/></svg></div>
-          <h3>10+ Years of Research</h3>
-          <p class="lbl">First Test 2011 · Results 2014</p>
-          <p>More than a decade of rigorous development, testing, and refinement went into the Capsule Pyrale. The first prototype was tested in 2011. Conclusive preservation results were confirmed in 2014.</p>
-        </article>
-        <article class="cert-card reveal">
-          <div class="cert-ic"><svg class="ic-svg"><use href="#ic-factory"/></svg></div>
-          <h3>100% Québec Manufacturing</h3>
-          <p class="lbl">Lifetime Warranty</p>
-          <p>Every Capsule Pyrale is designed, engineered, and assembled in Granby, Québec. Built from recyclable aluminium and aviation-grade polycarbonate — and backed by a lifetime structural warranty.</p>
-        </article>
-        <article class="cert-card reveal">
-          <div class="cert-ic"><svg class="ic-svg"><use href="#ic-badge-check"/></svg></div>
-          <h3>Independently Validated</h3>
-          <p class="lbl">Third-Party Review</p>
-          <p>Preservation performance has been reviewed by independent specialists, confirming the integrity of the seal and the stability of the inert-gas environment over time.</p>
-        </article>
+      <div class="proof-head">
+        <div><span class="proof-eye">Proven by research</span><h2>Innovation &amp;<br>Certification</h2></div>
+        <p class="proof-lead">More than a decade of research, engineering and validation stands behind every Capsule Pyrale.</p>
       </div>
+      <div class="proof-g">
+        <div class="proof-big">
+          <div class="proof-ghost" aria-hidden="true">2011 → 2014</div>
+          <div class="proof-n">10<sup>+</sup></div>
+          <div class="proof-k">Years of research</div>
+          <div class="proof-dates">
+            <div class="d"><span>First test</span><b>2011</b></div>
+            <div class="rule"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
+            <div class="d"><span>Results confirmed</span><b>2014</b></div>
+          </div>
+          <p>More than a decade of rigorous development, testing and refinement went into the Capsule Pyrale.</p>
+        </div>
+        <div class="proof-v"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
+        <div class="proof-ledger">
+          <div class="proof-row"><div class="proof-i">01</div><div class="proof-ic"><svg class="ic-svg"><use href="#ic-medal"/></svg></div>
+            <div class="proof-t"><h3>Patented Technology</h3><span class="meta">Certified · Canada &amp; USA</span></div>
+            <p class="proof-d">The Capsule Pyrale uses a proprietary hermetic sealing system and inert-gas preservation process — patented and certified in Canada and the United States, with additional certifications in progress.</p>
+            <span class="proof-s"><i></i>Certified</span></div>
+          <div class="proof-row"><div class="proof-i">02</div><div class="proof-ic"><svg class="ic-svg"><use href="#ic-flask"/></svg></div>
+            <div class="proof-t"><h3>10+ Years of Research</h3><span class="meta">First test 2011 · Results 2014</span></div>
+            <p class="proof-d">More than a decade of rigorous development, testing, and refinement went into the Capsule Pyrale. The first prototype was tested in 2011. Conclusive preservation results were confirmed in 2014.</p>
+            <span class="proof-s"><svg viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></svg>Verified</span></div>
+          <div class="proof-row"><div class="proof-i">03</div><div class="proof-ic"><svg class="ic-svg"><use href="#ic-factory"/></svg></div>
+            <div class="proof-t"><h3>100% Québec Manufacturing</h3><span class="meta">Designed · Engineered · Assembled in Québec</span></div>
+            <p class="proof-d">Every Capsule Pyrale is designed, engineered, and assembled in Granby, Québec. Built from recyclable aluminium and aviation-grade polycarbonate.</p>
+            <span class="proof-s"><i></i>Made in Québec</span></div>
+          <div class="proof-row"><div class="proof-i">04</div><div class="proof-ic"><svg class="ic-svg"><use href="#ic-badge-check"/></svg></div>
+            <div class="proof-t"><h3>Independently Validated</h3><span class="meta">Third-party review</span></div>
+            <p class="proof-d">Preservation performance has been reviewed by independent specialists, confirming the integrity of the seal and the stability of the inert-gas environment over time.</p>
+            <span class="proof-s"><svg viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></svg>Validated</span></div>
+        </div>
+      </div>
+      <div class="proof-div"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg></div>
+      <p class="proof-q">Engineered with precision. Proven over time.</p>
+      <div class="proof-cta"><a href="product.html">Explore our technology <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     </div>
   </section>
 
@@ -934,6 +963,12 @@ h1 em{font-style:italic}
 </script>
 <script>
 (function(){
+  var pr = document.getElementById('research');
+  if (pr && pr.classList.contains('proof')) {
+    if (!('IntersectionObserver' in window)) pr.classList.add('in');
+    else { var iop = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { pr.classList.add('in'); iop.unobserve(pr); } }); }, { threshold: 0.15 }); iop.observe(pr); }
+    setTimeout(function(){ pr.classList.add('in'); }, 3500);
+  }
   var fam = document.getElementById('about');
   if (fam && fam.classList.contains('fam')) {
     if (!('IntersectionObserver' in window)) fam.classList.add('in');
