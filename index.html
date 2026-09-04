@@ -469,6 +469,78 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
   .human-four h3{grid-column:2;margin:0;font-size:17px}
   .human-four p{grid-column:2;margin:4px 0 0;font-size:14px}
   }
+
+/* ══ « Preservation, re-engineered. » — le chapitre technique, après « More time » ══ */
+.tech{position:relative;background:#101820;color:#fff;font-family:'Instrument Sans',system-ui,sans-serif;overflow:hidden;isolation:isolate}
+/* La transition: le porcelaine cede a l encre sur les premiers pixels, sans coupure. */
+.tech::before{content:"";position:absolute;left:0;right:0;top:0;height:140px;background:linear-gradient(180deg,#F5F2ED 0%,rgba(245,242,237,0) 100%);z-index:3;pointer-events:none;opacity:.9}
+.tech-open{position:relative;min-height:min(100svh,900px);overflow:hidden}
+.tech-open .atm{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%;opacity:.9}
+.tech-open::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,24,32,.85) 0%,rgba(16,24,32,.55) 38%,rgba(16,24,32,.05) 70%),linear-gradient(180deg,rgba(16,24,32,.2),rgba(16,24,32,0) 30%,rgba(16,24,32,0) 70%,#101820 100%)}
+.tech-open .wrap{position:relative;z-index:2;max-width:1240px;padding-top:150px;min-height:inherit;display:grid;grid-template-columns:minmax(0,520px) 1fr;gap:40px}
+.tech-eye{font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:500}
+.tech h2{font-weight:300;font-size:clamp(56px,6vw,100px);line-height:.98;letter-spacing:-.025em;color:#fff;margin:20px 0 0}
+.tech-p{margin:26px 0 0;font-size:17.5px;line-height:1.55;color:rgba(255,255,255,.82);max-width:480px}
+.tech-cta{display:inline-flex;align-self:flex-start;align-items:center;gap:14px;height:52px;padding:0 26px;border-radius:999px;background:#fff;color:#101820;font-size:15px;font-weight:500;text-decoration:none;margin-top:30px;transition:transform .3s,box-shadow .3s}
+.tech-cta svg{width:18px;height:18px;transition:transform .3s}
+.tech-cta:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(0,0,0,.35)}.tech-cta:hover svg{transform:translateX(4px)}
+.tech-side{justify-self:end;text-align:right;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:2.1;padding-top:6px}
+.tech-side::after{content:"";display:block;width:52px;height:2px;background:#176B9E;margin:14px 0 0 auto;box-shadow:0 0 14px rgba(23,107,158,.9)}
+/* La vraie capsule, immense, entrant par la droite; l ombre, un reflet, un liseré bleu — autour du fichier, jamais dessus. */
+.tech-cap{position:absolute;z-index:1;right:-12%;bottom:6%;width:min(72vw,1150px);pointer-events:none}
+.tech-cap img{width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 30px 40px rgba(0,0,0,.55))}
+.tech-cap::before{content:"";position:absolute;left:8%;right:20%;bottom:-2%;height:18%;border-radius:50%;background:radial-gradient(ellipse,rgba(142,197,223,.28),rgba(23,107,158,.10) 45%,transparent 72%);filter:blur(24px);z-index:-1}
+.tech-cap .refl{position:absolute;left:0;right:0;top:100%;margin-top:-5%;transform:scaleY(-1);opacity:.16;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.9) 45%,#000);mask-image:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.9) 45%,#000);filter:blur(2px)}
+.tech-cap .refl img{filter:none}
+/* Les trois chapitres: filets, numeros, schemas au trait. */
+.tech-steps{position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:36px 40px 72px;display:grid;grid-template-columns:repeat(3,1fr);gap:0 56px}
+.tech-step .n{display:flex;align-items:center;gap:16px;font-size:12px;letter-spacing:.2em;color:rgba(255,255,255,.55)}
+.tech-step .n::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.18)}
+.tech-step .t{font-size:15px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:#fff;margin-top:10px}
+.tech-step .dg{margin:22px 0 18px;height:110px}
+.tech-step .dg svg{width:100%;height:100%;stroke:#D9DEE1;fill:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+.tech-step .dg .blue{stroke:#8EC5DF}.tech-step .dg .lbl{fill:#8EC5DF;stroke:none;font-size:9px;letter-spacing:.1em}
+.tech-step h3{font-weight:500;font-size:20px;color:#fff;line-height:1.25;margin:0}
+.tech-step p{margin:10px 0 0;font-size:15.5px;line-height:1.55;color:rgba(255,255,255,.72)}
+/* N2, avec la Terre en appui, et trois reperes derriere un filet. */
+.tech-n2{position:relative;border-top:1px solid rgba(255,255,255,.08);min-height:520px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);overflow:hidden}
+.tech-n2 .earth{position:relative;min-height:420px}
+.tech-n2 .earth img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:35% 50%;opacity:.95}
+.tech-n2 .earth::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,24,32,0) 50%,#101820 100%),linear-gradient(180deg,#101820 0%,rgba(16,24,32,0) 22%,rgba(16,24,32,0) 78%,#101820 100%)}
+.tech-n2 .body{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 48px;align-items:center;padding:64px 40px 64px 0}
+.tech-n2 .eye{font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:500}
+.tech-n2 .big{font-weight:300;font-size:clamp(120px,12vw,180px);line-height:.9;letter-spacing:-.04em;color:#fff;margin-top:14px;text-shadow:0 0 60px rgba(142,197,223,.28)}
+.tech-n2 .big sub{font-size:.5em;vertical-align:baseline;position:relative;top:.16em;font-weight:300}
+.tech-n2 .lead{font-size:22px;line-height:1.35;color:#fff;margin-top:18px;max-width:20ch}
+.tech-n2 .sub{font-size:15px;line-height:1.55;color:rgba(255,255,255,.7);margin-top:16px;max-width:36ch}
+.tech-n2 .vr{background:rgba(255,255,255,.14);align-self:stretch;margin:24px 0}
+.tech-n2 ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:30px}
+.tech-n2 li{display:grid;grid-template-columns:44px 1fr;gap:18px;align-items:center}
+.tech-n2 li svg{width:38px;height:38px;stroke:#fff;fill:none;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round}
+.tech-n2 li b{display:block;font-weight:500;font-size:17px;color:#fff}
+.tech-n2 li span{display:block;font-size:13.5px;color:rgba(255,255,255,.68);margin-top:3px}
+/* 60–100 years: un moment typographique, sans cadre. */
+.tech-years{position:relative;padding:96px 40px 80px;text-align:center;border-top:1px solid rgba(255,255,255,.08)}
+.tech-years .y{font-weight:300;font-size:clamp(84px,11vw,168px);line-height:.92;letter-spacing:-.04em;color:#fff}
+.tech-years .y small{display:block;font-size:.22em;letter-spacing:.4em;font-weight:400;color:#8EC5DF;margin-top:14px}
+.tech-years p{margin:26px auto 0;font-size:17px;color:rgba(255,255,255,.72);max-width:40ch}
+/* La fermeture sur la pierre: la lumiere bleue s adoucit, le serif revient — vers le confort. */
+.tech-close{position:relative;min-height:220px;display:flex;align-items:center;overflow:hidden}
+.tech-close img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.tech-close::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#101820 0%,rgba(16,24,32,.55) 30%,rgba(16,24,32,.35) 100%)}
+.tech-close .wrap{position:relative;z-index:1;max-width:1240px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;padding-top:40px;padding-bottom:40px}
+.tech-close .q{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,3vw,40px);line-height:1.25;color:#fff;letter-spacing:-.005em}
+.tech-close .w{border-left:1px solid rgba(255,255,255,.5);padding-left:26px;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.85);line-height:1.9}
+/* Arrivee */
+.tech .tech-eye,.tech h2,.tech-p,.tech-cta,.tech-side,.tech-cap,.tech-step,.tech-n2 .big,.tech-n2 .lead,.tech-n2 .sub,.tech-n2 li,.tech-years .y,.tech-years p,.tech-close .q{opacity:0;transform:translateY(18px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.tech .in .tech-eye,.tech .in h2,.tech .in .tech-p,.tech .in .tech-cta,.tech .in .tech-side,.tech .in.tech-cap,.tech .in .tech-cap,.tech .in .tech-step,.tech .in .big,.tech .in .lead,.tech .in .sub,.tech .in li,.tech .in .y,.tech .in p,.tech .in .q{opacity:1;transform:none}
+.tech .in h2{transition-delay:.08s}.tech .in .tech-p{transition-delay:.18s}.tech .in .tech-cta{transition-delay:.26s}.tech .in .tech-cap{transition-delay:.2s;transition-duration:1.3s}
+.tech .in .tech-step:nth-child(2){transition-delay:.12s}.tech .in .tech-step:nth-child(3){transition-delay:.24s}
+.tech .in .y{transition-duration:1.4s}
+@media(max-width:1100px){.tech-open .wrap{grid-template-columns:1fr}.tech-side{display:none}.tech-cap{position:relative;right:auto;bottom:auto;width:118vw;margin:24px 0 0 -9vw}.tech-open{min-height:0;padding-bottom:0}
+  .tech-steps{grid-template-columns:1fr;gap:36px;padding-top:40px}.tech-n2{grid-template-columns:1fr}.tech-n2 .earth{min-height:300px}.tech-n2 .earth::after{background:linear-gradient(180deg,rgba(16,24,32,.2),#101820)}.tech-n2 .body{grid-template-columns:1fr;gap:36px;padding:0 40px 56px}.tech-n2 .vr{display:none}.tech-close .wrap{grid-template-columns:1fr;gap:24px}}
+@media(max-width:600px){.tech-open .wrap{padding-top:110px}.tech h2{font-size:clamp(46px,12vw,64px)}.tech-p{font-size:16.5px}.tech-steps{padding:32px 24px 56px}.tech-n2 .body{padding:0 24px 48px}.tech-n2 .big{font-size:120px}.tech-years{padding:72px 24px 56px}.tech-years .y{font-size:clamp(64px,20vw,96px)}.tech-close .wrap{padding-top:32px;padding-bottom:32px}}
+@media(prefers-reduced-motion:reduce){.tech *{opacity:1!important;transform:none!important;transition:none!important}.tech-cap .refl{transform:scaleY(-1)!important}}
 </style>
 </head>
 <body>
@@ -545,7 +617,70 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
+<!-- THE SCIENCE OF PRESERVATION -->
+  <section class="tech" id="science" aria-label="The science of preservation">
+    <div class="tech-open">
+      <img class="atm" src="tech-atmosphere.jpg" alt="" loading="lazy" />
+      <div class="wrap" data-reveal>
+        <div style="display:flex;flex-direction:column">
+          <span class="tech-eye">The science of preservation</span>
+          <h2>Preservation,<br>re&#8209;engineered.</h2>
+          <p class="tech-p">The Capsule Pyrale creates a hermetically sealed environment in which oxygen is displaced and replaced with inert nitrogen gas. By controlling the atmosphere surrounding the body, the system offers a different approach to long-term preservation — without traditional embalming chemicals.</p>
+          <a class="tech-cta" href="product.html">Explore the technology <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="tech-side">Same humanity<br>A more advanced<br>tomorrow</div>
+      </div>
+      <div class="tech-cap" data-reveal-self>
+        <img src="capsule-hero.png" alt="The Capsule Pyrale — dark glass dome over a brushed aluminium body" loading="lazy" />
+        <div class="refl" aria-hidden="true"><img src="capsule-hero.png" alt="" /></div>
+      </div>
+    </div>
+
+    <div class="tech-steps" data-reveal>
+      <div class="tech-step"><div class="n">01</div><div class="t">Seal</div>
+        <div class="dg"><svg viewBox="0 0 200 92"><rect x="6" y="18" width="188" height="56" rx="28"/><path d="M14 46h172"/><path d="M22 18c8-10 148-10 156 0"/><path d="M100 12v-8M100 82v8" class="blue"/><circle cx="100" cy="46" r="3" class="blue"/></svg></div>
+        <h3>Create a controlled environment.</h3><p>The aluminium enclosure and transparent dome are hermetically sealed to isolate the capsule’s internal atmosphere.</p></div>
+      <div class="tech-step"><div class="n">02</div><div class="t">Replace</div>
+        <div class="dg"><svg viewBox="0 0 200 92"><rect x="6" y="18" width="188" height="56" rx="28"/><path d="M14 46h172"/><path d="M22 18c8-10 148-10 156 0"/><path d="M130 36h44M166 30l8 6-8 6" class="blue"/><path d="M174 58h-44M138 52l-8 6 8 6" class="blue"/><text x="132" y="29" class="lbl">O₂ OUT</text><text x="132" y="73" class="lbl">N₂ IN</text></svg></div>
+        <h3>Oxygen out. Nitrogen in.</h3><p>The internal air is displaced and replaced with inert nitrogen, creating a controlled low-oxygen preservation environment.</p></div>
+      <div class="tech-step"><div class="n">03</div><div class="t">Preserve</div>
+        <div class="dg"><svg viewBox="0 0 200 92"><rect x="6" y="18" width="188" height="56" rx="28"/><path d="M14 46h172"/><path d="M22 18c8-10 148-10 156 0"/><rect x="30" y="30" width="140" height="32" rx="16" class="blue" stroke-dasharray="2 4"/><text x="86" y="52" class="lbl" style="font-size:16px;letter-spacing:0">N₂</text></svg></div>
+        <h3>Designed for decades.</h3><p>The sealed environment is engineered around long-term preservation, with an intended horizon of 60 to 100 years.</p></div>
+    </div>
+
+    <div class="tech-n2" data-reveal>
+      <div class="earth"><img src="tech-earth.jpg" alt="The Earth’s atmosphere seen from orbit, at dawn" loading="lazy" /></div>
+      <div class="body">
+        <div>
+          <div class="eye">A natural ally</div>
+          <div class="big">N<sub>2</sub></div>
+          <p class="lead">Nitrogen is an inert gas that makes up most of the air around us.</p>
+          <p class="sub">Inside the Capsule Pyrale, it becomes part of a controlled preservation environment.</p>
+        </div>
+        <div class="vr" aria-hidden="true"></div>
+        <ul>
+          <li><svg viewBox="0 0 40 40"><path d="M8 32C22 34 32 24 32 8c0 0-10-1-17 3S6 21 8 32z"/><path d="M8.5 31.5C15 25 20 20 27 15"/></svg><div><b>Natural process</b><span>Using inert nitrogen gas.</span></div></li>
+          <li><svg viewBox="0 0 40 40"><path d="M16 6h8M17 6v11L8.5 31a2 2 0 001.7 3h19.6a2 2 0 001.7-3L23 17V6"/><path d="M13 25h14"/></svg><div><b>No harmful chemicals</b><span>No embalming. No formaldehyde.</span></div></li>
+          <li><svg viewBox="0 0 40 40"><path d="M20 5l12 4.5v9c0 8-5.2 14.2-12 16.5C13.2 32.7 8 26.5 8 18.5v-9z"/><path d="M14 19.5l4 4 8-8.5"/></svg><div><b>A proven technology</b><span>Developed through years of research.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tech-years" data-reveal>
+      <div class="y">60–100<small>Years</small></div>
+      <p>Designed around long-term preservation.</p>
+    </div>
+
+    <div class="tech-close" data-reveal>
+      <img src="tech-stone.jpg" alt="" loading="lazy" />
+      <div class="wrap">
+        <div class="q">No embalming. No harmful chemicals.<br>A different environment for preservation.</div>
+        <div class="w">Science<br>Respect<br>A brighter tomorrow</div>
+      </div>
+    </div>
+  </section>
+
+    <!-- HOW IT WORKS -->
   <section class="how" id="how">
     <div class="wrap">
       <div class="how-head-top reveal">
@@ -963,6 +1098,25 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
     apply(cur);
     sel.querySelectorAll('[data-lang]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); apply(a.dataset.lang); sel.removeAttribute('open'); }); });
     document.addEventListener('click', function(e){ if (!sel.contains(e.target)) sel.removeAttribute('open'); });
+  }
+})();
+</script>
+<script>
+(function(){
+  /* Chaque bloc du chapitre technique arrive quand il entre dans la fenetre. */
+  var els = document.querySelectorAll('#science [data-reveal], #science [data-reveal-self]');
+  if (!els.length) return;
+  if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(entries){ entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }); }, { threshold: 0.18 });
+  els.forEach(function(e){ io.observe(e); });
+  setTimeout(function(){ els.forEach(function(e){ e.classList.add('in'); }); }, 6000);
+  /* La capsule glisse a peine au defilement. */
+  var cap = document.querySelector('#science .tech-cap');
+  if (cap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.matchMedia('(min-width: 1101px)').matches) {
+    var t = false;
+    window.addEventListener('scroll', function(){ if (t) return; t = true; requestAnimationFrame(function(){
+      var r = cap.parentElement.getBoundingClientRect(); var p = Math.max(-1, Math.min(1, (window.innerHeight/2 - (r.top + r.height/2)) / window.innerHeight));
+      cap.style.transform = 'translateY(' + (p * -18).toFixed(1) + 'px)'; t = false; }); }, { passive: true });
   }
 })();
 </script>
