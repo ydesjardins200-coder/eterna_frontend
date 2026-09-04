@@ -508,7 +508,7 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
 .tech-n2 .earth{position:relative;min-height:360px}
 .tech-n2 .earth img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:20% 45%;opacity:.95}
 .tech-n2 .earth::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,24,32,0) 50%,#101820 100%),linear-gradient(180deg,#101820 0%,rgba(16,24,32,0) 22%,rgba(16,24,32,0) 78%,#101820 100%)}
-.tech-n2 .body{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 44px;align-items:center;padding:44px 40px 44px 0}
+.tech-n2 .body{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 44px;align-items:center;padding:44px 40px 56px 0}
 .tech-n2 .eye{font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:500}
 .tech-n2 .big{font-weight:300;font-size:clamp(110px,10.5vw,150px);line-height:.9;letter-spacing:-.04em;color:#fff;margin-top:14px;text-shadow:0 0 60px rgba(142,197,223,.28)}
 .tech-n2 .big sub{font-size:.5em;vertical-align:baseline;position:relative;top:.16em;font-weight:300}
@@ -521,26 +521,15 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
 .tech-n2 li b{display:block;font-weight:500;font-size:17px;color:#fff}
 .tech-n2 li span{display:block;font-size:13.5px;color:rgba(255,255,255,.68);margin-top:3px}
 /* 60–100 years: un moment typographique, sans cadre. */
-.tech-years{position:relative;padding:64px 40px 56px;text-align:center;border-top:1px solid rgba(255,255,255,.08)}
-.tech-years .y{font-weight:300;font-size:clamp(76px,9.5vw,140px);line-height:.92;letter-spacing:-.04em;color:#fff}
-.tech-years .y small{display:block;font-size:.22em;letter-spacing:.4em;font-weight:400;color:#8EC5DF;margin-top:14px}
-.tech-years p{margin:26px auto 0;font-size:17px;color:rgba(255,255,255,.72);max-width:40ch}
 /* La fermeture sur la pierre: la lumiere bleue s adoucit, le serif revient — vers le confort. */
-.tech-close{position:relative;min-height:180px;display:flex;align-items:center;overflow:hidden}
-.tech-close img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
-.tech-close::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#101820 0%,rgba(16,24,32,.55) 30%,rgba(16,24,32,.35) 100%)}
-.tech-close .wrap{position:relative;z-index:1;max-width:1240px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;padding-top:32px;padding-bottom:32px}
-.tech-close .q{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,3vw,40px);line-height:1.25;color:#fff;letter-spacing:-.005em}
-.tech-close .w{border-left:1px solid rgba(255,255,255,.5);padding-left:26px;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.85);line-height:1.9}
 /* Arrivee */
-.tech .tech-eye,.tech h2,.tech-p,.tech-cta,.tech-side,.tech-cap,.tech-step,.tech-n2 .big,.tech-n2 .lead,.tech-n2 .sub,.tech-n2 li,.tech-years .y,.tech-years p,.tech-close .q{opacity:0;transform:translateY(18px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
-.tech .in .tech-eye,.tech .in h2,.tech .in .tech-p,.tech .in .tech-cta,.tech .in .tech-side,.tech .in.tech-cap,.tech .in .tech-cap,.tech .in .tech-step,.tech .in .big,.tech .in .lead,.tech .in .sub,.tech .in li,.tech .in .y,.tech .in p,.tech .in .q{opacity:1;transform:none}
+.tech .tech-eye,.tech h2,.tech-p,.tech-cta,.tech-side,.tech-cap,.tech-step,.tech-n2 .big,.tech-n2 .lead,.tech-n2 .sub,.tech-n2 li{opacity:0;transform:translateY(18px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.tech .in .tech-eye,.tech .in h2,.tech .in .tech-p,.tech .in .tech-cta,.tech .in .tech-side,.tech .in.tech-cap,.tech .in .tech-cap,.tech .in .tech-step,.tech .in .big,.tech .in .lead,.tech .in .sub,.tech .in li{opacity:1;transform:none}
 .tech .in h2{transition-delay:.08s}.tech .in .tech-p{transition-delay:.18s}.tech .in .tech-cta{transition-delay:.26s}.tech .in .tech-cap{transition-delay:.2s;transition-duration:1.3s}
 .tech .in .tech-step:nth-child(2){transition-delay:.12s}.tech .in .tech-step:nth-child(3){transition-delay:.24s}
-.tech .in .y{transition-duration:1.4s}
 @media(max-width:1100px){.tech-open .wrap{grid-template-columns:1fr}.tech-side{display:none}.tech-cap{position:relative;right:auto;bottom:auto;width:118vw;margin:24px 0 0 -9vw}.tech-open{min-height:0;padding-bottom:0}
-  .tech-steps{grid-template-columns:1fr;gap:36px;padding-top:40px}.tech-n2{grid-template-columns:1fr}.tech-n2 .earth{min-height:300px}.tech-n2 .earth::after{background:linear-gradient(180deg,rgba(16,24,32,.2),#101820)}.tech-n2 .body{grid-template-columns:1fr;gap:36px;padding:0 40px 56px}.tech-n2 .vr{display:none}.tech-close .wrap{grid-template-columns:1fr;gap:24px}}
-@media(max-width:600px){.tech-open .wrap{padding-top:110px}.tech h2{font-size:clamp(46px,12vw,64px)}.tech-p{font-size:16.5px}.tech-steps{padding:32px 24px 56px}.tech-n2 .body{padding:0 24px 48px}.tech-n2 .big{font-size:120px}.tech-years{padding:72px 24px 56px}.tech-years .y{font-size:clamp(64px,20vw,96px)}.tech-close .wrap{padding-top:32px;padding-bottom:32px}}
+  .tech-steps{grid-template-columns:1fr;gap:36px;padding-top:40px}.tech-n2{grid-template-columns:1fr}.tech-n2 .earth{min-height:300px}.tech-n2 .earth::after{background:linear-gradient(180deg,rgba(16,24,32,.2),#101820)}.tech-n2 .body{grid-template-columns:1fr;gap:36px;padding:0 40px 56px}.tech-n2 .vr{display:none}}
+@media(max-width:600px){.tech-open .wrap{padding-top:110px}.tech h2{font-size:clamp(46px,12vw,64px)}.tech-p{font-size:16.5px}.tech-steps{padding:32px 24px 56px}.tech-n2 .body{padding:0 24px 48px}.tech-n2 .big{font-size:120px}}
 @media(prefers-reduced-motion:reduce){.tech *{opacity:1!important;transform:none!important;transition:none!important}.tech-cap .refl{transform:scaleY(-1)!important}}
 </style>
 </head>
@@ -668,18 +657,6 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
       </div>
     </div>
 
-    <div class="tech-years" data-reveal>
-      <div class="y">60–100<small>Years</small></div>
-      <p>Designed around long-term preservation.</p>
-    </div>
-
-    <div class="tech-close" data-reveal>
-      <img src="tech-stone.jpg" alt="" loading="lazy" />
-      <div class="wrap">
-        <div class="q">No embalming. No harmful chemicals.<br>A different environment for preservation.</div>
-        <div class="w">Science<br>Respect<br>A brighter tomorrow</div>
-      </div>
-    </div>
   </section>
 
     <!-- HOW IT WORKS -->
