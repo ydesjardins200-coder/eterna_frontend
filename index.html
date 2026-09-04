@@ -112,121 +112,6 @@
   .nav-cta { display: flex; align-items: center; gap: 16px; }
   .menu-toggle { display: none; background: none; border: 0; cursor: pointer; flex-direction: column; gap: 4px; }
   .menu-toggle span { width: 22px; height: 1.5px; background: var(--ink); display: block; }
-
-  /* ---------- HERO (cinematic + glass) ---------- */
-  .hero {
-    position: relative;
-    padding-top: 64px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; top: -14%; left: 0; right: 0; height: 128%;
-    background: #bfe0f2 url("hero-sky.jpg") center / cover no-repeat;
-    z-index: 0; will-change: transform;
-  }
-  .hero::before {
-    content: "";
-    position: absolute; inset: 0; pointer-events: none; z-index: 1;
-    background:
-      radial-gradient(70% 46% at 50% 26%, rgba(60,40,72,0.14), transparent 72%),
-      linear-gradient(180deg, rgba(40,26,48,0.16) 0%, rgba(40,26,48,0) 24%, rgba(34,20,44,0) 46%, rgba(30,18,40,0.34) 74%, rgba(22,13,32,0.62) 100%);
-  }
-  @keyframes heroSlideLeft { from { opacity: 0; transform: translateX(-8vw); } to { opacity: 1; transform: translateX(0); } }
-  @keyframes heroFadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  .hero-stage {
-    position: relative; z-index: 2; flex: 1;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    padding: 20px 0 0;
-  }
-  .hero-word {
-    font-family: var(--display);
-    font-weight: 400;
-    color: rgba(255,255,255,0.9);
-    font-size: clamp(78px, 19.5vw, 310px);
-    letter-spacing: 0.02em;
-    line-height: 0.9;
-    text-align: center;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-    filter: drop-shadow(0 0 42px rgba(28,14,34,0.72)) drop-shadow(0 4px 18px rgba(44,24,42,0.5));
-    animation: heroSlideLeft 1.2s cubic-bezier(.22,1,.36,1) both;
-  }
-  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
-    .hero-word {
-      background:
-        linear-gradient(105deg, transparent 42%, rgba(255,255,255,0.85) 50%, transparent 58%),
-        linear-gradient(176deg, #ffffff 0%, #f7f0e7 46%, #ecdcc8 100%);
-      background-size: 260% 100%, 100% 100%;
-      background-position: 135% 0, 0 0;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: heroSlideLeft 1.2s cubic-bezier(.22,1,.36,1) both, heroShine 8s ease-in-out 1.6s infinite;
-    }
-  }
-  @keyframes heroShine {
-    0%   { background-position: 135% 0, 0 0; }
-    26%  { background-position: -35% 0, 0 0; }
-    100% { background-position: -35% 0, 0 0; }
-  }
-  .hero-capsule {
-    position: relative;
-    width: min(78%, 1080px);
-    margin: -2.5% auto 0;
-    z-index: 2;
-    animation: heroFadeUp 1.2s cubic-bezier(.22,1,.36,1) 0.15s both;
-  }
-  .hero-capsule img {
-    width: 100%; height: auto; display: block;
-    position: relative; z-index: 2;
-    filter: drop-shadow(0 30px 30px rgba(40,24,46,0.42)) drop-shadow(0 64px 84px rgba(48,30,68,0.28));
-  }
-  .hero-capsule::after {
-    content: "";
-    position: absolute; z-index: 1;
-    left: 12%; right: 12%; bottom: -5%;
-    height: 64px;
-    background: radial-gradient(50% 100% at 50% 50%, rgba(34,18,44,0.6) 0%, rgba(40,22,52,0.32) 40%, transparent 74%);
-    filter: blur(22px);
-  }
-  .hero-panel-wrap {
-    position: relative; z-index: 3;
-    padding: 0 0 clamp(26px, 4.5vh, 54px);
-    animation: heroFadeUp 1s cubic-bezier(.22,1,.36,1) 0.4s both;
-  }
-  .hero-glass {
-    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 32px; align-items: center;
-    padding: 32px 40px;
-    border-radius: 22px;
-    background: rgba(30,20,40,0.30);
-    backdrop-filter: blur(30px) saturate(1.3);
-    -webkit-backdrop-filter: blur(30px) saturate(1.3);
-    border: 1px solid rgba(255,255,255,0.22);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.34),
-      inset 0 -1px 0 rgba(255,255,255,0.04),
-      0 34px 74px rgba(18,10,28,0.46);
-    position: relative; overflow: hidden;
-  }
-  .hero-glass::before {
-    content: ""; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
-  }
-  .hero-title {
-    margin: 0;
-    font-weight: 500; font-size: clamp(30px, 3.8vw, 52px); color: #fff;
-    letter-spacing: -0.025em; line-height: 1.05;
-    text-shadow: 0 2px 22px rgba(24,14,34,0.5);
-  }
-  .hero-lead { display: flex; flex-direction: column; align-items: flex-start; }
-  .hero-lead p { color: rgba(255,255,255,0.82); font-size: 14.5px; margin: 0 0 22px; line-height: 1.6; }
-  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-  .hero-glass .btn--dark { background: #fff; color: var(--ink); }
-  .hero-glass .btn--dark:hover { background: #ece9f3; transform: translateY(-1px); }
   .btn--partner {
     background: rgba(255,255,255,0.10); color: #fff;
     border: 1px solid rgba(255,255,255,0.42);
@@ -464,10 +349,6 @@
     .nav-links, .nav-cta .btn { display: none; }
     .menu-toggle { display: flex; }
     .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
-    .hero-glass { grid-template-columns: 1fr; gap: 18px; padding: 24px 22px; }
-    .hero-lead { align-items: flex-start; }
-    .hero-capsule { width: 100%; margin-top: -4%; }
-    .hero-word { font-size: clamp(60px, 22vw, 150px); }
     .values-grid, .cert-track { grid-template-columns: 1fr 1fr; }
     .how-grid { grid-template-columns: 1fr; gap: 30px; }
     .why-grid, .faq-grid, .voices-grid { grid-template-columns: 1fr; gap: 34px; }
@@ -486,12 +367,101 @@
   @media (prefers-reduced-motion: reduce) {
     * { scroll-behavior: auto !important; }
     .reveal { opacity: 1 !important; transform: none !important; transition: none; }
-    .hero-word, .hero-capsule, .hero-panel-wrap, .hero-title, .hero-lead { animation: none !important; opacity: 1 !important; transform: none !important; }
   }
 
   .foot-portal { text-align: center; padding: 18px 24px 0; }
   .foot-portal a { font-size: 12.5px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
   .foot-portal a:hover { color: var(--ink); }
+
+/* ══ Le héros — la terrasse au sommet, la vraie capsule posée dessus ══ */
+.hero{position:relative;height:max(100svh,900px);max-height:1080px;color:#fff;isolation:isolate;overflow:hidden;background:#1a2a3a}
+/* La scene est calee sur l image, pas sur la fenetre: la capsule reelle doit
+   recouvrir exactement celle qui est cuite dans le fond, quel que soit le
+   recadrage. Le cadre interieur a le format de l image et deborde comme
+   object-fit: cover le ferait. */
+.hero-scene{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-frame{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max(100%, calc(min(max(100svh,900px),1080px) * 1.7768));aspect-ratio:1672/941;will-change:transform}
+.hero-frame>img.bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-cap{position:absolute;left:16.6%;top:42.9%;width:64.5%;z-index:3;will-change:transform}
+.hero-cap img{width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 12px 18px rgba(20,25,35,.22))}
+.hero-cap .refl{position:absolute;left:0;right:0;top:100%;margin-top:-4.6%;transform:scaleY(-1);opacity:.22;z-index:-1;pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.85) 40%,#000 100%);mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.85) 40%,#000 100%);filter:blur(1.5px)}
+.hero-cap .refl img{filter:none}
+.hero-cap .shade{position:absolute;left:4%;right:4%;bottom:1.5%;height:12%;z-index:-2;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(30,36,45,.55),rgba(30,36,45,.22) 50%,rgba(30,36,45,0) 75%);filter:blur(12px)}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(100deg,rgba(14,26,44,.55) 0%,rgba(14,26,44,.32) 34%,rgba(14,26,44,.04) 60%,rgba(14,26,44,0) 72%),linear-gradient(180deg,rgba(10,18,30,.42) 0%,rgba(10,18,30,0) 26%)}
+.hero-in{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:92px 60px 0;display:grid;grid-template-columns:minmax(0,1.35fr) 1px minmax(300px,.65fr);gap:0 56px;align-items:start}
+.hero-eye{display:inline-flex;align-items:center;gap:14px;font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:500}
+.hero-eye::before{content:"";width:8px;height:1px;background:#fff;opacity:.8}
+.hero h1{font-family:'Instrument Sans',system-ui,sans-serif;font-weight:300;font-size:clamp(60px,5.7vw,100px);line-height:.94;letter-spacing:-.02em;color:#fff;margin:12px 0 0;max-width:12ch;text-shadow:0 2px 30px rgba(0,0,0,.18)}
+.hero-p{margin:18px 0 0;max-width:600px;font-size:clamp(17px,1.3vw,19px);line-height:1.5;color:rgba(255,255,255,.9)}
+.hero-acts{display:flex;align-items:center;gap:32px;margin-top:22px}
+.hero-cta{display:inline-flex;align-items:center;gap:14px;height:52px;padding:0 26px;border-radius:999px;background:#fff;color:#111;font-size:15px;font-weight:500;text-decoration:none;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.hero-cta svg{width:18px;height:18px;transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.hero-cta:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(0,0,0,.18)}.hero-cta:hover svg{transform:translateX(4px)}
+.hero-vid{display:inline-flex;align-items:center;gap:12px;color:rgba(255,255,255,.92);font-size:15px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:2px;transition:opacity .3s}
+.hero-vid i{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.7);display:inline-flex;align-items:center;justify-content:center;margin-left:4px}
+.hero-vid i::after{content:"";border-style:solid;border-width:5px 0 5px 8px;border-color:transparent transparent transparent #fff;margin-left:2px}
+.hero-vid:hover{opacity:.8}
+.hero-rule{width:1px;background:rgba(255,255,255,.35);align-self:stretch;margin-top:8px;min-height:270px}
+.hero-ben{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:30px;max-width:330px}
+.hero-ben li{display:grid;grid-template-columns:44px 1fr;gap:20px;align-items:center}
+.hero-ben svg{width:40px;height:40px;stroke:#fff;fill:none;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;opacity:.92}
+.hero-ben b{display:block;font-weight:400;font-size:18px;line-height:1.2;color:#fff}
+.hero-ben span{display:block;font-size:13.5px;color:rgba(255,255,255,.72);margin-top:4px}
+.hero-foot{position:absolute;left:0;right:0;bottom:0;z-index:2;max-width:1440px;margin:0 auto;padding:0 60px 56px;display:flex;justify-content:space-between;align-items:flex-end;pointer-events:none}
+.hero-words{border-left:1px solid rgba(255,255,255,.55);padding-left:26px;font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.9);line-height:1.9}
+.hero-scroll{display:inline-flex;align-items:center;gap:16px;font-size:13.5px;color:rgba(255,255,255,.85);pointer-events:auto;text-decoration:none}
+.hero-scroll::before{content:"";width:60px;height:1px;background:rgba(255,255,255,.5)}
+.hero-scroll i{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.75);display:inline-flex;align-items:center;justify-content:center}
+.hero-scroll svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+/* La barre, posee sur l image: blanche, legere; le bouton en pilule noire. */
+header.nav:not(.scrolled){background:transparent}
+header.nav:not(.scrolled) .brand{color:#fff}
+header.nav:not(.scrolled) .nav-links a{color:rgba(255,255,255,.9);font-size:14px}
+header.nav:not(.scrolled) .nav-links a::before{content:none}
+header.nav:not(.scrolled) .nav-links a:hover,header.nav:not(.scrolled) .nav-links a.active{color:#fff}
+header.nav:not(.scrolled) .menu-toggle span{background:#fff}
+.nav-cta .btn--dark{background:#000;color:#fff;border-radius:999px;transition:background .3s,transform .3s}
+.nav-cta .btn--dark:hover{background:#222;transform:translateY(-1px)}
+.lang-sel{position:relative;margin-left:18px}
+.lang-sel button{background:none;border:0;color:rgba(255,255,255,.9);font:inherit;font-size:13px;letter-spacing:.06em;display:inline-flex;align-items:center;gap:6px;cursor:pointer;padding:6px 2px}
+header.nav.scrolled .lang-sel button{color:var(--ink)}
+.lang-sel button svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6;transition:transform .25s}
+.lang-sel[open] button svg{transform:rotate(180deg)}
+.lang-sel ul{position:absolute;right:0;top:calc(100% + 8px);list-style:none;margin:0;padding:6px;min-width:150px;background:#fff;color:#111;border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.18);display:none}
+.lang-sel[open] ul{display:block}
+.lang-sel li a{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:8px;font-size:13.5px;color:#111;text-decoration:none}
+.lang-sel li a:hover{background:#f2f2f0}
+.lang-sel li a.on::after{content:"✓";font-size:12px;color:#666}
+/* Arrivee: 800–1200 ms, fondu et douze pixels. */
+.hero-frame{transform:translate(-50%,-50%) scale(1.02);transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
+.hero.in .hero-frame{transform:translate(-50%,-50%) scale(1)}
+.hero-eye,.hero h1,.hero-p,.hero-acts,.hero-ben li,.hero-foot>*{opacity:0;transform:translateY(15px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.hero-cap{opacity:0;transform:translateY(20px);transition:opacity 1s cubic-bezier(.22,1,.36,1) .25s,transform 1s cubic-bezier(.22,1,.36,1) .25s}
+.hero.in .hero-eye,.hero.in h1,.hero.in .hero-p,.hero.in .hero-acts,.hero.in .hero-ben li,.hero.in .hero-foot>*,.hero.in .hero-cap{opacity:1;transform:none}
+.hero.in h1{transition-delay:.08s}.hero.in .hero-p{transition-delay:.2s}.hero.in .hero-acts{transition-delay:.3s}
+.hero.in .hero-ben li:nth-child(1){transition-delay:.35s}.hero.in .hero-ben li:nth-child(2){transition-delay:.43s}.hero.in .hero-ben li:nth-child(3){transition-delay:.51s}.hero.in .hero-ben li:nth-child(4){transition-delay:.59s}
+.hero.in .hero-foot>*{transition-delay:.7s}
+@media(max-width:1100px){
+  /* Tablette: le texte, puis la scene en bande, puis les avantages sur deux colonnes, puis le pied. */
+  .hero{height:auto;max-height:none;display:flex;flex-direction:column;background:linear-gradient(180deg,#1f3550 0%,#2a4562 60%,#243a52 100%)}
+  .hero::before{display:none}
+  .hero-in{display:contents}
+  .hero-in>div:first-child{order:1;padding:120px 40px 0}
+  .hero-scene{order:2;position:relative;height:auto;aspect-ratio:16/10;overflow:hidden;margin-top:34px}
+  .hero-frame{width:max(100%, calc(100% * 1.1));left:50%;top:50%}
+  .hero-rule{display:none}
+  .hero-ben{order:3;flex-direction:row;flex-wrap:wrap;max-width:none;gap:22px 40px;padding:32px 40px 0}.hero-ben li{flex:1 1 40%}
+  .hero-foot{order:4;position:relative;padding:32px 40px 40px}}
+@media(max-width:760px){
+  .hero-in>div:first-child{padding:104px 24px 0}
+  .hero-scene{aspect-ratio:1/1;margin-top:28px}
+  .hero-frame{width:calc(100% * 1.777)}
+  .hero-ben{flex-direction:column;gap:18px;padding:28px 24px 0}.hero-ben li{flex:none}
+  .hero h1{font-size:clamp(48px,14vw,72px)}.hero-p{font-size:17px}.hero-acts{flex-wrap:wrap;gap:18px}
+  .hero-foot{padding:28px 24px 34px;flex-direction:column;align-items:flex-start;gap:22px}.hero-words{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.hero-frame,.hero-eye,.hero h1,.hero-p,.hero-acts,.hero-ben li,.hero-foot>*,.hero-cap{opacity:1!important;transform:none!important;transition:none!important}.hero-frame{transform:translate(-50%,-50%)!important}}
 </style>
 </head>
 <body>
@@ -515,6 +485,10 @@
     </nav>
     <div class="nav-cta">
       <a href="#contact" class="btn btn--dark">Book a Consultation</a>
+      <details class="lang-sel" id="langSel">
+        <summary style="list-style:none"><button type="button" aria-label="Language">EN <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button></summary>
+        <ul><li><a href="#" data-lang="en" class="on">English</a></li><li><a href="#" data-lang="fr">Français</a></li></ul>
+      </details>
       <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -523,25 +497,38 @@
 <main id="top">
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg" id="heroBg"></div>
-    <div class="hero-stage">
-      <div class="hero-word">ETERNA</div>
-      <div class="hero-capsule">
-        <img src="capsule-hero.png" alt="The Capsule Pyrale — a hermetic aluminium capsule with a dark glass viewing dome" />
-      </div>
-    </div>
-    <div class="wrap hero-panel-wrap">
-      <div class="hero-glass">
-        <h1 class="hero-title">A New Way<br />to Say Goodbye</h1>
-        <div class="hero-lead">
-          <p>The Capsule Pyrale is a hermetic aluminum capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without embalming, without compromise.</p>
-          <div class="hero-actions">
-            <a href="#capsule" class="btn btn--dark">Discover the Pyrale</a>
-            <a href="/partenaires" class="btn btn--partner">Partner With Us <span class="btn-arrow">&rarr;</span></a>
-          </div>
+  <section class="hero" id="hero" aria-label="The Capsule Pyrale">
+    <div class="hero-scene" aria-hidden="true">
+      <div class="hero-frame" id="heroFrame">
+        <img class="bg" src="hero-summit.jpg" alt="" />
+        <div class="hero-cap" id="heroCap">
+          <div class="shade"></div>
+          <img src="capsule-hero.png" alt="The Capsule Pyrale — a hermetic aluminium capsule with a dark glass dome, resting on a polished stone terrace" />
+          <div class="refl"><img src="capsule-hero.png" alt="" /></div>
         </div>
       </div>
+    </div>
+    <div class="hero-in" id="heroIn">
+      <div>
+        <span class="hero-eye">Preserve what matters</span>
+        <h1>A New Way<br>to Say Goodbye</h1>
+        <p class="hero-p">The Capsule Pyrale is a hermetic aluminum capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without embalming, without compromise.</p>
+        <div class="hero-acts">
+          <a class="hero-cta" href="product.html">Discover the Pyrale <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="hero-vid" href="product.html#video">Watch the video <i aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="hero-rule" aria-hidden="true"></div>
+      <ul class="hero-ben">
+        <li><svg viewBox="0 0 40 40"><path d="M8 32C22 34 32 24 32 8c0 0-10-1-17 3S6 21 8 32z"/><path d="M8.5 31.5C15 25 20 20 27 15"/></svg><div><b>60 – 100 years</b><span>Natural preservation</span></div></li>
+        <li><svg viewBox="0 0 40 40"><path d="M16 6h8M17 6v11L8.5 31a2 2 0 001.7 3h19.6a2 2 0 001.7-3L23 17V6"/><path d="M13 25h14"/></svg><div><b>No embalming</b><span>No harmful chemicals</span></div></li>
+        <li><svg viewBox="0 0 40 40"><path d="M20 5l12 4.5v9c0 8-5.2 14.2-12 16.5C13.2 32.7 8 26.5 8 18.5v-9z"/><path d="M14 19.5l4 4 8-8.5"/></svg><div><b>Patented technology</b><span>A proven and innovative process</span></div></li>
+        <li><svg viewBox="0 0 40 40"><path d="M20 5c-2 5-6 7-6 12 0 3 2.5 5 6 5s6-2 6-5c0-5-4-7-6-12z"/><path d="M20 22v13M14 27c-4-1-7-4-7-8 3 0 6 2 7 5M26 27c4-1 7-4 7-8-3 0-6 2-7 5M15 35h10"/></svg><div><b>Designed in Québec</b><span>A local vision for future generations</span></div></li>
+      </ul>
+    </div>
+    <div class="hero-foot">
+      <div class="hero-words">Science<br>Respect<br>A brighter tomorrow</div>
+      <a class="hero-scroll" href="#capsule">Scroll to explore <i><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></i></a>
     </div>
   </section>
 
@@ -965,6 +952,39 @@
       })
       .then(function () { if (btn) btn.disabled = false; });
   });
+</script>
+<script>
+(function(){
+  var hero = document.getElementById('hero'); if (!hero) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ hero.classList.add('in'); }); });
+  /* Une parallaxe a peine la: le fond bouge moins que le texte, la capsule entre les deux. */
+  if (!reduce && window.matchMedia('(min-width: 761px)').matches) {
+    var frame = document.getElementById('heroFrame'), cap = document.getElementById('heroCap'), inner = document.getElementById('heroIn');
+    var tick = false;
+    window.addEventListener('scroll', function(){
+      if (tick) return; tick = true;
+      requestAnimationFrame(function(){
+        var y = window.scrollY; if (y < window.innerHeight * 1.2) {
+          frame.style.transform = 'translate(-50%,-50%) translateY(' + (y * 0.06).toFixed(1) + 'px)';
+          cap.style.transform = 'translateY(' + (y * -0.04).toFixed(1) + 'px)';
+          inner.style.transform = 'translateY(' + (y * 0.12).toFixed(1) + 'px)';
+        }
+        tick = false;
+      });
+    }, { passive: true });
+  }
+  /* Le selecteur de langue: la preference est gardee et suit les liens du tunnel. Le contenu du site reste en anglais pour l instant. */
+  var sel = document.getElementById('langSel');
+  if (sel) {
+    var cur = 'en'; try { cur = localStorage.getItem('eterna_site_lang') || 'en'; } catch (e) {}
+    var btn = sel.querySelector('summary button');
+    function apply(l){ cur = l; btn.firstChild.nodeValue = l.toUpperCase() + ' '; sel.querySelectorAll('[data-lang]').forEach(function(a){ a.classList.toggle('on', a.dataset.lang === l); }); try { localStorage.setItem('eterna_site_lang', l); } catch (e) {} }
+    apply(cur);
+    sel.querySelectorAll('[data-lang]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); apply(a.dataset.lang); sel.removeAttribute('open'); }); });
+    document.addEventListener('click', function(e){ if (!sel.contains(e.target)) sel.removeAttribute('open'); });
+  }
+})();
 </script>
 </body>
 </html>
