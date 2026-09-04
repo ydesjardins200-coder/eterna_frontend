@@ -385,9 +385,11 @@
 .hero-in{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:118px 60px 0;text-align:center;display:flex;flex-direction:column;align-items:center}
 /* Une carte de verre: le texte tient ensemble, lisible sur n importe quelle
    partie de l image, sans voile sur l image elle-meme. */
-.hero-glass{display:flex;flex-direction:column;align-items:center;padding:44px 56px 40px;border-radius:28px;background:rgba(255,255,255,.10);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);border:1px solid rgba(255,255,255,.28);box-shadow:0 30px 80px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.35);max-width:960px}
-.hero h1{font-family:'Instrument Sans',system-ui,sans-serif;font-weight:300;font-size:clamp(44px,5.2vw,84px);line-height:1;letter-spacing:-.02em;color:#fff;margin:0;white-space:nowrap}
-.hero-p{margin:20px auto 0;max-width:640px;font-size:clamp(17px,1.3vw,19px);line-height:1.5;color:rgba(255,255,255,.94)}
+/* La carte epouse son contenu — le titre decide de sa largeur, avec 64 px
+   de marge de chaque cote — et ne depasse jamais la fenetre. */
+.hero-glass{display:flex;flex-direction:column;align-items:center;width:fit-content;max-width:100%;padding:44px 64px 42px;border-radius:28px;background:rgba(255,255,255,.10);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);border:1px solid rgba(255,255,255,.28);box-shadow:0 30px 80px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.35);box-sizing:border-box}
+.hero h1{font-family:'Instrument Sans',system-ui,sans-serif;font-weight:300;font-size:clamp(44px,4.9vw,78px);line-height:1;letter-spacing:-.02em;color:#fff;margin:0;white-space:nowrap}
+.hero-p{margin:20px auto 0;max-width:620px;font-size:clamp(17px,1.3vw,19px);line-height:1.5;color:rgba(255,255,255,.94)}
 .hero-acts{display:flex;align-items:center;justify-content:center;gap:32px;margin-top:26px}
 .hero-cta{display:inline-flex;align-items:center;gap:14px;height:52px;padding:0 26px;border-radius:999px;background:#fff;color:#111;font-size:15px;font-weight:500;text-decoration:none;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
 .hero-cta svg{width:18px;height:18px;transition:transform .35s cubic-bezier(.22,1,.36,1)}
