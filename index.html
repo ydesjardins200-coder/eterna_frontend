@@ -373,29 +373,19 @@
   .foot-portal a { font-size: 12.5px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
   .foot-portal a:hover { color: var(--ink); }
 
-/* ══ Le héros — la terrasse au sommet, la vraie capsule posée dessus ══ */
-.hero{position:relative;height:max(100svh,900px);max-height:1080px;color:#fff;isolation:isolate;overflow:hidden;background:#1a2a3a}
-/* La scene est calee sur l image, pas sur la fenetre: la capsule reelle doit
-   recouvrir exactement celle qui est cuite dans le fond, quel que soit le
-   recadrage. Le cadre interieur a le format de l image et deborde comme
-   object-fit: cover le ferait. */
+/* ══ Le héros — la terrasse au sommet, l image telle quelle, le texte centré ══ */
+.hero{position:relative;height:max(100svh,860px);max-height:1080px;color:#fff;isolation:isolate;overflow:hidden;background:#1a2a3a}
+/* La scene est calee sur l image, pas sur la fenetre: le cadre a le format de
+   l image et deborde comme object-fit: cover; a 110 % de hauteur sur bureau,
+   pour que la capsule cuite dans le fond reste sous le texte. */
 .hero-scene{position:absolute;inset:0;z-index:0;overflow:hidden}
-.hero-frame{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max(100%, calc(min(max(100svh,900px),1080px) * 1.7768));aspect-ratio:1672/941;will-change:transform}
-.hero-frame>img.bg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.hero-cap{position:absolute;left:16.6%;top:42.9%;width:64.5%;z-index:3;will-change:transform}
-.hero-cap img{width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 12px 18px rgba(20,25,35,.22))}
-.hero-cap .refl{position:absolute;left:0;right:0;top:100%;margin-top:-4.6%;transform:scaleY(-1);opacity:.22;z-index:-1;pointer-events:none;
-  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.85) 40%,#000 100%);mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.85) 40%,#000 100%);filter:blur(1.5px)}
-.hero-cap .refl img{filter:none}
-.hero-cap .shade{position:absolute;left:4%;right:4%;bottom:1.5%;height:12%;z-index:-2;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(30,36,45,.55),rgba(30,36,45,.22) 50%,rgba(30,36,45,0) 75%);filter:blur(12px)}
-.hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(100deg,rgba(14,26,44,.55) 0%,rgba(14,26,44,.32) 34%,rgba(14,26,44,.04) 60%,rgba(14,26,44,0) 72%),linear-gradient(180deg,rgba(10,18,30,.42) 0%,rgba(10,18,30,0) 26%)}
-.hero-in{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:92px 60px 0;display:grid;grid-template-columns:minmax(0,1.35fr) 1px minmax(300px,.65fr);gap:0 56px;align-items:start}
-.hero-eye{display:inline-flex;align-items:center;gap:14px;font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:500}
-.hero-eye::before{content:"";width:8px;height:1px;background:#fff;opacity:.8}
-.hero h1{font-family:'Instrument Sans',system-ui,sans-serif;font-weight:300;font-size:clamp(60px,5.7vw,100px);line-height:.94;letter-spacing:-.02em;color:#fff;margin:12px 0 0;max-width:12ch;text-shadow:0 2px 30px rgba(0,0,0,.18)}
-.hero-p{margin:18px 0 0;max-width:600px;font-size:clamp(17px,1.3vw,19px);line-height:1.5;color:rgba(255,255,255,.9)}
-.hero-acts{display:flex;align-items:center;gap:32px;margin-top:22px}
+.hero-frame{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max(100%, calc(min(max(100svh,860px),1080px) * 1.7768));aspect-ratio:1672/941;will-change:transform}
+.hero-frame>img.bg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110%;height:110%;object-fit:cover;display:block}
+/* Aucun voile: l image est deja composee pour porter le texte. */
+.hero-in{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:130px 60px 0;text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero h1{font-family:'Instrument Sans',system-ui,sans-serif;font-weight:300;font-size:clamp(44px,5.2vw,88px);line-height:1;letter-spacing:-.02em;color:#fff;margin:0;white-space:nowrap;text-shadow:0 2px 30px rgba(0,0,0,.18)}
+.hero-p{margin:22px auto 0;max-width:640px;font-size:clamp(17px,1.3vw,19px);line-height:1.5;color:rgba(255,255,255,.92);text-shadow:0 1px 14px rgba(0,0,0,.18)}
+.hero-acts{display:flex;align-items:center;justify-content:center;gap:32px;margin-top:26px}
 .hero-cta{display:inline-flex;align-items:center;gap:14px;height:52px;padding:0 26px;border-radius:999px;background:#fff;color:#111;font-size:15px;font-weight:500;text-decoration:none;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
 .hero-cta svg{width:18px;height:18px;transition:transform .35s cubic-bezier(.22,1,.36,1)}
 .hero-cta:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(0,0,0,.18)}.hero-cta:hover svg{transform:translateX(4px)}
@@ -403,24 +393,21 @@
 .hero-vid i{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.7);display:inline-flex;align-items:center;justify-content:center;margin-left:4px}
 .hero-vid i::after{content:"";border-style:solid;border-width:5px 0 5px 8px;border-color:transparent transparent transparent #fff;margin-left:2px}
 .hero-vid:hover{opacity:.8}
-.hero-rule{width:1px;background:rgba(255,255,255,.35);align-self:stretch;margin-top:8px;min-height:270px}
-.hero-ben{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:30px;max-width:330px}
-.hero-ben li{display:grid;grid-template-columns:44px 1fr;gap:20px;align-items:center}
-.hero-ben svg{width:40px;height:40px;stroke:#fff;fill:none;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;opacity:.92}
-.hero-ben b{display:block;font-weight:400;font-size:18px;line-height:1.2;color:#fff}
-.hero-ben span{display:block;font-size:13.5px;color:rgba(255,255,255,.72);margin-top:4px}
-.hero-foot{position:absolute;left:0;right:0;bottom:0;z-index:2;max-width:1440px;margin:0 auto;padding:0 60px 56px;display:flex;justify-content:space-between;align-items:flex-end;pointer-events:none}
+.hero-foot{position:absolute;left:0;right:0;bottom:0;z-index:2;max-width:1440px;margin:0 auto;padding:0 60px 48px;display:flex;justify-content:space-between;align-items:flex-end;pointer-events:none}
 .hero-words{border-left:1px solid rgba(255,255,255,.55);padding-left:26px;font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.9);line-height:1.9}
 .hero-scroll{display:inline-flex;align-items:center;gap:16px;font-size:13.5px;color:rgba(255,255,255,.85);pointer-events:auto;text-decoration:none}
 .hero-scroll::before{content:"";width:60px;height:1px;background:rgba(255,255,255,.5)}
 .hero-scroll i{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.75);display:inline-flex;align-items:center;justify-content:center}
 .hero-scroll svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-/* La barre, posee sur l image: blanche, legere; le bouton en pilule noire. */
+/* La barre, posee sur l image: blanche, legere; le bouton en pilule noire. Le
+   menu ouvert sur telephone garde son fond blanc, donc son texte redevient
+   sombre — sinon il etait blanc sur blanc, une page vide. */
 header.nav:not(.scrolled){background:transparent}
 header.nav:not(.scrolled) .brand{color:#fff}
 header.nav:not(.scrolled) .nav-links a{color:rgba(255,255,255,.9);font-size:14px}
 header.nav:not(.scrolled) .nav-links a::before{content:none}
 header.nav:not(.scrolled) .nav-links a:hover,header.nav:not(.scrolled) .nav-links a.active{color:#fff}
+header.nav:not(.scrolled) .nav-links.open a,header.nav:not(.scrolled) .nav-links.open a:hover{color:var(--ink)}
 header.nav:not(.scrolled) .menu-toggle span{background:#fff}
 .nav-cta .btn--dark{background:#000;color:#fff;border-radius:999px;transition:background .3s,transform .3s}
 .nav-cta .btn--dark:hover{background:#222;transform:translateY(-1px)}
@@ -437,31 +424,21 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
 /* Arrivee: 800–1200 ms, fondu et douze pixels. */
 .hero-frame{transform:translate(-50%,-50%) scale(1.02);transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
 .hero.in .hero-frame{transform:translate(-50%,-50%) scale(1)}
-.hero-eye,.hero h1,.hero-p,.hero-acts,.hero-ben li,.hero-foot>*{opacity:0;transform:translateY(15px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
-.hero-cap{opacity:0;transform:translateY(20px);transition:opacity 1s cubic-bezier(.22,1,.36,1) .25s,transform 1s cubic-bezier(.22,1,.36,1) .25s}
-.hero.in .hero-eye,.hero.in h1,.hero.in .hero-p,.hero.in .hero-acts,.hero.in .hero-ben li,.hero.in .hero-foot>*,.hero.in .hero-cap{opacity:1;transform:none}
-.hero.in h1{transition-delay:.08s}.hero.in .hero-p{transition-delay:.2s}.hero.in .hero-acts{transition-delay:.3s}
-.hero.in .hero-ben li:nth-child(1){transition-delay:.35s}.hero.in .hero-ben li:nth-child(2){transition-delay:.43s}.hero.in .hero-ben li:nth-child(3){transition-delay:.51s}.hero.in .hero-ben li:nth-child(4){transition-delay:.59s}
-.hero.in .hero-foot>*{transition-delay:.7s}
-@media(max-width:1100px){
-  /* Tablette: le texte, puis la scene en bande, puis les avantages sur deux colonnes, puis le pied. */
-  .hero{height:auto;max-height:none;display:flex;flex-direction:column;background:linear-gradient(180deg,#1f3550 0%,#2a4562 60%,#243a52 100%)}
-  .hero::before{display:none}
-  .hero-in{display:contents}
-  .hero-in>div:first-child{order:1;padding:120px 40px 0}
-  .hero-scene{order:2;position:relative;height:auto;aspect-ratio:16/10;overflow:hidden;margin-top:34px}
-  .hero-frame{width:max(100%, calc(100% * 1.1));left:50%;top:50%}
-  .hero-rule{display:none}
-  .hero-ben{order:3;flex-direction:row;flex-wrap:wrap;max-width:none;gap:22px 40px;padding:32px 40px 0}.hero-ben li{flex:1 1 40%}
-  .hero-foot{order:4;position:relative;padding:32px 40px 40px}}
+.hero h1,.hero-p,.hero-acts,.hero-foot>*{opacity:0;transform:translateY(15px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.hero.in h1,.hero.in .hero-p,.hero.in .hero-acts,.hero.in .hero-foot>*{opacity:1;transform:none}
+.hero.in .hero-p{transition-delay:.12s}.hero.in .hero-acts{transition-delay:.22s}.hero.in .hero-foot>*{transition-delay:.5s}
+@media(max-width:1100px){.hero h1{white-space:normal;font-size:clamp(44px,7vw,72px)}.hero-in{padding:120px 40px 0}.hero-foot{padding:0 40px 40px}}
 @media(max-width:760px){
-  .hero-in>div:first-child{padding:104px 24px 0}
-  .hero-scene{aspect-ratio:1/1;margin-top:28px}
-  .hero-frame{width:calc(100% * 1.777)}
-  .hero-ben{flex-direction:column;gap:18px;padding:28px 24px 0}.hero-ben li{flex:none}
-  .hero h1{font-size:clamp(48px,14vw,72px)}.hero-p{font-size:17px}.hero-acts{flex-wrap:wrap;gap:18px}
-  .hero-foot{padding:28px 24px 34px;flex-direction:column;align-items:flex-start;gap:22px}.hero-words{font-size:11px}}
-@media(prefers-reduced-motion:reduce){.hero-frame,.hero-eye,.hero h1,.hero-p,.hero-acts,.hero-ben li,.hero-foot>*,.hero-cap{opacity:1!important;transform:none!important;transition:none!important}.hero-frame{transform:translate(-50%,-50%)!important}}
+  /* Telephone: la meme image derriere le texte, recadree pour que la capsule
+     reste sous lui; le texte en haut, la capsule dessous. */
+  .hero{height:max(100svh,720px);max-height:none}
+  .hero-frame{width:max(100%, calc(max(100svh,720px) * 1.7768))}
+  .hero-frame>img.bg{width:100%;height:100%;object-position:50% 62%}
+  .hero-in{padding:104px 24px 0}
+  .hero h1{font-size:clamp(40px,11.5vw,52px)}.hero-p{font-size:16px}
+  .hero-acts{flex-direction:column;gap:16px}
+  .hero-foot{padding:0 24px 28px;flex-direction:column;align-items:flex-start;gap:18px}.hero-words{font-size:11px;line-height:1.7}}
+@media(prefers-reduced-motion:reduce){.hero-frame,.hero h1,.hero-p,.hero-acts,.hero-foot>*{opacity:1!important;transform:none!important;transition:none!important}.hero-frame{transform:translate(-50%,-50%)!important}}
 </style>
 </head>
 <body>
@@ -499,36 +476,19 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
   <!-- HERO -->
   <section class="hero" id="hero" aria-label="The Capsule Pyrale">
     <div class="hero-scene" aria-hidden="true">
-      <div class="hero-frame" id="heroFrame">
-        <img class="bg" src="hero-summit.jpg" alt="" />
-        <div class="hero-cap" id="heroCap">
-          <div class="shade"></div>
-          <img src="capsule-hero.png" alt="The Capsule Pyrale — a hermetic aluminium capsule with a dark glass dome, resting on a polished stone terrace" />
-          <div class="refl"><img src="capsule-hero.png" alt="" /></div>
-        </div>
-      </div>
+      <div class="hero-frame" id="heroFrame"><img class="bg" src="hero-summit.jpg" alt="" /></div>
     </div>
     <div class="hero-in" id="heroIn">
-      <div>
-        <span class="hero-eye">Preserve what matters</span>
-        <h1>A New Way<br>to Say Goodbye</h1>
-        <p class="hero-p">The Capsule Pyrale is a hermetic aluminum capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without embalming, without compromise.</p>
-        <div class="hero-acts">
-          <a class="hero-cta" href="product.html">Discover the Pyrale <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="hero-vid" href="product.html#video">Watch the video <i aria-hidden="true"></i></a>
-        </div>
+      <h1>A New Way to Say Goodbye</h1>
+      <p class="hero-p">The Capsule Pyrale is a hermetic aluminum capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without embalming, without compromise.</p>
+      <div class="hero-acts">
+        <a class="hero-cta" href="product.html">Discover the Pyrale <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="hero-vid" href="product.html#video">Watch the video <i aria-hidden="true"></i></a>
       </div>
-      <div class="hero-rule" aria-hidden="true"></div>
-      <ul class="hero-ben">
-        <li><svg viewBox="0 0 40 40"><path d="M8 32C22 34 32 24 32 8c0 0-10-1-17 3S6 21 8 32z"/><path d="M8.5 31.5C15 25 20 20 27 15"/></svg><div><b>60 – 100 years</b><span>Natural preservation</span></div></li>
-        <li><svg viewBox="0 0 40 40"><path d="M16 6h8M17 6v11L8.5 31a2 2 0 001.7 3h19.6a2 2 0 001.7-3L23 17V6"/><path d="M13 25h14"/></svg><div><b>No embalming</b><span>No harmful chemicals</span></div></li>
-        <li><svg viewBox="0 0 40 40"><path d="M20 5l12 4.5v9c0 8-5.2 14.2-12 16.5C13.2 32.7 8 26.5 8 18.5v-9z"/><path d="M14 19.5l4 4 8-8.5"/></svg><div><b>Patented technology</b><span>A proven and innovative process</span></div></li>
-        <li><svg viewBox="0 0 40 40"><path d="M20 5c-2 5-6 7-6 12 0 3 2.5 5 6 5s6-2 6-5c0-5-4-7-6-12z"/><path d="M20 22v13M14 27c-4-1-7-4-7-8 3 0 6 2 7 5M26 27c4-1 7-4 7-8-3 0-6 2-7 5M15 35h10"/></svg><div><b>Designed in Québec</b><span>A local vision for future generations</span></div></li>
-      </ul>
     </div>
     <div class="hero-foot">
       <div class="hero-words">Science<br>Respect<br>A brighter tomorrow</div>
-      <a class="hero-scroll" href="#capsule">Scroll to explore <i><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></i></a>
+      <a class="hero-scroll" href="#capsule">Scroll to explore <i><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6-6 6"/></svg></i></a>
     </div>
   </section>
 
@@ -960,14 +920,13 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
   requestAnimationFrame(function(){ requestAnimationFrame(function(){ hero.classList.add('in'); }); });
   /* Une parallaxe a peine la: le fond bouge moins que le texte, la capsule entre les deux. */
   if (!reduce && window.matchMedia('(min-width: 761px)').matches) {
-    var frame = document.getElementById('heroFrame'), cap = document.getElementById('heroCap'), inner = document.getElementById('heroIn');
+    var frame = document.getElementById('heroFrame'), inner = document.getElementById('heroIn');
     var tick = false;
     window.addEventListener('scroll', function(){
       if (tick) return; tick = true;
       requestAnimationFrame(function(){
         var y = window.scrollY; if (y < window.innerHeight * 1.2) {
           frame.style.transform = 'translate(-50%,-50%) translateY(' + (y * 0.06).toFixed(1) + 'px)';
-          cap.style.transform = 'translateY(' + (y * -0.04).toFixed(1) + 'px)';
           inner.style.transform = 'translateY(' + (y * 0.12).toFixed(1) + 'px)';
         }
         tick = false;
