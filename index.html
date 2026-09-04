@@ -382,15 +382,13 @@
 .hero-frame{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max(100%, calc(min(max(100svh,860px),1080px) * 1.7768));aspect-ratio:1672/941;will-change:transform}
 .hero-frame img.bg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110%;height:110%;object-fit:cover;display:block}
 /* Aucun voile: l image est deja composee pour porter le texte. */
-.hero-in{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:100px 60px 0;display:grid;grid-template-columns:minmax(0,1.35fr) 1px minmax(300px,.65fr);gap:0 56px;align-items:start}
+.hero-in{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:118px 60px 0;text-align:center;display:flex;flex-direction:column;align-items:center}
 /* Pas de carte: un halo d ombre sans bord — une lumiere qui tombe — derriere
    le bloc de texte, et une ombre fine sous les lettres. L image reste nue. */
-.hero-copy{position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:0;max-width:640px}
-.hero-eye{display:inline-flex;align-items:center;gap:14px;font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:500;text-shadow:0 1px 2px rgba(0,0,0,.35)}
-.hero-eye::before{content:"";width:8px;height:1px;background:#fff;opacity:.8}
-.hero h1{font-family:'Instrument Sans',system-ui,sans-serif;font-weight:300;font-size:clamp(48px,5.4vw,88px);line-height:.98;letter-spacing:-.02em;color:#fff;margin:16px 0 0;text-shadow:0 1px 2px rgba(0,0,0,.35),0 10px 40px rgba(0,0,0,.30)}
-.hero-p{margin:20px 0 0;max-width:560px;font-size:clamp(17px,1.3vw,19px);line-height:1.5;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35),0 6px 24px rgba(0,0,0,.30)}
-.hero-acts{display:flex;align-items:center;gap:32px;margin-top:26px}
+.hero-copy{position:relative;display:flex;flex-direction:column;align-items:center;padding:36px 64px 32px;max-width:100%}
+.hero h1{font-family:'Instrument Sans',system-ui,sans-serif;font-weight:300;font-size:clamp(44px,4.9vw,78px);line-height:1;letter-spacing:-.02em;color:#fff;margin:0;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.35),0 10px 40px rgba(0,0,0,.30)}
+.hero-p{margin:20px auto 0;max-width:620px;font-size:clamp(17px,1.3vw,19px);line-height:1.5;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35),0 6px 24px rgba(0,0,0,.30)}
+.hero-acts{display:flex;align-items:center;justify-content:center;gap:32px;margin-top:26px}
 .hero-cta{display:inline-flex;align-items:center;gap:14px;height:52px;padding:0 26px;border-radius:999px;background:#fff;color:#111;font-size:15px;font-weight:500;text-decoration:none;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
 .hero-cta svg{width:18px;height:18px;transition:transform .35s cubic-bezier(.22,1,.36,1)}
 .hero-cta:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(0,0,0,.18)}.hero-cta:hover svg{transform:translateX(4px)}
@@ -398,12 +396,6 @@
 .hero-vid i{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.7);display:inline-flex;align-items:center;justify-content:center;margin-left:4px}
 .hero-vid i::after{content:"";border-style:solid;border-width:5px 0 5px 8px;border-color:transparent transparent transparent #fff;margin-left:2px}
 .hero-vid:hover{opacity:.8}
-.hero-rule{width:1px;background:rgba(255,255,255,.35);align-self:stretch;margin-top:4px;min-height:240px}
-.hero-ben{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:22px;max-width:330px}
-.hero-ben li{display:grid;grid-template-columns:44px 1fr;gap:18px;align-items:center}
-.hero-ben svg{width:38px;height:38px;stroke:#fff;fill:none;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;opacity:.92}
-.hero-ben b{display:block;font-weight:400;font-size:17px;line-height:1.2;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
-.hero-ben span{display:block;font-size:13px;color:rgba(255,255,255,.75);margin-top:3px;text-shadow:0 1px 2px rgba(0,0,0,.35)}
 .hero-foot{position:absolute;left:0;right:0;bottom:0;z-index:2;max-width:1440px;margin:0 auto;padding:0 60px 48px;display:flex;justify-content:space-between;align-items:flex-end;pointer-events:none}
 .hero-words{border-left:1px solid rgba(255,255,255,.55);padding-left:26px;font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.9);line-height:1.9}
 .hero-scroll{display:inline-flex;align-items:center;gap:16px;font-size:13.5px;color:rgba(255,255,255,.85);pointer-events:auto;text-decoration:none}
@@ -435,11 +427,10 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
 /* Arrivee: 800–1200 ms, fondu et douze pixels. */
 .hero-frame{transform:translate(-50%,-50%) scale(1.02);transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
 .hero.in .hero-frame{transform:translate(-50%,-50%) scale(1)}
-.hero-eye,.hero h1,.hero-p,.hero-acts,.hero-ben li,.hero-foot>*{opacity:0;transform:translateY(15px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
-.hero.in .hero-eye,.hero.in h1,.hero.in .hero-p,.hero.in .hero-acts,.hero.in .hero-ben li,.hero.in .hero-foot>*{opacity:1;transform:none}
-.hero.in .hero-ben li:nth-child(2){transition-delay:.3s}.hero.in .hero-ben li:nth-child(3){transition-delay:.38s}.hero.in .hero-ben li:nth-child(4){transition-delay:.46s}
+.hero h1,.hero-p,.hero-acts,.hero-foot>*{opacity:0;transform:translateY(15px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.hero.in h1,.hero.in .hero-p,.hero.in .hero-acts,.hero.in .hero-foot>*{opacity:1;transform:none}
 .hero.in .hero-p{transition-delay:.12s}.hero.in .hero-acts{transition-delay:.22s}.hero.in .hero-foot>*{transition-delay:.5s}
-@media(max-width:1100px){.hero-in{grid-template-columns:1fr;gap:28px;padding:110px 40px 0}.hero-rule{display:none}.hero-ben{flex-direction:row;flex-wrap:wrap;max-width:none;gap:16px 36px}.hero-ben li{flex:1 1 40%}.hero-foot{padding:0 40px 40px}}
+@media(max-width:1100px){.hero h1{white-space:normal;font-size:clamp(44px,7vw,72px)}.hero-in{padding:110px 40px 0}.hero-copy{padding:28px 28px 24px}.hero-foot{padding:0 40px 40px}}
 @media(max-width:760px){
   /* Telephone: la meme image derriere le texte, recadree pour que la capsule
      reste sous lui; le texte en haut, la capsule dessous. */
@@ -447,11 +438,11 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
   /* La scene verticale: format 1:2, calee pour couvrir; la capsule vit dans le tiers bas, sous la carte. */
   .hero-frame{width:max(100%, calc(max(100svh,720px) * 0.5003));aspect-ratio:883/1765}
   .hero-frame img.bg{width:100%;height:100%;object-position:50% 50%}
-  .hero-in{padding:96px 22px 0;gap:22px}.hero-ben{flex-direction:column;gap:12px}.hero-ben li{flex:none;grid-template-columns:36px 1fr;gap:12px}.hero-ben svg{width:30px;height:30px}.hero-ben b{font-size:15px}.hero-ben span{font-size:12px}
-  .hero h1{font-size:clamp(40px,11.5vw,52px)}.hero-p{font-size:15.5px}
-  .hero-acts{flex-direction:column;align-items:flex-start;gap:14px}
+  .hero-in{padding:96px 18px 0}.hero-copy{padding:22px 10px 20px}
+  .hero h1{font-size:clamp(40px,11.5vw,52px)}.hero-p{font-size:16px}
+  .hero-acts{flex-direction:column;gap:16px}
   .hero-foot{padding:0 24px 28px;flex-direction:column;align-items:flex-start;gap:18px}.hero-words{font-size:11px;line-height:1.7}}
-@media(prefers-reduced-motion:reduce){.hero-frame,.hero-eye,.hero h1,.hero-p,.hero-acts,.hero-ben li,.hero-foot>*{opacity:1!important;transform:none!important;transition:none!important}.hero-frame{transform:translate(-50%,-50%)!important}}
+@media(prefers-reduced-motion:reduce){.hero-frame,.hero h1,.hero-p,.hero-acts,.hero-foot>*{opacity:1!important;transform:none!important;transition:none!important}.hero-frame{transform:translate(-50%,-50%)!important}}
 
 /* ══ « More time for what truly matters » — juste sous le héros ══ */
 .human{background:#F5F2ED;color:#151719;padding:0 0 64px;font-family:'Instrument Sans',system-ui,sans-serif;overflow:hidden}
@@ -528,21 +519,13 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
     </div>
     <div class="hero-in" id="heroIn">
       <div class="hero-copy">
-        <span class="hero-eye">Preserve what matters</span>
-        <h1>A New Way<br>to Say Goodbye</h1>
-        <p class="hero-p">The Capsule Pyrale is a hermetic aluminum capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without embalming, without compromise.</p>
-        <div class="hero-acts">
-          <a class="hero-cta" href="product.html">Discover the Pyrale <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="hero-vid" href="product.html#video">Watch the video <i aria-hidden="true"></i></a>
-        </div>
+      <h1>A New Way to Say Goodbye</h1>
+      <p class="hero-p">The Capsule Pyrale is a hermetic aluminum capsule that preserves the body naturally with nitrogen gas — for 60 to 100 years, without chemicals, without embalming, without compromise.</p>
+      <div class="hero-acts">
+        <a class="hero-cta" href="product.html">Discover the Pyrale <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="hero-vid" href="product.html#video">Watch the video <i aria-hidden="true"></i></a>
       </div>
-      <div class="hero-rule" aria-hidden="true"></div>
-      <ul class="hero-ben">
-        <li><svg viewBox="0 0 40 40"><path d="M8 32C22 34 32 24 32 8c0 0-10-1-17 3S6 21 8 32z"/><path d="M8.5 31.5C15 25 20 20 27 15"/></svg><div><b>60 – 100 years</b><span>Natural preservation</span></div></li>
-        <li><svg viewBox="0 0 40 40"><path d="M16 6h8M17 6v11L8.5 31a2 2 0 001.7 3h19.6a2 2 0 001.7-3L23 17V6"/><path d="M13 25h14"/></svg><div><b>No embalming</b><span>No harmful chemicals</span></div></li>
-        <li><svg viewBox="0 0 40 40"><path d="M20 5l12 4.5v9c0 8-5.2 14.2-12 16.5C13.2 32.7 8 26.5 8 18.5v-9z"/><path d="M14 19.5l4 4 8-8.5"/></svg><div><b>Patented technology</b><span>A proven and innovative process</span></div></li>
-        <li><svg viewBox="0 0 40 40"><path d="M20 5c-2 5-6 7-6 12 0 3 2.5 5 6 5s6-2 6-5c0-5-4-7-6-12z"/><path d="M20 22v13M14 27c-4-1-7-4-7-8 3 0 6 2 7 5M26 27c4-1 7-4 7-8-3 0-6 2-7 5M15 35h10"/></svg><div><b>Designed in Québec</b><span>A local vision for future generations</span></div></li>
-      </ul>
+      </div>
     </div>
     <div class="hero-foot">
       <div class="hero-words">Science<br>Respect<br>A brighter tomorrow</div>
