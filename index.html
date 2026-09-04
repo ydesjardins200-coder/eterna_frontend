@@ -552,9 +552,8 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
 .d-cta:focus-visible,.d-arr:focus-visible,.d-num:focus-visible,.d-rail button:focus-visible{outline:2px solid #176B9E;outline-offset:3px}
 .d-intro .micro{display:none;position:absolute;right:40px;bottom:44px;z-index:2;text-align:right;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(16,24,32,.6);line-height:2}
 /* ACTE II — la scene */
-.d-car{position:relative;background:#F5F2EC;color:#fff;padding:8px 0 44px}
-.d-stage{position:relative;height:min(80svh,640px);overflow:hidden;max-width:1240px;margin:0 auto;border-radius:24px;background:#101820}
-@media(max-width:1320px){.d-stage{margin:0 40px}}
+.d-car{position:relative;background:#F5F2EC;color:#fff;padding:0 0 44px}
+.d-stage{position:relative;height:100svh;overflow:hidden;max-width:none;margin:0;border-radius:0;background:#101820}
 .d-slide{position:absolute;inset:0;opacity:0;transition:opacity .7s cubic-bezier(.22,1,.36,1);pointer-events:none}
 .d-slide picture,.d-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02);transition:transform 1.4s cubic-bezier(.22,1,.36,1)}
 .d-slide.on{opacity:1;pointer-events:auto}.d-slide.on img{transform:none}
@@ -567,7 +566,7 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
 .d-slide h3{font-weight:300;font-size:clamp(40px,4.2vw,64px);line-height:.97;letter-spacing:-.025em;color:#fff;margin:16px 0 0;max-width:10ch}
 .d-slide .p{margin:22px 0 0;font-size:17.5px;line-height:1.55;color:rgba(255,255,255,.82);max-width:440px}
 .d-slide .mc{margin-top:28px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-.d-slide .ann{position:absolute;right:56px;bottom:110px;z-index:2;display:flex;gap:44px;opacity:0;transition:opacity .6s .55s}
+.d-slide .ann{position:absolute;right:max(56px,calc(50vw - 564px));bottom:110px;z-index:2;display:flex;gap:44px;opacity:0;transition:opacity .6s .55s}
 .d-slide.on .ann{opacity:1}
 /* La diapo 03 est la seule posee sur du metal clair: le voile du bas y descend
    plus bas, et les deux annotations gagnent une ombre douce. */
@@ -594,7 +593,7 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
 .design .in>.wrap>*,.design .in>.copy>*{opacity:1;transform:none}
 @media(max-width:900px){
   .d-intro .wrap{grid-template-columns:1fr;gap:28px;padding:88px 24px 32px}.d-intro picture{aspect-ratio:4/5;border-radius:18px}.d-intro picture img{object-position:50% 55%}.d-intro .copy{max-width:none}.d-intro h2{font-size:clamp(42px,11vw,54px)}.d-intro .p{font-size:16.5px}
-  .d-stage{height:min(78svh,640px);margin:0 16px;border-radius:18px}.d-slide .txt{padding:64px 24px 130px;justify-content:flex-start}.d-slide h3{font-size:clamp(40px,11vw,56px)}.d-slide .p{font-size:16.5px}.d-slide .ann{right:24px;bottom:110px;gap:24px}
+  .d-car{padding-top:8px}.d-stage{height:min(78svh,640px);margin:0 16px;border-radius:18px}.d-slide .txt{padding:64px 24px 130px;justify-content:flex-start}.d-slide h3{font-size:clamp(40px,11vw,56px)}.d-slide .p{font-size:16.5px}.d-slide .ann{right:24px;bottom:110px;gap:24px}
   .d-ctl{bottom:28px;padding:0 24px;gap:22px}.d-rail{display:none}
 }
 @media(prefers-reduced-motion:reduce){.design *{transition:none!important}.d-slide img{transform:none!important}.design [data-reveal]>.wrap>*,.design [data-reveal]>.copy>*{opacity:1!important;transform:none!important}}
