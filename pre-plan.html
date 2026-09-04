@@ -296,6 +296,18 @@ header.nav:not(.scrolled) .menu-toggle span { background: var(--ink); }
 .pp .stick .btn{flex:1}
 .pp{padding-bottom:74px}}
 </style>
+<script>
+  /* Le code d affilie arrive dans l adresse (?ref=), pose par la redirection
+     de l administration. On le garde: le tunnel le renvoie a la creation du
+     dossier, et la commission suit. Une famille revient souvent des semaines
+     plus tard; le localStorage survit a la session. */
+  (function () {
+    try {
+      var ref = new URLSearchParams(location.search).get('ref');
+      if (ref) localStorage.setItem('eterna_ref', ref);
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 
