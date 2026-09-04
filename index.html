@@ -569,6 +569,10 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
 .d-slide .mc{margin-top:28px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6)}
 .d-slide .ann{position:absolute;right:56px;bottom:110px;z-index:2;display:flex;gap:44px;opacity:0;transition:opacity .6s .55s}
 .d-slide.on .ann{opacity:1}
+/* La diapo 03 est la seule posee sur du metal clair: le voile du bas y descend
+   plus bas, et les deux annotations gagnent une ombre douce. */
+#dslide2::after{background:linear-gradient(90deg,rgba(16,24,32,.62) 0%,rgba(16,24,32,.28) 38%,rgba(16,24,32,0) 62%),linear-gradient(0deg,rgba(16,24,32,.74) 0%,rgba(16,24,32,.34) 26%,rgba(16,24,32,0) 52%)}
+#dslide2 .ann div{text-shadow:0 1px 14px rgba(16,24,32,.55)}
 .d-slide .ann div{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.85);line-height:1.7;border-top:1px solid rgba(255,255,255,.4);padding-top:10px}
 .d-ctl{position:absolute;left:0;right:0;bottom:28px;z-index:3;max-width:1240px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:center;gap:34px}
 .d-arr{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:none;color:#fff;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:border-color .3s,background .3s}
