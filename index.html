@@ -120,13 +120,6 @@
   }
   .btn--partner:hover { background: rgba(255,255,255,0.20); }
   .btn-arrow { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); font-size: 15px; }
-
-  /* ---------- VALUE STRIP ---------- */
-  .values { background: var(--mist); padding: 84px 0; }
-  .values-head { text-align: center; margin-bottom: 50px; }
-  .values-head .eyebrow { margin-bottom: 14px; }
-  .values-head h2 { font-size: clamp(30px, 3.6vw, 46px); }
-  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; z-index: 3; }
   .value-card {
     background: #fff;
     border: 1px solid rgba(228,227,223,0.9);
@@ -349,7 +342,6 @@
     .nav-links, .nav-cta .btn { display: none; }
     .menu-toggle { display: flex; }
     .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
-    .values-grid, .cert-track { grid-template-columns: 1fr 1fr; }
     .how-grid { grid-template-columns: 1fr; gap: 30px; }
     .why-grid, .faq-grid, .voices-grid { grid-template-columns: 1fr; gap: 34px; }
     .why::before { display: none; }
@@ -357,7 +349,6 @@
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 18px; }
-    .values-grid { grid-template-columns: 1fr; }
     .cert-track { grid-template-columns: 1fr; }
     .field-row { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; gap: 26px; }
@@ -529,7 +520,7 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
     </div>
     <div class="hero-foot">
       <div class="hero-words">Science<br>Respect<br>A brighter tomorrow</div>
-      <a class="hero-scroll" href="#capsule">Scroll to explore <i><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6-6 6"/></svg></i></a>
+      <a class="hero-scroll" href="#human">Scroll to explore <i><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6-6 6"/></svg></i></a>
     </div>
   </section>
 
@@ -550,38 +541,6 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
         <div><svg viewBox="0 0 34 34"><path d="M17 29S5 21 5 12.5A6.5 6.5 0 0117 9a6.5 6.5 0 0112 3.5C29 21 17 29 17 29z"/></svg><h3>Choice</h3><p>Decide today,<br>without pressure.</p></div>
         <div><svg viewBox="0 0 34 34"><circle cx="17" cy="9" r="4"/><circle cx="7.5" cy="13" r="3"/><circle cx="26.5" cy="13" r="3"/><path d="M10 28c1-5 3.5-8 7-8s6 3 7 8M2.5 25c.6-3.5 2.5-5.5 5-5.5M31.5 25c-.6-3.5-2.5-5.5-5-5.5"/></svg><h3>Peace of mind</h3><p>Less stress for<br>your loved ones.</p></div>
         <div><svg viewBox="0 0 34 34"><path d="M7 28c12 1 21-8 21-21 0 0-8-1-14 2S5 18 7 28z"/><path d="M7.5 27.5C13 21 18 17 23 14"/></svg><h3>A lighter footprint</h3><p>No chemicals,<br>no embalming.</p></div>
-      </div>
-    </div>
-  </section>
-
-    <!-- VALUE STRIP -->
-  <section class="values" id="capsule">
-    <div class="wrap">
-      <div class="values-head reveal">
-        <span class="eyebrow" style="display:inline-flex;">The difference</span>
-        <h2>Why the Capsule Pyrale</h2>
-      </div>
-      <div class="values-grid">
-        <div class="value-card reveal">
-          <div class="value-ic"><svg class="ic-svg"><use href="#ic-leaf"/></svg></div>
-          <h3>100% Québec</h3>
-          <p>Designed, engineered, and manufactured entirely in Québec, Canada.</p>
-        </div>
-        <div class="value-card reveal">
-          <div class="value-ic"><svg class="ic-svg"><use href="#ic-nochem"/></svg></div>
-          <h3>No Chemicals</h3>
-          <p>No embalming fluids, no toxic treatments. Preservation through inert nitrogen gas only.</p>
-        </div>
-        <div class="value-card reveal">
-          <div class="value-ic"><svg class="ic-svg"><use href="#ic-clock"/></svg></div>
-          <h3>60–100 Year Preservation</h3>
-          <p>The body is naturally preserved for up to a century inside the hermetically sealed capsule.</p>
-        </div>
-        <div class="value-card reveal">
-          <div class="value-ic"><svg class="ic-svg"><use href="#ic-medal"/></svg></div>
-          <h3>Patented Technology</h3>
-          <p>A unique, certified innovation — 10+ years of research, certified in Canada and the USA.</p>
-        </div>
       </div>
     </div>
   </section>
