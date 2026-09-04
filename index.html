@@ -443,6 +443,28 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
   .hero-acts{flex-direction:column;gap:16px}
   .hero-foot{padding:0 24px 28px;flex-direction:column;align-items:flex-start;gap:18px}.hero-words{font-size:11px;line-height:1.7}}
 @media(prefers-reduced-motion:reduce){.hero-frame,.hero h1,.hero-p,.hero-acts,.hero-foot>*{opacity:1!important;transform:none!important;transition:none!important}.hero-frame{transform:translate(-50%,-50%)!important}}
+
+/* ══ « More time for what truly matters » — juste sous le héros ══ */
+.human{background:#F5F2ED;color:#151719;padding:96px 0 84px;font-family:'Instrument Sans',system-ui,sans-serif;overflow:hidden}
+.human .wrap{max-width:1240px}
+.human-g{display:grid;grid-template-columns:1fr 1.05fr;gap:64px;align-items:center}
+.human-eye{font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#3f4447;font-weight:500}
+.human h2{font-weight:300;font-size:clamp(48px,5.4vw,84px);line-height:1;letter-spacing:-.025em;color:#151719;margin:22px 0 0;max-width:11ch}
+.human-p{margin:28px 0 0;font-size:17px;line-height:1.55;color:#3f4447;max-width:420px}
+.human-cta{display:inline-flex;align-items:center;gap:14px;height:52px;padding:0 26px;border-radius:999px;background:#0f1113;color:#fff;font-size:15px;font-weight:500;text-decoration:none;margin-top:32px;transition:transform .3s,box-shadow .3s}
+.human-cta svg{width:18px;height:18px;transition:transform .3s}
+.human-cta:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(0,0,0,.16)}.human-cta:hover svg{transform:translateX(4px)}
+.human-ph{position:relative;justify-self:end;width:100%;max-width:560px}
+.human-ph img{width:100%;height:auto;display:block}
+.human-four{display:grid;grid-template-columns:repeat(4,1fr);margin-top:72px;padding-top:32px;border-top:1px solid rgba(21,23,25,.12)}
+.human-four>div{padding:4px 28px 4px 0;border-right:1px solid rgba(21,23,25,.12)}
+.human-four>div+div{padding-left:28px}
+.human-four>div:last-child{border-right:none}
+.human-four svg{width:34px;height:34px;stroke:#151719;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.human-four h3{font-weight:500;font-size:18px;margin:16px 0 0;color:#151719}
+.human-four p{margin:6px 0 0;font-size:14.5px;line-height:1.5;color:#3f4447}
+@media(max-width:1000px){.human-g{grid-template-columns:1fr;gap:36px}.human-ph{justify-self:center}.human-four{grid-template-columns:1fr 1fr;gap:28px 0}.human-four>div:nth-child(2){border-right:none}.human-four>div:nth-child(3){padding-left:0}}
+@media(max-width:600px){.human{padding:64px 0 56px}.human h2{font-size:clamp(44px,12vw,60px)}.human-four{grid-template-columns:1fr;gap:22px}.human-four>div{border-right:none;padding:0}}
 </style>
 </head>
 <body>
@@ -498,7 +520,28 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
     </div>
   </section>
 
-  <!-- VALUE STRIP -->
+<!-- A MORE HUMAN TOMORROW -->
+  <section class="human" id="human">
+    <div class="wrap">
+      <div class="human-g">
+        <div>
+          <div class="human-eye">A more human tomorrow</div>
+          <h2>More time for what truly matters</h2>
+          <p class="human-p">Life doesn’t end on a deadline. The Capsule Pyrale offers a new possibility — giving families more time, more freedom, and more peace of mind.</p>
+          <a class="human-cta" href="#how">How It Works <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="human-ph"><img src="human-couple.jpg" alt="A father and daughter sitting together, looking out over mountains above the clouds at dawn" loading="lazy" /></div>
+      </div>
+      <div class="human-four">
+        <div><svg viewBox="0 0 34 34"><path d="M9 4h16M9 30h16M11 4c0 7 6 9 6 13s-6 6-6 13M23 4c0 7-6 9-6 13s6 6 6 13"/></svg><h3>Time</h3><p>60 to 100 years<br>of natural preservation.</p></div>
+        <div><svg viewBox="0 0 34 34"><path d="M17 29S5 21 5 12.5A6.5 6.5 0 0117 9a6.5 6.5 0 0112 3.5C29 21 17 29 17 29z"/></svg><h3>Choice</h3><p>Decide today,<br>without pressure.</p></div>
+        <div><svg viewBox="0 0 34 34"><circle cx="17" cy="9" r="4"/><circle cx="7.5" cy="13" r="3"/><circle cx="26.5" cy="13" r="3"/><path d="M10 28c1-5 3.5-8 7-8s6 3 7 8M2.5 25c.6-3.5 2.5-5.5 5-5.5M31.5 25c-.6-3.5-2.5-5.5-5-5.5"/></svg><h3>Peace of mind</h3><p>Less stress for<br>your loved ones.</p></div>
+        <div><svg viewBox="0 0 34 34"><path d="M7 28c12 1 21-8 21-21 0 0-8-1-14 2S5 18 7 28z"/><path d="M7.5 27.5C13 21 18 17 23 14"/></svg><h3>A lighter footprint</h3><p>No chemicals,<br>no embalming.</p></div>
+      </div>
+    </div>
+  </section>
+
+    <!-- VALUE STRIP -->
   <section class="values" id="capsule">
     <div class="wrap">
       <div class="values-head reveal">
