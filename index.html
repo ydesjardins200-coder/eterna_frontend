@@ -531,6 +531,93 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
   .tech-steps{grid-template-columns:1fr;gap:36px;padding-top:40px}.tech-n2{grid-template-columns:1fr}.tech-n2 .earth{min-height:300px}.tech-n2 .earth::after{background:linear-gradient(180deg,rgba(16,24,32,.2),#101820)}.tech-n2 .body{grid-template-columns:1fr;gap:36px;padding:0 40px 56px}.tech-n2 .vr{display:none}}
 @media(max-width:600px){.tech-open .wrap{padding-top:110px}.tech h2{font-size:clamp(46px,12vw,64px)}.tech-p{font-size:16.5px}.tech-steps{padding:32px 24px 56px}.tech-n2 .body{padding:0 24px 48px}.tech-n2 .big{font-size:120px}}
 @media(prefers-reduced-motion:reduce){.tech *{opacity:1!important;transform:none!important;transition:none!important}.tech-cap .refl{transform:scaleY(-1)!important}}
+
+/* ══ « Designed around dignity » — le chapitre design, après la science ══ */
+.design{position:relative;background:#F5F2EC;color:#101820;font-family:'Instrument Sans',system-ui,sans-serif;overflow:hidden}
+/* La transition: l encre de minuit s eteint sur 160 px, la lumiere chaude arrive. */
+.design::before{content:"";position:absolute;left:0;right:0;top:0;height:160px;background:linear-gradient(180deg,#101820 0%,rgba(16,24,32,.55) 40%,rgba(16,24,32,0) 100%);z-index:3;pointer-events:none}
+.d-eye{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(16,24,32,.7);font-weight:500}
+/* ACTE I */
+.d-intro{position:relative;min-height:min(100svh,880px);display:flex;align-items:center;overflow:hidden}
+.d-intro picture,.d-intro picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 55%;display:block}
+.d-intro::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,242,236,.92) 0%,rgba(245,242,236,.78) 30%,rgba(245,242,236,.25) 52%,rgba(245,242,236,0) 66%);pointer-events:none}
+.d-intro .wrap{position:relative;z-index:2;max-width:1240px;width:100%;padding-top:150px;padding-bottom:80px}
+.d-intro .copy{max-width:520px}
+.d-intro h2{font-weight:300;font-size:clamp(56px,5vw,92px);line-height:.97;letter-spacing:-.025em;color:#101820;margin:18px 0 0}
+.d-intro .p{margin:26px 0 0;font-size:17.5px;line-height:1.6;color:#3d454b;max-width:470px}
+.d-intro .st{margin:30px 0 0;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(22px,1.9vw,27px);line-height:1.25;color:#101820;max-width:20ch}
+.d-cta{display:inline-flex;align-items:center;gap:14px;height:52px;padding:0 26px;border-radius:999px;background:#101820;color:#fff;font-size:15px;font-weight:500;text-decoration:none;margin-top:32px;transition:transform .3s,box-shadow .3s}
+.d-cta svg{width:18px;height:18px;transition:transform .3s}
+.d-cta:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(16,24,32,.2)}.d-cta:hover svg{transform:translateX(4px)}
+.d-cta:focus-visible,.d-arr:focus-visible,.d-num:focus-visible,.d-sw:focus-visible,.d-rail button:focus-visible{outline:2px solid #176B9E;outline-offset:3px}
+.d-intro .micro{position:absolute;right:40px;bottom:44px;z-index:2;text-align:right;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(16,24,32,.6);line-height:2}
+/* ACTE II — la scene */
+.d-car{position:relative;background:#101820;color:#fff}
+.d-stage{position:relative;height:min(92svh,860px);overflow:hidden}
+.d-slide{position:absolute;inset:0;opacity:0;transition:opacity .7s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.d-slide picture,.d-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02);transition:transform 1.4s cubic-bezier(.22,1,.36,1)}
+.d-slide.on{opacity:1;pointer-events:auto}.d-slide.on img{transform:none}
+.d-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,24,32,.62) 0%,rgba(16,24,32,.28) 38%,rgba(16,24,32,0) 62%),linear-gradient(0deg,rgba(16,24,32,.6) 0%,rgba(16,24,32,0) 35%)}
+.d-slide .txt{position:absolute;left:0;right:0;top:0;bottom:0;z-index:2;max-width:1240px;margin:0 auto;padding:110px 40px 120px;display:flex;flex-direction:column;justify-content:center}
+.d-slide .txt>*{opacity:0;transform:translateY(12px);transition:opacity .6s cubic-bezier(.22,1,.36,1) .25s,transform .6s cubic-bezier(.22,1,.36,1) .25s}
+.d-slide.on .txt>*{opacity:1;transform:none}
+.d-slide .num{font-size:12px;letter-spacing:.3em;color:rgba(255,255,255,.7)}
+.d-slide .num b{font-weight:400;color:#fff;margin-right:14px}
+.d-slide h3{font-weight:300;font-size:clamp(48px,5vw,84px);line-height:.97;letter-spacing:-.025em;color:#fff;margin:16px 0 0;max-width:10ch}
+.d-slide .p{margin:22px 0 0;font-size:17.5px;line-height:1.55;color:rgba(255,255,255,.82);max-width:440px}
+.d-slide .mc{margin-top:28px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.d-slide .ann{position:absolute;right:40px;bottom:130px;z-index:2;display:flex;gap:44px;opacity:0;transition:opacity .6s .55s}
+.d-slide.on .ann{opacity:1}
+.d-slide .ann div{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.85);line-height:1.7;border-top:1px solid rgba(255,255,255,.4);padding-top:10px}
+.d-ctl{position:absolute;left:0;right:0;bottom:40px;z-index:3;max-width:1240px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:center;gap:34px}
+.d-arr{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:none;color:#fff;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:border-color .3s,background .3s}
+.d-arr:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.d-arr svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.d-nums{display:flex;gap:28px}
+.d-num{background:none;border:0;color:rgba(255,255,255,.55);font:inherit;font-size:13px;letter-spacing:.2em;cursor:pointer;padding:6px 0 10px;position:relative}
+.d-num::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.d-num[aria-selected="true"]{color:#fff}.d-num[aria-selected="true"]::after{transform:scaleX(1)}
+.d-rail{max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.12)}
+.d-rail button{background:none;border:0;border-right:1px solid rgba(255,255,255,.12);color:#fff;font:inherit;text-align:left;padding:24px 24px 26px 0;cursor:pointer;opacity:.55;transition:opacity .3s}
+.d-rail button+button{padding-left:24px}.d-rail button:last-child{border-right:0}
+.d-rail button[aria-selected="true"],.d-rail button:hover{opacity:1}
+.d-rail .k{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.d-rail .k b{font-weight:400;margin-right:12px}
+.d-rail .h{display:block;font-size:17px;margin-top:8px;color:#fff}
+/* ACTE III — les finis */
+.d-fin{position:relative;min-height:min(100svh,900px);overflow:hidden;background:#F5F2EC}
+.d-fin picture,.d-fin picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%;display:block}
+.d-fin::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(245,242,236,.55) 0%,rgba(245,242,236,.18) 40%,rgba(245,242,236,.35) 100%)}
+.d-fin .wrap{position:relative;z-index:2;max-width:1240px;padding-top:96px;padding-bottom:64px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.d-fin .wrap>*:not(.d-prod){position:relative;z-index:2}
+.d-fin h2{font-weight:300;font-size:clamp(46px,4.6vw,80px);line-height:.98;letter-spacing:-.025em;color:#101820;margin:18px 0 0;max-width:14ch}
+.d-fin .p{margin:20px auto 0;font-size:17.5px;line-height:1.55;color:#3d454b;max-width:520px}
+.d-prod{position:relative;width:min(64vw,900px);margin:26px auto 0}
+/* Un halo de porcelaine derriere le vrai rendu: il couvre la capsule cuite dans
+   l image d ambiance, et garde les bords de la scene. */
+.d-prod::before{content:"";position:absolute;left:-18%;right:-18%;top:-34%;bottom:-60%;background:radial-gradient(ellipse at 50% 50%,#F5F2EC 0%,#F5F2EC 46%,rgba(245,242,236,.85) 58%,rgba(245,242,236,0) 74%);z-index:0;pointer-events:none}
+.d-prod img{position:relative;z-index:1}
+.d-prod img{width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 34px 40px rgba(16,24,32,.28))}
+.d-prod img.f{position:absolute;inset:0;opacity:0;transition:opacity .6s cubic-bezier(.22,1,.36,1);z-index:1}
+.d-prod img.f.on{opacity:1}
+.d-prod img.base{visibility:hidden}
+.d-sws{display:flex;gap:34px;margin-top:34px;justify-content:center;flex-wrap:wrap}
+.d-sw{background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:12px;font:inherit;color:rgba(16,24,32,.6);font-size:12.5px;letter-spacing:.04em;transition:color .3s}
+.d-sw i{width:34px;height:34px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(16,24,32,.12);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.d-sw[aria-checked="true"]{color:#101820;font-weight:500}
+.d-sw[aria-checked="true"] i{transform:scale(1.18);box-shadow:inset 0 0 0 1px rgba(16,24,32,.12),0 0 0 3px #F5F2EC,0 0 0 4px #101820}
+.d-fin .micro{position:absolute;left:40px;bottom:44px;z-index:2;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(16,24,32,.6);line-height:2}
+.d-fin .micro2{position:absolute;right:40px;bottom:44px;z-index:2;text-align:right;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(16,24,32,.6);line-height:2}
+/* Arrivee */
+.design [data-reveal]>.wrap>*,.design [data-reveal]>.copy>*{opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.design .in>.wrap>*,.design .in>.copy>*{opacity:1;transform:none}
+@media(max-width:900px){
+  .d-intro{min-height:0;display:block}.d-intro picture,.d-intro picture img{position:relative;height:auto;aspect-ratio:9/16;object-position:50% 50%}.d-intro::after{display:none}
+  .d-intro .wrap{padding:96px 24px 40px}.d-intro .copy{max-width:none}.d-intro h2{font-size:clamp(46px,12vw,60px)}.d-intro .p{font-size:16.5px}.d-intro .micro{display:none}
+  .d-stage{height:min(88svh,820px)}.d-slide .txt{padding:64px 24px 130px;justify-content:flex-start}.d-slide h3{font-size:clamp(40px,11vw,56px)}.d-slide .p{font-size:16.5px}.d-slide .ann{right:24px;bottom:110px;gap:24px}
+  .d-ctl{bottom:28px;padding:0 24px;gap:22px}.d-rail{display:none}
+  .d-fin{min-height:0}.d-fin picture,.d-fin picture img{object-position:50% 45%}.d-fin .wrap{padding:80px 24px 56px}.d-fin h2{font-size:clamp(40px,10.5vw,54px)}.d-prod{width:118vw;margin-left:-9vw}.d-sws{gap:18px}.d-sw{font-size:11.5px}.d-fin .micro,.d-fin .micro2{position:static;text-align:center;margin-top:28px}.d-fin .micro2{display:none}}
+@media(prefers-reduced-motion:reduce){.design *{transition:none!important}.d-slide img{transform:none!important}.design [data-reveal]>.wrap>*,.design [data-reveal]>.copy>*{opacity:1!important;transform:none!important}}
 </style>
 </head>
 <body>
@@ -657,6 +744,86 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
       </div>
     </div>
 
+  </section>
+
+  <!-- DESIGNED AROUND DIGNITY -->
+  <section class="design" id="design" aria-label="Designed around dignity">
+    <div class="d-intro" data-reveal>
+      <picture><source media="(max-width: 900px)" srcset="design-intro-m.jpg"><img src="design-intro-d.jpg" alt="The Capsule Pyrale on a stone terrace under a warm arch, mountains beyond" loading="lazy" decoding="async"></picture>
+      <div class="wrap">
+        <div class="copy">
+          <span class="d-eye" data-fr="Conçue pour le moment" data-en="Designed for the moment">Designed for the moment</span>
+          <h2 data-fr="Conçue autour de la dignité." data-en="Designed around dignity.">Designed around dignity.</h2>
+          <p class="p" data-fr="Chaque détail de la Capsule Pyrale a été pensé non seulement pour la préservation, mais pour l’expérience qui l’entoure. Son corps d’aluminium sculpté, son dôme transparent et ses proportions calmes créent une présence contemporaine, sans rien retirer à la dignité du moment." data-en="Every detail of the Capsule Pyrale was considered not only for preservation, but for the experience surrounding it. Its sculpted aluminium body, transparent viewing dome and quiet proportions create a presence that feels contemporary without losing the dignity of the moment.">Every detail of the Capsule Pyrale was considered not only for preservation, but for the experience surrounding it. Its sculpted aluminium body, transparent viewing dome and quiet proportions create a presence that feels contemporary without losing the dignity of the moment.</p>
+          <p class="st" data-fr="La technologie doit s’effacer quand la famille prend sa place." data-en="Technology should disappear when family takes its place.">Technology should disappear when family takes its place.</p>
+          <a class="d-cta" href="product.html" data-fr="Découvrir l’expérience" data-en="Discover the experience">Discover the experience <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <div class="micro" data-fr="Un adieu plus calme<br>Un lendemain plus lumineux" data-en="A calmer farewell<br>A brighter tomorrow">A calmer farewell<br>A brighter tomorrow</div>
+    </div>
+
+    <div class="d-car" id="dcar">
+      <div class="d-stage" role="region" aria-roledescription="carousel" aria-label="Design details">
+        <div class="d-slide on" id="dslide0" role="tabpanel" aria-labelledby="dnum0">
+          <picture><source media="(max-width: 900px)" srcset="design-presence-m.jpg"><img src="design-presence-d.jpg" alt="The Capsule Pyrale in a warm, sunlit room" decoding="async"></picture>
+          <div class="txt">
+            <div class="num"><b>01</b><span data-fr="PRÉSENCE" data-en="PRESENCE">PRESENCE</span></div>
+            <h3 data-fr="Une présence apaisante." data-en="A calming presence.">A calming presence.</h3>
+            <p class="p" data-fr="Conçue pour trouver sa place naturellement dans les lieux où les familles se réunissent." data-en="Designed to feel natural within the spaces where families gather.">Designed to feel natural within the spaces where families gather.</p>
+            <div class="mc" data-fr="Là où le design rencontre l’humain" data-en="Where design meets humanity">Where design meets humanity</div>
+          </div>
+          
+        </div>
+        <div class="d-slide" id="dslide1" role="tabpanel" aria-labelledby="dnum1" aria-hidden="true">
+          <picture><source media="(max-width: 900px)" srcset="design-view-m.jpg"><img src="design-view-d.jpg" alt="A close view of the transparent dome of the Capsule Pyrale" loading="lazy" decoding="async"></picture>
+          <div class="txt">
+            <div class="num"><b>02</b><span data-fr="LA VUE" data-en="THE VIEW">THE VIEW</span></div>
+            <h3 data-fr="Un dernier lien." data-en="A final connection.">A final connection.</h3>
+            <p class="p" data-fr="Le dôme transparent préserve la possibilité de voir, sans rompre l’intégrité de l’environnement scellé." data-en="The transparent dome preserves the possibility of viewing while maintaining the integrity of the sealed environment.">The transparent dome preserves the possibility of viewing while maintaining the integrity of the sealed environment.</p>
+            <div class="mc" data-fr="La présence compte" data-en="Presence matters">Presence matters</div>
+          </div>
+          
+        </div>
+        <div class="d-slide" id="dslide2" role="tabpanel" aria-labelledby="dnum2" aria-hidden="true">
+          <picture><source media="(max-width: 900px)" srcset="design-material-m.jpg"><img src="design-material-d.jpg" alt="The brushed aluminium body of the Capsule Pyrale, in warm light" loading="lazy" decoding="async"></picture>
+          <div class="txt">
+            <div class="num"><b>03</b><span data-fr="MATIÈRE" data-en="MATERIAL">MATERIAL</span></div>
+            <h3 data-fr="Faite pour durer." data-en="Made to endure.">Made to endure.</h3>
+            <p class="p" data-fr="Des matériaux durables. Une construction précise. Une garantie structurelle à vie." data-en="Durable materials. Precise construction. A lifetime structural warranty.">Durable materials. Precise construction. A lifetime structural warranty.</p>
+            
+          </div>
+          <div class="ann"><div data-fr="Aluminium<br>de qualité aéronautique" data-en="Aircraft-grade<br>aluminium">Aircraft-grade<br>aluminium</div><div data-fr="Polycarbonate<br>de qualité aviation" data-en="Aviation-grade<br>polycarbonate">Aviation-grade<br>polycarbonate</div></div>
+        </div>
+        <div class="d-ctl">
+          <button class="d-arr" id="dprev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+          <div class="d-nums" role="tablist">
+            <button class="d-num" id="dnum0" role="tab" aria-selected="true" aria-controls="dslide0">01</button>
+            <button class="d-num" id="dnum1" role="tab" aria-selected="false" aria-controls="dslide1">02</button>
+            <button class="d-num" id="dnum2" role="tab" aria-selected="false" aria-controls="dslide2">03</button>
+          </div>
+          <button class="d-arr" id="dnext" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <div class="d-rail">
+        <button data-go="0" aria-selected="true"><span class="k"><b>01</b><span data-fr="Présence" data-en="Presence">Presence</span></span><span class="h" data-fr="Une présence apaisante." data-en="A calming presence.">A calming presence.</span></button>
+        <button data-go="1" aria-selected="false"><span class="k"><b>02</b><span data-fr="La vue" data-en="The view">The view</span></span><span class="h" data-fr="Un dernier lien." data-en="A final connection.">A final connection.</span></button>
+        <button data-go="2" aria-selected="false"><span class="k"><b>03</b><span data-fr="Matière" data-en="Material">Material</span></span><span class="h" data-fr="Faite pour durer." data-en="Made to endure.">Made to endure.</span></button>
+      </div>
+    </div>
+
+    <div class="d-fin" data-reveal>
+      <picture><source media="(max-width: 900px)" srcset="design-finishes-m.jpg"><img src="design-finishes-d.jpg" alt="" loading="lazy" decoding="async"></picture>
+      <div class="wrap">
+        <span class="d-eye" data-fr="Une expression raffinée" data-en="A refined expression">A refined expression</span>
+        <h2 data-fr="Cinq finis. Une seule présence." data-en="Five finishes. One singular presence.">Five finishes. One singular presence.</h2>
+        <p class="p" data-fr="La même technologie avancée. Un choix de finis pour refléter vos préférences et votre espace." data-en="The same advanced technology. A choice of finishes to reflect your preferences and your space.">The same advanced technology. A choice of finishes to reflect your preferences and your space.</p>
+        <div class="d-prod" id="dprod"><img class="base" src="pyrale-silver.png" alt="" aria-hidden="true"><img class="f on" src="pyrale-silver.png" alt="The Capsule Pyrale in Brushed Aluminium" loading="lazy" decoding="async"><img class="f" src="pyrale-champagne.png" alt="The Capsule Pyrale in Champagne" loading="lazy" decoding="async"><img class="f" src="pyrale-graphite.png" alt="The Capsule Pyrale in Graphite" loading="lazy" decoding="async"><img class="f" src="pyrale-bronze.png" alt="The Capsule Pyrale in Bronze" loading="lazy" decoding="async"><img class="f" src="pyrale-onyx.png" alt="The Capsule Pyrale in Onyx" loading="lazy" decoding="async"></div>
+        <div class="d-sws" role="radiogroup" aria-label="Finish"><button class="d-sw" role="radio" aria-checked="true" data-finish="silver" data-fr="Aluminium brossé" data-en="Brushed Aluminium"><i style="background:linear-gradient(135deg,#dfe3e6,#aeb5ba)"></i>Brushed Aluminium</button><button class="d-sw" role="radio" aria-checked="false" data-finish="champagne" data-fr="Champagne" data-en="Champagne"><i style="background:linear-gradient(135deg,#ecdcb9,#c8b48a)"></i>Champagne</button><button class="d-sw" role="radio" aria-checked="false" data-finish="graphite" data-fr="Graphite" data-en="Graphite"><i style="background:linear-gradient(135deg,#7d8386,#4a5053)"></i>Graphite</button><button class="d-sw" role="radio" aria-checked="false" data-finish="bronze" data-fr="Bronze" data-en="Bronze"><i style="background:linear-gradient(135deg,#b08b5e,#6e5537)"></i>Bronze</button><button class="d-sw" role="radio" aria-checked="false" data-finish="onyx" data-fr="Onyx" data-en="Onyx"><i style="background:linear-gradient(135deg,#3a3d3f,#151718)"></i>Onyx</button></div>
+        <a class="d-cta" href="product.html" data-fr="Explorer la capsule" data-en="Explore the Capsule">Explore the Capsule <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="micro" data-fr="Plus qu’un cercueil.<br>Un lendemain plus lumineux." data-en="More than a casket.<br>A brighter tomorrow.">More than a casket.<br>A brighter tomorrow.</div>
+      <div class="micro2" data-fr="Le temps prend<br>une nouvelle forme" data-en="Time takes on<br>a new form">Time takes on<br>a new form</div>
+    </div>
   </section>
 
     <!-- HOW IT WORKS -->
@@ -1097,6 +1264,46 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
       var r = cap.parentElement.getBoundingClientRect(); var p = Math.max(-1, Math.min(1, (window.innerHeight/2 - (r.top + r.height/2)) / window.innerHeight));
       cap.style.transform = 'translateY(' + (p * -18).toFixed(1) + 'px)'; t = false; }); }, { passive: true });
   }
+})();
+</script>
+<script>
+(function(){
+  var root = document.getElementById('design'); if (!root) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Arrivee des actes I et III. */
+  var revs = root.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: .12 }); revs.forEach(function(e){ io.observe(e); }); }
+  else revs.forEach(function(e){ e.classList.add('in'); });
+  setTimeout(function(){ revs.forEach(function(e){ e.classList.add('in'); }); }, 4000);
+  /* Le carrousel: trois etats, pilote par la personne — fleches, numeros, rail, clavier, balayage. Jamais tout seul. */
+  var slides = root.querySelectorAll('.d-slide'), nums = root.querySelectorAll('.d-num'), rail = root.querySelectorAll('.d-rail button'), cur = 0;
+  function go(n){
+    cur = (n + slides.length) % slides.length;
+    slides.forEach(function(s, i){ s.classList.toggle('on', i === cur); s.setAttribute('aria-hidden', i === cur ? 'false' : 'true'); });
+    nums.forEach(function(b, i){ b.setAttribute('aria-selected', i === cur ? 'true' : 'false'); });
+    rail.forEach(function(b, i){ b.setAttribute('aria-selected', i === cur ? 'true' : 'false'); });
+    /* La prochaine image se charge d avance, pour que le changement soit net. */
+    var nxt = slides[(cur + 1) % slides.length].querySelector('img'); if (nxt && nxt.loading === 'lazy') nxt.loading = 'eager';
+  }
+  document.getElementById('dprev').addEventListener('click', function(){ go(cur - 1); });
+  document.getElementById('dnext').addEventListener('click', function(){ go(cur + 1); });
+  nums.forEach(function(b, i){ b.addEventListener('click', function(){ go(i); }); });
+  rail.forEach(function(b){ b.addEventListener('click', function(){ go(parseInt(b.dataset.go, 10)); }); });
+  var stage = root.querySelector('.d-stage');
+  stage.setAttribute('tabindex', '0');
+  stage.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); } });
+  var x0 = null;
+  stage.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, { passive: true });
+  stage.addEventListener('touchend', function(e){ if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) > 48) go(dx < 0 ? cur + 1 : cur - 1); }, { passive: true });
+  /* Quand le carrousel approche, la deuxieme image se charge. */
+  if ('IntersectionObserver' in window) { var io2 = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { var im = slides[1].querySelector('img'); if (im) im.loading = 'eager'; io2.disconnect(); } }); }, { rootMargin: '600px 0px' }); io2.observe(stage); }
+  /* Les finis: le vrai rendu de chaque fini, un fichier par fini. */
+  var sws = root.querySelectorAll('.d-sw'), imgs = root.querySelectorAll('#dprod img.f');
+  sws.forEach(function(b){ b.addEventListener('click', function(){
+    var k = b.dataset.finish;
+    sws.forEach(function(x){ x.setAttribute('aria-checked', x === b ? 'true' : 'false'); });
+    imgs.forEach(function(im){ im.classList.toggle('on', im.getAttribute('src') === 'pyrale-' + k + '.png'); });
+  }); });
 })();
 </script>
 </body>
