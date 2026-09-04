@@ -466,7 +466,18 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
 .human-four h3{font-weight:500;font-size:18px;margin:16px 0 0;color:#151719}
 .human-four p{margin:6px 0 0;font-size:14.5px;line-height:1.5;color:#3f4447}
 @media(max-width:1000px){.human{min-height:0}.human .wrap{padding:0}.human-g{grid-template-columns:1fr;gap:0}.human-g>div:first-child{padding:64px clamp(24px,5vw,80px) 40px}.human-ph{min-height:0;aspect-ratio:4/3}.human-four{grid-template-columns:1fr 1fr;gap:28px 0;padding:32px clamp(24px,5vw,80px) 44px}.human-four>div:nth-child(2){border-right:none}.human-four>div:nth-child(3){padding-left:0}}
-@media(max-width:600px){.human h2{font-size:clamp(44px,12vw,60px)}.human-four{grid-template-columns:1fr;gap:22px}.human-four>div{border-right:none;padding:0}}
+@media(max-width:600px){
+  .human h2{font-size:clamp(44px,12vw,60px)}
+  /* Telephone: une ligne par repere — l icone a gauche, le titre et le texte a
+     droite — separees par un filet. La regle « div+div » de bureau decalait
+     un repere sur deux vers la droite. */
+  .human-four{grid-template-columns:1fr;gap:0;padding:8px clamp(24px,5vw,80px) 36px}
+  .human-four>div,.human-four>div+div{display:grid;grid-template-columns:44px 1fr;gap:0 16px;align-items:start;padding:18px 0;border-right:none;border-bottom:1px solid rgba(21,23,25,.12)}
+  .human-four>div:last-child{border-bottom:none}
+  .human-four svg{width:28px;height:28px;margin-top:2px}
+  .human-four h3{grid-column:2;margin:0;font-size:17px}
+  .human-four p{grid-column:2;margin:4px 0 0;font-size:14px}
+  }
 </style>
 </head>
 <body>
