@@ -745,6 +745,15 @@
 <div class="ptoast" id="ptoast" role="status"></div>
 
 <script>
+  /* La langue du dossier suit ce que la personne lit. ?lang= la porte depuis
+     une page traduite; sinon c est la langue declaree par la page elle-meme.
+     Tant que cette page n existe qu en anglais, le resultat est en-CA, comme
+     la constante qu il remplace. */
+  var LOCALE = (function () {
+    var q = new URLSearchParams(location.search).get('lang');
+    var l = String(q || document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
+    return l === 'fr' ? 'fr-CA' : 'en-CA';
+  })();
   // ---- Nav + shared behaviors ----
   const nav = document.getElementById('nav');
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
@@ -994,6 +1003,7 @@
       if (fab) q.push('fabric=' + encodeURIComponent(fab));
       var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e2) {}
       if (ref) q.push('ref=' + encodeURIComponent(ref));
+      if (LOCALE === 'fr-CA') q.push('lang=fr');
       window.location.href = '/achat?' + q.join('&');
     });
   });
@@ -1029,7 +1039,7 @@
           sku: SKU, email: email, firstName: first, lastName: last,
           phone: phone || undefined,
           dateOfBirth: dob,
-          locale: 'en-CA',
+          locale: LOCALE,
           finish: active ? active.dataset.name : undefined,
           fabric: chosenFabric() || undefined,
           referralCode: ref || undefined,
@@ -1128,6 +1138,7 @@
       if (fab) q.push('fabric=' + encodeURIComponent(fab));
       var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e2) {}
       if (ref) q.push('ref=' + encodeURIComponent(ref));
+      if (LOCALE === 'fr-CA') q.push('lang=fr');
       window.location.href = '/preplan?' + q.join('&');
     });
   });
@@ -1161,7 +1172,7 @@
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           sku: SKU, email: email, firstName: first, lastName: last,
-          phone: phone || undefined, dateOfBirth: dob, locale: 'en-CA',
+          phone: phone || undefined, dateOfBirth: dob, locale: LOCALE,
           finish: active ? active.dataset.name : undefined,
           fabric: chosenFabric() || undefined,
           months: ppChosen,
