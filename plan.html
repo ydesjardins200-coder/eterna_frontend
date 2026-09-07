@@ -216,6 +216,15 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
 </main>
 
 <script>
+  /* La langue du dossier suit ce que la personne lit. ?lang= la porte depuis
+     une page traduite; sinon c est la langue declaree par la page elle-meme.
+     Tant que cette page n existe qu en anglais, le resultat est en-CA, comme
+     la constante qu il remplace. */
+  var LOCALE = (function () {
+    var q = new URLSearchParams(location.search).get('lang');
+    var l = String(q || document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
+    return l === 'fr' ? 'fr-CA' : 'en-CA';
+  })();
 (function () {
   'use strict';
 
@@ -862,6 +871,7 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
           method: 'POST',
           body: JSON.stringify({
             kind: KIND,
+            locale: LOCALE,
             sku: q.get('sku') || 'PYR-STD',
             finish: q.get('finish') || undefined,
             fabric: q.get('fabric') || undefined,
