@@ -412,10 +412,14 @@ header.nav:not(.scrolled) .menu-toggle span{background:#fff}
 .nav-cta .btn--dark{background:#000;color:#fff;border-radius:999px;transition:background .3s,transform .3s}
 .nav-cta .btn--dark:hover{background:#222;transform:translateY(-1px)}
 .lang-sel{position:relative;margin-left:18px}
-.lang-sel button{background:none;border:0;color:rgba(255,255,255,.9);font:inherit;font-size:13px;letter-spacing:.06em;display:inline-flex;align-items:center;gap:6px;cursor:pointer;padding:6px 2px}
-header.nav.scrolled .lang-sel button{color:var(--ink)}
-.lang-sel button svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6;transition:transform .25s}
-.lang-sel[open] button svg{transform:rotate(180deg)}
+/* Le declencheur est le summary lui-meme. Un <button> imbrique dedans avalait
+   le clic et le <details> ne s ouvrait jamais. */
+.lang-sel summary{list-style:none;background:none;border:0;color:rgba(255,255,255,.9);font:inherit;font-size:13px;letter-spacing:.06em;display:inline-flex;align-items:center;gap:6px;cursor:pointer;padding:6px 2px}
+.lang-sel summary::-webkit-details-marker{display:none}
+.lang-sel summary::marker{content:""}
+header.nav.scrolled .lang-sel summary{color:var(--ink)}
+.lang-sel summary svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6;transition:transform .25s}
+.lang-sel[open] summary svg{transform:rotate(180deg)}
 .lang-sel ul{position:absolute;right:0;top:calc(100% + 8px);list-style:none;margin:0;padding:6px;min-width:150px;background:#fff;color:#111;border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.18);display:none}
 .lang-sel[open] ul{display:block}
 .lang-sel li a{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:8px;font-size:13.5px;color:#111;text-decoration:none}
@@ -632,7 +636,7 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
     <div class="nav-cta">
       <a href="#contact" class="btn btn--dark">Prendre rendez-vous</a>
       <details class="lang-sel" id="langSel">
-        <summary style="list-style:none"><button type="button" aria-label="Langue">FR <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button></summary>
+        <summary aria-label="Langue">FR <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
         <ul><li><a href="/" hreflang="en">English</a></li><li><a href="/fr/" hreflang="fr" class="on">Français</a></li></ul>
       </details>
       <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
