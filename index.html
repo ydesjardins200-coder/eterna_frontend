@@ -534,8 +534,11 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
 
 /* ══ « Designed around dignity » — le chapitre design, après la science ══ */
 .design{position:relative;background:#F5F2EC;color:#101820;font-family:'Instrument Sans',system-ui,sans-serif;overflow:hidden}
-/* La transition: l encre de minuit s eteint sur 160 px, la lumiere chaude arrive. */
+/* Transition mise de cote avec le chapitre technique: ce degrade eteignait
+   l encre de minuit qui precedait. Sans lui au-dessus, il posait une bande
+   sombre sortie de nulle part. A remettre si le chapitre technique revient.
 .design::before{content:"";position:absolute;left:0;right:0;top:0;height:160px;background:linear-gradient(180deg,#101820 0%,rgba(16,24,32,.55) 40%,rgba(16,24,32,0) 100%);z-index:3;pointer-events:none}
+*/
 .d-eye{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(16,24,32,.7);font-weight:500}
 /* ACTE I */
 .d-intro{position:relative;overflow:hidden}
@@ -675,6 +678,13 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
   </section>
 
 <!-- THE SCIENCE OF PRESERVATION -->
+  <!-- CHAPITRE TECHNIQUE — MIS EN COMMENTAIRE LE 4 SEPTEMBRE 2026
+       Le contenu part vers une page dediee a la technologie. Pour le
+       remettre: retirer ce commentaire. Le CSS (.tech*) et le script de
+       revelation restent en place; le script sort tout seul quand la
+       section est absente (if (!els.length) return).
+       Aucun lien du site ne pointe vers #science. -->
+  <!--
   <section class="tech" id="science" aria-label="The science of preservation">
     <div class="tech-open">
       <img class="atm" src="tech-atmosphere.jpg" alt="" loading="lazy" />
@@ -725,6 +735,7 @@ header.nav.scrolled .lang-sel button{color:var(--ink)}
     </div>
 
   </section>
+  -->
 
   <!-- DESIGNED AROUND DIGNITY -->
   <section class="design" id="design" aria-label="Designed around dignity">
