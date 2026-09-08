@@ -163,8 +163,10 @@
   /* Chapitres editoriaux */
   .chap { padding: 120px 0; }
   .chap h2 { margin: 16px 0 22px; max-width: 14ch; }
-  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
-  .split .ph { position: relative; border-radius: var(--r); overflow: hidden; aspect-ratio: 3 / 2; background: var(--mist); }
+  /* La photo prend exactement la hauteur du texte, de l accroche a la derniere
+     puce, comme dans la maquette; le cadrage en cover garde la capsule au centre. */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: stretch; }
+  .split .ph { position: relative; border-radius: var(--r); overflow: hidden; background: var(--mist); align-self: stretch; min-height: 420px; }
   .split .ph img { width: 100%; height: 100%; object-fit: cover; }
   .split.rev .ph { order: 2; }
   .fact-list { list-style: none; display: grid; gap: 14px; margin-top: 28px; }
@@ -349,6 +351,7 @@
     .chap { padding: 88px 0; }
     .split { grid-template-columns: 1fr; gap: 32px; }
     .split.rev .ph { order: 0; }
+    .split .ph { aspect-ratio: 3 / 2; min-height: 0; }
     .pres { min-height: 0; }
     .pres::after { background: linear-gradient(180deg, rgba(16,24,32,0.82) 0%, rgba(16,24,32,0.55) 55%, rgba(16,24,32,0.2) 100%); }
     .pres .wrap { padding: 72px 32px 320px; }
