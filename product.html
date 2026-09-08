@@ -213,6 +213,13 @@
   .time-ph { position: relative; background: var(--mist); min-height: 420px; }
   .time-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 40% 50%; }
   .time-tx { padding: 72px 80px; display: flex; flex-direction: column; justify-content: center; }
+  /* La variante inversee: texte a gauche sur la bande porcelaine, aligne sur la
+     grille de 1320, photo pleine hauteur a droite. */
+  .time--flip .time-grid { grid-template-columns: 1fr 1.15fr; }
+  .time--flip .time-ph { order: 2; }
+  .time--flip .time-ph img { object-position: 50% 50%; }
+  .time--flip .time-tx { padding-left: max(40px, calc((100vw - 1320px) / 2 + 40px)); }
+  .time--flip .fact-list { margin-top: 24px; gap: 12px; }
   .time-card { margin-top: 32px; background: #fff; border-radius: var(--r); padding: 28px 30px; border: 1px solid var(--line); }
   .time-card b { display: block; font-weight: 500; font-size: 18px; letter-spacing: -0.01em; }
   .time-card p { font-size: 14px; color: var(--ink-soft); margin: 8px 0 20px; }
@@ -237,7 +244,7 @@
   .care-list span { display: block; font-size: 13.5px; color: var(--ink-soft); margin-top: 3px; }
 
   /* 11 — FAQ */
-  .faq { background: var(--paper); padding: 64px 0 72px; }
+  .faq { background: var(--paper); padding: 0 0 88px; }
   .faq-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 72px; align-items: start; }
   .faq-grid > div:first-child { position: sticky; top: 96px; }
   .faq-q { padding: 12px 0; font-size: 15px; font-weight: 500; letter-spacing: -0.005em; display: flex; justify-content: space-between; align-items: center; gap: 24px; font-family: var(--sans); color: var(--ink); }
@@ -377,9 +384,12 @@
     .fin { padding: 56px 0; }
     .fin-list { grid-template-columns: repeat(3, 1fr); }
     .time-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+    .time--flip .time-ph { order: 0; }
+    .time--flip .time-tx { padding-left: 32px; }
     .time-ph { aspect-ratio: 4 / 3; min-height: 0; }
     .time-tx { padding: 48px 32px 56px; }
-    .spec, .faq { padding: 56px 0; }
+    .spec { padding: 56px 0; }
+    .faq { padding: 0 0 56px; }
     .spec-grid, .faq-grid { grid-template-columns: 1fr; gap: 36px; }
     .faq-grid > div:first-child { position: static; }
     .advisor { flex-direction: column; align-items: flex-start; }
@@ -406,6 +416,7 @@
     .fin-list { grid-template-columns: 1fr 1fr; }
     .pres .wrap { padding: 56px 20px 260px; }
     .time-tx { padding: 48px 20px 64px; }
+    .time--flip .time-tx { padding-left: 20px; }
     .pcta-tx { padding: 64px 20px 48px 20px; }
     .pcta-brand { right: 20px; bottom: 20px; }
   }
@@ -532,10 +543,10 @@
   </section>
 
   <!-- 04 — FAITE POUR DURER -->
-  <section class="chap" id="engineering" aria-labelledby="eng-title">
-    <div class="wrap split rev">
-      <div class="ph reveal"><img src="product-endure.jpg" srcset="product-endure-m.jpg 900w, product-endure.jpg 1536w" sizes="(max-width: 900px) 100vw, 50vw" alt="The Capsule Pyrale on the Eterna stand at a trade show" loading="lazy" decoding="async" width="1536" height="1024" /></div>
-      <div>
+  <section class="time time--flip" id="engineering" aria-labelledby="eng-title">
+    <div class="time-grid">
+      <div class="time-ph"><img src="product-endure.jpg" srcset="product-endure-m.jpg 900w, product-endure.jpg 1536w" sizes="(max-width: 900px) 100vw, 55vw" alt="The Capsule Pyrale on the Eterna stand at a trade show" loading="lazy" decoding="async" width="1536" height="1024" /></div>
+      <div class="time-tx">
         <span class="eyebrow reveal">Real product · Québec</span>
         <h2 id="eng-title" class="reveal">Built to endure generations.</h2>
         <p class="lede reveal">The Capsule Pyrale is crafted from high-grade aluminium, chosen for its exceptional durability, corrosion resistance and timeless aesthetic.</p>
