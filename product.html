@@ -91,8 +91,13 @@
   .phero { padding: 108px 0 48px; background: var(--paper); }
   /* La scene est au format 4:3 de la maquette, plus haute que la photo 3:2, et la
      colonne de gauche prend 65 %: c est ce qui donne a l image sa presence. */
-  .phero-grid { display: grid; grid-template-columns: minmax(0, 65fr) minmax(0, 35fr); gap: 44px; align-items: start; }
-  .pstage { position: relative; aspect-ratio: 4 / 3; background: #ECEEF0; border-radius: var(--r); overflow: hidden; }
+  .phero-grid { display: grid; grid-template-columns: minmax(0, 65fr) minmax(0, 35fr); gap: 44px; align-items: stretch; }
+  /* La galerie finit a la hauteur exacte des boutons: la scene absorbe la
+     difference, les vignettes restent en bas. Meme quand le catalogue ajoute
+     les interieurs et allonge la colonne de droite. */
+  .pgallery { display: flex; flex-direction: column; }
+  .pstage { position: relative; flex: 1 1 auto; min-height: 480px; background: #ECEEF0; border-radius: var(--r); overflow: hidden; }
+  .pthumbs { flex: 0 0 auto; }
   .pstage img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; transition: opacity 0.4s var(--ease); }
   .pstage.is-render { background: #fff; }
   .pstage.is-render img { object-fit: contain; object-position: 50% 62%; padding: 9% 6% 12%; position: relative; z-index: 1; }
@@ -146,8 +151,6 @@
   .pbuy { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; padding-top: 22px; border-top: 1px solid var(--line); }
   .pbuy .btn { width: 100%; flex-direction: column; gap: 4px; padding: 13px 26px; }
   .pbuy .btn small { font-size: 10.5px; font-weight: 400; letter-spacing: 0.06em; text-transform: none; opacity: 0.72; }
-  .ppre-note { font-size: 13px; color: var(--ink-soft); margin-top: 18px; line-height: 1.6; }
-  .ppre-note b { font-weight: 500; color: var(--ink); display: block; }
 
   /* Barre collante: en haut sur bureau, en bas au telephone. */
   .pbar { position: fixed; top: 0; left: 0; right: 0; z-index: 110; background: rgba(255,255,255,0.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); transform: translateY(-100%); transition: transform 0.4s var(--ease); }
@@ -352,7 +355,14 @@
   /* Reponsive */
   @media (max-width: 1100px) {
     .wrap { padding: 0 32px; }
-    .phero-grid { gap: 40px; }
+    /* A cette largeur la barre de navigation ne tient plus sur une ligne: menu replie. */
+    .nav-links, .nav-cta .btn { display: none; }
+    .menu-toggle { display: flex; }
+    .nav-links.open { display: flex; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 28px; gap: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+    /* Etirer la scene a la colonne d information donnerait un portrait: on garde le 4:3. */
+    .phero-grid { gap: 36px; align-items: start; }
+    .pstage { flex: none; aspect-ratio: 4 / 3; min-height: 0; }
+    .pswatches { gap: 20px; }
     .split { gap: 44px; }
     .time-tx { padding: 72px 48px; }
     .pcta-tx { padding-right: 48px; }
@@ -365,6 +375,7 @@
     .phero { padding-top: 92px; }
     .phero-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
     .pgallery, .pinfo { min-width: 0; }
+    .pstage { flex: none; aspect-ratio: 4 / 3; min-height: 0; }
     .pthumbs { display: flex; overflow-x: auto; scrollbar-width: none; }
     .pthumb { flex: 0 0 auto; width: 84px; }
     .pbuy { flex-direction: column; }
@@ -516,7 +527,6 @@
           <button class="btn btn--dark js-preplan"><span>Start my pre-plan <span class="arr">→</span></span><small>0% financing — up to 60 monthly payments</small></button>
           <button class="btn btn--ghost js-buy"><span>Purchase the Capsule</span><small>Secure credit card payment via Stripe</small></button>
         </div>
-        <p class="ppre-note"><b>Plan today. Decide at your pace.</b>Start with a few simple questions. No commitment required.</p>
       </div>
     </div>
   </section>
