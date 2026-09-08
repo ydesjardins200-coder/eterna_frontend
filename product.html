@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Capsule Pyrale — Eterna</title>
 <meta name="description" content="The Capsule Pyrale — a hermetic aluminium capsule that preserves the body naturally with nitrogen gas for 60 to 100 years. One model, five finishes. Designed and made in Québec. Start your pre-plan at your own pace." />
-<link rel="preload" as="image" href="product-showroom.jpg" imagesrcset="product-showroom-m.jpg 900w, product-showroom.jpg 1536w" imagesizes="(max-width: 900px) 100vw, 62vw" fetchpriority="high" />
+<link rel="preload" as="image" href="product-showroom.jpg" imagesrcset="product-showroom-m.jpg 900w, product-showroom.jpg 1536w" imagesizes="(max-width: 900px) 100vw, 65vw" fetchpriority="high" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
@@ -89,9 +89,12 @@
 
   /* 01 — CONFIGURATEUR */
   .phero { padding: 112px 0 56px; background: var(--porcelain); }
-  .phero-grid { display: grid; grid-template-columns: minmax(0, 63fr) minmax(0, 37fr); gap: 56px; align-items: start; }
-  .pstage { position: relative; aspect-ratio: 3 / 2; background: #ECEEF0; border-radius: var(--r); overflow: hidden; }
-  .pstage img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.4s var(--ease); }
+  /* La scene est au format 4:3 de la maquette, plus haute que la photo 3:2, et la
+     colonne de gauche prend 65 %: c est ce qui donne a l image sa presence. */
+  .phero .wrap { max-width: 1360px; }
+  .phero-grid { display: grid; grid-template-columns: minmax(0, 65fr) minmax(0, 35fr); gap: 44px; align-items: start; }
+  .pstage { position: relative; aspect-ratio: 4 / 3; background: #ECEEF0; border-radius: var(--r); overflow: hidden; }
+  .pstage img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; transition: opacity 0.4s var(--ease); }
   .pstage.is-render { background: linear-gradient(180deg, #EEF0F2 0%, #E2E6EA 100%); }
   .pstage.is-render img { object-fit: contain; padding: 4%; }
   .pthumbs { display: flex; gap: 10px; margin-top: 12px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
@@ -434,7 +437,7 @@
     <div class="wrap phero-grid">
       <div class="pgallery">
         <div class="pstage" id="pStage">
-          <img src="product-showroom.jpg" srcset="product-showroom-m.jpg 900w, product-showroom.jpg 1536w" sizes="(max-width: 900px) 100vw, 62vw" alt="The Capsule Pyrale in the Eterna showroom, mountains at sunset beyond the glass" id="pMain" width="1536" height="1024" fetchpriority="high" decoding="async" />
+          <img src="product-showroom.jpg" srcset="product-showroom-m.jpg 900w, product-showroom.jpg 1536w" sizes="(max-width: 900px) 100vw, 65vw" alt="The Capsule Pyrale in the Eterna showroom, mountains at sunset beyond the glass" id="pMain" width="1536" height="1024" fetchpriority="high" decoding="async" />
         </div>
         <div class="pthumbs" id="pThumbs" role="tablist" aria-label="Product views">
           <button class="pthumb active" data-src="product-showroom.jpg" data-fit="cover" data-alt="The Capsule Pyrale in the Eterna showroom" aria-label="Showroom"><img src="product-showroom-t.jpg" alt="" loading="lazy" width="400" height="267" /></button>
