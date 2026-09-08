@@ -102,17 +102,25 @@
   .pstage-cap { position: absolute; left: 24px; bottom: 20px; z-index: 2; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); opacity: 0; transform: translateY(6px); transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); pointer-events: none; }
   .pstage-cap b { display: block; font-size: 15px; letter-spacing: -0.01em; text-transform: none; font-weight: 500; color: var(--ink); margin-top: 3px; }
   .pstage.is-render .pstage-cap { opacity: 1; transform: none; }
-  .pthumbs { display: flex; gap: 10px; margin-top: 12px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .pthumbs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 12px; }
   .pthumbs::-webkit-scrollbar { display: none; }
-  .pthumb { flex: 0 0 auto; width: 96px; aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden; border: 1px solid var(--line); background: #fff; cursor: pointer; padding: 0; position: relative; transition: border-color 0.3s var(--ease), opacity 0.3s var(--ease); opacity: 0.78; }
+  .pthumb { width: 100%; aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden; border: 1px solid var(--line); background: #fff; cursor: pointer; padding: 0; position: relative; transition: border-color 0.3s var(--ease), opacity 0.3s var(--ease); opacity: 0.78; }
   .pthumb img { width: 100%; height: 100%; object-fit: cover; }
   .pthumb[data-fit="contain"] img { object-fit: contain; padding: 10%; }
   .pthumb:hover, .pthumb.active { opacity: 1; }
   .pthumb.active { border-color: var(--ink); }
+  .pthumb--video { background: var(--night); border-color: var(--night); opacity: 1; }
   .pthumb .play { position: absolute; inset: 0; display: grid; place-items: center; }
-  .pthumb .play i { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.92); display: grid; place-items: center; font-style: normal; font-size: 11px; color: var(--ink); padding-left: 2px; }
+  .pthumb .play i { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.94); display: grid; place-items: center; font-style: normal; font-size: 11px; color: var(--ink); padding-left: 3px; }
+  /* La video n existe pas encore: la scene le dit, sans faire semblant. */
+  .pstage.is-video img { filter: brightness(0.45); }
+  .pstage-video { position: absolute; inset: 0; z-index: 2; display: none; place-items: center; text-align: center; color: #fff; }
+  .pstage.is-video .pstage-video { display: grid; }
+  .pstage-video i { width: 72px; height: 72px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.6); display: grid; place-items: center; margin: 0 auto 14px; font-style: normal; font-size: 22px; padding-left: 5px; }
+  .pstage-video span { display: block; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
   .pinfo { padding-top: 6px; }
-  .pinfo h1 { font-size: clamp(30px, 2.6vw, 38px); margin: 12px 0 14px; }
+  .ptitle-row { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin: 0 0 14px; }
+  .pinfo h1 { font-size: clamp(30px, 2.6vw, 38px); margin: 0; }
   .psub { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); margin-bottom: 20px; }
   .pkey { list-style: none; display: grid; gap: 10px; margin-bottom: 26px; }
   .pkey li { display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: var(--ink-soft); }
@@ -133,11 +141,11 @@
   #pSwatches .pswatch.active::after { color: var(--ink); font-weight: 500; }
   .sw-note { font-size: 12px; color: var(--muted); margin-top: -6px; }
   .sw-note:empty { display: none; }
-  .pprice-row { border-top: 1px solid var(--line); padding-top: 22px; margin-top: 8px; }
-  .pprice { font-size: 30px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
-  .pprice em { font-style: normal; font-size: 13px; color: var(--muted); letter-spacing: 0.06em; margin-left: 4px; }
-  .pbuy { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
-  .pbuy .btn { width: 100%; }
+  .pprice { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; white-space: nowrap; }
+  .pprice em { font-style: normal; font-size: 12px; color: var(--muted); letter-spacing: 0.06em; margin-left: 4px; }
+  .pbuy { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .pbuy .btn { width: 100%; flex-direction: column; gap: 4px; padding: 13px 26px; }
+  .pbuy .btn small { font-size: 10.5px; font-weight: 400; letter-spacing: 0.06em; text-transform: none; opacity: 0.72; }
   .ppre-note { font-size: 13px; color: var(--ink-soft); margin-top: 18px; line-height: 1.6; }
   .ppre-note b { font-weight: 500; color: var(--ink); display: block; }
 
@@ -211,7 +219,7 @@
 
   /* 07 — CHAQUE DETAIL ET CE QUI EST COMPRIS */
   .spec { background: var(--paper); padding: 80px 0; }
-  .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+  .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 72px; align-items: start; }
   .spec h2 { font-size: clamp(28px, 2.6vw, 36px); margin: 12px 0 22px; }
   .ptable { width: 100%; border-collapse: collapse; }
   .ptable th, .ptable td { text-align: left; vertical-align: top; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; line-height: 1.5; }
@@ -222,19 +230,19 @@
   .care-list li { display: grid; grid-template-columns: 44px 1fr; gap: 18px; align-items: center; padding: 11px 0; }
   .care-list .ic { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; color: var(--champ); }
   .care-list b { display: block; font-weight: 500; font-size: 16px; letter-spacing: -0.01em; }
-  .advisor { margin-top: 22px; background: var(--porcelain); border: 1px solid var(--line); border-radius: var(--r); padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .advisor { grid-column: 1 / -1; margin-top: 8px; background: var(--porcelain); border: 1px solid var(--line); border-radius: var(--r); padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
   .advisor b { display: block; font-weight: 500; font-size: 15px; letter-spacing: -0.01em; }
   .advisor span { display: block; font-size: 13px; color: var(--ink-soft); margin-top: 3px; }
   .advisor .btn { padding: 12px 18px; font-size: 12px; flex: 0 0 auto; }
   .care-list span { display: block; font-size: 13.5px; color: var(--ink-soft); margin-top: 3px; }
 
   /* 11 — FAQ */
-  .faq { background: var(--paper); padding: 80px 0 88px; }
+  .faq { background: var(--paper); padding: 64px 0 72px; }
   .faq-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 72px; align-items: start; }
   .faq-grid > div:first-child { position: sticky; top: 96px; }
-  .faq-q { padding: 16px 0; font-size: 15.5px; font-weight: 500; letter-spacing: -0.005em; display: flex; justify-content: space-between; align-items: center; gap: 24px; font-family: var(--sans); color: var(--ink); }
+  .faq-q { padding: 12px 0; font-size: 15px; font-weight: 500; letter-spacing: -0.005em; display: flex; justify-content: space-between; align-items: center; gap: 24px; font-family: var(--sans); color: var(--ink); }
   .faq-a p { font-size: 14.5px; line-height: 1.65; }
-  .faq-all { background: none; border: 0; border-bottom: 1px solid currentColor; padding: 0 0 3px; cursor: pointer; color: var(--ink); margin-top: 22px; }
+  .faq-all { background: none; border: 0; border-bottom: 1px solid currentColor; padding: 0 0 3px; cursor: pointer; color: var(--ink); margin-top: 16px; }
   .faq-more[hidden] { display: none; }
 
   /* 12 — CLOTURE */
@@ -255,16 +263,15 @@
 
   /* ── Repris tels quels de l ancienne page: les modales, la cloche, la FAQ, le pied de page. ── */
   .ic-svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; display: block; }
-  .faq { padding: 90px 0; }
   .faq-grid { display: grid; grid-template-columns: 0.6fr 1.4fr; gap: 50px; }
   .faq-grid h2 { font-size: clamp(28px, 3.4vw, 42px); }
   .faq-item { border-top: 1px solid var(--line); }
   .faq-item:last-child { border-bottom: 1px solid var(--line); }
-  .faq-q { width: 100%; background: none; border: 0; cursor: pointer; text-align: left; padding: 24px 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-family: var(--sans); font-size: 15px; color: var(--ink); }
+  .faq-q { width: 100%; background: none; border: 0; cursor: pointer; text-align: left; }
   .faq-q .sign { font-size: 20px; color: var(--muted); transition: transform 0.3s; flex: 0 0 auto; }
   .faq-item.open .faq-q .sign { transform: rotate(45deg); }
   .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); }
-  .faq-a p { padding: 0 40px 24px 0; font-size: 13.5px; color: var(--ink-soft); }
+  .faq-a p { padding: 0 40px 18px 0; color: var(--ink-soft); }
   footer { position: relative; overflow: hidden; color: #fff; background: linear-gradient(180deg, rgba(10,11,14,0.88) 0%, rgba(10,11,14,0.72) 34%, rgba(10,11,14,0.82) 62%, rgba(9,10,13,0.96) 100%), #0c0d10 url("footer-mist.jpg") center 32% / cover no-repeat; }
   .foot-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: min(780px, 82%); height: 200px; background: radial-gradient(60% 100% at 50% 0%, rgba(23,107,158,0.16), transparent 72%); pointer-events: none; }
   footer .wrap { position: relative; z-index: 1; }
@@ -351,7 +358,8 @@
     .phero { padding-top: 92px; }
     .phero-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
     .pgallery, .pinfo { min-width: 0; }
-    .pthumb { width: 84px; }
+    .pthumbs { display: flex; overflow-x: auto; scrollbar-width: none; }
+    .pthumb { flex: 0 0 auto; width: 84px; }
     .pbuy { flex-direction: column; }
     .rail-grid { grid-template-columns: 1fr 1fr; }
     .rail-grid > div { padding: 22px 20px; border-bottom: 1px solid var(--line); }
@@ -454,6 +462,7 @@
         <div class="pstage" id="pStage">
           <img src="product-showroom.jpg" srcset="product-showroom-m.jpg 900w, product-showroom.jpg 1536w" sizes="(max-width: 900px) 100vw, 65vw" alt="The Capsule Pyrale in the Eterna showroom, mountains at sunset beyond the glass" id="pMain" width="1536" height="1024" fetchpriority="high" decoding="async" />
           <div class="pstage-cap" aria-hidden="true">Finish<b id="stageCap">Brushed Aluminium</b></div>
+          <div class="pstage-video" aria-hidden="true"><div><i>▶</i><span>Video — coming soon</span></div></div>
         </div>
         <div class="pthumbs" id="pThumbs" role="tablist" aria-label="Product views">
           <button class="pthumb active" data-src="product-showroom.jpg" data-fit="cover" data-alt="The Capsule Pyrale in the Eterna showroom" aria-label="Showroom"><img src="product-showroom-t.jpg" alt="" loading="lazy" width="400" height="267" /></button>
@@ -461,12 +470,12 @@
           <button class="pthumb" data-src="product-end.jpg" data-fit="contain" data-alt="The Capsule Pyrale, end view" aria-label="End view"><img src="product-end-t.jpg" alt="" loading="lazy" width="400" height="194" /></button>
           <button class="pthumb" data-src="product-top.jpg" data-fit="contain" data-alt="The Capsule Pyrale, seen from above" aria-label="Top view"><img src="product-top-t.jpg" alt="" loading="lazy" width="400" height="147" /></button>
           <button class="pthumb" data-src="product-open-lake.jpg" data-fit="cover" data-alt="The Capsule Pyrale open, by a mountain lake at sunrise" aria-label="Open capsule"><img src="product-open-lake-t.jpg" alt="" loading="lazy" width="400" height="267" /></button>
+          <button class="pthumb pthumb--video" data-video="1" data-src="product-showroom.jpg" data-fit="cover" data-alt="Video — coming soon" aria-label="Video, coming soon"><span class="play"><i>▶</i></span></button>
         </div>
       </div>
 
       <div class="pinfo">
-        <span class="eyebrow">A more human tomorrow</span>
-        <h1 id="ptitle">The Capsule Pyrale</h1>
+        <div class="ptitle-row"><h1 id="ptitle">The Pyrale</h1><div class="pprice" id="pPrice">$14,500 <em>CAD</em></div></div>
         <p class="psub">A patented aluminium design built for permanence and dignity. A modern alternative that combines refined design, advanced materials and a lower environmental impact — without a single chemical.</p>
         <ul class="pkey">
           <li><span class="ic"><svg class="ic-svg"><use href="#ic-nochem"/></svg></span>No toxic chemicals or preservatives</li>
@@ -492,13 +501,9 @@
           <div class="pswatches" id="pFabrics"></div>
         </div>
 
-        <div class="pprice-row">
-          <div class="pprice" id="pPrice">$14,500 <em>CAD</em></div>
-        </div>
-
         <div class="pbuy">
-          <button class="btn btn--dark js-preplan">Start my pre-plan <span class="arr">→</span></button>
-          <button class="btn btn--ghost js-buy">Purchase the Capsule</button>
+          <button class="btn btn--dark js-preplan"><span>Start my pre-plan <span class="arr">→</span></span><small>0% financing — up to 60 monthly payments</small></button>
+          <button class="btn btn--ghost js-buy"><span>Purchase the Capsule</span><small>Secure credit card payment via Stripe</small></button>
         </div>
         <p class="ppre-note"><b>Plan today. Decide at your pace.</b>Start with a few simple questions. No commitment required.</p>
       </div>
@@ -606,8 +611,8 @@
           <li><span class="ic"><svg class="ic-svg"><use href="#ic-badge-check"/></svg></span><div><b>Delivery coordination</b><span>With your chosen funeral home</span></div></li>
           <li><span class="ic"><svg class="ic-svg"><use href="#ic-heart"/></svg></span><div><b>Ongoing support</b><span>Our team is here, whenever you need us</span></div></li>
         </ul>
-        <div class="advisor reveal"><div><b>Questions before you decide?</b><span>An Eterna advisor answers within one business day — no obligation.</span></div><a href="contact.html" class="btn btn--ghost">Talk to an advisor</a></div>
       </div>
+      <div class="advisor reveal"><div><b>Questions before you decide?</b><span>An Eterna advisor answers within one business day — no obligation.</span></div><a href="contact.html" class="btn btn--ghost">Talk to an advisor</a></div>
     </div>
   </section>
 
@@ -1233,7 +1238,8 @@
     var thumbs = document.getElementById('pThumbs');
     if (!stage || !main) return;
 
-    function swap(src, fit, alt) {
+    function swap(src, fit, alt, video) {
+      stage.classList.toggle('is-video', !!video);
       if (main.getAttribute('src') === src && !main.srcset) return;
       main.style.opacity = '0';
       var img = new Image();
@@ -1253,7 +1259,7 @@
         t.addEventListener('click', function () {
           thumbs.querySelectorAll('.pthumb').forEach(function (x) { x.classList.remove('active'); });
           t.classList.add('active');
-          swap(t.dataset.src, t.dataset.fit, t.dataset.alt);
+          swap(t.dataset.src, t.dataset.fit, t.dataset.alt, t.dataset.video);
         });
       });
     }
@@ -1266,7 +1272,7 @@
       sw.addEventListener('click', function (e) {
         var b = e.target.closest('.pswatch');
         if (!b || b.disabled) return;
-        stage.classList.add('is-render');
+        stage.classList.add('is-render'); stage.classList.remove('is-video');
         main.removeAttribute('srcset'); main.removeAttribute('sizes');
         var cap = document.getElementById('stageCap'); if (cap) cap.textContent = b.dataset.name;
         if (thumbs) thumbs.querySelectorAll('.pthumb').forEach(function (x) { x.classList.remove('active'); });
