@@ -987,6 +987,15 @@
     [/white|blanc/, '#ece8df'],
     [/clear|transparent|crystal|cristal/, '#dfe8ed']
   ];
+  /* The open capsule in the lining chosen: the same photo, with the fabric
+     retouched to the colour of the option. Keyed on the swatch colour, so the
+     photo and the swatch can never disagree. A fabric with no matching photo
+     keeps the original one, and a photo uploaded from the back office wins
+     over all of them. */
+  var FABRIC_PHOTO = {
+    '#ece8df': 'product-open-white.jpg',
+    '#2b3138': 'product-open-onyx.jpg'
+  };
   function swatchHex(option, fallback) {
     var text = [option.code, option.labelEn, option.labelFr].join(' ').toLowerCase();
     for (var i = 0; i < SWATCH_WORDS.length; i++) {
@@ -1033,7 +1042,9 @@
       stageShow(/^https?:/.test(b.dataset.img) ? b.dataset.img : '/' + b.dataset.img, false);
       return;
     }
-    stageShow(CFG_VIEW[step].src, CFG_VIEW[step].render, CFG_VIEW[step].alt);
+    var src = CFG_VIEW[step].src;
+    if (step === 'fabric' && b && FABRIC_PHOTO[b.dataset.tone]) src = FABRIC_PHOTO[b.dataset.tone];
+    stageShow(src, CFG_VIEW[step].render, CFG_VIEW[step].alt);
   }
 
   /* The line under the swatches: the choice of the step on screen. */
@@ -1094,6 +1105,7 @@
       } else if (kind === 'fabric') {
         b.classList.add('pswatch--quilt');
         b.style.setProperty('--sw', swatchHex(f, '#b9bdc4'));
+        b.dataset.tone = swatchHex(f, '');
       } else {
         b.classList.add('pswatch--glass');
         b.style.setProperty('--sw', swatchHex(f, '#cfd6db'));
