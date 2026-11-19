@@ -270,6 +270,41 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
     'Brushed Aluminium': '#c9cdd3', 'Champagne': '#d3b47e', 'Graphite': '#6e727a',
     'Bronze': '#9c683c', 'Onyx': '#454852'
   };
+  /* The third choice of the capsule: its polycarbonate top. Empty when the
+     catalogue lists none, and the section then does not appear. */
+  var TOPS = [];
+  /* The colour of a dot follows the name of the option, by keyword: the same
+     table as the product page, so a fabric or a top looks the same on both.
+     Darkest words first: « Dark grey » must come out dark. */
+  var SWATCH_WORDS = [
+    [/onyx|black|noir|dark|opaque|fonc|smoked|fum|tint|teint/, '#2b3138'],
+    [/graphite|charcoal|anthracite/, '#5b6068'],
+    [/grey|gray|gris|silver|argent|alumin/, '#8d9299'],
+    [/champagne|ivory|ivoire|cream|cr[eè]me|beige|sand|sable/, '#d9c7a0'],
+    [/bronze|brown|brun|taupe/, '#8c6a48'],
+    [/blue|bleu/, '#5f7f9c'],
+    [/white|blanc/, '#ece8df'],
+    [/clear|transparent|crystal|cristal/, '#dfe8ed']
+  ];
+  function swatchHex(option, fallback) {
+    var text = [option.code, option.labelEn, option.labelFr].join(' ').toLowerCase();
+    for (var i = 0; i < SWATCH_WORDS.length; i++) {
+      if (SWATCH_WORDS[i][0].test(text)) return SWATCH_WORDS[i][1];
+    }
+    return fallback;
+  }
+  /* One option as a pill: its dot, its name, and its surcharge when it has one. */
+  function optionPill(kind, f, chosen) {
+    var on = String(chosen || '').toLowerCase() === f.code.toLowerCase();
+    var dot = f.image
+      ? '<span class="dot dot--img" style="background-image:url(' +
+        (/^https?:/.test(f.image) ? f.image : '/' + f.image) + ')"></span>'
+      : '<span class="dot" style="background:' + swatchHex(f, FABRIC_HEX[f.code] || '#b9bdc4') + '"></span>';
+    var extra = f.priceDeltaCents > 0
+      ? ' <span class="card-sub">+ $' + Math.round(f.priceDeltaCents / 100).toLocaleString('en-CA') + '</span>' : '';
+    return '<button type="button" class="fab" data-k="' + kind + '" data-v="' + esc(f.code) +
+      '" aria-pressed="' + on + '">' + dot + esc(f.labelEn || f.code) + extra + '</button>';
+  }
 
   async function loadCatalogue() {
     try {
@@ -287,6 +322,7 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
         });
       }
       FABRICS = (d.fabrics || []).filter(function (f) { return f.available !== false; });
+      TOPS = (d.tops || []).filter(function (f) { return f.available !== false; });
     } catch (e) { /* keep the fallback */ }
   }
 
@@ -505,16 +541,14 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
           '<p class="lede">The fabric your capsule is lined with. Every colour is included ' +
           'at the same price.</p>' +
           '<div class="fabs">' +
-            FABRICS.map(function (f) {
-              var on = String(D.payload.fabric || '').toLowerCase() === f.code.toLowerCase();
-              var dot = f.image
-                ? '<span class="dot dot--img" style="background-image:url(' +
-                  (/^https?:/.test(f.image) ? f.image : '/' + f.image) + ')"></span>'
-                : '<span class="dot" style="background:' +
-                  (FABRIC_HEX[f.code] || '#b9bdc4') + '"></span>';
-              return '<button type="button" class="fab" data-v="' + esc(f.code) + '" aria-pressed="' +
-                on + '">' + dot + esc(f.labelEn || f.code) + '</button>';
-            }).join('') +
+            FABRICS.map(function (f) { return optionPill('fabric', f, D.payload.fabric); }).join('') +
+          '</div>'
+        : '') +
+      (TOPS.length
+        ? '<h2 class="sub-h">Top</h2>' +
+          '<p class="lede">The polycarbonate top that closes your capsule.</p>' +
+          '<div class="fabs">' +
+            TOPS.map(function (f) { return optionPill('top', f, D.payload.top); }).join('') +
           '</div>'
         : '') +
       '<div class="acts">' +
@@ -522,12 +556,15 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
         '<button class="btn btn--go" id="next">Continue</button>' +
       '</div>';
 
+    /* The lining and the top are two separate choices: a click only clears its
+       own row, and saves under its own field. */
     pane.querySelectorAll('.fab').forEach(function (b) {
       b.addEventListener('click', async function () {
-        pane.querySelectorAll('.fab').forEach(function (x) {
+        pane.querySelectorAll('.fab[data-k="' + b.dataset.k + '"]').forEach(function (x) {
           x.setAttribute('aria-pressed', String(x === b));
         });
-        await save({ fabric: b.dataset.v });
+        var data = {}; data[b.dataset.k] = b.dataset.v;
+        await save(data);
         renderSide();
       });
     });
