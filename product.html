@@ -140,10 +140,35 @@
   .pswatch:hover { transform: translateY(-1px); }
   .pswatch.active::before { border-color: var(--ink); }
   .pswatch:disabled { opacity: 0.35; cursor: not-allowed; }
-  /* Le nom sort de l attribut: si le catalogue retire une pastille, son nom part avec elle. */
-  #pSwatches .pswatch { margin-bottom: 40px; }
-  #pSwatches .pswatch::after { content: attr(data-name); position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: 72px; text-align: center; white-space: normal; line-height: 1.25; font-size: 10.5px; color: var(--muted); letter-spacing: 0.02em; }
-  #pSwatches .pswatch.active::after { color: var(--ink); font-weight: 500; }
+  /* Le configurateur en trois etapes: exterieur, interieur, dessus. Une etape
+     a la fois; l onglet garde le choix fait, et le nom du choix courant s ecrit
+     en grand sous les pastilles plutot que sous chacune. */
+  .pcfg { border-top: 1px solid var(--line); margin-top: 4px; }
+  .pcfg-tabs { display: flex; gap: 0 28px; flex-wrap: wrap; border-bottom: 1px solid var(--line); counter-reset: pstep; }
+  .pcfg-tab { counter-increment: pstep; appearance: none; background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: 16px 0 12px; min-height: 64px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; text-align: left; cursor: pointer; color: var(--ink); transition: border-color 0.3s var(--ease); }
+  .pcfg-tab[hidden] { display: none; }
+  .pcfg-tab span { font-size: 10.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #5f6870; transition: color 0.3s var(--ease); }
+  .pcfg-tab span::before { content: "0" counter(pstep) " · "; }
+  .pcfg-tab b { font-size: 14.5px; font-weight: 500; letter-spacing: -0.01em; }
+  .pcfg-tab.active { border-bottom-color: var(--ink); }
+  .pcfg-tab.active span { color: var(--ink); }
+  .pcfg-panel { padding-top: 24px; }
+  .pcfg-panel[hidden] { display: none; }
+  .pcfg .pswatches { gap: 22px; padding: 7px; }
+  .pcfg .pswatch { width: 52px; height: 52px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4), inset 0 -7px 11px rgba(0,0,0,0.16), 0 1px 2px rgba(16,24,32,0.28), 0 8px 18px rgba(16,24,32,0.14); }
+  .pcfg .pswatch::before { inset: -7px; }
+  /* Un reflet sur chaque pastille: une matiere, pas un aplat. */
+  .pcfg .pswatch::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(135deg, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0) 46%); pointer-events: none; }
+  .pcfg .pswatch:hover { transform: translateY(-2px); }
+  /* Sans photo, un tissu montre sa piqure et un dessus son verre. Une photo
+     televersee depuis l administration les remplace. */
+  .pcfg .pswatch--quilt { background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.15) 0 1px, rgba(0,0,0,0) 1px 9px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.22) 0 1px, rgba(255,255,255,0) 1px 9px); background-size: auto; }
+  .pcfg .pswatch--glass { background-image: radial-gradient(circle at 32% 26%, rgba(255,255,255,0.95) 0 7%, rgba(255,255,255,0) 26%), linear-gradient(150deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 55%, rgba(0,0,0,0.22) 100%); background-size: auto; }
+  .pcfg-pick { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; padding: 16px 0 4px; }
+  .pcfg-pick b { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; }
+  .pcfg-pick span { font-size: 13px; color: #5f6870; }
+  .pcfg-pick em { margin-left: auto; font-style: normal; font-size: 10.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); }
+  .pcfg .sw-note { margin-top: 10px; }
   .sw-note { font-size: 12px; color: var(--muted); margin-top: -6px; }
   .sw-note:empty { display: none; }
   .pprice { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; white-space: nowrap; }
@@ -489,7 +514,7 @@
       <div class="pgallery">
         <div class="pstage" id="pStage">
           <img src="product-showroom.jpg" srcset="product-showroom-m.jpg 900w, product-showroom.jpg 1536w" sizes="(max-width: 900px) 100vw, 65vw" alt="The Capsule Pyrale in the Eterna showroom, mountains at sunset beyond the glass" id="pMain" width="1536" height="1024" fetchpriority="high" decoding="async" />
-          <div class="pstage-cap" aria-hidden="true">Finish<b id="stageCap">Brushed Aluminium</b></div>
+          <div class="pstage-cap" aria-hidden="true"><span id="stageCapK">Finish</span><b id="stageCap">Brushed Aluminium</b></div>
           <div class="pstage-video" aria-hidden="true"><div><i>▶</i><span>Video — coming soon</span></div></div>
         </div>
         <div class="pthumbs" id="pThumbs" role="tablist" aria-label="Product views">
@@ -512,8 +537,13 @@
           <li><span class="ic"><svg class="ic-svg"><use href="#ic-clock"/></svg></span>60 to 100 years of natural preservation</li>
         </ul>
 
-        <div class="pfinish">
-          <div class="pfinish-head">Choose your finish <span id="finishName">Brushed Aluminium</span></div>
+        <div class="pcfg" id="pCfg">
+          <div class="pcfg-tabs" role="tablist" aria-label="Configure your capsule">
+            <button type="button" class="pcfg-tab active" role="tab" aria-selected="true" data-step="finish"><span>Exterior</span><b id="finishName">Brushed Aluminium</b></button>
+            <button type="button" class="pcfg-tab" role="tab" aria-selected="false" data-step="fabric" id="pFabricBlock" hidden><span>Interior</span><b id="fabricName"></b></button>
+            <button type="button" class="pcfg-tab" role="tab" aria-selected="false" data-step="top" id="pTopBlock" hidden><span>Top</span><b id="topName"></b></button>
+          </div>
+          <div class="pcfg-panel" data-step="finish">
           <div class="pswatches" id="pSwatches">
             <button class="pswatch active" data-name="Brushed Aluminium" data-src="pyrale-silver.png" data-sheet="pyrale-spin-silver.jpg" style="--sw:#c9cdd3;background-image:url(swatch-silver.png)" aria-label="Brushed Aluminium"></button>
             <button class="pswatch" data-name="Champagne" data-src="pyrale-champagne.png" data-sheet="pyrale-spin-champagne.jpg" style="--sw:#d3b47e;background-image:url(swatch-champagne.png)" aria-label="Champagne"></button>
@@ -522,11 +552,14 @@
             <button class="pswatch" data-name="Onyx" data-src="pyrale-onyx.png" data-sheet="pyrale-spin-onyx.jpg" style="--sw:#454852;background-image:url(swatch-onyx.png)" aria-label="Onyx"></button>
           </div>
           <div class="sw-note" id="finishNote"></div>
-        </div>
-
-        <div class="pfinish" id="pFabricBlock" hidden>
-          <div class="pfinish-head">Interior <span id="fabricName"></span></div>
-          <div class="pswatches" id="pFabrics"></div>
+          </div>
+          <div class="pcfg-panel" data-step="fabric" hidden>
+            <div class="pswatches" id="pFabrics"></div>
+          </div>
+          <div class="pcfg-panel" data-step="top" hidden>
+            <div class="pswatches" id="pTops"></div>
+          </div>
+          <div class="pcfg-pick" aria-live="polite"><b id="pickName">Brushed Aluminium</b><span id="pickSub">Exterior finish</span><em id="pickPrice">Included</em></div>
         </div>
 
         <div class="pbuy">
@@ -913,57 +946,148 @@
           firstOpen.click();
         }
 
-        // Interior fabrics.
-        var wrap = document.getElementById('pFabrics');
-        var block = document.getElementById('pFabricBlock');
-        var label = document.getElementById('fabricName');
-        var sellable = (d.fabrics || []).filter(function (f) { return f.available !== false; });
-        if (wrap && sellable.length) {
-          wrap.innerHTML = '';
-          sellable.forEach(function (f, i) {
-            var b = document.createElement('button');
-            b.className = 'pswatch' + (i === 0 ? ' active' : '');
-            b.dataset.name = f.code;
-            b.setAttribute('aria-label', f.labelEn || f.code);
+        /* The surcharge of each finish, for the line under the swatches. */
+        boxes.forEach(function (b) {
+          var entry = listed[b.dataset.name];
+          if (entry) b.dataset.delta = entry.priceDeltaCents || 0;
+        });
 
-            /* A photo when there is one, a coloured dot when there is not.
-               A lining is chosen for its texture, which a flat circle cannot
-               show — so the moment a real photo exists it replaces the dot. */
-            if (f.image) {
-              b.classList.add('pswatch--img');
-              b.style.backgroundImage = 'url(' + (/^https?:/.test(f.image) ? f.image : '/' + f.image) + ')';
-              b.dataset.img = f.image;
-            } else {
-              b.style.setProperty('--sw', SWATCH_HEX[f.code] || '#b9bdc4');
-            }
-
-            b.addEventListener('click', function () {
-              wrap.querySelectorAll('.pswatch').forEach(function (s) { s.classList.remove('active'); });
-              b.classList.add('active');
-              label.textContent = f.labelEn || f.code;
-              showInterior(b);
-            });
-            wrap.appendChild(b);
-          });
-          label.textContent = sellable[0].labelEn || sellable[0].code;
-          block.hidden = false;
-        }
+        // Steps two and three: interior fabrics, then polycarbonate tops.
+        buildOptions('fabric', d.fabrics);
+        buildOptions('top', d.tops);
+        cfgPick(CFG_STEP);
       })
       .catch(function () { /* keep the static fallback */ });
   })();
 
-  /* Clicking a lining swaps the main picture to the capsule open, and picking
-     a finish swaps it back to the capsule closed. Without this the swatch
-     changes a word and nothing else, which reads as broken. */
-  function showInterior(btn) {
-    var pMainEl = document.getElementById('pMain');
-    if (!pMainEl || !btn || !btn.dataset.img) return;
-    var src = /^https?:/.test(btn.dataset.img) ? btn.dataset.img : '/' + btn.dataset.img;
-    pMainEl.style.opacity = '0';
+  /* ---- The three-step configurator ----
+     Exterior, interior, top: one step on screen at a time. Each tab keeps the
+     choice made, and the stage follows the step: the capsule closed for the
+     exterior, open for the interior, seen from above for the top. Without
+     that, a swatch changes a word and nothing else, which reads as broken. */
+  var CFG_STEP = 'finish';
+  var CFG_BOX = { finish: 'pSwatches', fabric: 'pFabrics', top: 'pTops' };
+  var CFG_SUB = { finish: 'Exterior finish', fabric: 'Interior fabric', top: 'Polycarbonate top' };
+  var CFG_VIEW = {
+    fabric: { src: 'product-open-lake.jpg', render: false, alt: 'The Capsule Pyrale open, showing its interior' },
+    top: { src: 'product-top.jpg', render: true, alt: 'The Capsule Pyrale, seen from above' }
+  };
+  var FABRIC_HEX = { 'Blanc/White Tissue': '#ece8df', 'White': '#ece8df', 'Grey': '#8d9299', 'Gray': '#8d9299' };
+  var TOP_HEX = { 'Clear': '#dfe8ed', 'Smoked': '#2b3138' };
+
+  function cfgActive(step) {
+    return document.querySelector('#' + CFG_BOX[step] + ' .pswatch.active');
+  }
+
+  /* One picture on the stage, framed as a render or as a photo. */
+  function stageShow(src, render, alt) {
+    var st = document.getElementById('pStage'), m = document.getElementById('pMain');
+    var th = document.getElementById('pThumbs');
+    if (!st || !m || !src) return;
+    if (th) th.querySelectorAll('.pthumb').forEach(function (x) { x.classList.remove('active'); });
+    st.classList.remove('is-video');
+    m.style.opacity = '0';
     var img = new Image();
-    img.onload = function () { pMainEl.src = src; pMainEl.style.opacity = '1'; };
-    img.onerror = function () { pMainEl.style.opacity = '1'; };
+    img.onload = function () {
+      m.removeAttribute('srcset'); m.removeAttribute('sizes');
+      m.src = src; if (alt) m.alt = alt;
+      st.classList.toggle('is-render', !!render);
+      m.style.opacity = '1';
+    };
+    img.onerror = function () { m.style.opacity = '1'; };
     img.src = src;
+  }
+
+  /* What the stage shows for a step: the photo of the chosen option when the
+     back office has one, else the view that goes with the step. */
+  function cfgView(step) {
+    var b = cfgActive(step), capK = document.getElementById('stageCapK'), cap = document.getElementById('stageCap');
+    if (step === 'finish') {
+      if (capK) capK.textContent = 'Finish';
+      if (b) { if (cap) cap.textContent = b.dataset.name; stageShow(b.dataset.src, true); }
+      return;
+    }
+    if (capK) capK.textContent = step === 'top' ? 'Top' : 'Interior';
+    if (cap && b) cap.textContent = b.dataset.label || b.dataset.name;
+    if (b && b.dataset.img) {
+      stageShow(/^https?:/.test(b.dataset.img) ? b.dataset.img : '/' + b.dataset.img, false);
+      return;
+    }
+    stageShow(CFG_VIEW[step].src, CFG_VIEW[step].render, CFG_VIEW[step].alt);
+  }
+
+  /* The line under the swatches: the choice of the step on screen. */
+  function cfgPick(step) {
+    var b = cfgActive(step);
+    var name = document.getElementById('pickName'), sub = document.getElementById('pickSub');
+    var price = document.getElementById('pickPrice');
+    if (!name) return;
+    name.textContent = b ? (b.dataset.label || b.dataset.name) : '\u2014';
+    sub.textContent = CFG_SUB[step];
+    var delta = b ? Number(b.dataset.delta || 0) : 0;
+    price.textContent = delta > 0
+      ? '+ $' + Math.round(delta / 100).toLocaleString('en-CA') : 'Included';
+  }
+
+  function cfgStep(step, show) {
+    CFG_STEP = step;
+    document.querySelectorAll('#pCfg .pcfg-tab').forEach(function (t) {
+      var on = t.dataset.step === step;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    document.querySelectorAll('#pCfg .pcfg-panel').forEach(function (p) {
+      p.hidden = p.dataset.step !== step;
+    });
+    cfgPick(step);
+    if (show) cfgView(step);
+  }
+
+  document.querySelectorAll('#pCfg .pcfg-tab').forEach(function (t) {
+    t.addEventListener('click', function () { cfgStep(t.dataset.step, true); });
+  });
+
+  /* A step of the catalogue, drawn as swatches. A photo when there is one;
+     without it a fabric shows its stitching and a top its glass, because a
+     flat circle says nothing about a material. An empty list leaves the tab
+     hidden: the step does not exist. */
+  function buildOptions(kind, list) {
+    var wrap = document.getElementById(CFG_BOX[kind]);
+    var tab = document.getElementById(kind === 'fabric' ? 'pFabricBlock' : 'pTopBlock');
+    var label = document.getElementById(kind === 'fabric' ? 'fabricName' : 'topName');
+    var sellable = (list || []).filter(function (f) { return f.available !== false; });
+    if (!wrap || !tab || !label || !sellable.length) return;
+    wrap.innerHTML = '';
+    sellable.forEach(function (f, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pswatch' + (i === 0 ? ' active' : '');
+      b.dataset.name = f.code;
+      b.dataset.label = f.labelEn || f.code;
+      b.dataset.delta = f.priceDeltaCents || 0;
+      b.title = b.dataset.label;
+      b.setAttribute('aria-label', b.dataset.label);
+      if (f.image) {
+        b.classList.add('pswatch--img');
+        b.style.backgroundImage = 'url(' + (/^https?:/.test(f.image) ? f.image : '/' + f.image) + ')';
+        b.dataset.img = f.image;
+      } else if (kind === 'fabric') {
+        b.classList.add('pswatch--quilt');
+        b.style.setProperty('--sw', FABRIC_HEX[f.code] || SWATCH_HEX[f.code] || '#b9bdc4');
+      } else {
+        b.classList.add('pswatch--glass');
+        b.style.setProperty('--sw', TOP_HEX[f.code] || '#cfd6db');
+      }
+      b.addEventListener('click', function () {
+        wrap.querySelectorAll('.pswatch').forEach(function (s) { s.classList.remove('active'); });
+        b.classList.add('active');
+        label.textContent = b.dataset.label;
+        cfgStep(kind, true);
+      });
+      wrap.appendChild(b);
+    });
+    label.textContent = sellable[0].labelEn || sellable[0].code;
+    tab.hidden = false;
   }
 
   /* Scoped on purpose: an unscoped '.pswatch.active' would pick whichever
@@ -971,6 +1095,10 @@
      the price made that ambiguous. */
   function chosenFabric() {
     var el = document.querySelector('#pFabrics .pswatch.active');
+    return el ? el.dataset.name : null;
+  }
+  function chosenTop() {
+    var el = document.querySelector('#pTops .pswatch.active');
     return el ? el.dataset.name : null;
   }
 
@@ -981,6 +1109,16 @@
   var pbarImg = document.getElementById('pbarImg');
   var pbarFinish = document.getElementById('pbarFinish');
   if (swatches) {
+    /* A finish picked from anywhere, the finishes chapter included, brings the
+       configurator back to its first step. Coming from another step, the stage
+       returns to the capsule closed even when that finish was already chosen. */
+    swatches.addEventListener('click', function (e) {
+      var b = e.target.closest('.pswatch');
+      if (!b || b.disabled) return;
+      var from = CFG_STEP;
+      cfgStep('finish', false);
+      if (from !== 'finish') cfgView('finish');
+    });
     swatches.querySelectorAll('.pswatch').forEach(function (b) {
       b.addEventListener('click', function () {
         /* Normally a no-op when already selected — but if the picture is
@@ -1065,6 +1203,8 @@
       if (active && active.dataset.name) q.push('finish=' + encodeURIComponent(active.dataset.name));
       var fab = chosenFabric();
       if (fab) q.push('fabric=' + encodeURIComponent(fab));
+      var top = chosenTop();
+      if (top) q.push('top=' + encodeURIComponent(top));
       var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e2) {}
       if (ref) q.push('ref=' + encodeURIComponent(ref));
       if (LOCALE === 'fr-CA') q.push('lang=fr');
@@ -1200,6 +1340,8 @@
       if (active && active.dataset.name) q.push('finish=' + encodeURIComponent(active.dataset.name));
       var fab = chosenFabric();
       if (fab) q.push('fabric=' + encodeURIComponent(fab));
+      var top = chosenTop();
+      if (top) q.push('top=' + encodeURIComponent(top));
       var ref = null; try { ref = localStorage.getItem('eterna_ref'); } catch (e2) {}
       if (ref) q.push('ref=' + encodeURIComponent(ref));
       if (LOCALE === 'fr-CA') q.push('lang=fr');

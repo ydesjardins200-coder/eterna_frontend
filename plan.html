@@ -401,6 +401,7 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
       '<div class="card-t">' + esc(D.product.nameFr) + '</div>' +
       '<div class="card-f">' + (p.finish ? esc(p.finish) : 'Finish to be chosen') +
         (p.fabric ? ' <span class="card-sub">&middot; ' + esc(p.fabric) + ' interior</span>' : '') +
+        (p.top ? ' <span class="card-sub">&middot; ' + esc(p.top) + ' top</span>' : '') +
       '</div>';
 
     if (pr.months > 0) {
@@ -875,6 +876,7 @@ h2{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
             sku: q.get('sku') || 'PYR-STD',
             finish: q.get('finish') || undefined,
             fabric: q.get('fabric') || undefined,
+            top: q.get('top') || undefined,
             ref: ref || undefined
           })
         });

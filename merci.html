@@ -313,10 +313,10 @@ a{color:inherit;text-decoration:none}
         document.getElementById('tyTitle').textContent = 'It\u2019s done, ' + d.firstName + '.';
       }
 
-      /* Both choices, spelled out. This is the page that says "it's yours";
+      /* Every choice, spelled out. This is the page that says "it's yours";
          a family who picked a lining and sees only the shell has reason to
          wonder whether we recorded it. */
-      var spec = [d.finish, d.fabric ? d.fabric + ' interior' : null]
+      var spec = [d.finish, d.fabric ? d.fabric + ' interior' : null, d.top ? d.top + ' top' : null]
         .filter(Boolean).join(' \u00b7 ');
       var img = d.finish ? FINISH_IMG[String(d.finish).toLowerCase()] : null;
       if (img || spec) {
