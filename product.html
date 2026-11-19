@@ -996,6 +996,10 @@
     '#ece8df': 'product-open-white.jpg',
     '#2b3138': 'product-open-onyx.jpg'
   };
+  /* The top view with a clear top. A retouch of the dark one, made for the
+     team demo: it reads as frosted rather than truly clear, and is to be
+     replaced by a real render when one exists. */
+  var TOP_PHOTO = { '#dfe8ed': 'product-top-clear.jpg' };
   function swatchHex(option, fallback) {
     var text = [option.code, option.labelEn, option.labelFr].join(' ').toLowerCase();
     for (var i = 0; i < SWATCH_WORDS.length; i++) {
@@ -1044,6 +1048,7 @@
     }
     var src = CFG_VIEW[step].src;
     if (step === 'fabric' && b && FABRIC_PHOTO[b.dataset.tone]) src = FABRIC_PHOTO[b.dataset.tone];
+    if (step === 'top' && b && TOP_PHOTO[b.dataset.tone]) src = TOP_PHOTO[b.dataset.tone];
     stageShow(src, CFG_VIEW[step].render, CFG_VIEW[step].alt);
   }
 
@@ -1109,6 +1114,7 @@
       } else {
         b.classList.add('pswatch--glass');
         b.style.setProperty('--sw', swatchHex(f, '#cfd6db'));
+        b.dataset.tone = swatchHex(f, '');
       }
       b.addEventListener('click', function () {
         wrap.querySelectorAll('.pswatch').forEach(function (s) { s.classList.remove('active'); });
