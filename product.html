@@ -162,7 +162,7 @@
   .pcfg .pswatch:hover { transform: translateY(-2px); }
   /* Sans photo, un tissu montre sa piqure et un dessus son verre. Une photo
      televersee depuis l administration les remplace. */
-  .pcfg .pswatch--quilt { background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.15) 0 1px, rgba(0,0,0,0) 1px 9px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.22) 0 1px, rgba(255,255,255,0) 1px 9px); background-size: auto; }
+  .pcfg .pswatch--quilt { background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.16) 0 1px, rgba(255,255,255,0.2) 1px 2px, rgba(0,0,0,0) 2px 9px), repeating-linear-gradient(-45deg, rgba(0,0,0,0.16) 0 1px, rgba(255,255,255,0.2) 1px 2px, rgba(0,0,0,0) 2px 9px); background-size: auto; }
   .pcfg .pswatch--glass { background-image: radial-gradient(circle at 32% 26%, rgba(255,255,255,0.95) 0 7%, rgba(255,255,255,0) 26%), linear-gradient(150deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 55%, rgba(0,0,0,0.22) 100%); background-size: auto; }
   .pcfg-pick { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; padding: 16px 0 4px; }
   .pcfg-pick b { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; }
@@ -972,8 +972,28 @@
     fabric: { src: 'product-open-lake.jpg', render: false, alt: 'The Capsule Pyrale open, showing its interior' },
     top: { src: 'product-top.jpg', render: true, alt: 'The Capsule Pyrale, seen from above' }
   };
-  var FABRIC_HEX = { 'Blanc/White Tissue': '#ece8df', 'White': '#ece8df', 'Grey': '#8d9299', 'Gray': '#8d9299' };
-  var TOP_HEX = { 'Clear': '#dfe8ed', 'Smoked': '#2b3138' };
+  /* The colour of a swatch follows the name of the option. Read from the code
+     and the labels together, by keyword, so an option added from the back
+     office under a new code still gets a swatch that matches what it is
+     called. First match wins; the darkest words are tested first because a
+     name like « Dark grey » must come out dark. */
+  var SWATCH_WORDS = [
+    [/onyx|black|noir|dark|opaque|fonc|smoked|fum|tint|teint/, '#2b3138'],
+    [/graphite|charcoal|anthracite/, '#5b6068'],
+    [/grey|gray|gris|silver|argent|alumin/, '#8d9299'],
+    [/champagne|ivory|ivoire|cream|cr[eè]me|beige|sand|sable/, '#d9c7a0'],
+    [/bronze|brown|brun|taupe/, '#8c6a48'],
+    [/blue|bleu/, '#5f7f9c'],
+    [/white|blanc/, '#ece8df'],
+    [/clear|transparent|crystal|cristal/, '#dfe8ed']
+  ];
+  function swatchHex(option, fallback) {
+    var text = [option.code, option.labelEn, option.labelFr].join(' ').toLowerCase();
+    for (var i = 0; i < SWATCH_WORDS.length; i++) {
+      if (SWATCH_WORDS[i][0].test(text)) return SWATCH_WORDS[i][1];
+    }
+    return fallback;
+  }
 
   function cfgActive(step) {
     return document.querySelector('#' + CFG_BOX[step] + ' .pswatch.active');
@@ -1073,10 +1093,10 @@
         b.dataset.img = f.image;
       } else if (kind === 'fabric') {
         b.classList.add('pswatch--quilt');
-        b.style.setProperty('--sw', FABRIC_HEX[f.code] || SWATCH_HEX[f.code] || '#b9bdc4');
+        b.style.setProperty('--sw', swatchHex(f, '#b9bdc4'));
       } else {
         b.classList.add('pswatch--glass');
-        b.style.setProperty('--sw', TOP_HEX[f.code] || '#cfd6db');
+        b.style.setProperty('--sw', swatchHex(f, '#cfd6db'));
       }
       b.addEventListener('click', function () {
         wrap.querySelectorAll('.pswatch').forEach(function (s) { s.classList.remove('active'); });
